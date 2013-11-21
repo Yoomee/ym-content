@@ -1,0 +1,19 @@
+-content_for :head do
+  :javascript
+    $(".nested-fields").sortable({
+      containment: "parent",
+      stop: function(event, ui) {
+        alert('done');
+      }
+    });
+    
+=semantic_form_for @content_type, :html => {:class => 'form-horizontal'} do |form|
+  =form.inputs do
+    =form.input :name
+    #content_attributes
+      %h3 Content attributes
+      =form.semantic_fields_for :content_attributes do |content_attribute|
+        =render 'content_attribute_fields', :f => content_attribute
+      .links
+        = link_to_add_association 'add content_attribute', form, :content_attributes
+  =form.actions

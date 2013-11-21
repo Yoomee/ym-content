@@ -1,0 +1,4 @@
+%h3=title 'Content types'
+%ul
+  -@content_types.each do |content_type|
+    %li=link_to(content_type, edit_content_type_path(content_type))

@@ -1,0 +1,13 @@
+.nested-fields.well
+  = f.inputs do
+    =f.input :slug
+    =f.input :name
+    =f.input :description
+    =f.input :field_type
+    =f.input :limit_quantity
+    =f.input :limit_unit
+    =f.input :position
+    =f.input :required, :default => false
+    =f.input :meta, :default => false
+    
+    = link_to_remove_association "remove content attribute", f
