@@ -1,5 +1,6 @@
 require 'ym_core'
-require "ym_content/engine"
+require 'ym_users'
+require 'ym_content/engine'
 
 module YmContent
 end

@@ -25,5 +25,12 @@ FactoryGirl.define do
   factory :content_package do
     content_type
   end
-  
+
+  factory :user do
+    first_name "Charles"
+    sequence(:last_name) {|n| "Barrett #{n}"}
+    sequence(:email) {|n| "charles@barrett_#{n}.com"}
+    password "password"
+  end
+
 end
