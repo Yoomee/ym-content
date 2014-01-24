@@ -1,0 +1,7 @@
+=semantic_form_for @content_package, :html => {:class => 'form-horizontal'} do |form|
+  =form.inputs do
+    =form.input :content_type, :include_blank => false
+    =form.input :slug
+    -@content_package.content_attributes.each do |content_attribute|
+      =form.input content_attribute.slug, :label => content_attribute.name
+  =form.actions

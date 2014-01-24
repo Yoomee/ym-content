@@ -7,14 +7,17 @@ FactoryGirl.define do
     view_name 'blog_post'
     use_workflow true
     after(:build) do |content_type|
-      content_type.content_attributes = [
-        FactoryGirl.build(:content_attribute, :limit_unit => 'character', :limit_quantity => 150),
-        FactoryGirl.build(:content_attribute, :slug => 'text', :name => 'Text', :description => 'Tell a story')
-      ]
+      if content_type.content_attributes.count.zero?
+        content_type.content_attributes = [
+          FactoryGirl.build(:content_attribute, :content_type => content_type, :limit_unit => 'character', :limit_quantity => 150),
+          FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'text', :name => 'Text', :description => 'Tell a story')
+        ]
+      end
     end
   end
   
   factory :content_attribute do
+    content_type
     slug "title"
     name "Title"
     description "Choose a pithy title"
@@ -24,6 +27,7 @@ FactoryGirl.define do
   
   factory :content_package do
     content_type
+    sequence(:slug){|n| "content_package_#{n}" }
   end
 
   factory :user do

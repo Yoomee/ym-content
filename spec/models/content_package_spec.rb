@@ -2,8 +2,10 @@ require 'spec_helper'
 
 describe ContentPackage do
   
-  let (:content_package) { FactoryGirl.build(:content_package) } 
-  
+  let (:content_package) { FactoryGirl.build(:content_package) }
+
+  it { should validate_presence_of(:content_type) }
+
   it 'is valid' do
     expect(content_package.valid?).to be_true
   end

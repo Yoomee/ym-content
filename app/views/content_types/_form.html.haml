@@ -11,7 +11,7 @@
   =form.inputs do
     =form.input :name
     #content_attributes
-      %h3 Content attributes
+      %h4 Content attributes
       =form.semantic_fields_for :content_attributes do |content_attribute|
         =render 'content_attribute_fields', :f => content_attribute
       .links

@@ -2,17 +2,28 @@ module YmContent::ContentPackage
   
   def self.included(base)
     base.send(:include, YmCore::Model)
-    
+
     base.belongs_to :content_type
     base.has_many :content_chunks, :autosave => true
     base.belongs_to :parent, :class_name => "ContentPackage"
     base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id'
-    
+
+    base.validates :content_type, :presence => true
+
     base.delegate :content_attributes, :to => :content_type
   end
-  
+
+  def respond_to?(method_id, include_all = false)
+    super || content_type && content_attributes.exists?(:slug => method_id.to_s.chomp('='))
+  end
+
+  def to_s
+    slug.to_s
+  end
+
   private
   def method_missing(method_sym, *arguments, &block)
+    return super if method_sym.to_s =~ /[?]$/ # e.g. method? or method!
     attribute_name = method_sym.to_s.chomp('=')
     if instance_variable_defined?("@#{attribute_name}")
       instance_variable_get("@#{attribute_name}")
@@ -28,5 +39,5 @@ module YmContent::ContentPackage
       super
     end
   end
-  
+
 end
