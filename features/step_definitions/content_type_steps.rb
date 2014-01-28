@@ -29,7 +29,7 @@ When(/^I fill in the new content type form and submit$/) do
     all(".nested-fields input[id$='_slug']")[idx].set(content_attribute.slug)
     all(".nested-fields input[id$='_name']")[idx].set(content_attribute.name)
     all(".nested-fields textarea[id$='_description']")[idx].set(content_attribute.description)
-    all(".nested-fields input[id$='_field_type']")[idx].set(content_attribute.field_type)
+    all(".nested-fields select[id$='_field_type']")[idx].find("option[value='#{content_attribute.field_type}']").select_option
   end
   click_button('Create Content type')
 end
