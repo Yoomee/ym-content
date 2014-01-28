@@ -3,7 +3,7 @@
     =f.input :slug
     =f.input :name
     =f.input :description
-    =f.input :field_type
+    =f.input :field_type, :as => :select, :collection => ContentType.field_types.invert, :prompt => "Select..."
     =#f.input :limit_quantity
     =#f.input :limit_unit
     =#f.input :position

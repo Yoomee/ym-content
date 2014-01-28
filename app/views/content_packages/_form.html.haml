@@ -4,5 +4,5 @@
     =form.input :slug
     =form.input :permalink_path
     -@content_package.content_attributes.each do |content_attribute|
-      =form.input content_attribute.slug, :label => content_attribute.name
+      =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name
   =form.actions

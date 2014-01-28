@@ -4,4 +4,9 @@
 %dl.dl-horizontal
   -@content_package.content_attributes.each do |attribute|
     %dt=attribute.name
-    %dd=@content_package.send(attribute.slug)
+    %dd
+      -case attribute.field_type
+      -when 'text'
+        =simple_format(@content_package.send(attribute.slug))
+      -else
+        =@content_package.send(attribute.slug)
