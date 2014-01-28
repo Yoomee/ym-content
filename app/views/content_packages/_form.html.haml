@@ -1,7 +1,7 @@
 =semantic_form_for @content_package, :html => {:class => 'form-horizontal'} do |form|
   =form.inputs do
     =form.input :content_type_id, :as => :hidden
-    =form.input :slug
+    =#form.input :slug
     =form.input :permalink_path
     %hr
     -@content_package.content_attributes.each do |content_attribute|
