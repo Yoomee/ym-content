@@ -18,22 +18,23 @@ module YmContent::ContentPackage
   end
 
   def to_s
-    slug.to_s
+    ((respond_to?(:title) ? title.presence : nil) || slug).to_s
   end
 
   private
   def method_missing(method_sym, *arguments, &block)
     return super if method_sym.to_s =~ /[?]$/ # e.g. method? or method!
     attribute_name = method_sym.to_s.chomp('=')
-    if instance_variable_defined?("@#{attribute_name}")
-      instance_variable_get("@#{attribute_name}")
+    if !method_sym.to_s.end_with?('=') && instance_variable_defined?("@#{attribute_name}".to_sym)
+      instance_variable_get("@#{attribute_name}".to_sym)
     elsif content_attribute = content_attributes.find_by_slug(attribute_name)
       if method_sym.to_s.end_with?('=')
         content_chunk = self.content_chunks.find_or_initialize_by_content_attribute_id(content_attribute.id)
         content_chunk.value = arguments.first
-        instance_variable_set("@#{attribute_name}", arguments.first)
+        content_chunk.save # TODO shouldn't need to save here
+        instance_variable_set("@#{attribute_name}".to_sym, arguments.first)
       else
-        instance_variable_set("@#{attribute_name}", content_chunks.find_by_content_attribute_id(content_attribute.id).try(:value))
+        instance_variable_set("@#{attribute_name}".to_sym, content_chunks.find_by_content_attribute_id(content_attribute.id).try(:value))
       end
     else
       super

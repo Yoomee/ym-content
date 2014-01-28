@@ -25,3 +25,8 @@ Scenario: Creating a content package
   Given there are 0 content packages
   When I fill in the new content package form and submit
   Then the content package is created
+
+Scenario: Updating a content package
+  Given there is 1 content package
+  When I update the content package
+  Then the content package should change

@@ -1,10 +1,10 @@
-Given(/^there are (\d+) content packages$/) do |n|
+Given(/^there (is|are) (\d+) content packages?$/) do |ia,n|
   if n.to_i.zero?
     ContentPackage.destroy_all
   end
   @content_packages = [].tap do |arr|
-    n.to_i.times do
-      arr << FactoryGirl.create(:content_package)
+    n.to_i.times do |i|
+      arr << FactoryGirl.create(:content_package, :title => "Content package #{i}")
     end
   end
   @content_package = @content_packages.first
@@ -30,4 +30,17 @@ end
 Then(/^the content package is created$/) do
   visit content_packages_path
   expect(page).to have_content(@content_package.to_s)
+end
+
+When(/^I update the content package$/) do
+  visit edit_content_package_path(@content_package)
+  fill_in('content_package_slug', :with => 'modified_slug')
+  fill_in('content_package_title', :with => 'Modified title')
+  click_button('Update Content package')
+end
+
+Then(/^the content package should change$/) do
+  visit edit_content_package_path(@content_package)
+  expect(find_field('Slug').value).to eq('modified_slug')
+  expect(find_field('Title').value).to eq('Modified title')
 end

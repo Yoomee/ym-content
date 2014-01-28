@@ -14,6 +14,7 @@ module YmContent::ContentPackagesController
 
   def index
     @content_types = ContentType.order(:name)
+    render :template => "content_types/index"
   end
 
   def new

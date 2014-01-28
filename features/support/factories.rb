@@ -9,7 +9,7 @@ FactoryGirl.define do
     after(:build) do |content_type|
       if content_type.content_attributes.count.zero?
         content_type.content_attributes = [
-          FactoryGirl.build(:content_attribute, :content_type => content_type, :limit_unit => 'character', :limit_quantity => 150),
+          FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'title', :limit_unit => 'character', :limit_quantity => 150),
           FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'text', :name => 'Text', :description => 'Tell a story')
         ]
       end
