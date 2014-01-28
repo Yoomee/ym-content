@@ -1,4 +1,6 @@
-%h3=title 'Content'
+%h3.pull-left=title 'Content types'
+=link_to('Add content type', new_content_type_path, :icon => 'plus', :class => 'btn btn-small pull-right mt-2 mr-1')
+.clearfix
 -@content_types.each do |content_type|
   %table.table.table-striped
     %thead
