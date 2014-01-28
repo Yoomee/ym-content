@@ -44,3 +44,13 @@ Then(/^the content package should change$/) do
   expect(find_field('Slug').value).to eq('modified_slug')
   expect(find_field('Title').value).to eq('Modified title')
 end
+
+When(/^I go to the content package$/) do
+  visit content_package_path(@content_package)
+end
+
+Then(/^I should see all its content$/) do
+  @content_package.content_chunks.each do |content_chunk|
+    expect(page).to have_content(content_chunk.value)
+  end
+end

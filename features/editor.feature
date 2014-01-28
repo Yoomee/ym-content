@@ -30,3 +30,8 @@ Scenario: Updating a content package
   Given there is 1 content package
   When I update the content package
   Then the content package should change
+
+Scenario: Viewing a content package
+  Given there is 1 content package
+  When I go to the content package
+  Then I should see all its content

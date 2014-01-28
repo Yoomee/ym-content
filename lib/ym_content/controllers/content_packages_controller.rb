@@ -21,6 +21,9 @@ module YmContent::ContentPackagesController
     @content_package.content_type = ContentType.find(params[:content_type_id])
   end
 
+  def show
+  end
+
   def update
     if @content_package.update_attributes(params[:content_package])
       redirect_to content_types_path

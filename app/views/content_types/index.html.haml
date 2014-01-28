@@ -5,6 +5,7 @@
       %tr
         %th
           %h4.pull-left=content_type
+        %th
           .pull-right
             =link_to('Edit content type', edit_content_type_path(content_type), :icon => 'pencil', :class => 'btn btn-small')
             =link_to('Add content package', new_content_type_content_package_path(content_type), :icon => 'file-text-o', :class => 'btn btn-small')
@@ -13,4 +14,7 @@
           %tr
             %td
               %i.fa.fa-file-text-o
-              =link_to(content_package, edit_content_package_path(content_package))
+              =content_package
+            %td
+              .pull-right
+                =link_to('View / edit', content_package)

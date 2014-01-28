@@ -1,0 +1,7 @@
+%h3.pull-left=title(@content_package)
+=link_to('Edit content package', edit_content_package_path(@content_package), :icon => 'pencil', :class => 'btn btn-small pull-right')
+.clearfix
+%dl.dl-horizontal
+  -@content_package.content_attributes.each do |attribute|
+    %dt=attribute.name
+    %dd=@content_package.send(attribute.slug)
