@@ -11,6 +11,9 @@ module YmContent::ContentPackage
     base.validates :content_type, :presence => true
 
     base.delegate :content_attributes, :to => :content_type
+
+    base.has_permalinks
+
   end
 
   def respond_to?(method_id, include_all = false)
