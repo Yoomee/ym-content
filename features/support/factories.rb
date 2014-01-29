@@ -37,4 +37,14 @@ FactoryGirl.define do
     password "password"
   end
 
+  factory :persona do
+    name "Bob Smith"
+    age 18
+    summary "Persona summary"
+    benefit_1 "Benefit 1"
+    benefit_2 "Benefit 2"
+    benefit_3 "Benefit 3"
+    benefit_4 "Benefit 4"
+  end
+
 end

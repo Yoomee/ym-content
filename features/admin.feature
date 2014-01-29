@@ -1,8 +1,8 @@
 @editor
-Feature: CMS editor
-  In order to curate great content
-  As an editor
-  I want to manage the content
+Feature: CMS admin
+  In order to create great content
+  As an admin
+  I want to manage the CMS
 
 Scenario: Viewing a list of content types
   Given there are 3 content types
@@ -35,3 +35,14 @@ Scenario: Viewing a content package
   Given there is 1 content package
   When I go to the content package
   Then I should see all its content
+
+Scenario: Viewing a list of personas
+  Given there are 3 personas
+  When I go to the list of personas
+  Then I see the personas
+
+Scenario: Creating a persona
+  Given there is 1 content type
+  Given there are 0 personas
+  When I fill in the new persona form and submit
+  Then the persona is created

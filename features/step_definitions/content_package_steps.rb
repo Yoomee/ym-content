@@ -34,14 +34,12 @@ end
 
 When(/^I update the content package$/) do
   visit edit_content_package_path(@content_package)
-  fill_in('content_package_slug', :with => 'modified_slug')
   fill_in('content_package_title', :with => 'Modified title')
   click_button('Update Content package')
 end
 
 Then(/^the content package should change$/) do
   visit edit_content_package_path(@content_package)
-  expect(find_field('Slug').value).to eq('modified_slug')
   expect(find_field('Title').value).to eq('Modified title')
 end
 

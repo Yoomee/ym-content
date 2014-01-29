@@ -1,0 +1,12 @@
+=semantic_form_for @persona, :html => {:class => 'form-horizontal'} do |form|
+  =form.inputs do
+    =form.input :name
+    =form.input :image, :as => :image
+    =form.input :age
+    =form.input :summary
+    =form.input :benefit_1, :as => :string
+    =form.input :benefit_2, :as => :string
+    =form.input :benefit_3, :as => :string
+    =form.input :benefit_4, :as => :string
+    =form.input :file, :as => :file_with_preview, :label => "Full persona"
+  =form.actions
