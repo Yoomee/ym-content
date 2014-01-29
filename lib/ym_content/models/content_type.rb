@@ -19,4 +19,8 @@ module YmContent::ContentType
 
   end
 
+  def package_name
+    read_attribute(:package_name).presence || name.downcase
+  end
+
 end

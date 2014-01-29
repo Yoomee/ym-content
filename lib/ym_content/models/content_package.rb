@@ -14,6 +14,8 @@ module YmContent::ContentPackage
 
     base.has_permalinks
 
+    base.delegate :package_name, :to => :content_type
+
   end
 
   def respond_to?(method_id, include_all = false)
