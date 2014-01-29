@@ -1,0 +1,22 @@
+%h3.pull-left=title 'Content types'
+=link_to('Add content type', new_content_type_path, :icon => 'plus', :class => 'btn btn-small pull-right mt-2 mr-1')
+.clearfix
+-@content_types.each do |content_type|
+  %table.table.table-striped
+    %thead
+      %tr
+        %th
+          %h4.pull-left=content_type
+        %th
+          .pull-right
+            =link_to('Edit content type', edit_content_type_path(content_type), :icon => 'pencil', :class => 'btn btn-small')
+            =link_to("Add #{content_type.package_name}", new_content_type_content_package_path(content_type), :icon => 'file-text-o', :class => 'btn btn-small')
+      %tbody
+        -content_type.content_packages.order(:slug).each do |content_package|
+          %tr
+            %td
+              %i.fa.fa-file-text-o
+              =content_package
+            %td
+              .pull-right
+                =link_to('View / edit', content_package)
