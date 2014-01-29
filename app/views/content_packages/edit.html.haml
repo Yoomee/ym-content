@@ -1,2 +1,17 @@
-%h3=title "Edit #{@content_package.package_name}"
-=render 'form'
+.row
+  .col-md-12
+    %h3=title "Edit #{@content_package.package_name}"
+.row
+  .col-md-8
+    =semantic_form_for @content_package, :html => {:class => 'form-horizontal'} do |form|
+      =form.inputs do
+        =form.input :content_type_id, :as => :hidden
+        =form.input :slug
+        =form.input :permalink_path
+        %hr
+        -@content_package.content_attributes.each do |content_attribute|
+          =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
+          %hr
+      =form.actions do
+        =form.action :submit, :label => "Update #{@content_package.package_name}"
+  .col-md-4
