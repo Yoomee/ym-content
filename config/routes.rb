@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   end
 
   get '/content' => 'content_types#index'
-  resources :content_packages, :except => :new
+
+  resources :content_packages
 
   resources :personas
 

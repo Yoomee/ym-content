@@ -1,2 +1,14 @@
-%h3=title "New #{@content_package.package_name}"
-=render 'form'
+%h3=title "New content"
+%ul.nav.nav-tabs
+  %li.active=link_to("Content type", '#content-type', 'data-toggle' => 'tab')
+  %li=link_to("Add context", '#context', 'data-toggle' => 'tab')
+  %li=link_to("Assign author", '#author', 'data-toggle' => 'tab')
+=semantic_form_for @content_package do |form|
+  .tab-content
+    #content-type.tab-pane.active
+      =form.input :content_type, :as => :radio
+      =link_to("Add context", '#context', 'data-toggle' => 'tab', :class => 'btn')
+    #context.tab-pane
+      %h4 Intended audience
+    #author.tab-pane
+      %h4 Author
