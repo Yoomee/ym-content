@@ -13,6 +13,11 @@ class CreatePersonas < ActiveRecord::Migration
       t.string :file_uid
       t.timestamps
     end
+    create_table :content_packages_personas, :id => false do |t|
+      t.belongs_to :content_package
+      t.belongs_to :persona
+    end
+    add_index :content_packages_personas, :content_package_id
   end
 
 end

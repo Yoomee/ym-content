@@ -10,5 +10,6 @@
       =link_to("Add context", '#context', 'data-toggle' => 'tab', :class => 'btn')
     #context.tab-pane
       %h4 Intended audience
+      =form.input :personas, :as => :check_boxes
     #author.tab-pane
       %h4 Author
