@@ -21,6 +21,9 @@ module YmContent::ContentPackagesController
   end
 
   def show
+    if template_exists?("content_packages/views/#{@content_package.view_name}")
+      render "content_packages/views/#{@content_package.view_name}" and return
+    end
   end
 
   def update

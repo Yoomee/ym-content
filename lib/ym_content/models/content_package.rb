@@ -11,7 +11,7 @@ module YmContent::ContentPackage
 
     base.validates :content_type, :presence => true
 
-    base.delegate :content_attributes, :package_name, :to => :content_type
+    base.delegate :content_attributes, :package_name, :view_name, :to => :content_type
 
     base.has_permalinks
 
