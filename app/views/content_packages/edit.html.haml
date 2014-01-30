@@ -1,6 +1,6 @@
 .row
   .col-md-8
-    %h3=title "Edit #{@content_package.package_name}"
+    %h3.mb-3=title "Edit #{@content_package.package_name}"
   .col-md-4
     =semantic_form_for @content_package, :html => {:class => 'form-inline pull-right'} do |form|
       =form.input :status, :as => :select, :collection => ContentPackage.statuses.invert, :include_blank => false
@@ -13,7 +13,7 @@
       %li=link_to("Related content", '#related', 'data-toggle' => 'tab')
     =semantic_form_for @content_package do |form|
       .tab-content
-        #content.tab-pane.active
+        #content.tab-pane.active.cms-form
           =form.inputs do
             =form.input :content_type_id, :as => :hidden
             -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
@@ -30,6 +30,7 @@
         #related.tab-pane
       =form.actions do
         =form.action :submit, :label => "Update #{@content_package.package_name}"
+        .mb-6
   .col-md-4
     %ul.nav.nav-tabs
       %li.active=link_to("Context", '#context', 'data-toggle' => 'tab')
