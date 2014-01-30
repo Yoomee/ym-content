@@ -11,11 +11,11 @@ module YmContent::ContentPackage
 
     base.validates :content_type, :presence => true
 
-    base.delegate :content_attributes, :to => :content_type
+    base.delegate :content_attributes, :package_name, :to => :content_type
 
     base.has_permalinks
 
-    base.delegate :package_name, :to => :content_type
+    base.send(:attr_accessor, :author)
 
   end
 
@@ -33,7 +33,7 @@ module YmContent::ContentPackage
     attribute_name = method_sym.to_s.chomp('=')
     if !method_sym.to_s.end_with?('=') && instance_variable_defined?("@#{attribute_name}".to_sym)
       instance_variable_get("@#{attribute_name}".to_sym)
-    elsif content_attribute = content_attributes.find_by_slug(attribute_name)
+    elsif content_type && content_attribute = content_attributes.find_by_slug(attribute_name)
       if method_sym.to_s.end_with?('=')
         content_chunk = self.content_chunks.find_or_initialize_by_content_attribute_id(content_attribute.id)
         content_chunk.value = arguments.first

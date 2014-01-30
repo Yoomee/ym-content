@@ -6,7 +6,7 @@ module YmContent::ContentPackagesController
 
   def create
     if @content_package.save
-      redirect_to content_types_path
+      redirect_to edit_content_package_path(@content_package)
     else
       render :action => 'edit'
     end

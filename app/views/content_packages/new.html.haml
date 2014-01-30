@@ -6,10 +6,16 @@
 =semantic_form_for @content_package do |form|
   .tab-content
     #content-type.tab-pane.active
-      =form.input :content_type, :as => :radio
-      =link_to("Add context", '#context', 'data-toggle' => 'tab', :class => 'btn')
+      =form.inputs do
+        =form.input :content_type, :as => :radio
+        =link_to("Add context", '#context', 'data-toggle' => 'tab', :class => 'btn')
     #context.tab-pane
       %h4 Intended audience
-      =form.input :personas, :as => :check_boxes
+      =form.inputs do
+        =form.input :personas, :as => :check_boxes
+        =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}
+        =link_to("Assign author", '#author', 'data-toggle' => 'tab', :class => 'btn')
     #author.tab-pane
-      %h4 Author
+      =form.inputs do
+        =form.input :author
+      =form.action :submit, :label => 'Finish'
