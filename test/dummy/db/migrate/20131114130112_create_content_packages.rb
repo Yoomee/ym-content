@@ -5,6 +5,7 @@ class CreateContentPackages < ActiveRecord::Migration
       t.string :slug
       t.belongs_to :content_type
       t.belongs_to :parent
+      t.string :status, :default => 'draft'
       t.text :notes
       t.timestamps
     end

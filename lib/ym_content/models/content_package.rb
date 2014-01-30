@@ -17,6 +17,19 @@ module YmContent::ContentPackage
 
     base.send(:attr_accessor, :author)
 
+    base.extend(ClassMethods)
+  end
+
+  module ClassMethods
+
+    def statuses
+      {
+        :draft => 'Draft',
+        :pending => 'Ready to review',
+        :published => 'Published'
+      }
+    end
+
   end
 
   def respond_to?(method_id, include_all = false)

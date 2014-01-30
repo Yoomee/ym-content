@@ -1,6 +1,10 @@
 .row
-  .col-md-12
+  .col-md-8
     %h3=title "Edit #{@content_package.package_name}"
+  .col-md-4
+    =semantic_form_for @content_package, :html => {:class => 'form-inline pull-right'} do |form|
+      =form.input :status, :as => :select, :collection => ContentPackage.statuses.invert, :include_blank => false
+      =form.action :submit, :label => "Save"
 .row
   .col-md-8
     %ul.nav.nav-tabs.mb-2

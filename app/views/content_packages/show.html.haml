@@ -1,12 +1,18 @@
-%h3.pull-left=title(@content_package)
-=link_to("Edit #{@content_package.package_name}", edit_content_package_path(@content_package), :icon => 'pencil', :class => 'btn btn-small pull-right')
-.clearfix
-%dl.dl-horizontal
-  -@content_package.content_attributes.each do |attribute|
-    %dt=attribute.name
-    %dd
-      -case attribute.field_type
-      -when 'text'
-        =simple_format(@content_package.send(attribute.slug))
-      -else
-        =@content_package.send(attribute.slug)
+%h3=title(@content_package)
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Attribute
+      %th Value
+  %tbody
+    -@content_package.content_attributes.each do |attribute|
+      %tr
+        %td.col-md-3=attribute.name
+        %td="@content_package.#{attribute.slug}"
+        %td
+          -case attribute.field_type
+          -when 'text'
+            =simple_format(@content_package.send(attribute.slug))
+          -else
+            %p=@content_package.send(attribute.slug)
