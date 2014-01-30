@@ -14,6 +14,7 @@ module YmContent
         copy_file "models/content_package.rb",   "app/models/content_package.rb"
         copy_file "models/content_chunk.rb",     "app/models/content_chunk.rb"
         copy_file "models/persona.rb",           "app/models/persona.rb"
+        copy_file "models/persona_group.rb",     "app/models/persona_group.rb"
         
         # controllers
         copy_file "controllers/content_types_controller.rb",      "app/controllers/content_types_controller.rb"

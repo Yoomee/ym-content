@@ -12,7 +12,9 @@
     #context.tab-pane
       %h4 Intended audience
       =form.inputs do
-        =form.input :personas, :as => :check_boxes
+        -PersonaGroup.all.each do |group|
+          %h5=group
+          =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false
         =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}
         =link_to("Assign author", '#author', 'data-toggle' => 'tab', :class => 'btn')
     #author.tab-pane
