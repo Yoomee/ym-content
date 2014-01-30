@@ -25,7 +25,7 @@ module YmContent::ContentPackagesController
 
   def update
     if @content_package.update_attributes(params[:content_package])
-      redirect_to content_types_path
+      redirect_to @content_package
     else
       render :action => 'edit'
     end

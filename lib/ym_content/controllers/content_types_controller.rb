@@ -6,7 +6,7 @@ module YmContent::ContentTypesController
 
   def create
     if @content_type.save
-      redirect_to content_types_path
+      redirect_to content_packages_path
     else
       render :action => 'edit'
     end
@@ -23,7 +23,7 @@ module YmContent::ContentTypesController
 
   def update
     if @content_type.update_attributes(params[:content_type])
-      redirect_to content_types_path
+      redirect_to content_packages_path
     else
       render :action => 'edit'
     end
