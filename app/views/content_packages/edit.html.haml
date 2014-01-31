@@ -21,6 +21,7 @@
               %hr
         #meta.tab-pane
           =form.inputs do
+            =parent_content_package_select(form)
             =#form.input :slug
             =form.input :permalink_path
             %hr

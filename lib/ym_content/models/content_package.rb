@@ -18,6 +18,8 @@ module YmContent::ContentPackage
     base.send(:attr_accessor, :author)
 
     base.extend(ClassMethods)
+
+    base.scope :root, base.where(:parent_id => nil)
   end
 
   module ClassMethods
@@ -30,6 +32,10 @@ module YmContent::ContentPackage
       }
     end
 
+  end
+  
+  def parents
+    [parent, parent.try(:parents)].flatten.compact
   end
 
   def respond_to?(method_id, include_all = false)
