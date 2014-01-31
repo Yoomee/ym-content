@@ -1,12 +1,6 @@
 .row
-  .col-md-8
+  .col-md-8.pr-3
     %h3.mb-3=title "Edit #{@content_package.package_name}"
-  .col-md-4
-    =semantic_form_for @content_package, :html => {:class => 'form-inline pull-right'} do |form|
-      =form.input :status, :as => :select, :collection => ContentPackage.statuses.invert, :include_blank => false
-      =form.action :submit, :label => "Save"
-.row
-  .col-md-8
     %ul.nav.nav-tabs.mb-2
       %li.active=link_to("Content", '#content', 'data-toggle' => 'tab')
       %li=link_to("Meta", '#meta', 'data-toggle' => 'tab')
@@ -18,8 +12,7 @@
             =form.input :content_type_id, :as => :hidden
             -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
               =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
-              %hr
-        #meta.tab-pane
+        #meta.tab-pane.cms-form
           =form.inputs do
             =parent_content_package_select(form)
             =#form.input :slug
@@ -27,42 +20,54 @@
             %hr
             -@content_package.content_attributes.where(:meta => true).each do |content_attribute|
               =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
-              %hr
         #related.tab-pane
       =form.actions do
         =form.action :submit, :label => "Update #{@content_package.package_name}"
         .mb-6
-  .col-md-4
-    %ul.nav.nav-tabs
-      %li.active=link_to("Context", '#context', 'data-toggle' => 'tab')
-      %li=link_to("Discussion", '#discussion', 'data-toggle' => 'tab')
-      %li=link_to("Activity", '#activity', 'data-toggle' => 'tab')
-    .tab-content
-      #context.tab-pane.active
-        - if @content_package.personas.present?
-          %h5 Audience/personas
-          -@content_package.personas.each do |persona|
-            .well.p-2
-              .row.mb-2
-                .col-sm-4
-                  =image_for(persona, '100x100#')
-                .col-sm-8
-                  %h4=persona
-                  %h5="Age #{persona.age}"
-              %p
-                %em=persona.summary
-              -if persona.benefits.present?
-                %p
-                  %strong Fact checker benefits
-                %ul
-                  -persona.benefits.each do |benefit|
-                    %li=benefit
-              -if persona.file
-                =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right')
-              .clearfix
-        -if @content_package.notes.present?
-          %h5 Content objective/goal
-          .well.p-2
-            =simple_format(@content_package.notes)
-      #discussion.tab-pane
-      #activity.tab-pane
+  .col-md-4.cms-sidebar-wrap
+    #cms-sidebar.cms-sidebar
+      .cms-edit-status.mb-2
+        %h4 Status
+        %select#bs3Select.selectpicker
+          %option Draft
+          %option Ready to review
+          %option Published
+      / Hiding the working select box for now, for the demo. The above needs wiring in to work, ideally without a save button.
+      -if false
+        =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
+          =form.input :status, :as => :select, :collection => ContentPackage.statuses.invert, :include_blank => false
+          =form.action :submit, :label => "Save" 
+      .cms-sidebar-tabs
+        %ul.nav.nav-pills
+          %li.active=link_to("Context", '#context', 'data-toggle' => 'pill')
+          %li=link_to("Discussion", '#discussion', 'data-toggle' => 'pill')
+          %li=link_to("Activity", '#activity', 'data-toggle' => 'pill')
+        .tab-content
+          #context.tab-pane.active
+            - if @content_package.personas.present?
+              %h5 Audience/personas
+              -@content_package.personas.each do |persona|
+                .well.p-2
+                  .row.mb-2
+                    .col-sm-4
+                      =image_for(persona, '100x100#')
+                    .col-sm-8
+                      %h4=persona
+                      %h5="Age #{persona.age}"
+                  %p
+                    %em=persona.summary
+                  -if persona.benefits.present?
+                    %p
+                      %strong Fact checker benefits
+                    %ul
+                      -persona.benefits.each do |benefit|
+                        %li=benefit
+                  -if persona.file
+                    =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right')
+                  .clearfix
+            -if @content_package.notes.present?
+              %h5 Content objective/goal
+              .well.p-2
+                =simple_format(@content_package.notes)
+          #discussion.tab-pane
+          #activity.tab-pane
