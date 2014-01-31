@@ -25,7 +25,7 @@
               1
             %span.btn-cms-text  
               Getting old
-    .well.cms-dashboard-well.clearfix.table-cms-dashboard.fadeInSlow2      
+    .well.cms-dashboard-well.clearfix.table-cms-dashboard.fadeInSlow      
       %h4.mt-0.b-1 Content assigned to you
       %table.table.table-striped.custab
         %thead
@@ -111,9 +111,10 @@
       .padding20px
         %a.btn.btn-small.ajax-activity-show-more{href: "#"} See older activity      
 
-  .col-md-4
-    =link_to("Site map", content_packages_path, :class => 'btn btn-primary btn-block mb-1')
-    =link_to("Create new content", new_content_package_path, :class => 'btn btn-primary btn-block mb-1')
-    =link_to("Users & permissions", '#', :class => 'btn btn-block mb-1')
-    =link_to("Manage personas", personas_path, :class => 'btn btn-primary btn-block mb-1')
-    =link_to("Request content type", '#', :class => 'btn btn-block mb-1')
+  .col-md-4.fadeInSlow
+    .well
+      =link_to("Site map", content_packages_path, :class => 'btn btn-primary btn-block mb-1')
+      =link_to("Create new content", new_content_package_path, :class => 'btn btn-primary btn-block mb-1')
+      =link_to("Users & permissions", '#', :class => 'btn btn-block mb-1')
+      =link_to("Manage personas", personas_path, :class => 'btn btn-primary btn-block mb-1')
+      =link_to("Request content type", '#', :class => 'btn btn-block mb-1')
