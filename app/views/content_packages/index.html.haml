@@ -31,7 +31,7 @@
                 =link_to('Edit content type', edit_content_type_path(content_type), :icon => 'pencil', :class => 'btn btn-small')
                 =link_to("Add #{content_type.package_name}", new_content_type_content_package_path(content_type), :icon => 'file-text-o', :class => 'btn btn-small btn-link')
           -content_type.content_packages.order(:slug).each do |content_package|
-            %tr
+            %tr{:class => "status-#{content_package.status}"}
               %td
                 %i.fa.fa-file-text-o
                 =content_package
