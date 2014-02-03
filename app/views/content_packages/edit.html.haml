@@ -1,73 +1,134 @@
-.row
-  .col-md-8.pr-3
-    %h2.mb-3=title "Edit #{@content_package.package_name}"
-    %ul.nav.nav-tabs.mb-2
-      %li.active=link_to("Content", '#content', 'data-toggle' => 'tab')
-      %li=link_to("Meta", '#meta', 'data-toggle' => 'tab')
-      %li=link_to("Related content", '#related', 'data-toggle' => 'tab')
-    =semantic_form_for @content_package do |form|
-      .tab-content
-        #content.tab-pane.active.cms-form
-          =form.inputs do
-            =form.input :content_type_id, :as => :hidden
-            -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
-              =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
-        #meta.tab-pane.cms-form
-          =form.inputs do
-            =parent_content_package_select(form)
-            =#form.input :slug
-            =form.input :permalink_path
-            %hr
-            -@content_package.content_attributes.where(:meta => true).each do |content_attribute|
-              =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
-        #related.tab-pane
-      =form.actions do
-        =form.action :submit, :label => "Update #{@content_package.package_name}"
-        .mb-6
-  .col-md-4.cms-sidebar-wrap
-    #cms-sidebar.cms-sidebar
-      .cms-edit-status.mb-2
-        %h4 Status
-        %select#bs3Select.selectpicker
-          %option Draft
-          %option Ready to review
-          %option Published
-      / Hiding the working select box for now, for the demo. The above needs wiring in to work, ideally without a save button.
-      -if false
-        =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
-          =form.input :status, :as => :select, :collection => ContentPackage.statuses.invert, :include_blank => false
-          =form.action :submit, :label => "Save" 
-      .cms-sidebar-tabs
-        %ul.nav.nav-pills
-          %li.active=link_to("Context", '#context', 'data-toggle' => 'pill')
-          %li=link_to("Discussion", '#discussion', 'data-toggle' => 'pill')
-          %li=link_to("Activity", '#activity', 'data-toggle' => 'pill')
+.container
+.container.container-cms-edit
+  .row
+    .col-md-8.pr-3
+      %h2.mb-3=title "Edit #{@content_package.package_name}"
+      %ul.nav.nav-tabs.mb-2
+        %li.active=link_to("Content", '#content', 'data-toggle' => 'tab')
+        %li=link_to("Meta", '#meta', 'data-toggle' => 'tab')
+        %li=link_to("Related content", '#related', 'data-toggle' => 'tab')
+      =semantic_form_for @content_package do |form|
         .tab-content
-          #context.tab-pane.active
-            - if @content_package.personas.present?
-              %h5 Audience/personas
-              -@content_package.personas.each do |persona|
-                .well.p-2
-                  .row.mb-2
-                    .col-sm-4
-                      =image_for(persona, '100x100#')
-                    .col-sm-8
-                      %h4=persona
-                      %h5="Age #{persona.age}"
-                  %p
-                    %em=persona.summary
-                  -if persona.benefits.present?
+          #content.tab-pane.active.cms-form
+            =form.inputs do
+              =form.input :content_type_id, :as => :hidden
+              -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
+                =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
+          #meta.tab-pane.cms-form
+            =form.inputs do
+              =parent_content_package_select(form)
+              =#form.input :slug
+              =form.input :permalink_path
+              %hr
+              -@content_package.content_attributes.where(:meta => true).each do |content_attribute|
+                =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
+          #related.tab-pane
+        =form.actions do
+          =form.action :submit, :label => "Update #{@content_package.package_name}"
+          .mb-6
+    .col-md-4.cms-sidebar-wrap
+      #cms-sidebar.cms-sidebar
+        .cms-edit-status.mb-2
+          %h4.mt-0 Status
+          %select#bs3Select.selectpicker
+            %option Draft
+            %option Ready to review
+            %option Published
+        / Hiding the working select box for now, for the demo. The above needs wiring in to work, ideally without a save button.
+        -if false
+          =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
+            =form.input :status, :as => :select, :collection => ContentPackage.statuses.invert, :include_blank => false
+            =form.action :submit, :label => "Save" 
+        .cms-sidebar-tabs
+          %ul.nav.nav-pills
+            %li.active=link_to("Context", '#context', 'data-toggle' => 'pill')
+            %li=link_to("Discussion", '#discussion', 'data-toggle' => 'pill')
+            %li=link_to("Activity", '#activity', 'data-toggle' => 'pill')
+            %li=link_to("Content scorecard", '#content-scorecard', 'data-toggle' => 'pill')
+          .tab-content
+            #context.tab-pane.active
+              - if @content_package.personas.present?
+                %h5.hide Audience/personas
+                -@content_package.personas.each do |persona|
+                  .cms-persona-box.p-2.mt-2
+                    .row.mb-2
+                      .col-sm-4
+                        =image_for(persona, '120x120#')
+                      .col-sm-8
+                        %h4=persona
+                        %h5="Age #{persona.age}"
                     %p
-                      %strong Fact checker benefits
-                    %ul
-                      -persona.benefits.each do |benefit|
-                        %li=benefit
-                  -if persona.file
-                    =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right')
-                  .clearfix
-            -if @content_package.notes.present?
-              %h5 Content objective/goal
-              .well.p-2
-                =simple_format(@content_package.notes)
-          #discussion.tab-pane
-          #activity.tab-pane
+                      %em=persona.summary
+                    -if persona.benefits.present?
+                      %p
+                        %strong Fact checker benefits
+                      %ul
+                        -persona.benefits.each do |benefit|
+                          %li=benefit
+                    -if persona.file
+                      =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right')
+                    .clearfix
+              -if @content_package.notes.present?
+                %h5 Content objective/goal
+                .cms-edit-context-box
+                  =simple_format(@content_package.notes)
+            #discussion.tab-pane
+              .discussion-item
+                .discussion-bubble
+                  I've changed the intro to say "supporter" and I'm in complete agreement about the "real world skills" phrase so having also chatted to someone in the corporate team, I've taken it out all together.
+                %img.discussion-avatar.img-circle.avatar{src: "https://yoomee1.gathercontent.com/assets/img/avatar.png"}/
+                %span.details Lindsay Sharman • vInspired • 20 Jan
+              .discussion-item
+                .discussion-bubble
+                  The real world skills development programme is mentioned a number of times - but leaves me scratching my head as to what it is in practice! Could you explain it any other way with slightly different words, without expanding too much (not asking much!!)
+                %img.discussion-avatar.img-circle.avatar{src: "https://yoomee1.gathercontent.com/assets/img/avatar.png"}/
+                %span.details Nicola Mayer • vInspired • 22 Jan
+              .discussion-item
+                .discussion-bubble
+                  Hi Lea, Your assumption is spot on! Yes, this is about what you can do for corporate partners.
+                %img.discussion-avatar.img-circle.avatar{src: "https://yoomee1.gathercontent.com/assets/img/avatar.png"}/
+                %span.details Andy Mayer • vInspired • 20 Jan
+
+            #activity.tab-pane
+              .cms-dashboard-well.clearfix.fadeIn
+                %ul.cms-activities.mt-3
+                  %li.cms-activity
+                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
+                    %p.desc
+                      %span.user-name Lindsay Sharman
+                      saved a revision of
+                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
+                    %span.when 22 minutes ago
+                  %li.cms-activity
+                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
+                    %p.desc
+                      %span.user-name Andy Mayer
+                      saved a revision of
+                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
+                    %span.when 40 minutes ago
+                  %li.cms-activity
+                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
+                    %p.desc
+                      %span.user-name Matt Atkins
+                      saved a revision of
+                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
+                    %span.when 3 hours ago
+                  %li.cms-activity
+                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
+                    %p.desc
+                      %span.user-name Lindsay Sharman
+                      saved a revision of
+                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
+                    %span.when 26 minutes ago
+                  %li.cms-activity
+                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
+                    %p.desc
+                      %span.user-name Lindsay Sharman
+                      saved a revision of
+                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
+                    %span.when 28 minutes ago
+                .padding20px
+                  %a.btn.btn-small.ajax-activity-show-more{href: "#"} See older activity    
+
+
+            #content-scorecard.tab-pane
