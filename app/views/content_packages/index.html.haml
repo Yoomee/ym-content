@@ -35,7 +35,8 @@
               %td
                 %i.fa.fa-file-text-o
                 =content_package
-              %td=status(content_package.status)
+              %td{:class => "td-status td-status-#{content_package.status}"}
+                =status(content_package.status)
               %td
                 =link_to('View', content_package)
               %td
