@@ -2,19 +2,18 @@
   .col-md-8
     %h3=title 'Personas'
   .col-md-4
-    =link_to('Add persona', new_persona_path, :icon => 'plus', :class => 'btn btn-small pull-right mt-2 mr-1')
+    =link_to('Add persona', new_persona_path, :icon => 'plus', :class => 'btn btn-primary btn-small pull-right mt-2 mr-1')
 -@persona_groups.each do |group|
   .row
     .col-md-12
-      %h4=group
+      %h4.mt-4=group
   -group.personas.each_slice(4) do |personas|
     .row
       -personas.each do |persona|
-        .col-md-3
-          .well
-            .row.mb-2
-              .col-sm-6
-                =image_for(persona, '100x100#')
-              .col-sm-6
-                %h4=persona
-            =link_to('View / edit', edit_persona_path(persona), :class => 'btn btn-block')
+        .col-md-3.fadeInPop
+          .well.paper
+            .row
+              .col-sm-12.center
+                =image_for(persona, '150x150#')
+                %h4.mv-2=persona
+                =link_to('View / edit', edit_persona_path(persona), :class => 'btn btn-primary btn-block btn-small')
