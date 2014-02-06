@@ -13,12 +13,12 @@ module YmContent::ContentPackagesController
   end
 
   def index
-    @content_packages = ContentPackage.root
-    @content_types = ContentType.order(:name)
+    @content_packages = ::ContentPackage.root
+    @content_types = ::ContentType.order(:name)
   end
 
   def new
-    @content_package.content_type = ContentType.find_by_id(params[:content_type_id])
+    @content_package.content_type = ::ContentType.find_by_id(params[:content_type_id])
   end
 
   def show
