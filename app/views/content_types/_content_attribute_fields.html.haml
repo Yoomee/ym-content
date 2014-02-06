@@ -2,12 +2,12 @@
   =f.inputs do
     =#f.input :slug
     =f.input :name
-    =f.input :description
+    =f.input :description, :input_html => {:rows => 4}
     =f.input :field_type, :as => :select, :collection => ContentType.field_types.invert, :prompt => "Select..."
     =#f.input :limit_quantity
     =#f.input :limit_unit
     =#f.input :position
     =#f.input :required, :default => false
-    =f.input :meta, :default => false
-
-    = link_to_remove_association "remove content attribute", f
+    =f.input :meta, :default => false, :label => "This is a meta attribute"
+  =f.inputs do
+    = link_to_remove_association "Remove this content attribute", f

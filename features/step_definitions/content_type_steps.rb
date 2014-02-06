@@ -21,7 +21,7 @@ When(/^I fill in the new content type form and submit$/) do
   @content_type = FactoryGirl.build(:content_type)
   fill_in('content_type_name', :with => @content_type.name)
   @content_type.content_attributes.each_with_index do |content_attribute, idx|
-    click_link('add content_attribute')
+    click_link('Add content attribute')
     all(".nested-fields input[id$='_name']")[idx].set(content_attribute.name)
     all(".nested-fields textarea[id$='_description']")[idx].set(content_attribute.description)
     all(".nested-fields select[id$='_field_type']")[idx].find("option[value='#{content_attribute.field_type}']").select_option
