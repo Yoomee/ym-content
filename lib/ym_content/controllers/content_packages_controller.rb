@@ -8,7 +8,7 @@ module YmContent::ContentPackagesController
     if @content_package.save
       redirect_to edit_content_package_path(@content_package)
     else
-      render :action => 'edit'
+      render :action => 'new'
     end
   end
 
@@ -19,6 +19,7 @@ module YmContent::ContentPackagesController
 
   def new
     @content_package.content_type = ::ContentType.find_by_id(params[:content_type_id])
+    @content_package.parent_id = params[:parent]
   end
 
   def show

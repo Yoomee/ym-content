@@ -5,7 +5,7 @@ module YmContent::ContentHelper
     current_page = form.object
     return "" if ContentPackage.without([current_page] + current_page.children).empty?
     out = form.label(:parent_id, options[:label], :class => 'control-label')
-    out << content_tag(:div, form.select(:parent_id, content_tag(:option) + parent_content_package_option_tags(current_page)), :class => 'controls')
+    out << content_tag(:div, form.select(:parent_id, content_tag(:option, 'None') + parent_content_package_option_tags(current_page)), :class => 'controls')
     content_tag(:div, out, :class => 'select control-group optional', :id => 'content_package_parent_input')
   end
   
@@ -15,9 +15,9 @@ module YmContent::ContentHelper
     parent_pages.inject('') do |memo, parent_page|
       ret = "<option value='#{parent_page.id}'"
       ret << " selected='selected'" if current_page.parent == parent_page
-      ret << ">#{'&nbsp;&nbsp;&nbsp;' * options[:indent]}#{parent_page}</option>"
+      ret << ">#{'&nbsp;&minus;&nbsp;' * options[:indent]}#{parent_page}</option>"
       if parent_page.children.present?
-        ret << parent_page_option_tags(current_page, :pages => parent_page.children, :indent => options[:indent] + 1)
+        ret << parent_content_package_option_tags(current_page, :pages => parent_page.children, :indent => options[:indent] + 1)
       end
       memo + ret
     end.html_safe

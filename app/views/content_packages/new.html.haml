@@ -9,6 +9,7 @@
       .tab-content
         #content-type.tab-pane.active
           =form.inputs do
+            =form.input :parent_id, :as => :hidden
             =form.input :content_type, :as => :radio, :label => "Select a content type below", :required => false
             =link_to("Next", '#context', 'data-toggle' => 'tab', :class => 'btn mt-3')
         #context.tab-pane
