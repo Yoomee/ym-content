@@ -5,4 +5,8 @@ module YmContent::PersonaGroup
     base.validates :name, :presence => true
   end
 
+  def to_s
+    name
+  end
+
 end

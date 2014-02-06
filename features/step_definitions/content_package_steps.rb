@@ -10,7 +10,7 @@ Given(/^there (is|are) (\d+) content packages?$/) do |ia,n|
   @content_package = @content_packages.first
 end
 
-When(/^I go to the list of content packages$/) do
+When(/^I go to the sitemap$/) do
   visit content_packages_path
 end
 
@@ -22,20 +22,19 @@ end
 
 When(/^I fill in the new content package form and submit$/) do
   visit new_content_type_content_package_path(@content_type)
-  @content_package = FactoryGirl.build(:content_package)
-  fill_in('content_package_slug', :with => @content_package.slug)
-  click_button('Create Content package')
+  @content_package = FactoryGirl.build(:content_package, :content_type => @content_type)
+  choose(@content_type)
+  click_button("Finish")
 end
 
-Then(/^the content package is created$/) do
-  visit content_packages_path
-  expect(page).to have_content(@content_package.to_s)
+Then(/^I am taken to edit the content package$/) do
+  expect(page).to have_content("Edit #{@content_package.package_name}")
 end
 
 When(/^I update the content package$/) do
   visit edit_content_package_path(@content_package)
   fill_in('content_package_title', :with => 'Modified title')
-  click_button('Update Content package')
+  click_button("Update #{@content_package.package_name}")
 end
 
 Then(/^the content package should change$/) do

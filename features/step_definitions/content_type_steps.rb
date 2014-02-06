@@ -10,10 +10,6 @@ Given(/^there (is|are) (\d+) content types?$/) do |ia,n|
   @content_type = @content_types.first
 end
 
-When(/^I go to the list of content types$/) do
-  visit content_types_path
-end
-
 Then(/^I see the content types$/) do
   @content_types.each do |content_type|
     expect(page).to have_content(content_type.to_s)
@@ -26,7 +22,6 @@ When(/^I fill in the new content type form and submit$/) do
   fill_in('content_type_name', :with => @content_type.name)
   @content_type.content_attributes.each_with_index do |content_attribute, idx|
     click_link('add content_attribute')
-    all(".nested-fields input[id$='_slug']")[idx].set(content_attribute.slug)
     all(".nested-fields input[id$='_name']")[idx].set(content_attribute.name)
     all(".nested-fields textarea[id$='_description']")[idx].set(content_attribute.description)
     all(".nested-fields select[id$='_field_type']")[idx].find("option[value='#{content_attribute.field_type}']").select_option
@@ -35,6 +30,6 @@ When(/^I fill in the new content type form and submit$/) do
 end
 
 Then(/^the content type is created$/) do
-  visit content_types_path
+  step "I go to the sitemap"
   expect(page).to have_content(@content_type.to_s)
 end

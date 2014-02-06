@@ -37,8 +37,13 @@ FactoryGirl.define do
     password "password"
   end
 
+  factory :persona_group, :aliases => [:group] do
+    sequence(:name){|n| "Persona group #{n}" }
+  end
+
   factory :persona do
-    name "Bob Smith"
+    group
+    sequence(:name){|n| "Bob Smith #{n}" }
     age 18
     summary "Persona summary"
     benefit_1 "Benefit 1"

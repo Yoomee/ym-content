@@ -23,6 +23,7 @@ end
 When(/^I fill in the new persona form and submit$/) do
   visit new_persona_path
   @persona = FactoryGirl.build(:persona)
+  select(@persona_group.to_s)
   fill_in('persona_name', :with => @persona.name)
   fill_in('persona_age', :with => @persona.age)
   fill_in('persona_summary', :with => @persona.summary)

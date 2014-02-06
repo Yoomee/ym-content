@@ -6,7 +6,7 @@ Feature: CMS admin
 
 Scenario: Viewing a list of content types
   Given there are 3 content types
-  When I go to the list of content types
+  When I go to the sitemap
   Then I see the content types
 
 @javascript
@@ -17,14 +17,14 @@ Scenario: Creating a content type
 
 Scenario: Viewing a list of content packages
   Given there are 3 content packages
-  When I go to the list of content packages
+  When I go to the sitemap
   Then I see the content packages
 
 Scenario: Creating a content package
   Given there is 1 content type
   Given there are 0 content packages
   When I fill in the new content package form and submit
-  Then the content package is created
+  Then I am taken to edit the content package
 
 Scenario: Updating a content package
   Given there is 1 content package
@@ -42,7 +42,7 @@ Scenario: Viewing a list of personas
   Then I see the personas
 
 Scenario: Creating a persona
-  Given there is 1 content type
   Given there are 0 personas
+  And there is 1 persona group
   When I fill in the new persona form and submit
   Then the persona is created
