@@ -36,6 +36,11 @@ Scenario: Viewing a content package
   When I go to the content package
   Then I should see all its content
 
+Scenario: Viewing a list of persona groups
+  Given there are 3 persona groups
+  When I go to the list of personas
+  Then I see the persona groups
+
 Scenario: Viewing a list of personas
   Given there are 3 personas
   When I go to the list of personas
