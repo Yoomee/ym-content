@@ -10,7 +10,11 @@ module YmContent::ContentAttribute
   private
   def set_slug
     if slug.blank? && name.present? && errors['name'].blank?
-      self.slug = name.parameterize("_")
+      slug_name = name.parameterize("_")
+      if ::ContentPackage.new().respond_to_without_content_attributes?(slug_name,true)
+        slug_name = 'content_package_' + slug_name
+      end
+      self.slug = slug_name
       valid?
     end
   end

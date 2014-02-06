@@ -38,9 +38,10 @@ module YmContent::ContentPackage
     [parent, parent.try(:parents)].flatten.compact
   end
 
-  def respond_to?(method_id, include_all = false)
-    super || content_type && content_attributes.exists?(:slug => method_id.to_s.chomp('='))
+  def respond_to_with_content_attributes?(method_id, include_all = false)
+    respond_to_without_content_attributes?(method_id, include_all) || content_type && content_attributes.exists?(:slug => method_id.to_s.chomp('='))
   end
+  alias_method_chain :respond_to?, :content_attributes
 
   def to_s
     ((respond_to?(:title) ? title.presence : nil) || slug).to_s
