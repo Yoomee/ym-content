@@ -13,7 +13,7 @@
             =form.inputs do
               =form.input :content_type_id, :as => :hidden
               -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
-                =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
+                =form.content_input content_attribute
           #meta.tab-pane.cms-form
             =form.inputs do
               =parent_content_package_select(form)
