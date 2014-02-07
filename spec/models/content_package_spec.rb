@@ -29,5 +29,14 @@ describe ContentPackage do
     end
   end
 
+  describe 'required fields' do
+    it 'should be required' do
+      ca = content_package.content_attributes.first
+      ca.required = true
+      content_package.send("#{ca.slug}=",nil)
+      expect(content_package).to_not be_valid
+    end
+  end
+
   
 end

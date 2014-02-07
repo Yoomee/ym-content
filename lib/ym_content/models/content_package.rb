@@ -10,6 +10,7 @@ module YmContent::ContentPackage
     base.has_and_belongs_to_many :personas
 
     base.validates :content_type, :presence => true
+    base.validate :required_attributes
 
     base.delegate :content_attributes, :package_name, :view_name, :to => :content_type
 
@@ -64,6 +65,15 @@ module YmContent::ContentPackage
       end
     else
       super
+    end
+  end
+
+  def required_attributes
+    return true unless content_type
+    content_attributes.each do |content_attribute|
+      if content_attribute.required? && send(content_attribute.slug).blank?
+        self.errors.add_on_blank(content_attribute.slug)
+      end
     end
   end
 
