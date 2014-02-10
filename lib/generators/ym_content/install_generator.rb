@@ -15,12 +15,15 @@ module YmContent
         copy_file "models/content_chunk.rb",     "app/models/content_chunk.rb"
         copy_file "models/persona.rb",           "app/models/persona.rb"
         copy_file "models/persona_group.rb",     "app/models/persona_group.rb"
-        
+
+        # views
+        copy_file "views/users/_form.html.haml", "app/views/users/_form.html.haml"
+
         # controllers
         copy_file "controllers/content_types_controller.rb",      "app/controllers/content_types_controller.rb"
         copy_file "controllers/content_packages_controller.rb",   "app/controllers/content_packages_controller.rb"
         copy_file "controllers/personas_controller.rb",           "app/controllers/personas_controller.rb"
-        
+
         # migrations
         try_migration_template "migrations/create_content_types.rb",      "db/migrate/create_content_types"
         try_migration_template "migrations/create_content_attributes.rb", "db/migrate/create_content_attributes"

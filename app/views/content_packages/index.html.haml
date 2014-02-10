@@ -1,5 +1,5 @@
 %h2.mb-3.pull-left=title 'Site map & content types'
-=link_to('Add content type', new_content_type_path, :icon => 'plus', :class => 'btn btn-small pull-right mt-2 mr-1')
+=link_if_can('Add content type', [:new, ContentType.new], :icon => 'plus', :class => 'btn btn-small pull-right mt-2 mr-1')
 .clearfix
 %ul.nav.nav-tabs.mb-2
   %li.active=link_to("Site map", '#site-map', 'data-toggle' => 'tab')
@@ -17,8 +17,7 @@
           =render('content_package', :content_package => content_package)
         %tr
           %td{:colspan => 5}
-            %i.fa.fa-plus
-            =link_to("Add new content", new_content_package_path)
+            =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus')
   #content-types.tab-pane
     %table.table.table-striped.table-content-types
       %thead

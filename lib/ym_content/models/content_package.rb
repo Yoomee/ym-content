@@ -10,7 +10,7 @@ module YmContent::ContentPackage
     base.has_and_belongs_to_many :personas
 
     base.validates :content_type, :presence => true
-    base.validate :required_attributes
+    # base.validate :required_attributes
 
     base.delegate :content_attributes, :package_name, :view_name, :to => :content_type
 
