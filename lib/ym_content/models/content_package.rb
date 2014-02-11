@@ -22,16 +22,17 @@ module YmContent::ContentPackage
     base.extend(ClassMethods)
 
     base.scope :root, base.where(:parent_id => nil)
+    base.scope :published, base.where(:status => 'published')
   end
 
   module ClassMethods
 
-    def statuses
-      {
-        :draft => 'Draft',
-        :pending => 'Ready to review',
-        :published => 'Published'
-      }
+    def statuses(user)
+      Hash.new.tap do |s|
+        s[:draft] = 'Draft'
+        s[:pending] = 'Ready to review'
+        s[:published] = 'Published' if user.is_admin? || user.try(:role_is?, :editor)
+      end
     end
 
   end

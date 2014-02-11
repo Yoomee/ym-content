@@ -30,7 +30,7 @@
       #cms-sidebar.cms-sidebar
         .cms-edit-status.mb-2
         =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
-          =form.input :status, :as => :select, :collection => ContentPackage.statuses.invert, :include_blank => false
+          =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false
           =form.action :submit, :label => "Save"
         .cms-sidebar-tabs
           %ul.nav.nav-pills
