@@ -10,6 +10,6 @@
   %td
     =link_to('Edit', edit_content_package_path(content_package))
   %td
-    =link_to('Add child', new_content_package_path(:parent => content_package.id))
+    =link_if_can('Add child', [:new, ContentPackage.new], :parent => content_package.id)
 -content_package.children.each do |child|
   =render('content_package', :content_package => child)

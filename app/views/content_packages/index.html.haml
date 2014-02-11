@@ -3,7 +3,8 @@
 .clearfix
 %ul.nav.nav-tabs.mb-2
   %li.active=link_to("Site map", '#site-map', 'data-toggle' => 'tab')
-  %li=link_to("Content types", '#content-types', 'data-toggle' => 'tab')
+  -if can? :manage, ContentType
+    %li=link_to("Content types", '#content-types', 'data-toggle' => 'tab')
 
 .tab-content
   #site-map.tab-pane.active
@@ -18,30 +19,31 @@
         %tr
           %td{:colspan => 5}
             =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus')
-  #content-types.tab-pane
-    %table.table.table-striped.table-content-types
-      %thead
-        %tr
-          %th Content type / Name
-          %th.col-md-3 Status
-          %th{:colspan => 2} Actions
-      %tbody
-        -@content_types.each do |content_type|
-          %tr.content-type
-            %td{:colspan => 4}
-              %strong=content_type.to_s.pluralize
-              .pull-right
-                =link_to('Edit content type', edit_content_type_path(content_type))
-                &nbsp;
-                =link_to("Add #{content_type.package_name}", new_content_type_content_package_path(content_type))
-          -content_type.content_packages.order(:slug).each do |content_package|
-            %tr{:class => "status-#{content_package.status}"}
-              %td
-                %i.fa.fa-file-text-o
-                =content_package
-              %td{:class => "td-status td-status-#{content_package.status}"}
-                =status(content_package.status)
-              %td
-                =link_to('View', content_package)
-              %td
-                =link_to('Edit', edit_content_package_path(content_package))
+  -if can? :manage, ContentType
+    #content-types.tab-pane
+      %table.table.table-striped.table-content-types
+        %thead
+          %tr
+            %th Content type / Name
+            %th.col-md-3 Status
+            %th{:colspan => 2} Actions
+        %tbody
+          -@content_types.each do |content_type|
+            %tr.content-type
+              %td{:colspan => 4}
+                %strong=content_type.to_s.pluralize
+                .pull-right
+                  =link_to('Edit content type', edit_content_type_path(content_type))
+                  &nbsp;
+                  =link_to("Add #{content_type.package_name}", new_content_type_content_package_path(content_type))
+            -content_type.content_packages.order(:slug).each do |content_package|
+              %tr{:class => "status-#{content_package.status}"}
+                %td
+                  %i.fa.fa-file-text-o
+                  =content_package
+                %td{:class => "td-status td-status-#{content_package.status}"}
+                  =status(content_package.status)
+                %td
+                  =link_to('View', content_package)
+                %td
+                  =link_to('Edit', edit_content_package_path(content_package))
