@@ -29,16 +29,9 @@
     .col-md-4.cms-sidebar-wrap
       #cms-sidebar.cms-sidebar
         .cms-edit-status.mb-2
-          %h4.mt-0 Status
-          %select#bs3Select.selectpicker
-            %option Draft
-            %option Ready to review
-            %option Published
-        / Hiding the working select box for now, for the demo. The above needs wiring in to work, ideally without a save button.
-        -if false
-          =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
-            =form.input :status, :as => :select, :collection => ContentPackage.statuses.invert, :include_blank => false
-            =form.action :submit, :label => "Save" 
+        =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
+          =form.input :status, :as => :select, :collection => ContentPackage.statuses.invert, :include_blank => false
+          =form.action :submit, :label => "Save"
         .cms-sidebar-tabs
           %ul.nav.nav-pills
             %li.active=link_to("Context", '#context', 'data-toggle' => 'pill')

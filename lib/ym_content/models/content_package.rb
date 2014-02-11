@@ -35,7 +35,7 @@ module YmContent::ContentPackage
     end
 
   end
-  
+
   def parents
     [parent, parent.try(:parents)].flatten.compact
   end
