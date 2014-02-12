@@ -10,6 +10,8 @@ module YmContent::ContentPackage
     base.has_and_belongs_to_many :personas
     base.belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
 
+    base.before_create :set_next_review
+
     base.validates :content_type, :presence => true
     # base.validate :required_attributes
 
@@ -33,6 +35,15 @@ module YmContent::ContentPackage
         s[:pending] = 'Ready to review'
         s[:published] = 'Published' if user.is_admin? || user.try(:role_is?, :editor)
       end
+    end
+
+     def review_frequencies
+      {
+        :'1' => 'Monthly',
+        :'2' => 'Every 2 Months',
+        :'3' => 'Every 3 Months',
+        :'6' => 'Every 6 Months'
+      }
     end
 
   end
@@ -77,6 +88,10 @@ module YmContent::ContentPackage
         self.errors.add_on_blank(content_attribute.slug)
       end
     end
+  end
+
+  def set_next_review
+    self.next_review = Date.today + self.review_frequency.months
   end
 
 end
