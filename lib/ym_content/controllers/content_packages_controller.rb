@@ -13,7 +13,7 @@ module YmContent::ContentPackagesController
   end
 
   def index
-    @content_packages = ::ContentPackage.root
+    @content_packages = @content_packages.root
     @content_types = ::ContentType.order(:name)
   end
 
