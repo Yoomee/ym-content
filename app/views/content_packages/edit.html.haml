@@ -70,6 +70,9 @@
                 %h5 Content objective/goal
                 .cms-edit-context-box
                   =simple_format(@content_package.notes)
+                %h5 Content assigned to
+                .cms-edit-context-box
+                  =@content_package.author.full_name
             #discussion.tab-pane
               .discussion-item
                 .discussion-bubble

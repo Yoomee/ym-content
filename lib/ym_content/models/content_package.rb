@@ -8,7 +8,7 @@ module YmContent::ContentPackage
     base.belongs_to :parent, :class_name => "ContentPackage"
     base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id'
     base.has_and_belongs_to_many :personas
-    base.belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
+    base.belongs_to :author, :class_name => 'User'
 
     base.before_create :set_next_review
 
@@ -19,7 +19,7 @@ module YmContent::ContentPackage
 
     base.has_permalinks
 
-    base.send(:attr_accessor, :author)
+    # base.send(:attr_accessor, :author)
 
     base.extend(ClassMethods)
 
