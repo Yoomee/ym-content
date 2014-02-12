@@ -20,6 +20,7 @@ module YmContent::ContentPackagesController
   def new
     @content_package.content_type = ::ContentType.find_by_id(params[:content_type_id])
     @content_package.parent_id = params[:parent]
+    @content_package.requested_by = current_user
   end
 
   def show

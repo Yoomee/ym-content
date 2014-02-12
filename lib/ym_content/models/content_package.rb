@@ -9,6 +9,7 @@ module YmContent::ContentPackage
     base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id'
     base.has_and_belongs_to_many :personas
     base.belongs_to :author, :class_name => 'User'
+    base.belongs_to :requested_by, :class_name => 'User'
 
     base.before_create :set_next_review
 
