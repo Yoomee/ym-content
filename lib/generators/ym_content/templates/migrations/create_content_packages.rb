@@ -8,6 +8,7 @@ class CreateContentPackages < ActiveRecord::Migration
       t.belongs_to :author
       t.string :status, :default => 'draft'
       t.text :notes
+      t.date :due_date
       t.timestamps
     end
     add_index :content_packages, :parent_id

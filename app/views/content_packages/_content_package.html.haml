@@ -5,6 +5,8 @@
     =content_package
   %td{:class => "td-status td-status-#{content_package.status}"}
     =status(content_package.status)
+  %td{:class => "td-status td-status-#{content_package.status}"}
+    =content_package.due_date.strftime('%b %d, %Y')
   %td
     =link_to('View', content_package)
   %td
