@@ -24,7 +24,7 @@ class CreatePersonas < ActiveRecord::Migration
 
     create_table :persona_groups do |t|
       t.string :name
-      t.integer :position, :default => 0
+      t.integer :position
       t.timestamps
     end
   end

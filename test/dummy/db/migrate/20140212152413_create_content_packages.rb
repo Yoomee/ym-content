@@ -5,8 +5,13 @@ class CreateContentPackages < ActiveRecord::Migration
       t.string :slug
       t.belongs_to :content_type
       t.belongs_to :parent
+      t.belongs_to :author
+      t.belongs_to :requested_by
       t.string :status, :default => 'draft'
       t.text :notes
+      t.date :due_date
+      t.integer :review_frequency
+      t.date :next_review
       t.timestamps
     end
     add_index :content_packages, :parent_id
