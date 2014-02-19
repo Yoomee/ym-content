@@ -75,7 +75,7 @@
                 =@content_package.requested_by.full_name
               %h5 Content assigned to
               .cms-edit-context-box
-                =@content_package.author.full_name
+                =@content_package.author.try(:full_name)
             #discussion.tab-pane
               .discussion-item
                 .discussion-bubble
