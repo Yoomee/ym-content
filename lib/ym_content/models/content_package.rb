@@ -13,7 +13,7 @@ module YmContent::ContentPackage
 
     base.before_create :set_next_review
 
-    base.validates :content_type, :presence => true
+    base.validates :content_type, :requested_by, :review_frequency, :presence => true
     # base.validate :required_attributes
 
     base.delegate :content_attributes, :package_name, :view_name, :to => :content_type
