@@ -5,7 +5,6 @@
   %li.active=link_to("Site map", '#site-map', 'data-toggle' => 'tab')
   -if can? :manage, ContentType
     %li=link_to("Content types", '#content-types', 'data-toggle' => 'tab')
-
 .tab-content
   #site-map.tab-pane.active
     %table.table.table-striped
@@ -18,7 +17,7 @@
         -@content_packages.each do |content_package|
           =render('content_package', :content_package => content_package)
         %tr
-          %td{:colspan => 5}
+          %td{:colspan => 6}
             =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus')
   -if can? :manage, ContentType
     #content-types.tab-pane
