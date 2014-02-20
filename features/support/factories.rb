@@ -10,7 +10,9 @@ FactoryGirl.define do
       if content_type.content_attributes.count.zero?
         content_type.content_attributes = [
           FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'title', :limit_unit => 'character', :limit_quantity => 150),
-          FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'text', :name => 'Text', :description => 'Tell a story')
+          FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'text', :name => 'Text', :field_type => 'text', :description => 'Tell a story'),
+          FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'photo', :name => 'Photo', :field_type => 'image', :description => 'Add a picture'),
+          FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'document', :name => 'Document', :field_type => 'file', :description => 'Add a file')
         ]
       end
     end

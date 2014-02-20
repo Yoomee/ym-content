@@ -7,6 +7,14 @@ module YmContent::ContentAttribute
     base.validates :slug, :name, :uniqueness => { :scope => :content_type_id }
   end
 
+  def input_type
+    case field_type
+    when 'file' then 'file_with_preview'
+    when 'text' then 'redactor'
+    else field_type
+    end
+  end
+
   private
   def set_slug
     if slug.blank? && name.present? && errors['name'].blank?

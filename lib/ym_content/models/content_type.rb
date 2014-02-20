@@ -1,5 +1,5 @@
 module YmContent::ContentType
-  
+
   def self.included(base)
     base.has_many :content_attributes, :order => :position
     base.has_many :content_packages
@@ -13,7 +13,9 @@ module YmContent::ContentType
     def field_types
       {
         :string => 'Text',
-        :text => 'Text area'
+        :text => 'Text area',
+        :image => 'Image',
+        :file => 'File'
       }
     end
 

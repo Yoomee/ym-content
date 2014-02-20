@@ -7,6 +7,8 @@ describe ContentPackage do
   it { should validate_presence_of(:content_type) }
 
   it 'is valid' do
+    content_package.valid?
+    expect(content_package.errors.full_messages).to eq([])
     expect(content_package.valid?).to be_true
   end
   
@@ -31,6 +33,7 @@ describe ContentPackage do
 
   describe 'required fields' do
     it 'should be required' do
+      content_package.save
       ca = content_package.content_attributes.first
       ca.required = true
       content_package.send("#{ca.slug}=",nil)
@@ -38,5 +41,17 @@ describe ContentPackage do
     end
   end
 
-  
+  describe 'image attributes' do
+    it 'can be got' do
+      expect{ content_package.photo }.not_to raise_error
+    end
+    it 'can be set' do
+      expect{ content_package.photo = File.read(File.join(Rails.root, 'public/dragonfly/defaults/user.jpg')) }.not_to raise_error
+    end
+    it 'can generate thumbnail' do
+      content_package.photo = File.read(File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
+      expect(content_package.photo.thumb('100x100#').url).to match(/^\/media\//)
+    end
+  end
+
 end

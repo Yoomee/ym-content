@@ -12,6 +12,10 @@
         %td="@content_package.#{attribute.slug}"
         %td
           -case attribute.field_type
+          -when 'file'
+            %p=link_to(@content_package.send(attribute.slug).name, @content_package.send(attribute.slug).url, :target => '_blank')
+          -when 'image'
+            =image_for(@content_package, '300x200#', :method => attribute.slug.chomp('_uid'))
           -when 'text'
             =simple_format(@content_package.send(attribute.slug))
           -else
