@@ -21,11 +21,11 @@ FactoryGirl.define do
     slug "title"
     name "Title"
     description "Choose a pithy title"
-    field_type 'text'
+    field_type 'string'
     sequence(:position)
   end
 
-  factory :user do
+  factory :user, :aliases => [:author, :requested_by]  do
     first_name "Charles"
     sequence(:last_name) {|n| "Barrett #{n}"}
     sequence(:email) {|n| "charles@barrett_#{n}.com"}
@@ -36,8 +36,8 @@ FactoryGirl.define do
     content_type
     review_frequency 1
     due_date Date.today + 6.months
-    author_id 1
-    requested_by_id 1
+    author
+    requested_by
     sequence(:slug){|n| "content_package_#{n}" }
   end
 
