@@ -5,7 +5,7 @@ module YmContent::ContentHelper
     current_page = form.object
     return "" if ContentPackage.without([current_page] + current_page.children).empty?
     out = form.label(:parent_id, options[:label], :class => 'control-label')
-    out << content_tag(:div, form.select(:parent_id, content_tag(:option, 'None') + parent_content_package_option_tags(current_page)), :class => 'controls')
+    out << content_tag(:div, form.select(:parent_id, content_tag(:option, 'None', :value => '') + parent_content_package_option_tags(current_page)), :class => 'controls')
     content_tag(:div, out, :class => 'select control-group optional', :id => 'content_package_parent_input')
   end
   
