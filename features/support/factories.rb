@@ -35,6 +35,7 @@ FactoryGirl.define do
   end
 
   factory :content_package do
+    sequence(:name) {|n| "Content package #{n}"}
     content_type
     review_frequency 1
     due_date Date.today + 6.months

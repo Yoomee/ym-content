@@ -3,6 +3,7 @@ class CreateContentPackages < ActiveRecord::Migration
   def change
     create_table :content_packages do |t|
       t.string :slug
+      t.string :name
       t.belongs_to :content_type
       t.belongs_to :parent
       t.belongs_to :author

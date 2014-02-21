@@ -13,7 +13,7 @@ module YmContent::ContentPackage
 
     base.before_create :set_next_review
 
-    base.validates :content_type, :requested_by, :review_frequency, :presence => true
+    base.validates :name, :content_type, :requested_by, :review_frequency, :presence => true
     base.validate :required_attributes
 
     base.delegate :content_attributes, :package_name, :view_name, :to => :content_type
@@ -58,7 +58,7 @@ module YmContent::ContentPackage
   alias_method_chain :respond_to?, :content_attributes
 
   def to_s
-    ((respond_to?(:title) ? title.presence : nil) || slug).to_s
+    name
   end
 
   private

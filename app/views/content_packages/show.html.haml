@@ -1,7 +1,7 @@
 .col-md-8
   %h3=title(@content_package)
   -@content_package.content_attributes.each do |attribute|
-    %h4
+    %h4.mt-3
       =attribute.name
       -if Rails.env.development?
         %small="@content_package.#{attribute.slug}"

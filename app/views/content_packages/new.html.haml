@@ -20,7 +20,9 @@
                 %h5.cms-edit-group-title=group
                 =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false
             %br.clear
-            %h4 Write an objective/goal for this content
+            %h4 Give this content a name
+            =form.input :name, :label => false
+            %h4.mt-3 Write an objective/goal for this content
             .cms-edit-context-box
               =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}, :class => "content-objective-goal"
             =link_to("Next", '#author', 'data-toggle' => 'tab', :class => 'btn')
