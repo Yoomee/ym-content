@@ -1,23 +1,18 @@
-%h3=title(@content_package)
-%table.table.table-striped
-  %thead
-    %tr
-      %th Name
-      %th Attribute
-      %th Value
-  %tbody
-    -@content_package.content_attributes.each do |attribute|
-      %tr
-        %td.col-md-3=attribute.name
-        %td="@content_package.#{attribute.slug}"
-        %td
-          -case attribute.field_type
-          -when 'file'
-            -if file = @content_package.send(attribute.slug)
-              %p=link_to(file.name, file.url, :target => '_blank')
-          -when 'image'
-            =image_for(@content_package, '300x200#', :method => attribute.slug.chomp('_uid'))
-          -when 'text'
-            =simple_format(@content_package.send(attribute.slug))
-          -else
-            %p=@content_package.send(attribute.slug)
+.col-md-8
+  %h3=title(@content_package)
+  -@content_package.content_attributes.each do |attribute|
+    %h4
+      =attribute.name
+      -if Rails.env.development?
+        %small="@content_package.#{attribute.slug}"
+
+    -case attribute.field_type
+    -when 'file'
+      -if file = @content_package.send(attribute.slug)
+        %p=link_to(file.name, file.url, :target => '_blank')
+    -when 'image'
+      =image_for(@content_package, '300x200#', :method => attribute.slug.chomp('_uid'))
+    -when 'text'
+      =simple_format(@content_package.send(attribute.slug))
+    -else
+      %p=@content_package.send(attribute.slug)

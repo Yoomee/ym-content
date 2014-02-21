@@ -21,6 +21,12 @@ module YmContent::ContentType
 
   end
 
+  def has_view?
+    ActionController::Base.view_paths.any? do |path|
+      File.exists?("#{path}/content_packages/views/#{view_name}.html.haml")
+    end
+  end
+
   def package_name
     read_attribute(:package_name).presence || name.downcase
   end

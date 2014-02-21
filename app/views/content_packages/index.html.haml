@@ -32,6 +32,8 @@
             %tr.content-type
               %td{:colspan => 4}
                 %strong=content_type.to_s.pluralize
+                -unless content_type.has_view?
+                  %span.label.label-default Needs design
                 .pull-right
                   =link_to('Edit content type', edit_content_type_path(content_type))
                   &nbsp;
