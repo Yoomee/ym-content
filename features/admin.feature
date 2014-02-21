@@ -22,7 +22,7 @@ Scenario: Viewing a list of content packages
 
 Scenario: Creating a content package
   Given there is 1 content type
-  Given there are 0 content packages
+  And there are 0 content packages
   When I fill in the new content package form and submit
   Then I am taken to edit the content package
 
