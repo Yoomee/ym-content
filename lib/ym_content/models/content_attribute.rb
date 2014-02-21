@@ -18,7 +18,7 @@ module YmContent::ContentAttribute
   private
   def set_slug
     if slug.blank? && name.present? && errors['name'].blank?
-      slug_name = name.parameterize("_")
+      slug_name = name.gsub('-',' ').parameterize("_")
       if ::ContentPackage.new().respond_to_without_content_attributes?(slug_name,true)
         slug_name = 'content_package_' + slug_name
       end
