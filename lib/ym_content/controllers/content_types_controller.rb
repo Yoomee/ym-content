@@ -19,6 +19,7 @@ module YmContent::ContentTypesController
   end
 
   def new
+    @content_type.content_attributes.build
   end
 
   def update
