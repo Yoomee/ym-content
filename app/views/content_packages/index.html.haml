@@ -1,3 +1,7 @@
+:javascript
+  $(document).ready(function(){
+    YmContent.Sitemap.init()
+  });
 %h2.mb-3.pull-left=title 'Site map & content types'
 =link_if_can('Add content type', [:new, ContentType.new], :icon => 'plus', :class => 'btn btn-small pull-right mt-2 mr-1')
 .clearfix
@@ -9,10 +13,15 @@
   #site-map.tab-pane.active
     %table.table.table-striped
       %thead
-        %th Name
-        %th.col-md-2 Status
-        %th.col-md-2 Due Date
-        %th{:colspan => 3} Actions
+        %tr
+          %th.col-md-6 Name
+          %th.col-md-2 Status
+          %th.col-md-2 Due Date
+          %th{:colspan => 3}
+            .sitemap-filter.pull-right
+              %strong Filter
+              &nbsp;
+              =select_tag(:status, options_for_select([['All', nil]] + ContentPackage.statuses(current_user).invert.to_a, params[:filter])) 
       %tbody
         -@content_packages.each do |content_package|
           =render('content_package', :content_package => content_package)

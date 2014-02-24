@@ -24,6 +24,7 @@ module YmContent::ContentPackage
 
     base.scope :root, base.where(:parent_id => nil)
     base.scope :published, base.where(:status => 'published')
+    base.scope :expiring, base.where('next_review < ?', Date.today)
   end
 
   module ClassMethods

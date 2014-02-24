@@ -6,7 +6,11 @@ Rails.application.routes.draw do
 
   get '/content' => 'content_types#index'
 
-  resources :content_packages
+  resources :content_packages do
+    collection do
+      get ':filter' => 'content_packages#index', :as => 'filter'
+    end
+  end
 
   resources :personas
 

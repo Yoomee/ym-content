@@ -1,4 +1,4 @@
-%tr{:class => "status-#{content_package.status}"}
+%tr.content-package{:class => "status-#{content_package.status}"}
   %td
     =raw '&nbsp;' * content_package.parents.size * 3
     %i.fa{:class => "fa-#{content_package.children.empty? ? 'file-text-o' : 'folder-open-o'}"}

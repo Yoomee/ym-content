@@ -8,21 +8,21 @@
         Content status
       .row.cms-dashboard-btn
         .col-md-4
-          =link_to "#", :class=>"btn btn-block btn-with-number btn-cms-drafts fadeInPop" do
+          =link_to filter_content_packages_path(:filter => 'draft'), :class=>"btn btn-block btn-with-number btn-cms-drafts fadeInPop" do
             %span.btn-cms-number
-              6
+              =ContentPackage.where(:status => 'draft').count
             %span.btn-cms-text  
               Drafts
         .col-md-4
-          =link_to "#", :class=>"btn btn-block btn-with-number btn-cms-review fadeInPop" do
+          =link_to filter_content_packages_path(:filter => 'pending'), :class=>"btn btn-block btn-with-number btn-cms-review fadeInPop" do
             %span.btn-cms-number
-              2
+              =ContentPackage.where(:status => 'pending').count
             %span.btn-cms-text  
               Ready to review
         .col-md-4
-          =link_to "#", :class=>"btn btn-block  btn-with-number btn-cms-old fadeInPop" do
+          =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-with-number btn-cms-old fadeInPop" do
             %span.btn-cms-number
-              1
+              =ContentPackage.expiring.count
             %span.btn-cms-text  
               Getting old
     .well.cms-dashboard-well.clearfix.table-cms-dashboard.fadeInSlow      
