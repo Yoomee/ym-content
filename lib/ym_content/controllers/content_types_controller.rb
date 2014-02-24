@@ -13,6 +13,7 @@ module YmContent::ContentTypesController
   end
 
   def edit
+    @content_type.content_attributes.build if @content_type.content_attributes.count.zero?
   end
 
   def index
