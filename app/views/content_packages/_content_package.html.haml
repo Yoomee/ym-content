@@ -1,7 +1,7 @@
 %tr.content-package{:class => "status-#{content_package.status}"}
-  %td
-    =raw '&nbsp;' * content_package.parents.size * 3
-    =content_package
+  %td.td-name
+    =sitemap_spacers(content_package)
+    %span.name=content_package
   %td{:class => "td-status td-status-#{content_package.status}"}
     =status(content_package.status)
   %td{:class => "td-status td-status-#{content_package.status}"}

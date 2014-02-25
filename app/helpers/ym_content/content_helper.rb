@@ -28,6 +28,28 @@ module YmContent::ContentHelper
     end.html_safe
   end
 
+  def sitemap_spacers(content_package)
+    "".tap do |out|
+      parents = content_package.parents.reverse
+      parents.each_with_index do |parent, idx|
+        spacer_class = 'spacer'
+        if parent == content_package.parents.first
+          if content_package == parent.children.last
+            spacer_class << ' spacer-last'
+          else
+            spacer_class << ' spacer-mid'
+          end
+        else
+          next_parent = parents[idx + 1]
+          if next_parent && (next_parent == parent.children.last)
+            spacer_class << ' spacer-empty'
+          end
+        end
+        out << content_tag(:span, nil, :class => spacer_class, :title => parent.name)
+      end
+    end.html_safe
+  end
+
   def status(status_string)
     case status_string
     when 'published' then 'Published'
