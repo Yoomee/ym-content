@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :content_packages do
     collection do
-      get ':filter' => 'content_packages#index', :as => 'filter'
+      get 'filter/:filter' => 'content_packages#index', :as => 'filter'
     end
   end
 

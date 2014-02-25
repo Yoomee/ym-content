@@ -1,4 +1,9 @@
 module YmContent::ContentHelper
+  
+  def needs_design(content_package)
+    return nil if content_package.has_view?
+    content_tag(:span, 'Needs design', :class => 'label label-default')
+  end
 
   def parent_content_package_select(form, options = {})
     options.reverse_merge!(:label => "Parent")

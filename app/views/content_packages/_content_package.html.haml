@@ -1,7 +1,6 @@
 %tr.content-package{:class => "status-#{content_package.status}"}
   %td
     =raw '&nbsp;' * content_package.parents.size * 3
-    %i.fa{:class => "fa-#{content_package.children.empty? ? 'file-text-o' : 'folder-open-o'}"}
     =content_package
   %td{:class => "td-status td-status-#{content_package.status}"}
     =status(content_package.status)
@@ -12,6 +11,7 @@
   %td
     =link_to('Edit', edit_content_package_path(content_package))
   %td
-    =link_if_can('Add child', [:new, ContentPackage.new], :parent => content_package.id)
+    -if can?(:new, ContentPackage.new)
+      =link_if_can('Add child', new_content_package_path(:parent => content_package.id))
 -content_package.children.each do |child|
   =render('content_package', :content_package => child)

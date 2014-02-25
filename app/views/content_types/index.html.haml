@@ -34,42 +34,13 @@
             %th Status
             %th Due date
             %th
-        %tr
-          %td CV Polisher case Study
-          %td Draft
-          %td 16th Feb 14
-          %td.text-right
-            =link_to "#", :class=>"cms-table-view btn btn-small" do
-              View
-        %tr
-          %td Frenemy case study
-          %td=link_to "Ready to review", "#", :class=>"cms-link-ready-to-review"
-          %td 13th Feb 14
-          %td.text-right
-            =link_to "#", :class=>"cms-table-view btn btn-small" do
-              View     
-        %tr
-          %td Newbie case study
-          %td=link_to "Ready to review", "#", :class=>"link-ready-to-review"
-          %td 14th Feb 14
-          %td.text-right
-            =link_to "#", :class=>"cms-table-view btn btn-small" do
-              View                      
-        %tr
-          %td Fact Checker case Study
-          %td Draft
-          %td 16th Feb 14
-          %td.text-right
-            =link_to "#", :class=>"cms-table-view btn btn-small" do
-              View
-        %tr
-          %td About us
-          %td=link_to "Published", "#", :class=>"cms-link-published"
-          %td
-          %td.text-right
-            =link_to "#", :class=>"cms-table-view btn btn-small" do
-              View              
-      
+        -ContentPackage.where(:author_id => current_user.id).each do |content_package|
+          %tr
+            %td=content_package
+            %td=status(content_package.status)
+            %td=content_package.due_date.try(:strftime, '%b %d, %Y')
+            %td.text-right
+              =link_to "View", content_package, :class=>"cms-table-view btn btn-small"
     .well.cms-dashboard-well.clearfix.fadeInSlow3
       %h4.mt-0.b-1 Recent Activity
       %ul.cms-activities
