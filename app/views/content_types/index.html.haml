@@ -34,7 +34,7 @@
             %th Status
             %th Due date
             %th
-        -ContentPackage.where(:author_id => current_user.id).each do |content_package|
+        -ContentPackage.where(:author_id => current_user.try(:id)).each do |content_package|
           %tr
             %td=content_package
             %td=status(content_package.status)
