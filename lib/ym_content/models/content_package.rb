@@ -88,7 +88,7 @@ module YmContent::ContentPackage
       if method == 'url'
         instance_variable_set("@#{content_attribute.slug}_url".to_sym, content_chunk.try(:value))
       else
-        instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:html).try(:html_safe))
+        instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:html).to_s.gsub('http://', 'https://').html_safe)
       end
     else
       instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value).try(:html_safe))
