@@ -54,4 +54,22 @@ describe ContentPackage do
     end
   end
 
+  describe 'embeddable attributes' do
+    it 'can be got' do
+      expect{ content_package.video }.not_to raise_error
+    end
+    it 'can be set' do
+      expect{ content_package.video_url = "http://www.youtube.com/watch?v=qvmc9d0dlOg" }.not_to raise_error
+    end
+    it 'are invalid with bad URL ' do
+      content_package.video_url = "http://www.youtube.com/watch?v=qvmc9d0dlO"
+      expect(content_package.valid?).to be_false
+    end
+    it 'fetches HTML' do
+      content_package.video_url = "http://www.youtube.com/watch?v=qvmc9d0dlO"
+      content_package.valid?
+      expect(content_package.video).to_not be_blank
+    end
+  end
+
 end

@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'ym_permalinks', '~> 1.0.1'
   s.add_dependency 'ym_users', '~> 1.1.1'
   s.add_dependency 'cocoon'
+  s.add_dependency 'ruby-oembed'
 
   s.add_development_dependency "sqlite3"
 

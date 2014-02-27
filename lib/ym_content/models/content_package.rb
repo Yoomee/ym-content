@@ -15,6 +15,7 @@ module YmContent::ContentPackage
 
     base.validates :name, :content_type, :requested_by, :review_frequency, :presence => true
     base.validate :required_attributes
+    base.validate :embeddable_attributes
 
     base.delegate :content_attributes, :package_name, :view_name, :has_view?, :to => :content_type
 
@@ -37,7 +38,7 @@ module YmContent::ContentPackage
       end
     end
 
-     def review_frequencies
+    def review_frequencies
       {
         :'1' => 'Monthly',
         :'2' => 'Every 2 Months',
@@ -54,7 +55,7 @@ module YmContent::ContentPackage
 
   def respond_to_with_content_attributes?(method_id, include_all = false)
     slug = method_id.to_s.sub(/^retained_/,'').sub(/^remove_/,'').sub(/_uid$/,'').chomp('=')
-    respond_to_without_content_attributes?(method_id, include_all) || content_type && content_attributes.exists?(:slug => slug)
+    respond_to_without_content_attributes?(method_id, include_all) || content_type && (content_attributes.exists?(:slug => slug) || content_attributes.exists?(:slug => slug.chomp('_url')))
   end
   alias_method_chain :respond_to?, :content_attributes
 
@@ -63,6 +64,37 @@ module YmContent::ContentPackage
   end
 
   private
+  def embeddable_attributes
+    self.content_chunks.each do |content_chunk|
+      if content_chunk.content_attribute.field_type.embeddable? && content_chunk.value.present?
+        begin
+          content_chunk.html = OEmbed::Providers.get(content_chunk.value).html
+        rescue OEmbed::NotFound => e
+          content_chunk.html = nil
+          self.errors.add(content_chunk.content_attribute.slug + '_url', "No embeddable content found at this URL")
+        end
+      end
+    end
+  end
+
+  def get_value_for_content_attribute(content_attribute, method = nil)
+    content_chunk = content_chunks.find_by_content_attribute_id(content_attribute.id)
+    case content_attribute.field_type
+    when 'file'
+      content_chunk.try(:file)
+    when 'image'
+      content_chunk.try(:image)
+    when 'embeddable'
+      if method == 'url'
+        instance_variable_set("@#{content_attribute.slug}_url".to_sym, content_chunk.try(:value))
+      else
+        instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:html).try(:html_safe))
+      end
+    else
+      instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
+    end
+  end
+
   def method_missing(method_sym, *arguments, &block)
     return super if method_sym.to_s =~ /[?]$/ # e.g. method? or method!
     attribute_name = method_sym.to_s.chomp('=')
@@ -85,27 +117,15 @@ module YmContent::ContentPackage
         end
       elsif content_attribute = content_attributes.find_by_slug(attribute_name)
         if method_sym.to_s.end_with?('=')
-          content_chunk = self.content_chunks.find_or_initialize_by_content_attribute_id(content_attribute.id)
-          case content_attribute.field_type
-          when 'file'
-            content_chunk.file = arguments.first
-          when 'image'
-            content_chunk.image = arguments.first
-          else
-            content_chunk.value = arguments.first
-          end
-          content_chunk.save # TODO shouldn't need to save here
-          instance_variable_set("@#{attribute_name}".to_sym, arguments.first) unless %w{file image}.include?(content_attribute.field_type)
+          set_value_for_content_attribute(content_attribute, arguments.first)
         else
-          content_chunk = content_chunks.find_by_content_attribute_id(content_attribute.id)
-          case content_attribute.field_type
-          when 'file'
-            content_chunk.try(:file)
-          when 'image'
-            content_chunk.try(:image)
-          else
-            instance_variable_set("@#{attribute_name}".to_sym, content_chunk.try(:value))
-          end
+          get_value_for_content_attribute(content_attribute)
+        end
+      elsif content_attribute = content_attributes.find_by_slug(attribute_name.chomp('_url'))
+        if method_sym.to_s.end_with?('=')
+          set_value_for_content_attribute(content_attribute, arguments.first, 'url')
+        else
+          get_value_for_content_attribute(content_attribute, 'url')
         end
       else
         super
@@ -126,6 +146,26 @@ module YmContent::ContentPackage
 
   def set_next_review
     self.next_review = Date.today + self.review_frequency.months
+  end
+
+  def set_value_for_content_attribute(content_attribute, value, method = nil)
+    content_chunk = self.content_chunks.find_or_initialize_by_content_attribute_id(content_attribute.id)
+    case content_attribute.field_type
+    when 'file'
+      content_chunk.file = value
+    when 'image'
+      content_chunk.image = value
+    when 'embeddable'
+      if method == 'url'
+        content_chunk.value = value
+      else
+        content_chunk.html = html
+      end
+    else
+      content_chunk.value = value
+    end
+    content_chunk.save # TODO shouldn't need to save here
+    instance_variable_set("@#{content_attribute.slug}".to_sym, value) unless %w{file image}.include?(content_attribute.field_type)
   end
 
 end

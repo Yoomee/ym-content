@@ -5,6 +5,25 @@ module YmContent::ContentAttribute
     base.after_validation :set_slug
     base.validates :slug, :name, :field_type, :presence => true
     base.validates :slug, :name, :uniqueness => { :scope => :content_type_id }
+    base.extend(ClassMethods)
+  end
+
+  module ClassMethods
+
+    def field_types
+      {
+        :string => 'Text',
+        :text => 'Text area',
+        :image => 'Image',
+        :file => 'File',
+        :embeddable => 'Embeddable content - Flickr, Instagram, Scribd, Slideshare, SoundCloud, Vimeo, YouTube'
+      }
+    end
+
+  end
+
+  def field_type
+    ActiveSupport::StringInquirer.new(read_attribute(:field_type).to_s)
   end
 
   def input_type

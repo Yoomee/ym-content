@@ -14,5 +14,7 @@
       =image_for(@content_package, '300x200#', :method => attribute.slug.chomp('_uid'))
     -when 'text'
       =simple_format(@content_package.send(attribute.slug))
+    -when 'embeddable'
+      =@content_package.send(attribute.slug)
     -else
       %p=@content_package.send(attribute.slug)
