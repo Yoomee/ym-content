@@ -91,7 +91,7 @@ module YmContent::ContentPackage
         instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:html).try(:html_safe))
       end
     else
-      instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
+      instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value).try(:html_safe))
     end
   end
 
