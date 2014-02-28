@@ -10,6 +10,12 @@
 =semantic_form_for @content_type do |form|
   =form.inputs do
     =form.input :name
+    -if current_user.yoomee_staff?
+      =form.input :description, :input_html => {:rows => 4}
+      =form.input :singleton
+      =form.input :package_name
+      =form.input :view_name
+      =form.input :use_workflow
     #content_attributes
       %h4 Content attributes
       =form.semantic_fields_for :content_attributes do |content_attribute|
