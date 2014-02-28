@@ -31,7 +31,9 @@ When(/^I fill in the new content package form and submit$/) do
 end
 
 Then(/^I am taken to edit the content package$/) do
-  expect(page).to have_content("Edit #{@content_package.package_name}")
+  @content_package.content_attributes.each do |content_attribute|
+    expect(page).to have_content(content_attribute.name)
+  end
 end
 
 When(/^I update the content package$/) do

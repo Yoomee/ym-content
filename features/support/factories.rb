@@ -33,6 +33,7 @@ FactoryGirl.define do
     sequence(:last_name) {|n| "Barrett #{n}"}
     sequence(:email) {|n| "charles@barrett_#{n}.com"}
     password "password"
+    role 'admin'
   end
 
   factory :content_package do
