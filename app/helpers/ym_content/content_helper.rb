@@ -1,7 +1,7 @@
 module YmContent::ContentHelper
   
   def needs_design(content_package)
-    return nil if content_package.has_view?
+    return nil unless content_package.missing_view?
     content_tag(:span, 'Needs design', :class => 'label label-default')
   end
 

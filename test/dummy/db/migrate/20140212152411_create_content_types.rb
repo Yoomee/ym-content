@@ -6,6 +6,7 @@ class CreateContentTypes < ActiveRecord::Migration
       t.text :description
       t.boolean :singleton, :default => false
       t.string :package_name
+      t.boolean :viewless, :default => false
       t.string :view_name
       t.boolean :use_workflow, :default => false
     end

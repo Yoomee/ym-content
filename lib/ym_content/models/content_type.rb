@@ -7,9 +7,13 @@ module YmContent::ContentType
     base.accepts_nested_attributes_for :content_attributes, :allow_destroy => true
   end
 
-  def has_view?
-    ActionController::Base.view_paths.any? do |path|
-      File.exists?("#{path}/content_packages/views/#{view_name}.html.haml")
+  def missing_view?
+    if viewless?
+      false
+    else
+      ActionController::Base.view_paths.all? do |path|
+        !File.exists?("#{path}/content_packages/views/#{view_name}.html.haml")
+      end
     end
   end
 

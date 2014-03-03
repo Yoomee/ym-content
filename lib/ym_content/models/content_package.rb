@@ -17,9 +17,11 @@ module YmContent::ContentPackage
     base.validate :required_attributes
     base.validate :embeddable_attributes
 
-    base.delegate :content_attributes, :package_name, :view_name, :has_view?, :to => :content_type
+    base.delegate :content_attributes, :package_name, :view_name, :missing_view?, :viewless?, :to => :content_type
 
     base.has_permalinks
+
+    base.alias_method_chain(:set_permalink_path, :viewless)
 
     base.extend(ClassMethods)
 
@@ -148,6 +150,10 @@ module YmContent::ContentPackage
 
   def set_next_review
     self.next_review = Date.today + self.review_frequency.months
+  end
+
+  def set_permalink_path_with_viewless
+    content_type.try(:viewless?) ? true : set_permalink_path_without_viewless
   end
 
   def set_value_for_content_attribute(content_attribute, value, method = nil)
