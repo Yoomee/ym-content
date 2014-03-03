@@ -14,6 +14,7 @@ module YmContent::ContentAttribute
       {
         :string => 'Text',
         :text => 'Text area',
+        :link => 'Link',
         :image => 'Image',
         :file => 'File',
         :embeddable => 'Embeddable content - Flickr, Instagram, Scribd, Slideshare, SoundCloud, Vimeo, YouTube'

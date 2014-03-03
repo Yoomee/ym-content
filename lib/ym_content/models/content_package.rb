@@ -82,6 +82,8 @@ module YmContent::ContentPackage
     case content_attribute.field_type
     when 'file'
       content_chunk.try(:file)
+    when 'link'
+      instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
     when 'image'
       content_chunk.try(:image)
     when 'embeddable'
@@ -155,6 +157,8 @@ module YmContent::ContentPackage
       content_chunk.file = value
     when 'image'
       content_chunk.image = value
+    when 'link'
+      content_chunk.value = value.to_s
     when 'embeddable'
       if method == 'url'
         content_chunk.value = value
@@ -164,8 +168,8 @@ module YmContent::ContentPackage
     else
       content_chunk.value = value
     end
-    content_chunk.save # TODO shouldn't need to save here
-    instance_variable_set("@#{content_attribute.slug}".to_sym, value) unless %w{file image}.include?(content_attribute.field_type)
+    content_chunk.save unless new_record? # TODO shouldn't need to save here
+    instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.value) unless %w{file image}.include?(content_attribute.field_type)
   end
 
 end

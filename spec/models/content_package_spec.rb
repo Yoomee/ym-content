@@ -50,6 +50,7 @@ describe ContentPackage do
     end
     it 'can generate thumbnail' do
       content_package.photo = File.read(File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
+      content_package.save
       expect(content_package.photo.thumb('100x100#').url).to match(/^\/media\//)
     end
   end
@@ -69,6 +70,19 @@ describe ContentPackage do
       content_package.video_url = "http://www.youtube.com/watch?v=qvmc9d0dlO"
       content_package.valid?
       expect(content_package.video).to_not be_blank
+    end
+  end
+
+  describe 'link attributes' do
+    it 'can be set as a URL' do
+      url = "http://yoomee.com"
+      content_package.link = url
+      expect(content_package.link.value).to eq(url)
+    end
+    it 'can be set as a content package' do
+      package_2 = FactoryGirl.create(:content_package)
+      content_package.link = package_2.id
+      expect(content_package.link.value).to eq(package_2)
     end
   end
 
