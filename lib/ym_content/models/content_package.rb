@@ -55,6 +55,10 @@ module YmContent::ContentPackage
     [parent, parent.try(:parents)].flatten.compact
   end
 
+  def publicly_visible?
+    status == 'published' && !missing_view?
+  end
+
   def respond_to_with_content_attributes?(method_id, include_all = false)
     slug = method_id.to_s.sub(/^retained_/,'').sub(/^remove_/,'').sub(/_uid$/,'').chomp('=')
     respond_to_without_content_attributes?(method_id, include_all) || content_type && (content_attributes.exists?(:slug => slug) || content_attributes.exists?(:slug => slug.chomp('_url')))
