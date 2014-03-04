@@ -4,13 +4,13 @@ module YmContent
     attr_reader :url, :content_package, :target
 
     def initialize(val)
-      @value = val.strip
-      if @value =~ /^\d+$/
-        @content_package = ::ContentPackage.find_by_id(value)
+      @raw = val.strip
+      if raw =~ /^\d+$/
+        @content_package = ::ContentPackage.find_by_id(raw)
         @target = nil
       else
-        @url = @value.html_safe
-        if @value.start_with?('/')
+        @url = val.to_s.html_safe
+        if url.start_with?('/')
           @target = nil
         else
           @target = "_blank"
@@ -23,7 +23,7 @@ module YmContent
     end
 
     def raw
-      @value
+      @raw
     end
 
   end
