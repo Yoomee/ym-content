@@ -3,13 +3,14 @@ module YmContent
 
     attr_reader :url, :content_package, :target
 
-    def initialize(value)
-      if value.strip =~ /^\d+$/
+    def initialize(val)
+      @value = val.strip
+      if @value =~ /^\d+$/
         @content_package = ::ContentPackage.find_by_id(value)
         @target = nil
       else
-        @url = value.strip.html_safe
-        if value.start_with?('/')
+        @url = @value.html_safe
+        if @value.start_with?('/')
           @target = nil
         else
           @target = "_blank"
@@ -19,6 +20,10 @@ module YmContent
 
     def value
       content_package.presence || url
+    end
+
+    def raw
+      @value
     end
 
   end
