@@ -12,7 +12,8 @@
     -when 'image'
       =image_for(@content_package, '300x200#', :method => attribute.slug.chomp('_uid'))
     -when 'link'
-      =link_to(@content_package.send(attribute.slug).value, @content_package.send(attribute.slug).value)
+      -if link = @content_package.send(attribute.slug).try(:value)
+        =link_to(link, link, :target => '_blank')
     -when 'text'
       =simple_format(@content_package.send(attribute.slug))
     -when 'embeddable'
