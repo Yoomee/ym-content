@@ -103,12 +103,10 @@ module YmContent::ContentPackage
   def get_value_for_content_attribute(content_attribute, method = nil)
     content_chunk = content_chunk_for_content_attribute(content_attribute)
     case content_attribute.field_type
-    when 'file'
+    when 'file', 'image'
       content_chunk.try(:file)
     when 'link'
       instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
-    when 'image'
-      content_chunk.try(:image)
     when 'embeddable'
       if method == 'url'
         instance_variable_set("@#{content_attribute.slug}_url".to_sym, content_chunk.try(:value))
@@ -130,7 +128,7 @@ module YmContent::ContentPackage
         file_attribute_name = $1
         if content_attribute = content_attributes.find_by_slug(file_attribute_name)
           content_chunk = content_chunk_for_content_attribute(content_attribute, true)
-          file_method_sym = method_sym.to_s.sub(file_attribute_name, content_attribute.field_type)
+          file_method_sym = method_sym.to_s.sub(file_attribute_name, 'file')
           if arguments.present?
             content_chunk.send(file_method_sym, arguments.first)
           else
@@ -183,10 +181,8 @@ module YmContent::ContentPackage
   def set_value_for_content_attribute(content_attribute, value, method = nil)
     content_chunk = content_chunk_for_content_attribute(content_attribute, true)
     case content_attribute.field_type
-    when 'file'
+    when 'file', 'image'
       content_chunk.file = value
-    when 'image'
-      content_chunk.image = value
     when 'link'
       content_chunk.value = value.to_s
     when 'embeddable'

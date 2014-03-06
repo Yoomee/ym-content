@@ -46,7 +46,19 @@ end
 
 Then(/^the content package should change$/) do
   visit edit_content_package_path(@content_package)
+  expect(page).to have_xpath("//img[contains(@src, \"media\")]")
   expect(find_field('Title').value).to eq('Modified title')
+end
+
+Given(/^I remove an image$/) do
+  visit edit_content_package_path(@content_package)
+  check 'content_package_remove_photo'
+  click_button("Update #{@content_package.package_name}")
+end
+
+Then(/^the image should be removed$/) do
+  visit edit_content_package_path(@content_package)
+  expect(page).to_not have_xpath("//img[contains(@src, \"media\")]")
 end
 
 When(/^I go to the content package$/) do
