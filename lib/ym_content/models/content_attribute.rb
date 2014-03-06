@@ -17,7 +17,8 @@ module YmContent::ContentAttribute
         :link => 'Link',
         :image => 'Image',
         :file => 'File',
-        :embeddable => 'Embeddable content - Flickr, Instagram, Scribd, Slideshare, SoundCloud, Vimeo, YouTube'
+        :embeddable => 'Embeddable content - Flickr, Instagram, Scribd, Slideshare, SoundCloud, Vimeo, YouTube',
+        :boolean => 'Check box'
       }
     end
 

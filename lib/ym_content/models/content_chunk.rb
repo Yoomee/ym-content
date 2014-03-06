@@ -16,6 +16,8 @@ module YmContent::ContentChunk
 
   def value
     case content_attribute.field_type
+    when 'boolean'
+      read_attribute(:value) == '1'
     when 'file'
       file
     when 'image'

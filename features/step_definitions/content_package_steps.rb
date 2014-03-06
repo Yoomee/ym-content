@@ -41,12 +41,14 @@ When(/^I update the content package$/) do
   fill_in('content_package_title', :with => 'Modified title')
   attach_file('content_package_photo', File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
   attach_file('content_package_document', File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
+  check('content_package_special')
   click_button("Update #{@content_package.package_name}")
 end
 
 Then(/^the content package should change$/) do
   visit edit_content_package_path(@content_package)
   expect(page).to have_xpath("//img[contains(@src, \"media\")]")
+  expect(find('#content_package_special')).to be_checked
   expect(find_field('Title').value).to eq('Modified title')
 end
 

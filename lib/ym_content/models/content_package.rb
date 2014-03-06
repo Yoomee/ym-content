@@ -103,6 +103,8 @@ module YmContent::ContentPackage
   def get_value_for_content_attribute(content_attribute, method = nil)
     content_chunk = content_chunk_for_content_attribute(content_attribute)
     case content_attribute.field_type
+    when 'boolean'
+      instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value) || false)
     when 'file', 'image'
       content_chunk.try(:file)
     when 'link'
@@ -181,6 +183,8 @@ module YmContent::ContentPackage
   def set_value_for_content_attribute(content_attribute, value, method = nil)
     content_chunk = content_chunk_for_content_attribute(content_attribute, true)
     case content_attribute.field_type
+    when 'boolean'
+      content_chunk.value = [0, "0", false, "false", "", nil].include?(value) ? '0' : '1'
     when 'file', 'image'
       content_chunk.file = value
     when 'link'

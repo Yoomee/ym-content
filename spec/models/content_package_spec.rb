@@ -102,6 +102,19 @@ describe ContentPackage do
     end
   end
 
+  describe 'boolean attributes' do
+    it 'can be got' do
+      expect(content_package.special).to eq(false)
+    end
+    it 'can be set' do
+      content_package.special = '1'
+      expect(content_package.special).to eq(true)
+    end
+    it 'can be got with a boolean accessor' do
+      expect(content_package.special?).to eq(false)
+    end
+  end
+
   it 'has a permalink if not viewless' do
     content_package.build_permalink
     content_package.valid?
