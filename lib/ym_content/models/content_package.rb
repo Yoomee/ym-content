@@ -4,7 +4,7 @@ module YmContent::ContentPackage
     base.send(:include, YmCore::Model)
 
     base.belongs_to :content_type
-    base.has_many :content_chunks, :autosave => true
+    base.has_many :content_chunks
     base.belongs_to :parent, :class_name => "ContentPackage"
     base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id'
     base.has_and_belongs_to_many :personas
@@ -12,6 +12,7 @@ module YmContent::ContentPackage
     base.belongs_to :requested_by, :class_name => 'User'
 
     base.before_create :set_next_review
+    base.after_save :save_content_chunks
 
     base.validates :name, :content_type, :requested_by, :review_frequency, :presence => true
     base.validate :required_attributes
@@ -24,6 +25,8 @@ module YmContent::ContentPackage
     base.alias_method_chain(:set_permalink_path, :viewless)
 
     base.extend(ClassMethods)
+
+    base.send(:default_scope, :include => [:content_type, :content_chunks])
 
     base.scope :root, base.where(:parent_id => nil)
     base.scope :published, base.where(:status => 'published')
@@ -51,6 +54,10 @@ module YmContent::ContentPackage
 
   end
 
+  def content_chunks
+    @content_chunks ||= super.to_a
+  end
+
   def parents
     [parent, parent.try(:parents)].flatten.compact
   end
@@ -70,6 +77,16 @@ module YmContent::ContentPackage
   end
 
   private
+
+  def content_chunk_for_content_attribute(content_attribute, initialise_if_nil = false)
+    content_chunk = self.content_chunks.select{|c| c.content_attribute_id == content_attribute.id }.first
+    if content_chunk.nil? && initialise_if_nil
+      content_chunk = ContentChunk.new(:content_attribute => content_attribute, :content_package => self)
+      self.content_chunks << content_chunk
+    end
+    content_chunk
+  end
+
   def embeddable_attributes
     self.content_chunks.each do |content_chunk|
       if content_chunk.content_attribute.field_type.embeddable? && content_chunk.value.present?
@@ -84,7 +101,7 @@ module YmContent::ContentPackage
   end
 
   def get_value_for_content_attribute(content_attribute, method = nil)
-    content_chunk = content_chunks.find_by_content_attribute_id(content_attribute.id)
+    content_chunk = content_chunk_for_content_attribute(content_attribute)
     case content_attribute.field_type
     when 'file'
       content_chunk.try(:file)
@@ -112,11 +129,10 @@ module YmContent::ContentPackage
       if attribute_name =~ /^retained_(.*)/ || attribute_name =~ /^remove_(.*)/ || attribute_name =~ /(.*)_uid$/
         file_attribute_name = $1
         if content_attribute = content_attributes.find_by_slug(file_attribute_name)
-          content_chunk = self.content_chunks.find_or_initialize_by_content_attribute_id(content_attribute.id)
+          content_chunk = content_chunk_for_content_attribute(content_attribute, true)
           file_method_sym = method_sym.to_s.sub(file_attribute_name, content_attribute.field_type)
           if arguments.present?
             content_chunk.send(file_method_sym, arguments.first)
-            content_chunk.save if method_sym.to_s.end_with?('=') # TODO shouldn't need to save here
           else
             content_chunk.send(file_method_sym)
           end
@@ -152,6 +168,10 @@ module YmContent::ContentPackage
     end
   end
 
+  def save_content_chunks
+    content_chunks.each(&:save)
+  end
+
   def set_next_review
     self.next_review = Date.today + self.review_frequency.months
   end
@@ -161,7 +181,7 @@ module YmContent::ContentPackage
   end
 
   def set_value_for_content_attribute(content_attribute, value, method = nil)
-    content_chunk = self.content_chunks.find_or_initialize_by_content_attribute_id(content_attribute.id)
+    content_chunk = content_chunk_for_content_attribute(content_attribute, true)
     case content_attribute.field_type
     when 'file'
       content_chunk.file = value
@@ -178,7 +198,6 @@ module YmContent::ContentPackage
     else
       content_chunk.value = value
     end
-    content_chunk.save unless new_record? # TODO shouldn't need to save here
     instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.value) unless %w{file image}.include?(content_attribute.field_type)
   end
 

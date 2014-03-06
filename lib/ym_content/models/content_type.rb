@@ -4,6 +4,7 @@ module YmContent::ContentType
     base.has_many :content_attributes, :order => :position
     base.has_many :content_packages
     base.validates_presence_of :name
+    base.send(:default_scope, :include => :content_attributes)
     base.accepts_nested_attributes_for :content_attributes, :allow_destroy => true
   end
 

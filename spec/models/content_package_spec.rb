@@ -31,6 +31,16 @@ describe ContentPackage do
     end
   end
 
+  describe 'changing attribute' do
+    it 'should work for content_attribute' do
+      content_package.save
+      content_package.title = "A new title"
+      content_package.save
+      content_package.reload
+      expect(content_package.title).to eq("A new title")
+    end
+  end
+
   describe 'required fields' do
     it 'should be required' do
       content_package.save
@@ -50,8 +60,14 @@ describe ContentPackage do
     end
     it 'can generate thumbnail' do
       content_package.photo = File.read(File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
-      content_package.save
       expect(content_package.photo.thumb('100x100#').url).to match(/^\/media\//)
+    end
+    it 'can be removed' do
+      content_package.photo = File.read(File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
+      content_package.save
+      content_package.remove_photo = true
+      content_package.save
+      expect(content_package.photo).to be_nil
     end
   end
 
