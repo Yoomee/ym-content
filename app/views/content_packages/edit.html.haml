@@ -15,6 +15,7 @@
           #content.tab-pane.active.cms-form
             =form.inputs do
               =form.input :content_type_id, :as => :hidden
+              =form.input :name if current_user.admin?
               -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
                 =form.content_input content_attribute
           #meta.tab-pane.cms-form
