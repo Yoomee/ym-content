@@ -1,4 +1,12 @@
 window.YmContent =
+  Redactor:
+    init: ->
+      $('.redactor textarea').redactor
+        removeClasses: true,
+        removeStyles: true,
+        buttons: [ 'unorderedlist', 'orderedlist', 'link', 'html' ],
+        convertDivs: true,
+        path:'/assets/redactor'
   Sitemap:
     init: ->
       YmContent.Sitemap.filter()

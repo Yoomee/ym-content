@@ -1,7 +1,5 @@
-=content_for :head do
-  :coffeescript
-    $ ->
-      $('.redactor textarea').redactor({ buttons: ['unorderedlist', 'orderedlist', 'link'] })
+:javascript
+  $(document).ready(function(){YmContent.Redactor.init();});
 
 .container
 .container.container-cms-edit
