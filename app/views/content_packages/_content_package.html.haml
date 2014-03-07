@@ -1,7 +1,11 @@
-%tr.content-package{:class => "status-#{content_package.status}"}
+- parents = parents.try(:dup) || []
+%tr.content-package{:class => "status-#{content_package.status} #{'has-children' unless content_package.children.count.zero?}", :id => "content-package-#{content_package.id}", :data => {:depth => parents.size}}
   %td.td-name
-    =sitemap_spacers(content_package)
-    %span.name=content_package
+    =sitemap_spacers(content_package, parents)
+    %span.name
+      - unless content_package.children.count.zero?
+        %i.fa.fa-caret-right.sitemap-caret
+      =content_package
   %td{:class => "td-status td-status-#{content_package.status}"}
     =status(content_package.status)
   %td{:class => "td-status td-status-#{content_package.status}"}
@@ -13,5 +17,6 @@
   %td
     -if can?(:new, ContentPackage.new)
       =link_if_can('Add child', new_content_package_path(:parent => content_package.id))
+- parents << content_package
 -content_package.children.each do |child|
-  =render('content_package', :content_package => child)
+  =#render('content_package', :content_package => child, :parents => parents)

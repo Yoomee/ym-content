@@ -28,12 +28,11 @@ module YmContent::ContentHelper
     end.html_safe
   end
 
-  def sitemap_spacers(content_package)
+  def sitemap_spacers(content_package, parents)
     "".tap do |out|
-      parents = content_package.parents.reverse
       parents.each_with_index do |parent, idx|
         spacer_class = 'spacer'
-        if parent == content_package.parents.first
+        if parent == parents.last
           if content_package == parent.children.last
             spacer_class << ' spacer-last'
           else

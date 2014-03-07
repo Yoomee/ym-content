@@ -4,6 +4,9 @@ module YmContent::ContentPackagesController
     base.load_and_authorize_resource
   end
 
+  def children
+  end
+
   def create
     if @content_package.save
       redirect_to edit_content_package_path(@content_package)
@@ -13,7 +16,7 @@ module YmContent::ContentPackagesController
   end
 
   def index
-    @content_packages = @content_packages.root
+    @content_packages = @content_packages.root.includes(:children)
     @content_types = ::ContentType.order(:name)
   end
 

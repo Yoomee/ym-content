@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     collection do
       get 'filter/:filter' => 'content_packages#index', :as => 'filter'
     end
+    member do
+      get 'children'
+    end
   end
 
   resources :personas

@@ -1,0 +1,6 @@
+<%html = "".tap do |out|%>
+  <%@content_package.children.each do |child| %>
+    <% out << render('content_package', :content_package => child, :parents => @content_package.parents.reverse << @content_package) %>
+  <% end %>
+<% end %>
+$('#content-package-<%=@content_package.id%>').after('<%=escape_javascript(html.html_safe)%>');

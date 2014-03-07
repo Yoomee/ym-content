@@ -26,8 +26,6 @@ module YmContent::ContentPackage
 
     base.extend(ClassMethods)
 
-    base.send(:default_scope, :include => [:content_type, :content_chunks])
-
     base.scope :root, base.where(:parent_id => nil)
     base.scope :published, base.where(:status => 'published')
     base.scope :expiring, base.where('next_review < ?', Date.today)
@@ -121,7 +119,7 @@ module YmContent::ContentPackage
   end
 
   def method_missing(method_sym, *arguments, &block)
-    return super if method_sym.to_s =~ /[?]$/ # e.g. method? or method!
+    return super if method_sym.to_s =~ /\?$/ # e.g. method? or method!
     attribute_name = method_sym.to_s.chomp('=')
     if !method_sym.to_s.end_with?('=') && instance_variable_defined?("@#{attribute_name}".to_sym)
       instance_variable_get("@#{attribute_name}".to_sym)
