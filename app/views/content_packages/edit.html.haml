@@ -21,7 +21,7 @@
           #meta.tab-pane.cms-form
             =form.inputs do
               =parent_content_package_select(form)
-              =#form.input :slug
+              =form.input :slug if current_user.yoomee_staff?
               =form.input :permalink_path, :prepend => "/" unless @content_package.viewless?
               %hr
               -@content_package.content_attributes.where(:meta => true).each do |content_attribute|
