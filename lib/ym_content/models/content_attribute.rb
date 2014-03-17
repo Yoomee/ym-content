@@ -18,6 +18,7 @@ module YmContent::ContentAttribute
         :image => 'Image',
         :file => 'File',
         :embeddable => 'Embeddable content - Flickr, Instagram, Scribd, Slideshare, SoundCloud, Vimeo, YouTube',
+        :tags => 'Tag list',
         :boolean => 'Check box'
       }
     end
@@ -33,6 +34,14 @@ module YmContent::ContentAttribute
     when 'file' then 'file_with_preview'
     when 'text' then 'redactor'
     else field_type
+    end
+  end
+
+  def input_method
+    case field_type
+    when 'embeddable' then slug + "_url"
+    when 'tags' then slug.singularize + "_list"
+    else slug
     end
   end
 

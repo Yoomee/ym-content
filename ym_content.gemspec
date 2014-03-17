@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'ym_core', '~> 1.1.4'
   s.add_dependency 'ym_permalinks', '~> 1.0.1'
   s.add_dependency 'ym_users', '~> 1.1.1'
+  s.add_dependency 'ym_tags', '~> 1.0.4'
   s.add_dependency 'cocoon'
   s.add_dependency 'ruby-oembed'
 

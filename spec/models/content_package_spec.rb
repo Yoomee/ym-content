@@ -115,6 +115,19 @@ describe ContentPackage do
     end
   end
 
+  describe 'tags attributes' do
+    it 'can be got' do
+      expect(content_package.skill_list).to eq([])
+    end
+    it 'can be set' do
+      skills = %w{shooting hunting fishing}
+      content_package.skill_list = skills.join(',')
+      content_package.save
+      expect(content_package.skill_list).to eq(skills)
+      expect(content_package.skills.map(&:to_s)).to eq(%w{shooting hunting fishing})
+    end
+  end
+
   it 'has a permalink if not viewless' do
     content_package.build_permalink
     content_package.valid?

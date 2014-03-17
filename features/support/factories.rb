@@ -15,7 +15,8 @@ FactoryGirl.define do
           FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'document', :name => 'Document', :field_type => 'file', :description => 'Add a file'),
           FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'video', :name => 'Video', :field_type => 'embeddable', :description => 'Add a video'),
           FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'link', :name => 'Link', :field_type => 'link', :description => 'Add a link'),
-          FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'special', :name => 'Is this special?', :field_type => 'boolean', :description => 'Yes or no')
+          FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'special', :name => 'Is this special?', :field_type => 'boolean', :description => 'Yes or no'),
+          FactoryGirl.build(:content_attribute, :content_type => content_type, :slug => 'skills', :name => 'Skills', :field_type => 'tags', :description => 'list some skills')
         ]
       end
     end

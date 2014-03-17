@@ -6,6 +6,14 @@ module YmContent::ContentChunk
     base.send(:file_accessor, :file)
   end
 
+  def dragonfly_attachments
+    if %{file image}.include?(content_attribute.try(:field_type).to_s)
+      super
+    else
+      {}
+    end
+  end
+
   def file_uid
     read_attribute(:value)
   end
