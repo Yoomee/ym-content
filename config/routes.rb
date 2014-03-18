@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     member do
       get 'children'
+      get 'search'
     end
   end
 

@@ -27,10 +27,13 @@ module YmContent::ContentPackagesController
     @content_package.review_frequency = 1
   end
 
+  def search
+    @results = ContentPackage.search(params[:q], :with => {:parent_id => @content_package.id}, :page => params[:page], :per_page => params[:per_page] || 20)
+    render_content_package_view
+  end
+
   def show
-    if template_exists?("content_packages/views/#{@content_package.view_name}")
-      render "content_packages/views/#{@content_package.view_name}" and return
-    end
+    render_content_package_view
   end
 
   def update
@@ -38,6 +41,13 @@ module YmContent::ContentPackagesController
       redirect_to @content_package
     else
       render :action => 'edit'
+    end
+  end
+
+  private
+  def render_content_package_view
+    if template_exists?("content_packages/views/#{@content_package.view_name}")
+      render "content_packages/views/#{@content_package.view_name}" and return
     end
   end
 
