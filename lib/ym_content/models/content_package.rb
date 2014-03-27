@@ -153,7 +153,7 @@ module YmContent::ContentPackage
         tag_context = tags_attribute_name.singularize
         case method_sym.to_s
         when "#{tag_context}_list"
-           tag_list_on(tags_context)
+          tag_list_on(tags_context)
         when "#{tag_context}_list="
           set_tag_list_on(tags_context, arguments.first)
         when "#{tags_context}_taggings"
