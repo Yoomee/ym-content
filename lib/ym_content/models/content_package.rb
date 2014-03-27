@@ -89,12 +89,17 @@ module YmContent::ContentPackage
 
   def embeddable_attributes
     self.content_chunks.each do |content_chunk|
-      if content_chunk.content_attribute.field_type.embeddable? && content_chunk.value.present?
-        begin
-          content_chunk.html = OEmbed::Providers.get(content_chunk.value).html
-        rescue OEmbed::NotFound => e
+      if content_chunk.content_attribute.field_type.embeddable? && content_chunk.value_changed?
+        if content_chunk.value.blank?
+          content_chunk.value = nil
           content_chunk.html = nil
-          self.errors.add(content_chunk.content_attribute.slug + '_url', "No embeddable content found at this URL")
+        else
+          begin
+            content_chunk.html = OEmbed::Providers.get(content_chunk.value).html
+          rescue OEmbed::NotFound => e
+            content_chunk.html = nil
+            self.errors.add(content_chunk.content_attribute.slug + '_url', "No embeddable content found at this URL")
+          end
         end
       end
     end
