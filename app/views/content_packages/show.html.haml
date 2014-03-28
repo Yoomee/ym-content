@@ -17,7 +17,7 @@
     -when 'tags'
       =@content_package.send(attribute.slug).map(&:to_s).join(', ')
     -when 'text'
-      =simple_format(@content_package.send(attribute.slug))
+      =@content_package.send(attribute.slug).try(:html_safe)
     -when 'embeddable'
       =@content_package.send(attribute.slug)
     -else
