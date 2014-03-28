@@ -1,10 +1,11 @@
+- open = @open && @open.include?(content_package)
 - parents = parents.try(:dup) || []
 %tr.content-package{:class => "status-#{content_package.status} #{'has-children' unless content_package.children.count.zero?}", :id => "content-package-#{content_package.id}", :data => {:depth => parents.size}}
-  %td.td-name
+  %td.td-name{:data => {:open => (open ? 1 : 0), :loaded => (open ? 1 : 0)}}
     =sitemap_spacers(content_package, parents)
     %span.name
       - unless content_package.children.count.zero?
-        %i.fa.fa-caret-right.sitemap-caret
+        %i.fa.sitemap-caret{:class => "fa-caret-#{open ? 'down' : 'right'}"}
       =content_package
   %td{:class => "td-status td-status-#{content_package.status}"}
     =status(content_package.status)
@@ -15,8 +16,13 @@
   %td
     =link_to('Edit', edit_content_package_path(content_package))
   %td
-    -if can?(:new, ContentPackage.new)
-      =link_if_can('Add child', new_content_package_path(:parent => content_package.id))
+    .dropdown
+      =link_to('More&hellip;'.html_safe, '#', 'data-toggle' => 'dropdown')
+      %ul.dropdown-menu
+        %li=link_to('Add child', new_content_package_path(:parent => content_package.id))
+        -if content_package.children.count > 1
+          %li=link_to('Reorder children', reorder_content_package_path(content_package))
 - parents << content_package
--content_package.children.each do |child|
-  =#render('content_package', :content_package => child, :parents => parents)
+-if open
+  -content_package.children.each do |child|
+    =render('content_package', :content_package => child, :parents => parents)

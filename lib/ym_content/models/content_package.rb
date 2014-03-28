@@ -6,7 +6,7 @@ module YmContent::ContentPackage
     base.belongs_to :content_type
     base.has_many :content_chunks
     base.belongs_to :parent, :class_name => "ContentPackage"
-    base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id'
+    base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id]
     base.has_and_belongs_to_many :personas
     base.belongs_to :author, :class_name => 'User'
     base.belongs_to :requested_by, :class_name => 'User'
@@ -28,7 +28,7 @@ module YmContent::ContentPackage
 
     base.extend(ClassMethods)
 
-    base.scope :root, base.where(:parent_id => nil)
+    base.scope :root, base.where(:parent_id => nil).order(:position, :id)
     base.scope :published, base.where(:status => 'published')
     base.scope :expiring, base.where('next_review < ?', Date.today)
   end

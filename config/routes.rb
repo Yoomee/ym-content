@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
     member do
       get 'children'
+      get 'reorder'
+      put 'reorder' => 'content_packages#save_order'
       get 'search'
     end
   end

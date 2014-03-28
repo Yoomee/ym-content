@@ -17,6 +17,9 @@ module YmContent::ContentPackagesController
 
   def index
     @content_packages = @content_packages.root.includes(:children)
+    if params[:open] && open_content_package = ContentPackage.find_by_id(params[:open])
+      @open = [open_content_package] + open_content_package.parents
+    end
     @content_types = ::ContentType.order(:name)
   end
 
@@ -25,6 +28,16 @@ module YmContent::ContentPackagesController
     @content_package.parent_id = params[:parent]
     @content_package.requested_by = current_user
     @content_package.review_frequency = 1
+  end
+
+  def reorder
+  end
+
+  def save_order
+    params[:children_ids].each_with_index do |child_id, position|
+      ContentPackage.find(child_id).update_attribute(:position, position)
+    end
+    redirect_to content_packages_path(:open => @content_package.id)
   end
 
   def search

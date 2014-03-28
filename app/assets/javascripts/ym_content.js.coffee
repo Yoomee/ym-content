@@ -58,4 +58,12 @@ window.YmContent =
       link = $("#content-package-#{id} td.td-name")
       if link.data('loaded') == 0
         link.find('i.sitemap-caret').removeClass('fa-caret-right').addClass('fa-spinner').addClass('fa-spin')
+  Sortable:
+    init: ->
+      $('.sortable').sortable
+        placeholder: 'well well-placeholder'
+      $('a.sortable-submit').click (event) ->
+        url = $(this).attr('href') + '?'
+        url += $('.sortable').sortable("serialize")
+        $(this).attr('href', url)
       

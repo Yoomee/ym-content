@@ -5,6 +5,7 @@ class CreateContentPackages < ActiveRecord::Migration
       t.string :slug
       t.string :name
       t.belongs_to :content_type
+      t.integer :position, :default => 0
       t.belongs_to :parent
       t.belongs_to :author
       t.belongs_to :requested_by
