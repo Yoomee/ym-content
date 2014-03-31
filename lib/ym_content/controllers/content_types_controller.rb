@@ -23,6 +23,16 @@ module YmContent::ContentTypesController
     @content_type.content_attributes.build
   end
 
+  def reorder
+  end
+
+  def save_order
+    params[:content_attribute_ids].each_with_index do |content_attribute_id, position|
+      ContentAttribute.find(content_attribute_id).update_attribute(:position, position)
+    end
+    redirect_to content_packages_path(:anchor => 'content-types')
+  end
+
   def update
     if @content_type.update_attributes(params[:content_type])
       redirect_to content_packages_path

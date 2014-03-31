@@ -9,7 +9,7 @@ class CreateContentAttributes < ActiveRecord::Migration
       t.string :field_type
       t.integer :limit_quantity
       t.string :limit_unit
-      t.integer :position
+      t.integer :position, :default => 0
       t.boolean :required, :default => false
       t.boolean :meta, :default => false
     end

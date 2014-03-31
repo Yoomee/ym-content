@@ -62,6 +62,7 @@ window.YmContent =
     init: ->
       $('.sortable').sortable
         placeholder: 'well well-placeholder'
+        containment: 'parent'
       $('a.sortable-submit').click (event) ->
         url = $(this).attr('href') + '?'
         url += $('.sortable').sortable("serialize")

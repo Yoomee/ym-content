@@ -1,0 +1,22 @@
+:javascript
+  $(document).ready(function(){YmContent.Sortable.init();});
+%h3
+  Reorder content attributes for
+  =@content_type.package_name.pluralize
+%p
+  Drag and drop the content attributes into the desired order and click
+  %em Save order.
+%form.formtastic.form-horizontal.form-sortable
+  -[false,true].each do |meta|
+    -content_attributes = @content_type.content_attributes.where(:meta => meta)
+    -if content_attributes.count.nonzero?
+      %hr.controls
+      %fieldset.inputs
+        %h4.mv-2=meta ? "Meta tab" : "Content tab"
+        .controls.sortable
+          -content_attributes.each do |content_attribute|
+            .well{:id => "content_attribute_ids_#{content_attribute.id}"}
+              =content_attribute
+  %hr.controls
+  %fieldset.form-actions
+    =link_to('Save order', reorder_content_type_path(@content_type), :method => :put, :class => 'btn sortable-submit mb-3')

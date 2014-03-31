@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   resources :content_types, :except => [:destroy] do
     resources :content_packages, :only => :new
+    member do
+      get 'reorder'
+      put 'reorder' => 'content_types#save_order'
+    end
   end
 
   get '/content' => 'content_types#index'
