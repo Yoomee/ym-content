@@ -3,7 +3,6 @@
     YmContent.Sitemap.init()
   });
 %h2.mb-3.pull-left=title 'Site map & content types'
-=link_if_can('Add content type', [:new, ContentType.new], :icon => 'plus', :class => 'btn btn-small pull-right mt-2 mr-1')
 .clearfix
 %ul.nav.nav-tabs.mb-2
   %li.active=link_to("Site map", '#site-map', 'data-toggle' => 'tab')
@@ -33,16 +32,24 @@
       %table.table.table-content-types
         %thead
           %tr
-            %th.col-md-6 Content type / Name
+            %th.col-md-10{:colspan => 4} Content type / Name
         %tbody
           -@content_types.each do |content_type|
             %tr.content-type
-              %td
+              %td.td-name.col-md-10
                 =content_type.to_s.pluralize
                 =needs_design(content_type)
-                .pull-right
-                  =link_to('Edit content type', edit_content_type_path(content_type))
-                  &nbsp;
-                  =link_to('Reorder content attributes', reorder_content_type_path(content_type))
-                  &nbsp;
-                  =link_to("Create content", new_content_type_content_package_path(content_type))
+              %td
+              %td
+                =link_to('Edit', edit_content_type_path(content_type))
+              %td
+                .dropdown
+                  =link_to('More&hellip;'.html_safe, '#', 'data-toggle' => 'dropdown')
+                  %ul.dropdown-menu
+                    %li=link_to("Add new content of this type", new_content_type_content_package_path(content_type))
+                    %li=link_to('Reorder content attributes', reorder_content_type_path(content_type))
+                    -if content_type.destroyable?
+                      %li=link_to('Delete this content type', content_type_path(content_type), :method => :delete, :confirm => "Are you sure you want to delete this content type? This cannot be undone.")
+          %tr
+            %td{:colspan => 7}
+              =link_if_can("Add new content type", [:new, ContentType.new], :icon => 'plus')

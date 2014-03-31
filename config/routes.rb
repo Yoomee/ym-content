@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :content_types, :except => [:destroy] do
+  resources :content_types do
     resources :content_packages, :only => :new
     member do
       get 'reorder'

@@ -12,6 +12,15 @@ module YmContent::ContentTypesController
     end
   end
 
+  def destroy
+    if @content_type.destroy
+      flash[:notice] = "The content type was cuccessfully deleted"
+    else
+      flash[:error] = "Unable to delete this content type"
+    end
+    redirect_to content_packages_path(:anchor => 'content-types')
+  end
+
   def edit
     @content_type.content_attributes.build if @content_type.content_attributes.count.zero?
   end

@@ -8,6 +8,17 @@ describe ContentType do
     expect(content_type.valid?).to be_true
   end
   
+  it 'can be destroyed if has no content packages' do
+    content_type.save
+    expect(content_type.destroy).to be_true
+  end
+
+  it 'cannot be destroyed if has content packages' do
+    content_type.save
+    content_type.content_packages << FactoryGirl.create(:content_package, :content_type => content_type)
+    expect(content_type.destroy).to be_false
+  end
+
   describe 'missing_view?' do
 
     it 'returns false if viewless' do

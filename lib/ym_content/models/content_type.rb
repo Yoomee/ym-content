@@ -6,6 +6,11 @@ module YmContent::ContentType
     base.validates_presence_of :name
     base.send(:default_scope, :include => :content_attributes)
     base.accepts_nested_attributes_for :content_attributes, :allow_destroy => true
+    base.before_destroy(:destroyable?)
+  end
+
+  def destroyable?
+    content_packages.count.zero?
   end
 
   def missing_view?
