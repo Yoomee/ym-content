@@ -8,5 +8,6 @@
     =#f.input :position
     =f.input :required, :default => false, :label => "This is a required field"
     =f.input :meta, :default => false, :label => "This is a meta attribute"
-  =f.inputs do
-    = link_to_remove_association "Remove this content attribute", f
+  -if f.object.removable?
+    =f.inputs do
+      = link_to_remove_association "Remove this content attribute", f

@@ -45,6 +45,10 @@ module YmContent::ContentAttribute
     end
   end
 
+  def removable?
+    new_record? || content_type.missing_view?
+  end
+
   private
   def set_slug
     if slug.blank? && name.present? && errors['name'].blank?
