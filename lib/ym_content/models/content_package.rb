@@ -54,6 +54,24 @@ module YmContent::ContentPackage
 
   end
 
+  def deletable?
+    !deleted? && slug.blank? && (children.empty? || children.all?(&:deletable?))
+  end
+
+  def delete
+    return true if deleted?
+    if deletable?
+      self.update_attribute(:deleted_at, Time.now)
+      children.all.each(&:delete)
+    else
+      false
+    end
+  end
+
+  def deleted?
+    deleted_at.present?
+  end
+
   def content_chunks
     @content_chunks ||= super.to_a
   end
@@ -79,6 +97,11 @@ module YmContent::ContentPackage
     end
   end
   alias_method_chain :respond_to?, :content_attributes
+
+  def restore
+    return true unless deleted?
+    self.update_attribute(:deleted_at, nil)
+  end
 
   def to_s
     name

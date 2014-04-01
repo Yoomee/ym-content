@@ -14,6 +14,7 @@ class CreateContentPackages < ActiveRecord::Migration
       t.date :due_date
       t.integer :review_frequency
       t.date :next_review
+      t.datetime :deleted_at
       t.timestamps
     end
     add_index :content_packages, :parent_id
