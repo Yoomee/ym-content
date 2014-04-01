@@ -68,7 +68,15 @@ module YmContent::ContentPackage
 
   def respond_to_with_content_attributes?(method_id, include_all = false)
     slug = method_id.to_s.sub(/^retained_/,'').sub(/^remove_/,'').sub(/_uid$/,'').chomp('=')
-    respond_to_without_content_attributes?(method_id, include_all) || content_type && (content_attributes.exists?(:slug => slug) || content_attributes.exists?(:slug => slug.chomp('_list').pluralize) || content_attributes.exists?(:slug => slug.chomp('_url')))
+    if respond_to_without_content_attributes?(method_id, include_all)
+      true
+    elsif content_type
+      return false if slug =~ /^_run__.*__callbacks$/
+      slug_variants = [ slug, slug.chomp('_list').pluralize, slug.chomp('_url') ]
+      slug_variants.any?{|sl| content_attributes.exists?(:slug => sl)}
+    else
+      false
+    end
   end
   alias_method_chain :respond_to?, :content_attributes
 
