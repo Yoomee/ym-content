@@ -6,7 +6,8 @@ module YmContent::ContentPackage
     base.belongs_to :content_type
     base.has_many :content_chunks
     base.belongs_to :parent, :class_name => "ContentPackage"
-    base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id]
+    base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => {:deleted_at => nil}
+    base.has_many :deleted_children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => "deleted_at IS NOT NULL"
     base.has_and_belongs_to_many :personas
     base.belongs_to :author, :class_name => 'User'
     base.belongs_to :requested_by, :class_name => 'User'
@@ -28,7 +29,7 @@ module YmContent::ContentPackage
 
     base.extend(ClassMethods)
 
-    base.scope :root, base.where(:parent_id => nil).order(:position, :id)
+    base.scope :root, base.where(:parent_id => nil, :deleted_at => nil).order(:position, :id)
     base.scope :published, base.where(:status => 'published')
     base.scope :expiring, base.where('next_review < ?', Date.today)
   end
@@ -54,6 +55,24 @@ module YmContent::ContentPackage
 
   end
 
+  def deletable?
+    !deleted? && slug.blank? && (children.empty? || children.all?(&:deletable?))
+  end
+
+  def delete
+    return true if deleted?
+    if deletable?
+      self.update_attribute(:deleted_at, Time.now)
+      children.all.each(&:delete)
+    else
+      false
+    end
+  end
+
+  def deleted?
+    deleted_at.present?
+  end
+
   def content_chunks
     @content_chunks ||= super.to_a
   end
@@ -63,15 +82,38 @@ module YmContent::ContentPackage
   end
 
   def publicly_visible?
-    status == 'published' && !missing_view?
+    status == 'published' && !deleted? && !missing_view?
   end
 
   def respond_to_with_content_attributes?(method_id, include_all = false)
     slug = method_id.to_s.sub(/^retained_/,'').sub(/^remove_/,'').sub(/_uid$/,'').chomp('=')
-    respond_to_without_content_attributes?(method_id, include_all) || content_type && (content_attributes.exists?(:slug => slug) || content_attributes.exists?(:slug => slug.chomp('_list').pluralize) || content_attributes.exists?(:slug => slug.chomp('_url')) ||
-      content_attributes.exists?(:slug => slug.chomp('_id')))
+    if respond_to_without_content_attributes?(method_id, include_all)
+      true
+    elsif content_type
+      return false if slug =~ /^_run__.*__callbacks$/
+      slug_variants = [ slug, slug.chomp('_list').pluralize, slug.chomp('_url') ]
+      slug_variants.any?{|sl| content_attributes.exists?(:slug => sl)}
+    else
+      false
+    end
   end
   alias_method_chain :respond_to?, :content_attributes
+
+  def restore
+    return true unless deleted?
+    deletion_occurred_at = deleted_at.dup
+    self.update_attribute(:deleted_at, nil)
+    deleted_children.where("deleted_at > ? && deleted_at < ?",deletion_occurred_at - 1.minute, deletion_occurred_at + 1.minute).each(&:restore)
+  end
+
+  def restore_warning
+    deleted_parents = parents.select(&:deleted?)
+    if deleted_parents.empty?
+      nil
+    else
+      "WARNING: One or more of this package's parents are deleted. This package will not show in the sitemap unless you also restore #{deleted_parents.map{|cp| "\"#{cp.name}\""}.to_sentence}."
+    end
+  end
 
   def to_s
     name

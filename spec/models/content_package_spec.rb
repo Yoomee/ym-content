@@ -158,4 +158,30 @@ describe ContentPackage do
     expect(content_package.permalink_path).to be_nil
   end
 
+  it 'can be deleted' do
+    content_package.slug = nil
+    content_package.delete
+    expect(content_package.deleted?).to be_true
+  end
+
+  it 'has its children deleted too' do
+    content_package.slug = nil
+    content_package.children << FactoryGirl.create(:content_package, :parent => content_package, :slug => nil)
+    content_package.delete
+    content_package.reload
+    expect(content_package.children.all?(&:deleted?)).to be_true
+  end
+
+  it 'cannot be deleted if it has a slug' do
+    content_package.delete
+    expect(content_package.deleted?).to be_false
+  end
+
+  it 'cannot be deleted if it has a child with a slug' do
+    content_package.slug = nil
+    content_package.children << FactoryGirl.build(:content_package, :parent => content_package)
+    content_package.delete
+    expect(content_package.deleted?).to be_false
+  end
+
 end
