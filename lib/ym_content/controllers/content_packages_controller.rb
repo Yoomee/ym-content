@@ -15,12 +15,22 @@ module YmContent::ContentPackagesController
     end
   end
 
+  def destroy
+    if @content_package.delete
+      flash[:notice] = "Deleted \"#{@content_package}\" - #{view_context.link_to('Undo', restore_content_package_path(@content_package), :method => :put)}"
+    else
+      flash[:error] = "\"#{@content_package}\" couldn't be deleted"
+    end
+    redirect_to content_packages_path(:open => @content_package.parent)
+  end
+
   def index
     @content_packages = @content_packages.root.includes(:children)
     if params[:open] && open_content_package = ContentPackage.find_by_id(params[:open])
       @open = [open_content_package] + open_content_package.parents
     end
     @content_types = ::ContentType.order(:name)
+    @deleted_content_packages = ContentPackage.where("deleted_at IS NOT NULL").order("deleted_at DESC").paginate(:page => params[:page], :per_page => 50)
   end
 
   def new
@@ -31,6 +41,12 @@ module YmContent::ContentPackagesController
   end
 
   def reorder
+  end
+
+  def restore
+    @content_package.restore
+    flash[:notice] = "Restored \"#{@content_package}\""
+    redirect_to content_packages_path(:open => @content_package)
   end
 
   def save_order

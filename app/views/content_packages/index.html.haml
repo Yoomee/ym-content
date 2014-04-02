@@ -1,15 +1,17 @@
 :javascript
   $(document).ready(function(){
     YmContent.Sitemap.init()
+    #{"$('#content-package-#{params[:open]}').effect('highlight', 2000);" if @open}
   });
 %h2.mb-3.pull-left=title 'Site map & content types'
 .clearfix
 %ul.nav.nav-tabs.mb-2
-  %li.active=link_to("Site map", '#site-map', 'data-toggle' => 'tab')
+  %li{:class => params[:page] ? nil : 'active'}=link_to("Site map", '#site-map', 'data-toggle' => 'tab')
   -if can? :manage, ContentType
     %li=link_to("Content types", '#content-types', 'data-toggle' => 'tab')
-.tab-content
-  #site-map.tab-pane.active
+  %li{:class => params[:page] ? 'active' : nil}=link_to("Deleted content", '#deleted', 'data-toggle' => 'tab')
+.tab-content.tab-content-sitemap
+  #site-map.tab-pane{:class => params[:page] ? nil : 'active'}
     %table.table
       %thead
         %tr
@@ -53,3 +55,20 @@
           %tr
             %td{:colspan => 7}
               =link_if_can("Add new content type", [:new, ContentType.new], :icon => 'plus')
+    #deleted.tab-pane{:class => params[:page] ? 'active' : nil}
+      %table.table
+        %thead
+          %tr
+            %th.col-md-9 Name
+            %th{:colspan => 2} Deleted
+        %tbody
+          -@deleted_content_packages.each do |content_package|
+            %tr
+              %td=content_package
+              %td
+                =time_ago_in_words(content_package.deleted_at)
+                ago
+              %td
+                =link_to('Restore', restore_content_package_path(content_package), :method => :put, :confirm => content_package.restore_warning)
+      =will_paginate(@deleted_content_packages)
+

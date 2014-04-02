@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get 'children'
       get 'reorder'
       put 'reorder' => 'content_packages#save_order'
+      put 'restore'
       get 'search'
     end
   end
