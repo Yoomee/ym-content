@@ -128,6 +128,23 @@ describe ContentPackage do
     end
   end
 
+   describe 'user attributes' do
+    it 'can be got' do
+      expect(content_package.person).to eq(nil)
+    end
+    it 'can be set as a user id' do
+      content_package.person_id = User.first.id 
+      content_package.save
+      expect(content_package.person_id).to eq(User.first.id)
+      expect(content_package.person).to eq(User.first)
+    end
+    it 'can be set as a user' do
+      content_package.person = User.last
+      content_package.save
+      expect(content_package.person).to eq(User.last)
+    end
+  end
+
   it 'has a permalink if not viewless' do
     content_package.build_permalink
     content_package.valid?

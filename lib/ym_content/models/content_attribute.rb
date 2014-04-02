@@ -19,7 +19,8 @@ module YmContent::ContentAttribute
         :file => 'File',
         :embeddable => 'Embeddable content - Flickr, Instagram, Scribd, Slideshare, SoundCloud, Vimeo, YouTube',
         :tags => 'Tag list',
-        :boolean => 'Check box'
+        :boolean => 'Check box',
+        :user => "User"
       }
     end
 
@@ -41,6 +42,7 @@ module YmContent::ContentAttribute
     case field_type
     when 'embeddable' then slug + "_url"
     when 'tags' then slug.singularize + "_list"
+    when 'user' then slug + "_id"
     else slug
     end
   end

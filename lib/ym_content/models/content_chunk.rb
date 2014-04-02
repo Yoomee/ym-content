@@ -22,18 +22,24 @@ module YmContent::ContentChunk
     self.value = uid
   end
 
+  def raw_value
+    read_attribute(:value)
+  end
+
   def value
     case content_attribute.field_type
     when 'boolean'
-      read_attribute(:value) == '1'
+      raw_value == '1'
     when 'file'
       file
     when 'image'
       file
     when 'link'
-      YmContent::Link.new(read_attribute(:value))
+      YmContent::Link.new(raw_value)
+    when 'user'
+      User.find_by_id(raw_value) if raw_value.present?
     else
-      read_attribute(:value)
+      raw_value
     end
   end
 

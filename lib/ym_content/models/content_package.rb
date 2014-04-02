@@ -68,7 +68,8 @@ module YmContent::ContentPackage
 
   def respond_to_with_content_attributes?(method_id, include_all = false)
     slug = method_id.to_s.sub(/^retained_/,'').sub(/^remove_/,'').sub(/_uid$/,'').chomp('=')
-    respond_to_without_content_attributes?(method_id, include_all) || content_type && (content_attributes.exists?(:slug => slug) || content_attributes.exists?(:slug => slug.chomp('_list').pluralize) || content_attributes.exists?(:slug => slug.chomp('_url')))
+    respond_to_without_content_attributes?(method_id, include_all) || content_type && (content_attributes.exists?(:slug => slug) || content_attributes.exists?(:slug => slug.chomp('_list').pluralize) || content_attributes.exists?(:slug => slug.chomp('_url')) ||
+      content_attributes.exists?(:slug => slug.chomp('_id')))
   end
   alias_method_chain :respond_to?, :content_attributes
 
@@ -130,6 +131,12 @@ module YmContent::ContentPackage
       else
         instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:html).to_s.gsub('http://', 'https://').html_safe)
       end
+    when 'user'
+      if method == 'id'
+        instance_variable_set("@#{content_attribute.slug}_id".to_sym, content_chunk.try(:raw_value))
+      else
+        instance_variable_set("@#{content_attribute.slug}_id".to_sym, content_chunk.try(:value))
+      end
     else
       instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value).try(:html_safe))
     end
@@ -169,11 +176,17 @@ module YmContent::ContentPackage
         else
           get_value_for_content_attribute(content_attribute)
         end
-      elsif content_attribute = content_attributes.find_by_slug(attribute_name.chomp('_url'))
+      elsif content_attribute = content_attributes.where(:field_type => 'link').find_by_slug(attribute_name.chomp('_url'))
         if method_sym.to_s.end_with?('=')
           set_value_for_content_attribute(content_attribute, arguments.first, 'url')
         else
           get_value_for_content_attribute(content_attribute, 'url')
+        end
+      elsif content_attribute = content_attributes.find_by_slug(attribute_name.chomp('_id')) #TODO
+        if method_sym.to_s.end_with?('=')
+          set_value_for_content_attribute(content_attribute, arguments.first, 'id')
+        else
+          get_value_for_content_attribute(content_attribute, 'id')
         end
       else
         super
@@ -219,10 +232,16 @@ module YmContent::ContentPackage
       else
         content_chunk.html = html
       end
+    when 'user'
+      if method == 'id'
+        content_chunk.value = value
+      else
+        content_chunk.value = value.try(:id)
+      end
     else
       content_chunk.value = value
     end
-    instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.value) unless %w{file image}.include?(content_attribute.field_type)
+    instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.value) unless %w{file image user}.include?(content_attribute.field_type)
   end
 
 end
