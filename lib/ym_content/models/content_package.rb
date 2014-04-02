@@ -91,7 +91,7 @@ module YmContent::ContentPackage
       true
     elsif content_type
       return false if slug =~ /^_run__.*__callbacks$/
-      slug_variants = [ slug, slug.chomp('_list').pluralize, slug.chomp('_url') ]
+      slug_variants = [ slug, slug.chomp('_list').pluralize, slug.chomp('_url'), slug.chomp('_id') ]
       slug_variants.any?{|sl| content_attributes.exists?(:slug => sl)}
     else
       false
