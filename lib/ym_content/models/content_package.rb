@@ -218,7 +218,7 @@ module YmContent::ContentPackage
         else
           get_value_for_content_attribute(content_attribute)
         end
-      elsif content_attribute = content_attributes.where(:field_type => 'link').find_by_slug(attribute_name.chomp('_url'))
+      elsif content_attribute = content_attributes.where(:field_type => 'embeddable').find_by_slug(attribute_name.chomp('_url'))
         if method_sym.to_s.end_with?('=')
           set_value_for_content_attribute(content_attribute, arguments.first, 'url')
         else
