@@ -81,8 +81,12 @@ module YmContent::ContentPackage
     [parent, parent.try(:parents)].flatten.compact
   end
 
-  def publicly_visible?
-    status == 'published' && !deleted? && !missing_view?
+  def visible_to_user?(user)
+    if logged_in_only?
+      user && status == 'published' && !deleted? && !missing_view?
+    else
+      status == 'published' && !deleted? && !missing_view?
+    end
   end
 
   def respond_to_with_content_attributes?(method_id, include_all = false)

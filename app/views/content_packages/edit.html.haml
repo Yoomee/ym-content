@@ -21,6 +21,7 @@
           #meta.tab-pane.cms-form
             =form.inputs do
               =parent_content_package_select(form)
+              =form.input :logged_in_only, :label => "Only logged in users can view this"
               =form.input :slug if current_user.yoomee_staff?
               =form.input :permalink_path, :prepend => "/" unless @content_package.viewless?
               %hr
