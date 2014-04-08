@@ -34,6 +34,7 @@ module YmContent::ContentAttribute
     case field_type
     when 'file' then 'file_with_preview'
     when 'text' then 'redactor'
+    when 'boolean' then 'content_boolean'
     else field_type
     end
   end
