@@ -1,0 +1,5 @@
+.discussion-item
+  .discussion-bubble
+    =post.text
+  =image_for(post.user, '20x20#', :class => 'discussion-avatar img-circle avatar')
+  %span.details{:title => post.created_at}="#{post.user} #{time_ago_in_words(post.created_at)} ago"

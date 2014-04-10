@@ -1,5 +1,5 @@
 module YmContent::ContentPackage
-  
+
   def self.included(base)
     base.send(:include, YmCore::Model)
 
@@ -8,6 +8,7 @@ module YmContent::ContentPackage
     base.belongs_to :parent, :class_name => "ContentPackage"
     base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => {:deleted_at => nil}
     base.has_many :deleted_children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => "deleted_at IS NOT NULL"
+    base.has_many :posts, :as => :target, :dependent => :destroy
     base.has_and_belongs_to_many :personas
     base.belongs_to :author, :class_name => 'User'
     base.belongs_to :requested_by, :class_name => 'User'

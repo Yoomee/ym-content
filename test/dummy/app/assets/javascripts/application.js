@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require cocoon
+//= require ym_core
 //= require ym_content
+//= require redactor
 //= require_tree .

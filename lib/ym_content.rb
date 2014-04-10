@@ -3,6 +3,7 @@ require 'ym_permalinks'
 require 'ym_users'
 require 'ym_tags'
 require 'ym_content/engine'
+require 'ym_posts'
 
 module YmContent
 end

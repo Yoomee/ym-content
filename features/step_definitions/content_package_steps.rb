@@ -74,3 +74,13 @@ Then(/^I should see all its content$/) do
     expect(page).to have_content(content_chunk.value)
   end
 end
+
+When(/^I discuss the content package$/) do
+  visit edit_content_package_path(@content_package)
+  fill_in('post_text', :with => "Some sample text")
+  click_button("Post")
+end
+
+Then(/^the discussion count should increase$/) do
+  expect(page).to have_content("Some sample text")
+end

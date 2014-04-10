@@ -57,3 +57,9 @@ Scenario: Creating a persona
   And there is 1 persona group
   When I fill in the new persona form and submit
   Then the persona is created
+
+@javascript
+Scenario: Discussing a content package
+  Given there is 1 content package
+  When I discuss the content package
+  Then the discussion count should increase
