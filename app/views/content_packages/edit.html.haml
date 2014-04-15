@@ -34,11 +34,14 @@
     .col-md-4.cms-sidebar-wrap
       #cms-sidebar.cms-sidebar
         .cms-edit-status.mb-2
-        =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
-          =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false
-          =form.action :submit, :label => "Save"
+          =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
+            %label{for: "content_package_status"} Status
+            %br 
+            =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false, :label => false
+            =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-confirm btn-small"}
+        %hr
         .cms-sidebar-tabs
-          %ul.nav.nav-pills
+          %ul.nav.nav-pills.mb-3
             %li.active=link_to("Context", '#context', 'data-toggle' => 'pill')
             %li=link_to("Discussion", '#discussion', 'data-toggle' => 'pill')
             %li=link_to("Activity", '#activity', 'data-toggle' => 'pill')
@@ -71,7 +74,7 @@
                 .cms-edit-context-box
                   =simple_format(@content_package.notes)
               %h5 Content requested by
-              .cms-edit-context-box
+              .cms-edit-context-box.mb-2
                 =@content_package.requested_by.full_name
               %h5 Content assigned to
               .cms-edit-context-box
@@ -80,7 +83,7 @@
               =render("discussion", :content_package_id => @content_package.id)
             #activity.tab-pane
               .cms-dashboard-well.clearfix.fadeIn
-                %ul.cms-activities.mt-3
+                %ul.cms-activities
                   %li.cms-activity
                     %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
                     %p.desc
