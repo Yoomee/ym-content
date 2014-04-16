@@ -4,6 +4,7 @@ require 'ym_users'
 require 'ym_tags'
 require 'ym_content/engine'
 require 'ym_posts'
+require 'geocoder'
 
 module YmContent
 end

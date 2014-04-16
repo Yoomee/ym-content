@@ -96,7 +96,7 @@ module YmContent::ContentPackage
       true
     elsif content_type
       return false if slug =~ /^_run__.*__callbacks$/
-      slug_variants = [ slug, slug.chomp('_list').pluralize, slug.chomp('_url'), slug.chomp('_id') ]
+      slug_variants = [ slug, slug.chomp('_list').pluralize, slug.chomp('_url'), slug.chomp('_id'), slug.chomp('_lat_lng') ]
       slug_variants.any?{|sl| content_attributes.exists?(:slug => sl)}
     else
       false
@@ -184,6 +184,12 @@ module YmContent::ContentPackage
       else
         instance_variable_set("@#{content_attribute.slug}_id".to_sym, content_chunk.try(:value))
       end
+    when 'location'
+      if method == 'lat_lng'
+        instance_variable_set("@#{content_attribute.slug}_lat_lng".to_sym, content_chunk.try(:html).split(',').map { |e| e.to_f  })
+      else
+        instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
+      end
     else
       instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value).try(:html_safe))
     end
@@ -211,7 +217,7 @@ module YmContent::ContentPackage
         when "#{tag_context}_list="
           set_tag_list_on(tags_context, arguments.first)
         when "#{tags_context}_taggings"
-          taggings.where("#{ActsAsTaggableOn::Tagging.table_name}.context = ?", tags_context)
+           taggings.where("#{ActsAsTaggableOn::Tagging.table_name}.context = ?", tags_context)
         when tags_context
           ActsAsTaggableOn::Tag.joins(:taggings).where("#{ActsAsTaggableOn::Tagging.table_name}.taggable_id = ? AND #{ActsAsTaggableOn::Tagging.table_name}.taggable_type = 'ContentPackage' AND #{ActsAsTaggableOn::Tagging.table_name}.context = ?", id, tags_context)
         else
@@ -228,6 +234,12 @@ module YmContent::ContentPackage
           set_value_for_content_attribute(content_attribute, arguments.first, 'url')
         else
           get_value_for_content_attribute(content_attribute, 'url')
+        end
+      elsif content_attribute = content_attributes.where(:field_type => 'location').find_by_slug(attribute_name.chomp('_lat_lng'))
+        if method_sym.to_s.end_with?('=')
+          set_value_for_content_attribute(content_attribute, arguments.first, 'lat_lng')
+        else
+          get_value_for_content_attribute(content_attribute, 'lat_lng')
         end
       elsif content_attribute = content_attributes.find_by_slug(attribute_name.chomp('_id')) #TODO
         if method_sym.to_s.end_with?('=')
@@ -278,6 +290,12 @@ module YmContent::ContentPackage
         content_chunk.value = value
       else
         content_chunk.html = html
+      end
+    when 'location'
+      if method == 'lat_lng'
+        content_chunk.html = html
+      else
+        content_chunk.value = value
       end
     when 'user'
       if method == 'id'

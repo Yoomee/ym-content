@@ -18,6 +18,7 @@ group :test do
   gem 'poltergeist', '~> 1.4.0'
   gem 'jquery-rails'
   gem 'coffee-rails'
+  gem 'webmock'
 end
 
 

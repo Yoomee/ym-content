@@ -20,7 +20,8 @@ module YmContent::ContentAttribute
         :embeddable => 'Embeddable content - Flickr, Instagram, Scribd, Slideshare, SoundCloud, Vimeo, YouTube',
         :tags => 'Tag list',
         :boolean => 'Check box',
-        :user => "User"
+        :user => "User",
+        :location => "Location"
       }
     end
 

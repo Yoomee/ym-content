@@ -4,6 +4,8 @@ module YmContent::ContentChunk
     base.belongs_to :content_package
     base.belongs_to :content_attribute
     base.send(:file_accessor, :file)
+    base.send(:geocoded_by, :value)
+    base.send(:after_validation, :geocode_if_geocodeable)
   end
 
   def dragonfly_attachments
@@ -40,6 +42,21 @@ module YmContent::ContentChunk
       User.find_by_id(raw_value) if raw_value.present?
     else
       raw_value
+    end
+  end
+
+  private
+  def geocode_if_geocodeable
+    if content_attribute.field_type == "location"
+      do_lookup(false) do |o,rs|
+        if r = rs.first
+          unless r.latitude.nil? or r.longitude.nil?
+            o.send :write_attribute, self.class.geocoder_options[:latitude],  r.latitude
+            o.send :write_attribute, self.class.geocoder_options[:longitude], r.longitude
+          end
+          self.html = r.coordinates.join(',')
+        end
+      end
     end
   end
 

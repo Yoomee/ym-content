@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ContentPackage do
-  
+
   let (:content_package) { FactoryGirl.build(:content_package) }
 
   it { should validate_presence_of(:content_type) }
@@ -11,7 +11,7 @@ describe ContentPackage do
     expect(content_package.errors.full_messages).to eq([])
     expect(content_package.valid?).to be_true
   end
-  
+
   describe 'getting attribute' do
     it 'should work for content_attribute' do
       expect{ content_package.title }.not_to raise_error
@@ -20,7 +20,7 @@ describe ContentPackage do
       expect{ content_package.title2 }.to raise_error
     end
   end
-  
+
   describe 'setting attribute' do
     it 'should work for content_attribute' do
       content_package.title = "A new title"
@@ -128,12 +128,12 @@ describe ContentPackage do
     end
   end
 
-   describe 'user attributes' do
+  describe 'user attributes' do
     it 'can be got' do
       expect(content_package.person).to eq(nil)
     end
     it 'can be set as a user id' do
-      content_package.person_id = User.first.id 
+      content_package.person_id = User.first.id
       content_package.save
       expect(content_package.person_id).to eq(User.first.id)
       expect(content_package.person).to eq(User.first)
@@ -142,6 +142,20 @@ describe ContentPackage do
       content_package.person = User.last
       content_package.save
       expect(content_package.person).to eq(User.last)
+    end
+  end
+
+  describe 'location attributes' do
+    it 'can be got' do
+      expect{ content_package.geo }.not_to raise_error
+    end
+    it 'can be set' do
+      expect{ content_package.geo = "Sheffield" }.not_to raise_error
+    end
+    it 'fetches latitude & longitude' do
+      content_package.geo = "Sheffield"
+      content_package.save
+      expect(content_package.geo_lat_lng).to_not be_blank
     end
   end
 

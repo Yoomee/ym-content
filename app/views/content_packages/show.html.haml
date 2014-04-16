@@ -20,5 +20,7 @@
       =@content_package.send(attribute.slug).try(:html_safe)
     -when 'embeddable'
       =@content_package.send(attribute.slug)
+    -when 'location'
+      =@content_package.send(attribute.slug)
     -else
       %p=@content_package.send(attribute.slug)
