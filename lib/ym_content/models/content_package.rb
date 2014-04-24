@@ -96,7 +96,7 @@ module YmContent::ContentPackage
       true
     elsif content_type
       return false if slug =~ /^_run__.*__callbacks$/
-      slug_variants = [ slug, slug.chomp('_list').pluralize, slug.chomp('_url'), slug.chomp('_id'), slug.chomp('_lat_lng') ]
+      slug_variants = [ slug, slug.chomp('_list').pluralize, slug.chomp('_url'), slug.chomp('_id'), slug.chomp('_lat_lng'), slug.chomp('_path') ]
       slug_variants.any?{|sl| content_attributes.exists?(:slug => sl)}
     else
       false
@@ -169,7 +169,11 @@ module YmContent::ContentPackage
     when 'boolean'
       instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value) || false)
     when 'file', 'image'
-      content_chunk.try(:file)
+      if method == 'path'
+        content_chunk.try(:file).try(:url)
+      else
+        content_chunk.try(:file)
+      end
     when 'link'
       instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
     when 'embeddable'
@@ -217,7 +221,7 @@ module YmContent::ContentPackage
         when "#{tag_context}_list="
           set_tag_list_on(tags_context, arguments.first)
         when "#{tags_context}_taggings"
-           taggings.where("#{ActsAsTaggableOn::Tagging.table_name}.context = ?", tags_context)
+          taggings.where("#{ActsAsTaggableOn::Tagging.table_name}.context = ?", tags_context)
         when tags_context
           ActsAsTaggableOn::Tag.joins(:taggings).where("#{ActsAsTaggableOn::Tagging.table_name}.taggable_id = ? AND #{ActsAsTaggableOn::Tagging.table_name}.taggable_type = 'ContentPackage' AND #{ActsAsTaggableOn::Tagging.table_name}.context = ?", id, tags_context)
         else
@@ -235,6 +239,8 @@ module YmContent::ContentPackage
         else
           get_value_for_content_attribute(content_attribute, 'url')
         end
+      elsif content_attribute = content_attributes.where(:field_type => 'image').find_by_slug(attribute_name.chomp('_path'))
+        get_value_for_content_attribute(content_attribute, 'path')
       elsif content_attribute = content_attributes.where(:field_type => 'location').find_by_slug(attribute_name.chomp('_lat_lng'))
         if method_sym.to_s.end_with?('=')
           set_value_for_content_attribute(content_attribute, arguments.first, 'lat_lng')
