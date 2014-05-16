@@ -6,7 +6,11 @@ window.YmContent =
         removeStyles: true,
         buttons: [ 'unorderedlist', 'orderedlist', 'link', 'html' ],
         convertDivs: true,
-        path:'/assets/redactor'
+        path:'/assets/redactor',
+        focusCallback: (e) ->
+          $(e.currentTarget).parents(".form-group").addClass("focus")
+        blurCallback: (e) ->
+          $(e.currentTarget).parents(".form-group").removeClass("focus")
   Sitemap:
     init: ->
       YmContent.Sitemap.filter()
