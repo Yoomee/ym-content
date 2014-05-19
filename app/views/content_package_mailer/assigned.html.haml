@@ -1,3 +1,7 @@
 %p="Hi #{@user.first_name},"
 %p
-  =@content_package.name + @content
+  =Settings.site_url
+  =link_to "#{@content_package.name}", "#{Settings.site_url}/#{(@content_package.permalink_path ||= 'content_packages/#{story.id}')}"
+  =@content
+%p Thanks
+
