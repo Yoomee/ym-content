@@ -14,7 +14,8 @@
   %td
     =link_to('View', content_package) unless content_package.viewless?
   %td
-    =link_to('Edit', edit_content_package_path(content_package))
+    -if can? :edit, content_package
+      =link_to('Edit', edit_content_package_path(content_package))
   %td
     .dropdown
       =link_to('More&hellip;'.html_safe, '#', 'data-toggle' => 'dropdown')

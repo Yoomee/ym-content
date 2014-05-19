@@ -14,6 +14,7 @@ module YmContent::ContentPackage
     base.belongs_to :requested_by, :class_name => 'User'
 
     base.before_create :set_next_review
+    base.before_save :set_status
     base.after_save :save_content_chunks
 
     base.validates :name, :content_type, :requested_by, :review_frequency, :presence => true
@@ -39,7 +40,7 @@ module YmContent::ContentPackage
 
     def statuses(user)
       Hash.new.tap do |s|
-        s[:draft] = 'Draft'
+        s[:draft] = 'Draft' if user.is_admin? || user.try(:role_is?, :editor)
         s[:pending] = 'Ready to review'
         s[:published] = 'Published' if user.is_admin? || user.try(:role_is?, :editor)
       end
@@ -280,6 +281,16 @@ module YmContent::ContentPackage
 
   def set_permalink_path_with_viewless
     content_type.try(:viewless?) ? true : set_permalink_path_without_viewless
+  end
+
+  def set_status
+    if self.status_changed? then
+      case self.status
+      when 'pending'
+        self.author_id = self.requested_by_id
+        ContentPackageMailer.assigned(self, self.author).deliver
+      end
+    end
   end
 
   def set_value_for_content_attribute(content_attribute, value, method = nil)

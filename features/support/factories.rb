@@ -38,7 +38,14 @@ FactoryGirl.define do
     sequence(:last_name) {|n| "Barrett #{n}"}
     sequence(:email) {|n| "charles@barrett_#{n}.com"}
     password "password"
-    role 'admin'
+    role "admin"
+
+    trait :author do
+      before(:create) { |user| user.role = "author" }
+    end
+    trait :admin do
+      after(:create) {|user| user.role = "admin" }
+    end
   end
 
   factory :content_package do
@@ -48,6 +55,7 @@ FactoryGirl.define do
     due_date Date.today + 6.months
     author
     requested_by
+    status "published"
     sequence(:slug){|n| "content_package_#{n}" }
   end
 

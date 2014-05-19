@@ -1,13 +1,17 @@
-Given(/^there (is|are) (\d+) content packages?$/) do |ia,n|
+Given(/^there (?:is|are) (\d+) content packages?\s?(not\s)?(?:assigned to me)?$/) do |n, assigned|
   if n.to_i.zero?
     ContentPackage.destroy_all
   end
   @content_packages = [].tap do |arr|
     n.to_i.times do |i|
-      arr << FactoryGirl.create(:content_package, :title => "Content package #{i}")
+      if assigned.try(:strip) == 'not'
+        arr << FactoryGirl.create(:content_package, :title => "Content package #{i}")
+      else
+        arr << FactoryGirl.create(:content_package, :title => "Content package #{i}", :author => @current_user )
+      end
     end
   end
-  @author = FactoryGirl.create(:author)
+  @admin = FactoryGirl.create(:user, :admin)
   @content_package = @content_packages.first
 end
 
@@ -21,9 +25,21 @@ Then(/^I see the content packages$/) do
   end
 end
 
+Then(/^I can't edit the content packages$/) do
+  page.all('tr.content-package').each do |tr|
+    expect(tr.text).to_not have_content("Edit")
+  end
+end
+
+Then(/^I can edit the content packages$/) do
+  page.all('tr.content-package').each do |tr|
+    expect(tr.text).to have_content("Edit")
+  end
+end
+
 When(/^I fill in the new content package form and submit$/) do
   visit new_content_type_content_package_path(@content_type)
-  @content_package = FactoryGirl.build(:content_package, :content_type => @content_type, :author => @author)
+  @content_package = FactoryGirl.build(:content_package, :content_type => @content_type, :author => @admin)
   choose(@content_type)
   fill_in('content_package_name', :with => @content_package.name)
   select(@content_package.author.full_name, :from => 'content_package[author_id]')
@@ -83,4 +99,18 @@ end
 
 Then(/^the discussion count should increase$/) do
   expect(page).to have_content("Some sample text")
+end
+
+When(/^I mark the content package as ready to review$/) do
+  visit edit_content_package_path(@content_package)
+  select("Ready to review", :from => 'content_package[status]')
+  click_button("Finish")
+end
+
+Then(/^it is assigned back to the requester$/) do
+  @content_package.reload
+  expect(@content_package.author_id).to eq(@content_package.requested_by_id)
+  assign_email = ActionMailer::Base.deliveries.last
+  expect(assign_email.to).to include(@content_package.author.email)
+  expect(assign_email.subject).to have_content(@content_package.name)
 end

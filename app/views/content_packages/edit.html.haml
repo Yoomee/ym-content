@@ -32,14 +32,15 @@
         =form.actions do
           =form.action :submit, :label => "Update #{@content_package.package_name}"
           .mb-6
-    .col-md-4.cms-sidebar-wrap
+    .col-md-4.cms-sidebar-wrap.ph-0
       #cms-sidebar.cms-sidebar
         .cms-edit-status.mb-2
           =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
-            %label{for: "content_package_status"} Status
-            %br 
-            =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false, :label => false
-            =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-confirm btn-small"}
+            %div{:class => ("hidden" unless current_user.role != "author")}
+              %label{for: "content_package_status"} Status
+              %br
+              =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false, :label => false
+            =form.action :submit, :label => current_user.role == "author" ? "Finish" : "Sadve", :button_html => {:class => "btn btn-confirm btn-small"}
         %hr
         .cms-sidebar-tabs
           %ul.nav.nav-pills.mb-3
@@ -75,7 +76,7 @@
                 .cms-edit-context-box
                   =simple_format(@content_package.notes)
               %h5 Content requested by
-              .cms-edit-context-box.mb-2
+              .cms-edit-context-box.requested-by.mb-2
                 =@content_package.requested_by.full_name
               %h5 Content assigned to
               .cms-edit-context-box
