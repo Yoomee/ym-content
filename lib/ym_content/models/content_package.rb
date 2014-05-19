@@ -286,9 +286,11 @@ module YmContent::ContentPackage
   def set_status
     if self.status_changed? then
       case self.status
+      when 'draft'
+        ContentPackageMailer.assigned(self, self.requested_by).deliver
       when 'pending'
-        self.author_id = self.requested_by_id
-        ContentPackageMailer.assigned(self, self.author).deliver
+        self.author_id = nil
+        ContentPackageMailer.assigned(self, self.requested_by).deliver
       end
     end
   end

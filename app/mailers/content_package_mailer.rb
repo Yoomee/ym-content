@@ -8,8 +8,8 @@ class ContentPackageMailer < ActionMailer::Base
   def assigned(content_package, assigned_to)
     @content_package = content_package
     @user = assigned_to
-    reasons = { 'author' => 'writing', 'editor' => 'approval', 'admin' => 'approval' }
-    @content = "has being assigned to you for #{reasons[@content_package.author.role]}"
+    reason = @content_package.author.present? ? 'writing' : 'approval'
+    @content = "has being assigned to you for #{reason}"
     mail(:to => assigned_to.email, :subject => "[#{Settings.site_name}] #{content_package.name} #{@content}" )
   end
 

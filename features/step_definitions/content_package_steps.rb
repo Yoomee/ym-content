@@ -12,6 +12,7 @@ Given(/^there (?:is|are) (\d+) content packages?\s?(not\s)?(?:assigned to me)?$/
     end
   end
   @admin = FactoryGirl.create(:user, :admin)
+  @author = FactoryGirl.create(:user, :author)
   @content_package = @content_packages.first
 end
 
@@ -109,8 +110,23 @@ end
 
 Then(/^it is assigned back to the requester$/) do
   @content_package.reload
-  expect(@content_package.author_id).to eq(@content_package.requested_by_id)
+  expect(@content_package.author_id).to eq(nil)
   assign_email = ActionMailer::Base.deliveries.last
-  expect(assign_email.to).to include(@content_package.author.email)
+  expect(assign_email.to).to include(@content_package.requested_by.email)
   expect(assign_email.subject).to have_content(@content_package.name)
+end
+
+When(/^I assign it to an author$/) do
+  visit edit_content_package_path(@content_package)
+  select("#{@author.full_name} (#{@author.role})", :from => 'content_package[author_id]')
+  click_button("Save")
+end
+
+Then(/^the content package author should change$/) do
+  @content_package.reload
+  expect(@content_package.author_id).to eq(@author.id)
+end
+
+Then(/^the author should be emailed$/) do
+  email = ActionMailer::Base.deliveries.last
 end

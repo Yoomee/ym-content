@@ -63,3 +63,10 @@ Scenario: Discussing a content package
   Given there is 1 content package
   When I discuss the content package
   Then the discussion count should increase
+
+@javascript
+Scenario: I can assign a content package to an author
+  Given there is 1 content package
+  When I assign it to an author
+  Then the content package author should change
+  And the author should be emailed

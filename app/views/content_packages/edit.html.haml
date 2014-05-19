@@ -1,5 +1,13 @@
 :javascript
-  $(document).ready(function(){YmContent.Redactor.init();});
+  $(document).ready(function() {
+    YmContent.Redactor.init();
+    $("#content_package_author_id").on("change", function(){
+      role = $("option:selected", this).data("role");
+      if (role === "author") {
+        $("#content_package_status").val("draft")
+      }
+    });
+  });
 
 .container
 .container.container-cms-edit
@@ -35,12 +43,14 @@
     .col-md-4.cms-sidebar-wrap.ph-0
       #cms-sidebar.cms-sidebar
         .cms-edit-status.mb-2
-          =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
+          =semantic_form_for @content_package, :html => {:class => ''} do |form|
             %div{:class => ("hidden" unless current_user.role != "author")}
+              %label{for: "content_package_author_id"} Assigned To
+              =form.input :author_id, :as => :select, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id, {:'data-role' => u.role }] }, :include_blank => false, :label => false
               %label{for: "content_package_status"} Status
-              %br
               =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false, :label => false
-            =form.action :submit, :label => current_user.role == "author" ? "Finish" : "Sadve", :button_html => {:class => "btn btn-confirm btn-small"}
+            =form.action :submit, :label => current_user.role == "author" ? "Finish" : "Save", :button_html => {:class => "btn btn-confirm btn-small pull-right"}
+        .clearfix
         %hr
         .cms-sidebar-tabs
           %ul.nav.nav-pills.mb-3
