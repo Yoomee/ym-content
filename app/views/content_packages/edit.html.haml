@@ -32,8 +32,8 @@
         =form.actions do
           =form.action :submit, :label => "Update #{@content_package.package_name}"
           .mb-6
-    .col-md-4.cms-sidebar-wrap
-      #cms-sidebar.cms-sidebar
+    .col-md-4.cms-sidebar-wrap.ph-0
+      #cms-sidebar.cms-sidebar{:data => {:spy => 'affix', :offset_top => '120'}}
         .cms-edit-status.mb-2
           =semantic_form_for @content_package, :html => {:class => 'form-inline'} do |form|
             %label{for: "content_package_status"} Status
