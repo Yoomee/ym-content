@@ -3,28 +3,29 @@
     %h2=title 'Content dashboard'
 .row
   .col-md-8
-    .well
-      %h4.mt-0.mb-1
-        Content status
-      .row.cms-dashboard-btn
-        .col-md-4
-          =link_to filter_content_packages_path(:filter => 'draft'), :class=>"btn btn-block btn-with-number btn-cms-drafts fadeInPop" do
-            %span.btn-cms-number
-              =ContentPackage.where(:status => 'draft').count
-            %span.btn-cms-text  
-              Drafts
-        .col-md-4
-          =link_to filter_content_packages_path(:filter => 'pending'), :class=>"btn btn-block btn-with-number btn-cms-review fadeInPop" do
-            %span.btn-cms-number
-              =ContentPackage.where(:status => 'pending').count
-            %span.btn-cms-text  
-              Ready to review
-        .col-md-4
-          =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-with-number btn-cms-old fadeInPop" do
-            %span.btn-cms-number
-              =ContentPackage.expiring.count
-            %span.btn-cms-text  
-              Getting old
+    -if current_user.is_admin?
+      .well
+        %h4.mt-0.mb-1
+          Content status
+        .row.cms-dashboard-btn
+          .col-md-4
+            =link_to filter_content_packages_path(:filter => 'draft'), :class=>"btn btn-block btn-with-number btn-cms-drafts fadeInPop" do
+              %span.btn-cms-number
+                =ContentPackage.where(:status => 'draft').count
+              %span.btn-cms-text  
+                Drafts
+          .col-md-4
+            =link_to filter_content_packages_path(:filter => 'pending'), :class=>"btn btn-block btn-with-number btn-cms-review fadeInPop" do
+              %span.btn-cms-number
+                =ContentPackage.where(:status => 'pending').count
+              %span.btn-cms-text  
+                Ready to review
+          .col-md-4
+            =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-with-number btn-cms-old fadeInPop" do
+              %span.btn-cms-number
+                =ContentPackage.expiring.count
+              %span.btn-cms-text  
+                Getting old
     .well.cms-dashboard-well.clearfix.table-cms-dashboard.fadeInSlow      
       %h4.mt-0.b-1 Content assigned to you
       %table.table.table-striped.custab
