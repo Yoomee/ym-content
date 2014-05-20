@@ -8,11 +8,12 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/content' => 'content_types#index'
+  get '/content' => 'content_types#dashboard'
 
   resources :content_packages do
     collection do
       get 'filter/:filter' => 'content_packages#index', :as => 'filter'
+      get 'deleted'
     end
     member do
       get 'children'

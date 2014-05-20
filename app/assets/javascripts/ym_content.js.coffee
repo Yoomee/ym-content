@@ -12,7 +12,7 @@ window.YmContent =
       YmContent.Sitemap.filter()
       $('select#status').change ->
         YmContent.Sitemap.filter()
-      $('#site-map').on 'click', '.has-children td.td-name', ->
+      $('#sitemap').on 'click', '.has-children td.td-name', ->
         link = $(this)
         row = link.parent()
         if $(this).data('open') == 1
@@ -50,10 +50,10 @@ window.YmContent =
     filter: ->
       status = $('select#status').val()
       if status.length > 0
-        $("#site-map tr.content-package").hide()
-        $("#site-map tr.status-#{status}").show()
+        $("#sitemap tr.content-package").hide()
+        $("#sitemap tr.status-#{status}").show()
       else
-        $("#site-map tr.content-package").show()
+        $("#sitemap tr.content-package").show()
     loading:(id) ->
       link = $("#content-package-#{id} td.td-name")
       if link.data('loaded') == 0

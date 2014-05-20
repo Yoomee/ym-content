@@ -15,6 +15,10 @@ module YmContent::ContentPackagesController
     end
   end
 
+  def deleted
+    @deleted_content_packages = ContentPackage.where("deleted_at IS NOT NULL").order("deleted_at DESC").paginate(:page => params[:page], :per_page => 50)
+  end
+
   def destroy
     if @content_package.delete
       flash[:notice] = "Deleted \"#{@content_package}\" - #{view_context.link_to('Undo', restore_content_package_path(@content_package), :method => :put)}"
@@ -29,8 +33,6 @@ module YmContent::ContentPackagesController
     if params[:open] && open_content_package = ContentPackage.find_by_id(params[:open])
       @open = [open_content_package] + open_content_package.parents
     end
-    @content_types = ::ContentType.order(:name)
-    @deleted_content_packages = ContentPackage.where("deleted_at IS NOT NULL").order("deleted_at DESC").paginate(:page => params[:page], :per_page => 50)
   end
 
   def new
