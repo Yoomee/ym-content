@@ -7,6 +7,10 @@
         $("#content_package_status").val("draft")
       }
     });
+    $("input.js-save-progress").on("click", function(e) {
+      e.preventDefault();
+      $("#content_package_submit_action").click();
+    });
   });
 
 .container
@@ -43,13 +47,17 @@
     .col-md-4.cms-sidebar-wrap.ph-0
       #cms-sidebar.cms-sidebar{:data => {:spy => 'affix', :offset_top => '120'}}
         .cms-edit-status.mb-2
-          =semantic_form_for @content_package, :html => {:class => ''} do |form|
+          =semantic_form_for @content_package do |form|
             %div{:class => ("hidden" unless current_user.role != "author")}
               %label{for: "content_package_author_id"} Assigned To
               =form.input :author_id, :as => :select, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id, {:'data-role' => u.role }] }, :include_blank => false, :label => false
               %label{for: "content_package_status"} Status
               =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false, :label => false
-            =form.action :submit, :label => current_user.role == "author" ? "Finish" : "Save", :button_html => {:class => "btn btn-confirm btn-small pull-right"}
+            -if current_user.role == "author"
+              =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-primary btn-block"}
+              =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-confirm btn-block js-save-progress"}
+            -else
+              =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-confirm btn-small pull-right"}
         .clearfix
         %hr
         .cms-sidebar-tabs

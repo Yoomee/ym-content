@@ -105,7 +105,7 @@ end
 When(/^I mark the content package as ready to review$/) do
   visit edit_content_package_path(@content_package)
   select("Ready to review", :from => 'content_package[status]')
-  click_button("Finish")
+  click_button("Mark as ready to review")
 end
 
 Then(/^it is assigned back to the requester$/) do
