@@ -1,0 +1,18 @@
+=render("content_packages/sitemap_header")
+.tab-content.tab-content-sitemap
+  #deleted.tab-pane.active
+    %table.table
+      %thead
+        %tr
+          %th.col-md-9 Name
+          %th{:colspan => 2} Deleted
+      %tbody
+        -@deleted_content_packages.each do |content_package|
+          %tr
+            %td=content_package
+            %td
+              =time_ago_in_words(content_package.deleted_at)
+              ago
+            %td
+              =link_to('Restore', restore_content_package_path(content_package), :method => :put, :confirm => content_package.restore_warning)
+    =will_paginate(@deleted_content_packages)
