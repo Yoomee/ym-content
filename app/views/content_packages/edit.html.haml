@@ -85,9 +85,10 @@
             #activity.tab-pane
               .cms-dashboard-well.clearfix.fadeIn
                 %ul.cms-activities
-                  -@content_package.activity_items.paginate(:page => 1, :per_page => 5).each do |activity|
+                  -activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
+                  -activity_items.each do |activity|
                     =render("content_packages/activity", :include_name => true, :activity => activity)
-                -if @content_package.activity_items != @content_package.activity_items
+                -if activity_items.total_pages != activity_items.current_page
                   =link_to "See older activity", activity_content_packages_path(@content_package), :remote => true, :class => 'btn btn-small js-older-activities pull-right mt-1'
 
             #content-scorecard.tab-pane
