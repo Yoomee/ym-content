@@ -1,92 +1,27 @@
-.row
-  .col-md-12.mb-3
-    %h2=title 'Content dashboard'
-.row
-  .col-md-8
-    -if current_user.is_admin?
-      .well
-        %h4.mt-0.mb-1
-          Content status
-        .row.cms-dashboard-btn
-          .col-md-4
-            =link_to filter_content_packages_path(:filter => 'draft'), :class=>"btn btn-block btn-with-number btn-cms-drafts fadeInPop" do
-              %span.btn-cms-number
-                =ContentPackage.where(:status => 'draft').count
-              %span.btn-cms-text  
-                Drafts
-          .col-md-4
-            =link_to filter_content_packages_path(:filter => 'pending'), :class=>"btn btn-block btn-with-number btn-cms-review fadeInPop" do
-              %span.btn-cms-number
-                =ContentPackage.where(:status => 'pending').count
-              %span.btn-cms-text  
-                Ready to review
-          .col-md-4
-            =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-with-number btn-cms-old fadeInPop" do
-              %span.btn-cms-number
-                =ContentPackage.expiring.count
-              %span.btn-cms-text  
-                Getting old
-    .well.cms-dashboard-well.clearfix.table-cms-dashboard.fadeInSlow      
-      %h4.mt-0.b-1 Content assigned to you
-      %table.table.table-striped.custab
-        %thead
-          %tr
-            %th Content name
-            %th Status
-            %th Due date
-            %th
-        -ContentPackage.where(:author_id => current_user.try(:id)).each do |content_package|
-          %tr
-            %td=content_package
-            %td=status(content_package.status)
-            %td=content_package.due_date.try(:strftime, '%b %d, %Y')
-            %td.text-right
-              =link_to "View", content_package, :class=>"cms-table-view btn btn-small"
-    .well.cms-dashboard-well.clearfix.fadeInSlow3
-      %h4.mt-0.b-1 Recent Activity
-      %ul.cms-activities
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 22 minutes ago
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 26 minutes ago
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 26 minutes ago
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 26 minutes ago
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 28 minutes ago
-      .padding20px
-        %a.btn.btn-small.ajax-activity-show-more{href: "#"} See older activity      
-
-  .col-md-4.fadeInSlow
-    .well
-      =link_to("Site map", content_packages_path, :class => 'btn btn-primary btn-block mb-1')
-      =link_to("Create new content", new_content_package_path, :class => 'btn btn-primary btn-block mb-1')
-      =link_to("Users & permissions", '#', :class => 'btn btn-block mb-1')
-      =link_to("Manage personas", personas_path, :class => 'btn btn-primary btn-block mb-1')
-      =link_to("Request content type", '#', :class => 'btn btn-block mb-1')
+=render("content_packages/sitemap_header")
+.tab-content.tab-content-sitemap
+  #content-types.tab-pane.active
+    %table.table.table-content-types
+      %thead
+        %tr
+          %th.col-md-10{:colspan => 4} Content type / Name
+      %tbody
+        -@content_types.each do |content_type|
+          %tr.content-type
+            %td.td-name.col-md-10
+              =content_type.to_s.pluralize
+              =needs_design(content_type)
+            %td
+            %td
+              =link_to('Edit', edit_content_type_path(content_type))
+            %td
+              .dropdown
+                =link_to('More&hellip;'.html_safe, '#', 'data-toggle' => 'dropdown')
+                %ul.dropdown-menu
+                  %li=link_to("Add new content of this type", new_content_type_content_package_path(content_type))
+                  %li=link_to('Reorder content attributes', reorder_content_type_path(content_type))
+                  -if content_type.destroyable?
+                    %li=link_to('Delete this content type', content_type_path(content_type), :method => :delete, :confirm => "Are you sure you want to delete this content type? This cannot be undone.")
+        %tr
+          %td{:colspan => 7}
+            =link_if_can("Add new content type", [:new, ContentType.new], :icon => 'plus')

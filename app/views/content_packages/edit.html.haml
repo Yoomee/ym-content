@@ -100,47 +100,14 @@
               .cms-edit-context-box
                 =@content_package.author.try(:full_name)
             #discussion.tab-pane
-              =render("discussion", :content_package_id => @content_package.id)
+              =render("discussion")
             #activity.tab-pane
               .cms-dashboard-well.clearfix.fadeIn
                 %ul.cms-activities
-                  %li.cms-activity
-                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-                    %p.desc
-                      %span.user-name Lindsay Sharman
-                      saved a revision of
-                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-                    %span.when 22 minutes ago
-                  %li.cms-activity
-                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-                    %p.desc
-                      %span.user-name Andy Mayer
-                      saved a revision of
-                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-                    %span.when 40 minutes ago
-                  %li.cms-activity
-                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-                    %p.desc
-                      %span.user-name Matt Atkins
-                      saved a revision of
-                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-                    %span.when 3 hours ago
-                  %li.cms-activity
-                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-                    %p.desc
-                      %span.user-name Lindsay Sharman
-                      saved a revision of
-                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-                    %span.when 26 minutes ago
-                  %li.cms-activity
-                    %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-                    %p.desc
-                      %span.user-name Lindsay Sharman
-                      saved a revision of
-                      %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-                    %span.when 28 minutes ago
-                .padding20px
-                  %a.btn.btn-small.ajax-activity-show-more{href: "#"} See older activity    
-
+                  -activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
+                  -activity_items.each do |activity|
+                    =render("content_packages/activity", :include_name => true, :activity => activity)
+                -if activity_items.total_pages != activity_items.current_page
+                  =link_to "See older activity", activity_content_packages_path(@content_package), :remote => true, :class => 'btn btn-small js-older-activities pull-right mt-1'
 
             #content-scorecard.tab-pane

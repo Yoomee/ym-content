@@ -21,11 +21,16 @@ module YmContent::ContentTypesController
     redirect_to content_packages_path(:anchor => 'content-types')
   end
 
+  def dashboard
+    @activity_items = ActivityItem.where(:resource_type => "ContentPackage").paginate(:page => 1, :per_page => 5)
+  end
+
   def edit
     @content_type.content_attributes.build if @content_type.content_attributes.count.zero?
   end
 
   def index
+    @content_types = ::ContentType.order(:name)
   end
 
   def new

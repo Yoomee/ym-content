@@ -4,15 +4,32 @@ module YmContent::ContentPackagesController
     base.load_and_authorize_resource
   end
 
+  def activity
+    if request.xhr?
+      page = params[:page] || 2
+      if @content_package
+        @activity_items = @content_package.paginate(:page => page, :per_page => 5)
+      else
+        @activity_items = ActivityItem.where(:resource_type => "ContentPackage").paginate(:page => page, :per_page => 5)
+      end
+      @page = page.to_i + 1
+    end
+  end
+
   def children
   end
 
   def create
     if @content_package.save
+      current_user.record_activity!(@content_package, :text => "created")
       redirect_to edit_content_package_path(@content_package)
     else
       render :action => 'new'
     end
+  end
+
+  def deleted
+    @deleted_content_packages = ContentPackage.where("deleted_at IS NOT NULL").order("deleted_at DESC").paginate(:page => params[:page], :per_page => 50)
   end
 
   def destroy
@@ -29,8 +46,6 @@ module YmContent::ContentPackagesController
     if params[:open] && open_content_package = ContentPackage.find_by_id(params[:open])
       @open = [open_content_package] + open_content_package.parents
     end
-    @content_types = ::ContentType.order(:name)
-    @deleted_content_packages = ContentPackage.where("deleted_at IS NOT NULL").order("deleted_at DESC").paginate(:page => params[:page], :per_page => 50)
   end
 
   def new
@@ -67,6 +82,7 @@ module YmContent::ContentPackagesController
 
   def update
     if @content_package.update_attributes(params[:content_package])
+      current_user.record_activity!(@content_package, :text => "updated")
       redirect_to @content_package
     else
       render :action => 'edit'
