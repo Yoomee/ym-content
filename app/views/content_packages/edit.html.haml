@@ -85,7 +85,7 @@
             #activity.tab-pane
               .cms-dashboard-well.clearfix.fadeIn
                 %ul.cms-activities
-                  -ActivityItem.where(:resource_type => "ContentPackage").paginate(:page => 1, :per_page => 5).each do |activity|
+                  -@content_package.activity_items.paginate(:page => 1, :per_page => 5).each do |activity|
                     =render("content_packages/activity", :include_name => true, :activity => activity)
                 =link_to "See older activity", activity_content_packages_path, :remote => true, :class => 'btn btn-small js-older-activities pull-right mt-1'
 

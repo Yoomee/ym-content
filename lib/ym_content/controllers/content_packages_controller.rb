@@ -17,7 +17,7 @@ module YmContent::ContentPackagesController
 
   def create
     if @content_package.save
-      current_user.record_activity!(@content_package, :text => "#{current_user.full_name} created this ")
+      current_user.record_activity!(@content_package, :text => "created")
       redirect_to edit_content_package_path(@content_package)
     else
       render :action => 'new'
