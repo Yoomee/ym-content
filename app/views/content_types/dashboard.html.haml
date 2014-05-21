@@ -44,44 +44,10 @@
     .well.cms-dashboard-well.clearfix.fadeInSlow3
       %h4.mt-0.b-1 Recent Activity
       %ul.cms-activities
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 22 minutes ago
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 26 minutes ago
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 26 minutes ago
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 26 minutes ago
-        %li.cms-activity
-          %img.avatar.thumbnail.cms-thumbnail{height: "45px", src: "https://yoomee1.gathercontent.com/assets/img/avatar.png", width: "45px"}/
-          %p.desc
-            %span.user-name Lindsay Sharman
-            saved a revision of
-            %a{href: "//yoomee1.gathercontent.com/page/718678", target: "_blank"} National Citizens Service
-          %span.when 28 minutes ago
+        -@activity_items.each do |activity|
+          =render("content_packages/activity", :include_name => true, :activity => activity)
       .padding20px
-        %a.btn.btn-small.ajax-activity-show-more{href: "#"} See older activity      
-
+      =link_to "See older activity", activity_content_packages_path, :remote => true, :class => 'btn btn-small js-older-activities'
   .col-md-4.fadeInSlow
     .well
       =link_to("Site map", content_packages_path, :class => 'btn btn-primary btn-block mb-1')

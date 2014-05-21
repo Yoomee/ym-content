@@ -2,6 +2,7 @@ module YmContent::ContentPackage
 
   def self.included(base)
     base.send(:include, YmCore::Model)
+    base.send(:include, YmActivity::Recordable)
 
     base.belongs_to :content_type
     base.has_many :content_chunks

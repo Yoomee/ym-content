@@ -1,0 +1,11 @@
+%li.cms-activity
+  =image_for(activity.user, "45x45#", :class => 'thumbnail cms-thumbnail')
+  %p.desc
+  -if include_name == true
+    =link_to activity.resource.name, activity.resource.permalink_path || "content_packages/#{activity.resource.id}"
+    %span=" was #{activity.text} by #{activity.user.full_name}"
+  -else
+    =activity.text.try(:capitalize)
+    by
+    %span.user-name=activity.user.full_name
+  %div.when="#{time_ago_in_words(activity.created_at)} ago"

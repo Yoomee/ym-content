@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     collection do
       get 'filter/:filter' => 'content_packages#index', :as => 'filter'
       get 'deleted'
+      get 'activity'
     end
     member do
       get 'children'

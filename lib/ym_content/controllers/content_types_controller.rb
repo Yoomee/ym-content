@@ -22,6 +22,7 @@ module YmContent::ContentTypesController
   end
 
   def dashboard
+    @activity_items = ActivityItem.where(:resource_type => "ContentPackage").paginate(:page => 1, :per_page => 5)
   end
 
   def edit
