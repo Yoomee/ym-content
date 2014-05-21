@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       put 'reorder' => 'content_packages#save_order'
       put 'restore'
       get 'search'
+      get 'activity'
     end
   end
 

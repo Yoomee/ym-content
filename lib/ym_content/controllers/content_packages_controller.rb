@@ -7,7 +7,11 @@ module YmContent::ContentPackagesController
   def activity
     if request.xhr?
       page = params[:page] || 2
-      @activity_items = ActivityItem.where(:resource_type => "ContentPackage").paginate(:page => page, :per_page => 5)
+      if @content_package
+        @activity_items = @content_package.paginate(:page => page, :per_page => 5)
+      else
+        @activity_items = ActivityItem.where(:resource_type => "ContentPackage").paginate(:page => page, :per_page => 5)
+      end
       @page = page.to_i + 1
     end
   end
