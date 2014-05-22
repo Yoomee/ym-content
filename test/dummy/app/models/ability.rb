@@ -11,7 +11,6 @@ class Ability
       # admin ability
     elsif user.role == "author"
       # author ability
-      can [:index, :show], ContentPackage
       can [:edit, :update], ContentPackage, :author_id => user.id
       can [:show], ContentPackage
       can [:index, :dashboard], ContentType
