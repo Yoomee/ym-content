@@ -45,7 +45,7 @@
           =form.action :submit, :label => "Update #{@content_package.package_name}"
           .mb-6
     .col-md-4.cms-sidebar-wrap.ph-0
-      #cms-sidebar.cms-sidebar{:data => {:spy => 'affix', :offset_top => '120'}}
+      #cms-sidebar.cms-sidebar{:data => {:spy => 'affix', :offset_top => '70'}}
         .cms-edit-status.mb-2
           =semantic_form_for @content_package do |form|
             %div{:class => ("hidden" unless current_user.role != "author")}
