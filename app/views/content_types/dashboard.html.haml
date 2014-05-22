@@ -50,9 +50,9 @@
       .padding20px
       =link_to "See older activity", activity_content_packages_path, :remote => true, :class => 'btn btn-small js-older-activities'
   .col-md-4.fadeInSlow
-    .well
-      =link_to("Site map", content_packages_path, :class => 'btn btn-primary btn-block mb-1')
-      =link_to("Create new content", new_content_package_path, :class => 'btn btn-primary btn-block mb-1')
-      =link_to("Users & permissions", '#', :class => 'btn btn-block mb-1')
-      =link_to("Manage personas", personas_path, :class => 'btn btn-primary btn-block mb-1')
-      =link_to("Request content type", '#', :class => 'btn btn-block mb-1')
+    .well.dashboard-actions<
+      =link_if_can("Site map", content_packages_path, :class => 'btn btn-primary btn-block mb-1')
+      =link_if_can("Create new content", new_content_package_path, :class => 'btn btn-primary btn-block mb-1')
+      =link_if_can("Users & permissions", '#', :class => 'btn btn-block mb-1')
+      =link_if_can("Manage personas", personas_path, :class => 'btn btn-primary btn-block mb-1')
+      =link_if_can("Request content type", '#', :class => 'btn btn-block mb-1')
