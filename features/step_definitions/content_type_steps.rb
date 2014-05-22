@@ -11,6 +11,7 @@ Given(/^there (is|are) (\d+) content types?$/) do |ia,n|
 end
 
 Then(/^I see the content types$/) do
+  click_link "Content types"
   @content_types.each do |content_type|
     expect(page).to have_content(content_type.to_s)
   end
@@ -31,5 +32,6 @@ end
 
 Then(/^the content type is created$/) do
   step "I go to the sitemap"
+  click_link "Content types"
   expect(page).to have_content(@content_type.to_s)
 end

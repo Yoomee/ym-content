@@ -78,7 +78,6 @@ Given(/^I remove an image$/) do
 end
 
 Then(/^the image should be removed$/) do
-  visit edit_content_package_path(@content_package)
   expect(page).to_not have_xpath("//img[contains(@src, \"media\")]")
 end
 
@@ -129,4 +128,8 @@ end
 
 Then(/^the author should be emailed$/) do
   email = ActionMailer::Base.deliveries.last
+end
+
+When(/^I go to edit the content package$/) do
+  visit edit_content_package_path(@content_package)
 end

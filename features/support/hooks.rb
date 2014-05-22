@@ -1,3 +1,7 @@
+Before('@admin') do
+  step "I am logged in as an admin"
+end
+
 Before('@editor') do
   step "I am logged in as an admin"
 end

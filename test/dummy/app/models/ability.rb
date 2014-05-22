@@ -10,9 +10,11 @@ class Ability
       can :manage, :all
       # admin ability
     elsif user.role == "author"
-      can [:index, :show], :all
+      # author ability
+      can [:index, :show], ContentPackage
       can [:edit, :update], ContentPackage, :author_id => user.id
-      # admin ability
+      can [:show], ContentPackage
+      can [:index, :dashboard], ContentType
     elsif user
       # user ability
       can :show, ContentPackage do |content_package|

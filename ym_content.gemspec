@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'ym_users', '~> 1.1.1'
   s.add_dependency 'ym_tags', '~> 1.0.4'
   s.add_dependency 'ym_posts'
+  s.add_dependency 'ym_activity'
   s.add_dependency 'geocoder'
   s.add_dependency 'cocoon'
   s.add_dependency 'ruby-oembed'

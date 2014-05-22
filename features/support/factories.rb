@@ -48,6 +48,10 @@ FactoryGirl.define do
     end
   end
 
+  factory :activity_item do
+    user
+  end
+
   factory :content_package do
     sequence(:name) {|n| "Content package #{n}"}
     content_type
@@ -57,6 +61,9 @@ FactoryGirl.define do
     requested_by
     status "published"
     sequence(:slug){|n| "content_package_#{n}" }
+    after(:build) do |content_package|
+      FactoryGirl.create(:activity_item, :resource_type => "ContentPackage", :resource => content_package)
+    end
   end
 
   factory :persona_group, :aliases => [:group] do
