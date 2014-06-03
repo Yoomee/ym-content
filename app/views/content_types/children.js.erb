@@ -1,0 +1,6 @@
+<%html = "".tap do |out|%>
+  <%@content_type.content_packages.order(:name).each_with_index do |content_package, idx| %>
+    <% out << render('content_package', :content_package => content_package, :last => idx + 1 == @content_type.content_packages.count) %>
+  <% end %>
+<% end %>
+$('#content-type-<%=@content_type.id%>').after('<%=escape_javascript(html.html_safe)%>');

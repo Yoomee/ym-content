@@ -1,16 +1,25 @@
+:javascript
+  $(document).ready(function(){
+    YmContent.ContentTypes.init()
+  });
 =render("content_packages/sitemap_header")
 .tab-content.tab-content-sitemap
-  #content-types.tab-pane.active
+  #content-types.tab-pane.active.sitemap
     %table.table.table-content-types
       %thead
         %tr
           %th.col-md-10{:colspan => 4} Content type / Name
       %tbody
         -@content_types.each do |content_type|
-          %tr.content-type
+          %tr.content-type{:id => "content-type-#{content_type.id}", :class => "#{'has-children' unless content_type.content_packages.count.zero?}", :data => {:depth => 0}}
             %td.td-name.col-md-10
-              =content_type.to_s.pluralize
-              =needs_design(content_type)
+              .name
+                -unless content_type.content_packages.count.zero?
+                  %i.fa.fa-caret-right.sitemap-caret
+                =content_type.to_s.pluralize
+                %span.text-muted
+                  =pluralize(content_type.content_packages.count, 'page')
+                =needs_design(content_type)
             %td
             %td
               =link_to('Edit', edit_content_type_path(content_type))

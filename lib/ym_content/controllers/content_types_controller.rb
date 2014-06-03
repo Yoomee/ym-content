@@ -4,6 +4,9 @@ module YmContent::ContentTypesController
     base.load_and_authorize_resource
   end
 
+  def children
+  end
+
   def create
     if @content_type.save
       redirect_to content_packages_path
