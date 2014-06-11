@@ -7,8 +7,16 @@ module YmContent::ContentPackage
     base.belongs_to :content_type
     base.has_many :content_chunks
     base.belongs_to :parent, :class_name => "ContentPackage"
-    base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => {:deleted_at => nil}
-    base.has_many :deleted_children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => "deleted_at IS NOT NULL"
+    if Rails::VERSION::MAJOR >= 4
+      base.has_many :children, -> { where(:deleted_at => nil).order(:position, :id) }, :class_name => "ContentPackage", :foreign_key => 'parent_id'
+    else      
+      base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => {:deleted_at => nil}
+    end
+    if Rails::VERSION::MAJOR >= 4
+      base.has_many :deleted_children, -> { where("deleted_at IS NOT NULL").order(:position, :id) }, :class_name => "ContentPackage", :foreign_key => 'parent_id'
+    else      
+      base.has_many :deleted_children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => "deleted_at IS NOT NULL"
+    end
     base.has_many :posts, :as => :target, :dependent => :destroy
     base.has_and_belongs_to_many :personas
     base.belongs_to :author, :class_name => 'User'
@@ -32,9 +40,9 @@ module YmContent::ContentPackage
 
     base.extend(ClassMethods)
 
-    base.scope :root, base.where(:parent_id => nil, :deleted_at => nil).order(:position, :id)
-    base.scope :published, base.where(:status => 'published')
-    base.scope :expiring, base.where('next_review < ?', Date.today)
+    base.scope :root, -> { base.where(:parent_id => nil, :deleted_at => nil).order(:position, :id) }
+    base.scope :published, -> { base.where(:status => 'published') }
+    base.scope :expiring, -> { base.where('next_review < ?', Date.today) }
   end
 
   module ClassMethods
