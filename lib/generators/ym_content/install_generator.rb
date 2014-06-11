@@ -25,11 +25,11 @@ module YmContent
         copy_file "controllers/personas_controller.rb",           "app/controllers/personas_controller.rb"
 
         # migrations
-        try_migration_template "migrations/create_content_types.rb",      "db/migrate/create_content_types"
-        try_migration_template "migrations/create_content_attributes.rb", "db/migrate/create_content_attributes"
-        try_migration_template "migrations/create_content_packages.rb",   "db/migrate/create_content_packages"
-        try_migration_template "migrations/create_content_chunks.rb",     "db/migrate/create_content_chunks"
-        try_migration_template "migrations/create_personas.rb",           "db/migrate/create_personas"
+        try_migration_template "migrations/create_content_types.rb",      "db/migrate/create_content_types.rb"
+        try_migration_template "migrations/create_content_attributes.rb", "db/migrate/create_content_attributes.rb"
+        try_migration_template "migrations/create_content_packages.rb",   "db/migrate/create_content_packages.rb"
+        try_migration_template "migrations/create_content_chunks.rb",     "db/migrate/create_content_chunks.rb"
+        try_migration_template "migrations/create_personas.rb",           "db/migrate/create_personas.rb"
 
       end
 
