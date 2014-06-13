@@ -1,4 +1,0 @@
-= YmContent
-
-This project rocks and uses MIT-LICENSE.
-Add ym_content_meta_tags to your the head section of the application layout
