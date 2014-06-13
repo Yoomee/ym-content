@@ -11,6 +11,7 @@ class CreateContentPackages < ActiveRecord::Migration
       t.belongs_to :requested_by
       t.string :status, :default => 'draft'
       t.boolean :logged_in_only, :default => false
+      t.boolean :hide_from_robots, :default => false
       t.text :notes
       t.date :due_date
       t.integer :review_frequency
