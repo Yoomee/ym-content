@@ -16,6 +16,7 @@ module YmContent
         copy_file "models/persona.rb",           "app/models/persona.rb"
         copy_file "models/persona_group.rb",     "app/models/persona_group.rb"
         copy_file "models/navigation_item.rb",   "app/models/navigation_item.rb"
+        insert_into_file "app/models/user.rb", "\n  def self.available_roles\n    %w(admin editor author)\n  end\n", :after => "class User < ActiveRecord::Base"
 
         # views
         copy_file "views/users/_form.html.haml", "app/views/users/_form.html.haml"
