@@ -4,7 +4,7 @@
     =form.input :last_name
     =form.input :email
     -if current_user.is_admin?
-      =form.input :role, :as => :select, :collection => ["admin", "editor", "author"]
+      =form.input :role, :as => :select, :collection => User.available_roles
     -if @user.new_record?
       =form.input :password
     -else

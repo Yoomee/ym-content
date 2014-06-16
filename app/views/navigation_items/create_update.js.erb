@@ -1,0 +1,8 @@
+<% if @navigation_item.valid? %>
+$('#nav-modal').modal('hide');
+$('#nav-modal .modal-content').html('');
+$('#nav-table').html('<%=escape_javascript(render('table', :navigation_items => NavigationItem.root))%>');
+$('#main-header').html('<%=escape_javascript(render('layouts/header'))%>');
+<% else %>
+$('#nav-modal .modal-content').html('<%=escape_javascript(render('form'))%>');
+<% end %>

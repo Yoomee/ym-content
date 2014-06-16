@@ -1,0 +1,14 @@
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Link
+      %th 
+  %tbody
+    -navigation_items.root.each do |navigation_item|
+      =render 'navigation_items/navigation_item', :navigation_item => navigation_item
+    %tr
+      %td{:colspan => 3}
+        =link_to("Add top level item", new_navigation_item_path, :remote => true)
+        &nbsp;
+        =link_to("Reorder top level items", reorder_navigation_items_path)

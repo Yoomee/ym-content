@@ -1,0 +1,21 @@
+:javascript
+  NavigationManager.init()
+.modal-header
+  %button.close{'data-dismiss' => "modal"} &times;
+  %h4.modal-title Navigation item
+=semantic_form_for @navigation_item, :remote => true do |form|
+  .modal-body
+    =form.inputs do
+      =form.input :parent_id, :as => :hidden
+      =form.input :title
+      -if @navigation_item.depth.zero?
+        =form.input :item_type, :label => "Type", :as => :select, :collection => [["Link", 'link'], ['Dropdown', 'dropdown']], :include_blank => false
+      =form.input :link, :label => "Link - <em>type the name of an existing page on the site, or enter a URL e.g. '/volunteer'</em>".html_safe, :input_html => {:value => (@navigation_item.url || (@navigation_item.resource ? polymorphic_path(@navigation_item.resource) : nil))}, :wrapper_html => {:style => "display:#{@navigation_item.item_type == 'dropdown' ? 'none' : 'block'};"}
+      -if @navigation_item.depth == 1
+        =form.input :description, :input_html => {:rows => 2}
+        =form.input :image, :as => :image, :label => "Large image - <em>used when on the top row of the dropdown</em>".html_safe, :remove_label => "Remove large image"
+        =form.input :logo, :as => :image, :label => "Logo image - <em>used when on or below the second row of the dropdown</em>".html_safe, :remove_label => "Remove logo image"
+  .modal-footer
+    =form.actions do
+      =form.action :submit, :label => 'Submit', :button_html => {:class => 'btn btn-primary btn-block'}
+  
