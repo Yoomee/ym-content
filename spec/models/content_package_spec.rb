@@ -161,6 +161,7 @@ describe ContentPackage do
 
   it 'has a permalink if not viewless' do
     content_package.build_permalink
+    content_package.permalink_path = nil
     content_package.valid?
     expect(content_package.permalink_path).not_to be_blank
   end
@@ -168,6 +169,7 @@ describe ContentPackage do
   it "doesn't have a permalink if viewless" do
     content_package.content_type.viewless = true
     content_package.build_permalink
+    content_package.permalink_path = nil
     content_package.valid?
     expect(content_package.permalink_path).to be_nil
   end
