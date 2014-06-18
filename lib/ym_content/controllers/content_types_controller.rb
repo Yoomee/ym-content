@@ -57,5 +57,9 @@ module YmContent::ContentTypesController
       render :action => 'edit'
     end
   end
-  
+
+  private
+  def content_type_params
+    params.require(:content_type).permit(:name, :description)
+  end
 end

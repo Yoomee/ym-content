@@ -29,5 +29,9 @@ module YmContent::PersonasController
       render :action => 'edit'
     end
   end
-  
+
+  private
+  def persona_params
+    params.require(:persona).permit(:name, :age, :summary, :benefit_1, :benefit_2, :benefit_3, :benefit_4, :image_uid, :file_uid, :group_id)
+  end
 end

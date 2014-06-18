@@ -81,7 +81,7 @@ module YmContent::ContentPackagesController
   end
 
   def update
-    if @content_package.update_attributes(params[:content_package])
+    if @content_package.update_attributes(content_package_params)
       current_user.record_activity!(@content_package, :text => "updated")
       redirect_to @content_package
     else
@@ -90,6 +90,11 @@ module YmContent::ContentPackagesController
   end
 
   private
+    def content_package_params
+      params.require(:content_package).permit(*params[:content_package].try(:keys))
+    end
+
+
   def render_content_package_view
     if template_exists?("content_packages/views/#{@content_package.view_name}")
       render "content_packages/views/#{@content_package.view_name}" and return
