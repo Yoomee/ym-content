@@ -49,9 +49,9 @@ module YmContent::ContentPackage
 
     def statuses(user)
       Hash.new.tap do |s|
-        s[:draft] = 'Draft' if user.is_admin? || user.try(:role_is?, :editor)
+        s[:draft] = 'Draft' if user.try(:role_is?, :admin) || user.try(:role_is?, :editor)
         s[:pending] = 'Ready to review'
-        s[:published] = 'Published' if user.is_admin? || user.try(:role_is?, :editor)
+        s[:published] = 'Published' if user.try(:role_is?, :admin) || user.try(:role_is?, :editor)
       end
     end
 
