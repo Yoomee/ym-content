@@ -1,3 +1,4 @@
+require 'ym_core'
 module YmContent
   module Generators
     class InstallGenerator < Rails::Generators::Base
@@ -35,6 +36,8 @@ module YmContent
         try_migration_template "migrations/create_personas.rb",           "db/migrate/create_personas"
         try_migration_template "migrations/create_navigation_items.rb",   "db/migrate/create_navigation_items"
 
+        #Copy features folder
+        directory "../../../../features/", "features"
       end
 
     end
