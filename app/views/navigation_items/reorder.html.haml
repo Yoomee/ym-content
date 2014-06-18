@@ -1,0 +1,14 @@
+:javascript
+  $(document).ready(function(){YmContent.Sortable.init();});
+%h3 Reorder children
+%p
+  Drag and drop the children into the desired order and click
+  %em Save order.
+%form.formtastic.form-horizontal.form-sortable
+  %fieldset.inputs
+    .controls.sortable
+      -@navigation_items.each do |child|
+        .well{:id => "children_ids_#{child.id}"}
+          =child
+  %fieldset.form-actions
+    =link_to('Save order', @navigation_item ? reorder_navigation_item_path(@navigation_item) : reorder_navigation_items_path, :method => :put, :class => 'btn sortable-submit mb-3')

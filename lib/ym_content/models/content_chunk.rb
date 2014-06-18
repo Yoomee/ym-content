@@ -50,10 +50,6 @@ module YmContent::ContentChunk
     if content_attribute.field_type == "location"
       do_lookup(false) do |o,rs|
         if r = rs.first
-          unless r.latitude.nil? or r.longitude.nil?
-            o.send :write_attribute, self.class.geocoder_options[:latitude],  r.latitude
-            o.send :write_attribute, self.class.geocoder_options[:longitude], r.longitude
-          end
           self.html = r.coordinates.join(',')
         end
       end

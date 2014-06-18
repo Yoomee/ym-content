@@ -1,0 +1,8 @@
+=render("content_packages/sitemap_header")
+.tab-content.tab-content-sitemap
+  #navigation-manager.tab-pane.active
+    #nav-table.sitemap
+      =render('navigation_items/table', :navigation_items => NavigationItem.root)
+    #nav-modal.modal.fade
+      .modal-dialog
+        .modal-content

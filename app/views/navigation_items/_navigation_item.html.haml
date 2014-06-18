@@ -1,0 +1,24 @@
+- parents = parents.try(:dup) || []
+%tr
+  %td.td-name
+    =sitemap_spacers(navigation_item, parents)
+    %span.name
+      -unless navigation_item.children.count.zero?
+        %i.fa.sitemap-caret.fa-caret-down
+      =navigation_item.title
+  %td.td-link
+    -if navigation_item.item_type != 'dropdown' && navigation_item.linkable
+      =link_to((navigation_item.url || (navigation_item.resource ? polymorphic_path(navigation_item.resource) : nil)), navigation_item.linkable, :target => '_blank')
+  %td.td-actions
+    =link_to('Edit', edit_navigation_item_path(navigation_item), :remote => true)
+    &nbsp;
+    =link_to('Delete', navigation_item_path(navigation_item), :remote => true, :method => :delete, :confirm => "Are you sure you want to delete this?")
+    -if parents.size < 2
+      &nbsp;
+      =link_to('Add child', new_navigation_item_path(:parent_id => navigation_item.id), :remote => true)
+      -if navigation_item.children.size > 1
+        &nbsp;
+        =link_to('Reorder children', reorder_navigation_item_path(navigation_item))
+- parents << navigation_item
+-navigation_item.children.each do |child|
+  =render('navigation_items/navigation_item', :navigation_item => child, :parents => parents)

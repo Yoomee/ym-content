@@ -1,3 +1,5 @@
+#= require navigation_manager
+
 window.YmContent =
   ContentTypes:
     init: ->
@@ -112,4 +114,4 @@ window.YmContent =
         url = $(this).attr('href') + '?'
         url += $('.sortable').sortable("serialize")
         $(this).attr('href', url)
-      
+
