@@ -62,12 +62,6 @@
   }
 }
 
-@include media-query(portable) {
-  .cms-navbar .cms-navbar-toggle {
-    right:5px;
-  }
-}
-
 @media (min-width: 768px) and (max-width: 1200px) {
   .cms-navbar .cms-navbar-toggle {
     right:0px;
