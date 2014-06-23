@@ -23,7 +23,7 @@
         %li=link_to("Meta", '#meta', 'data-toggle' => 'tab')
         %li=link_to("Related content", '#related', 'data-toggle' => 'tab')
       =semantic_form_for @content_package do |form|
-        .tab-content
+        .tab-content.mb-2
           #content.tab-pane.active.cms-form
             =form.inputs do
               =form.input :content_type_id, :as => :hidden
@@ -45,10 +45,10 @@
               %label{for: "content_package_status"} Status
               =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false, :label => false
             -if current_user.role == "author"
-              =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-primary btn-block"}
-              =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-confirm btn-block js-save-progress"}
+              =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-primary1 btn-block"}
+              =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-confirm1 btn-block js-save-progress"}
             -else
-              =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-confirm btn ph-6 pull-right"}
+              =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-confirm1 btn ph-6 pull-right"}
         .clearfix
         %hr
         .cms-sidebar-tabs
@@ -57,7 +57,7 @@
             %li=link_to("Discussion", '#discussion', 'data-toggle' => 'pill')
             %li=link_to("Activity", '#activity', 'data-toggle' => 'pill')
             %li=link_to("Content scorecard", '#content-scorecard', 'data-toggle' => 'pill')
-          .tab-content
+          .tab-content.mb-2
             #context.tab-pane.active
               - if @content_package.personas.present?
                 %h5.hide Audience/personas

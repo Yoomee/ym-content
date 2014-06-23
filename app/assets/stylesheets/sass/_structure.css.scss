@@ -8,10 +8,39 @@
 
 /* Edit page */
 
-.container-cms-edit radio,
-.container-cms-edit checkbox{
-  margin-left:34px;
+.cms-form .radio,
+.cms-form .checkbox{
+  padding-left:34px;
 }
 .cms-title-icon{
   float: left;
+}
+.cms-form .form-group > label{
+  background:#f3f3f3;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  font-size: 17px;
+  margin: 0;
+  padding: 7px 14px 2px;
+  width: 100%;
+}
+.cms-form .image.input{
+  img{
+    border-radius: 50%;
+    float: left;
+    margin:15px 18px;
+  }
+  .image-inputs {
+    margin: 23px 14px;
+    float: left;
+  }
+  .checkbox.remove-image{
+    margin-left:0;
+  }
+}
+.cms-form .form-group{
+  margin: 0;
+}
+.formtastic.content_package .form-actions #content_package_submit_action{
+  margin-right: 16px;
 }
