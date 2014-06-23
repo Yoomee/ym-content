@@ -133,3 +133,22 @@ end
 When(/^I go to edit the content package$/) do
   visit edit_content_package_path(@content_package)
 end
+
+When(/^I fill in a content attribute with a word limit$/) do
+  visit edit_content_package_path(@content_package)
+  fill_in('content_package_title', :with => "0123456789")
+end
+
+Then(/^the character counter should increase$/) do
+  expect(page).to have_content("10/30")
+end
+
+When(/^I exceed the word limit of a content attribute$/) do
+  visit edit_content_package_path(@content_package)
+  fill_in('content_package_title', :with => "0123456789012345678901234567891")
+end
+
+Then(/^the character counter should go red$/) do
+  puts find('#content_package_title_input')['class']
+  find('#content_package_title_input')['class'].include? ".word-count-exceeded"
+end
