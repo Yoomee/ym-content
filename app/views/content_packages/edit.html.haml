@@ -29,7 +29,7 @@
               =form.input :content_type_id, :as => :hidden
               =form.input :name if current_user.admin?
               -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
-                =form.content_input content_attribute
+                =form.content_input content_attribute, :input_html => { :data => Hash.new.tap { |h| h[:limit_quantity] = content_attribute.limit_quantity if content_attribute.limit_quantity.to_i > 0 } }
           =render("meta_tab", :form => form)
           #related.tab-pane
         =form.actions do

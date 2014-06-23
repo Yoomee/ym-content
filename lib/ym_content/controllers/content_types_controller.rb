@@ -51,7 +51,7 @@ module YmContent::ContentTypesController
   end
 
   def update
-    if @content_type.update_attributes(params[:content_type])
+    if @content_type.update_attributes(content_type_params)
       redirect_to content_packages_path
     else
       render :action => 'edit'
@@ -60,6 +60,6 @@ module YmContent::ContentTypesController
 
   private
   def content_type_params
-    params.require(:content_type).permit(:name, :description)
+    params.require(:content_type).permit(:name, :description, :singleton, :package_name, :viewless, :view_name, :use_workflow, :content_attributes_attributes => [:name, :description, :field_type, :required, :meta])
   end
 end

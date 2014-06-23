@@ -1,6 +1,8 @@
 #= require navigation_manager
 #= require bootstrap-select.min
 #= require custom
+#= require character_limits
+
 
 $(document).ready ->
   $("select").selectpicker()
@@ -60,6 +62,10 @@ window.YmContent =
           $(e.currentTarget).parents(".form-group").addClass("focus")
         blurCallback: (e) ->
           $(e.currentTarget).parents(".form-group").removeClass("focus")
+        initCallback: (e) ->
+          if CharacterLimits
+            CharacterLimits.registerRedactor(this)
+
   Sitemap:
     init: ->
       YmContent.Sitemap.filter()
