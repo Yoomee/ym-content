@@ -1,0 +1,103 @@
+/* =======================================================================
+   NAVBAR
+   Styles for CMS navbar
+   ======================================================================= */
+
+.cms-navbar {
+  background:$primary2;
+  margin:0px;
+  border-radius:0;
+  border:none;
+  clear:both;
+  .container {
+    position:relative;
+  }
+  ul {
+    margin:0px;
+    float:right;
+    li {
+      display:inline-block;
+    }
+    a {
+      color:#fff;
+      display:block;
+      padding:12px;
+      &:hover {
+        text-decoration:none;
+        background: darken($primary2, 10%);
+      }
+    }
+  }
+  .cms-navbar-toggle {
+    position:absolute;
+    right:40px;
+    bottom:-46px;
+    z-index:10;
+    padding:0px 20px 20px;
+    color:#fff;
+    span {
+      display:block;
+      background:#e34440;
+      padding:4px 9px 2px;
+      float:left;
+    }
+    &:hover {
+      text-decoration:none;
+    }
+    span.warning {
+      background: rgba(0, 0, 0, 0.4);
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  .cms-navbar .cms-navbar-toggle {
+    right:0px;
+  }
+}
+
+
+
+/* ======= Navigation manager =======*/
+
+.sitemap .td-link a{
+  color: #999;
+}
+#nav-modal .modal-dialog {
+  margin-top:100px;
+}
+#nav-modal .image label,
+#nav-modal .image .form-wrapper,
+#nav-modal .image .form-wrapper img,
+#nav-modal .image .form-wrapper .image-inputs{
+  float:left;
+}
+#nav-modal .image .form-wrapper{
+  clear:both;
+  margin-bottom:15px;
+}
+#nav-modal .image .form-wrapper img{
+  margin-right:15px;
+}
+#nav-modal label em {
+  font-family: "Proxima N W15 Reg", helvetica, sans-serif;
+}
+#nav-modal .remove-image input {
+  margin-left:0px;
+  margin-right:5px;
+}
+.controller_navigation_items .ui-autocomplete.ui-menu {
+  z-index:1100;
+}
+.controller_navigation_items .ui-menu .ui-menu-item a{
+  padding: 3px .4em;
+  line-height:1.1;
+}
+.controller_navigation_items .ui-menu-item a em{
+  font-size:70%;
+  color: #666;
+  padding-left:5px;
+}
+

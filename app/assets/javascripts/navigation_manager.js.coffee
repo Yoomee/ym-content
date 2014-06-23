@@ -15,3 +15,5 @@ window.NavigationManager =
         $("#navigation_item_link_input").hide()
       else
         $("#navigation_item_link_input").show()
+
+

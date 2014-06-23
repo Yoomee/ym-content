@@ -1,4 +1,10 @@
 #= require navigation_manager
+#= require bootstrap-select.min
+#= require custom
+
+$(document).ready ->
+  $("select").selectpicker()
+
 
 window.YmContent =
   ContentTypes:

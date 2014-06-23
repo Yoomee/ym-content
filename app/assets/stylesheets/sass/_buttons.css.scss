@@ -1,0 +1,115 @@
+.controller_content_packages .cms-main .btn{
+  float: right;
+  min-width: 150px;
+}
+.action_dashboard .cms-dashboard .btn{
+  background:#c9c9c9;
+}
+.btn.btn-primary1{
+  background: $primary1;
+  &:hover{
+    background: darken($primary1, 10%);
+  }
+}
+.btn.btn-primary2{
+  background: $primary2;
+  &:hover{
+    background: darken($primary2, 10%);
+  }
+}
+.btn.btn-primary3{
+  background: $primary3;
+  &:hover{
+    background: darken($primary3, 10%);
+  }
+}
+.btn.btn-primary4{
+  background: $primary4;
+  &:hover{
+    background: darken($primary4, 10%);
+  }
+}
+.open .btn-default.dropdown-toggle{
+  background: $primary1 !important;
+}
+.form-control{
+  height: auto;
+}
+.btn#content_package_submit_action{
+  float: right;
+}
+// Hide save button for now
+.btn-cms-status {
+  display: none;
+}
+// make cms edit sidebar have a full background right sidebar
+body.controller_content_packages.action_edit {
+  background: #fff;
+  background-size: 100%;
+}
+.cms-edit-status .btn-group {
+  width: 100% !important;
+}
+.main-wrapper .selectpicker.btn {
+  background: #f3f3f3;
+  border-radius:3px;
+  color: #666;
+  width: 100%;
+}
+.main-wrapper .cms-sidebar .selectpicker.btn {
+    background: #fff;
+}
+.sitemap .selectpicker.btn{
+  background:#f3f3f3;
+  color: #777;
+}
+.sitemap .bootstrap-select.btn-group .selectpicker.btn .caret{
+  border-top-color: #777;
+}
+.cms-edit-status .bootstrap-select.btn-group .btn .caret,
+.content_package .bootstrap-select.btn-group .btn .caret {
+  border-top-color: #666;
+ }
+
+/* tabs  */
+
+.controller_content_packages .tabs-wrap{
+  position: relative;
+  margin-bottom:30px;
+}
+.controller_content_packages .tabs-wrap hr{
+  border-bottom: 6px solid #f3f3f3;
+  border-top: 0 none;
+  height: 36px;
+  margin: 0;
+  position: absolute;
+  top: -12px;
+  width: 498px;
+  z-index: -1;
+}
+.controller_content_packages  .tabs-wrap  .nav-tabs{
+  width: 576px;
+  margin:30px 0 0 0;
+  border-bottom: 0;
+}
+.controller_content_packages .tabs-wrap .nav > li{
+  float: left;
+  margin: 0 38px 0 0 !important;
+  text-align: center;
+  width: 153px !important;
+}
+.controller_content_packages .tabs-wrap .nav > li > a{
+  padding: 16px 25px;
+  border-radius: 0;
+  border:0;
+  font-size: 16px;
+  border-radius: 41px !important;
+  background:#f3f3f3;
+  color: #ccc;
+}
+.controller_content_packages .tabs-wrap  .nav > li.active > a{
+  border-radius: 0;
+  border:0;
+  background:$primary2;
+  color: #fff;
+}
