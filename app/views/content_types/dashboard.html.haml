@@ -1,7 +1,9 @@
 .container.cms-main
   .row.cms-dashboard
     .col-md-12.mb-3
-      %h2=title 'Content dashboard'
+      %h2
+        =title 'Content dashboard'
+        %i.fa.fa-home.pull-left
   .row
     .col-md-8
       .well.dashboard-well
@@ -9,7 +11,7 @@
           Content status
         .row.cms-dashboard-btn
           .col-md-4
-            =link_to filter_content_packages_path(:filter => 'draft'), :class=>"btn btn-primary1 btn-block btn-with-number btn-cms-drafts fadeInPop" do
+            =link_to filter_content_packages_path(:filter => 'draft'), :class=>"btn btn-primary3 btn-block btn-with-number btn-cms-drafts fadeInPop" do
               %span.btn-cms-number
                 =ContentPackage.where(:status => 'draft').count
               %span.btn-cms-text  
