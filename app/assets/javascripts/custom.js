@@ -1,9 +1,9 @@
 $(document).ready(function(){
-  if ($(window).width() < 300) {
-   $('.cms-sidebar').removeClass("affix-bottom");
-  }
-
   $('.control-label').click(function(){
-    $(this).next('.form-wrapper').fadeToggle();
+    $(this).next('.form-wrapper').toggle();
+  });
+  $('.persona-summary').hide()
+  $('.more-persona').click(function(){
+    $(this).parent('.row').next('.persona-summary').toggle();
   });
 });

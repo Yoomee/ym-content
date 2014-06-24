@@ -46,9 +46,9 @@
               =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false, :label => false
             -if current_user.role == "author"
               =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-primary1 btn-block"}
-              =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-confirm1 btn-block js-save-progress"}
+              =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-confirm btn-block js-save-progress"}
             -else
-              =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-confirm1 btn ph-6 pull-right"}
+              =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-confirm btn ph-6 pull-right"}
         .clearfix
         %hr
         .cms-sidebar-tabs
@@ -69,16 +69,18 @@
                       .col-sm-8
                         %h4=persona
                         %h5="Age #{persona.age}"
-                    %p
-                      %em=persona.summary
-                    -if persona.benefits.present?
+                      .btn.btn-small.pull-right.more-persona.mr-2.mt-1 Read more
+                    .persona-summary
                       %p
-                        %strong Fact checker benefits
-                      %ul
-                        -persona.benefits.each do |benefit|
-                          %li=benefit
-                    -if persona.file
-                      =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right')
+                        %em=persona.summary
+                      -if persona.benefits.present?
+                        %p
+                          %strong Fact checker benefits
+                        %ul
+                          -persona.benefits.each do |benefit|
+                            %li=benefit
+                      -if persona.file
+                        =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right')
                     .clearfix
               -if @content_package.notes.present?
                 %h5 Content objective/goal

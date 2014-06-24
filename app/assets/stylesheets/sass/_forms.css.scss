@@ -1,0 +1,64 @@
+.cms-form {
+  //disabling the 400px height on textareas for now- a bit hacky - needs sorting properly.
+  textarea {
+    height: 170px !important;
+    overflow: auto;
+  }
+  .form-control {
+    font-size: 16px;
+    color: #000;
+    border-color: #e5e5e5;
+    border-radius: 3px;
+  }
+  .focus .form-control {
+    border-color: #f3f3f3;
+  }
+  .form-group {
+    position: relative;
+    padding: 15px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    > label {
+      font-size: 20px;
+    }
+  }
+  .form-group.focus {
+    background: lighten(desaturate($primary1, 30), 57);
+    box-shadow: 0 0 2px #ccc;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease;
+    label {
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+    }
+  }
+  .form-group.text.focus:before {
+      content: "";
+      display: block;
+      background:url(/assets/cms-list-and-link.png) no-repeat top right;
+      width: 46px;
+      height: 19px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      opacity: 0.8;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+  }
+  .help-block {
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    opacity: 0;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top:10px;
+  }
+  .focus .help-block,
+  .checkbox > .help-block {
+    height: auto;
+    opacity: 1;
+  }
+}

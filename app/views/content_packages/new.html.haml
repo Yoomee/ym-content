@@ -1,7 +1,9 @@
 .container.cms-main
   .row
     .col-md-6.col-md-offset-3.mb-4
-      %h2=title "New content"
+      %h2
+        =title "New content"
+        %i.fa.fa-file.pull-left
       .tabs-wrap
         %ul.nav.nav-tabs
           %li.active=link_to("Content type", '#content-type', 'data-toggle' => 'tab')
@@ -31,7 +33,7 @@
               .cms-edit-context-box
                 =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}, :class => "content-objective-goal"
               =link_to("Previous", '#content-type', 'data-toggle' => 'tab', :class => 'btn pull-left')
-              =link_to("Next", '#author', 'data-toggle' => 'tab', :class => 'btn btn-primary1')
+              =link_to("Next", '#author', 'data-toggle' => 'tab', :class => 'btn btn-primary3')
           #author.tab-pane
             =form.inputs do
               =form.input :requested_by, :collection => User.where(:role => 'admin')

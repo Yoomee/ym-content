@@ -1,3 +1,5 @@
+
+
 /*==================== Dashboard ====================*/ 
 
 .btn-with-number {
@@ -117,4 +119,10 @@ margin-bottom: 20px;
 }
 .dashboard-actions:empty {
   display: none;
+}
+
+.dashboard-well.well{
+  border:0;
+  border-radius:3px;
+  background: #fff;
 }

@@ -1,6 +1,6 @@
 %h2.mb-3.pull-left=title 'Site map & content types'
 .clearfix
-%ul.nav.nav-tabs.mb-2
+%ul.nav.nav-tabs
   %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
     =link_to("Site map", content_packages_path)
   -if can? :manage, ContentType
