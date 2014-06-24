@@ -53,6 +53,8 @@ module YmContent::ContentPackagesController
     @content_package.parent_id = params[:parent]
     @content_package.requested_by = current_user
     @content_package.review_frequency = 1
+    @content_package.due_date = Date.today
+
   end
 
   def reorder
