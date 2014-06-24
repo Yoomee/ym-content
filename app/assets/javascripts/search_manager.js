@@ -9,11 +9,15 @@ window.SearchManager = {
       }
     });
 
+    function loadContentPageInTree(cp_id) {
+      window.location.href = "/content_packages?open=" + cp_id;
+    }
+
     $("#content_search_link").navAutocomplete({
       source: "/navigation_items/search",
       minlength: 2,
       select: function(event, ui) {
-        console.log('select pressed')
+        loadContentPageInTree(ui.item.id);
       }
     });
 

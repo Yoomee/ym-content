@@ -1,6 +1,7 @@
 :javascript
-  $(document).ready(function(){
+  $(document).ready(function() {
     YmContent.Sitemap.init()
+    SearchManager.init()
     #{"$('#content-package-#{params[:open]}').effect('highlight', 3500);" if @open}
   });
 =render("content_packages/sitemap_header")
@@ -11,8 +12,6 @@
     #content_search.form
       =semantic_form_for 'content_search', :remote => true do |form|
         =form.input :link, :label => false, :input_html => {:placeholder => "Content search"}, :wrapper_html => {:style => "display:block;"}
-      :javascript
-        SearchManager.init()
     -# end search form
 
     %table.table

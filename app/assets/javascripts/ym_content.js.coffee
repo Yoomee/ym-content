@@ -1,9 +1,9 @@
 #= require navigation_manager
-#= require search_manager
 #= require bootstrap-select.min
 #= require custom
 #= require character_limits
 #= require tabs
+#= require search_manager
 
 
 $(document).ready ->
