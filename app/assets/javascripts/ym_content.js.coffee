@@ -1,4 +1,5 @@
 #= require navigation_manager
+#= require search_manager
 #= require bootstrap-select.min
 #= require custom
 #= require character_limits
@@ -131,4 +132,3 @@ window.YmContent =
         url = $(this).attr('href') + '?'
         url += $('.sortable').sortable("serialize")
         $(this).attr('href', url)
-

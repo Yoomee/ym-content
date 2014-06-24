@@ -6,6 +6,15 @@
 =render("content_packages/sitemap_header")
 .tab-content.tab-content-sitemap
   #sitemap.sitemap.tab-pane.active
+
+    -# start search form
+    #content_search.form
+      =semantic_form_for 'content_search', :remote => true do |form|
+        =form.input :link, :label => false, :input_html => {:placeholder => "Content search"}, :wrapper_html => {:style => "display:block;"}
+      :javascript
+        SearchManager.init()
+    -# end search form
+
     %table.table
       %thead
         %tr
@@ -16,11 +25,10 @@
             .sitemap-filter.pull-right
               %strong Filter
               &nbsp;
-              =select_tag(:status, options_for_select([['All', nil]] + ContentPackage.statuses(current_user).invert.to_a, params[:filter])) 
+              =select_tag(:status, options_for_select([['All', nil]] + ContentPackage.statuses(current_user).invert.to_a, params[:filter]))
       %tbody
         -@content_packages.each do |content_package|
           =render('content_package', :content_package => content_package)
         %tr
           %td{:colspan => 7}
             =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus')
-
