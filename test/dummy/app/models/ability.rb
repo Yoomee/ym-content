@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new # guest user (not logged in)
     # open ability
     can [:search, :show], ContentPackage do |content_package|
       content_package.visible_to_user?(nil)
