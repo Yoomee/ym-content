@@ -7,13 +7,13 @@ require "ym_content/version"
 Gem::Specification.new do |s|
   s.name        = "ym_content"
   s.version     = YmContent::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of YmContent."
-  s.description = "TODO: Description of YmContent."
+  s.authors     = ["Yoomee"]
+  s.email       = ["developers@yoomee.com"]
+  s.homepage    = "http://www.yoomee.com"
+  s.summary     = "Content strategy driven CMS"
+  s.description = "Content strategy driven CMS"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'rails', '>= 3'
