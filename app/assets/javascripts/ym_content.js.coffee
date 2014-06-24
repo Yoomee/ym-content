@@ -7,6 +7,11 @@
 $(document).ready ->
   $("select").selectpicker()
 
+  $('input,textarea,select').focusin ->
+    $(this).parents('.form-group').addClass('focus')
+  $('input,textarea,select').focusout ->
+    $(this).parents('.form-group').removeClass('focus')
+
 
 window.YmContent =
   ContentTypes:
