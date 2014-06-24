@@ -10,6 +10,7 @@ gem 'ym_core',        :git => "git@gitlab.yoomee.com:yoomee/ym_core.git", :branc
 gem 'ym_posts',       :git => "git@gitlab.yoomee.com:yoomee/ym_posts.git", :branch => "rails-4"
 gem 'ym_permalinks',  :git => "git@gitlab.yoomee.com:yoomee/ym_permalinks.git", :branch => "rails-4"
 gem 'ym_tags',        :git => "git@gitlab.yoomee.com:yoomee/ym_tags.git", :branch => "rails-4"
+gem 'ym_videos',      :git => "git@gitlab.yoomee.com:yoomee/ym_videos.git", :branch => "rails-4"
 
 group :test do
   gem 'capybara', '~> 2.1'
