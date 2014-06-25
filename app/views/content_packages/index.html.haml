@@ -22,7 +22,7 @@
               %strong Filter
               &nbsp;
               =select_tag(:status, options_for_select([['All', nil]] + ContentPackage.statuses(current_user).invert.to_a, params[:filter]))
-      %tbody
+      %tbody#content-packages-list
         -@content_packages.each do |content_package|
           =render('content_package', :content_package => content_package)
         %tr

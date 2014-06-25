@@ -3,7 +3,13 @@ window.SearchManager = {
   init: function() {
 
     function loadContentPageInTree(cp_id) {
-      window.location.href = "/content_packages?open=" + cp_id;
+      $.ajax({
+        type: 'GET',
+        url: '/content_packages?open=' + cp_id,
+        dataType: "script"
+      });
+      return false;
+      // window.location.href = "/content_packages?open=" + cp_id;
     }
 
     $("#content_search_link").navAutocomplete({
