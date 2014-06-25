@@ -1,10 +1,17 @@
-.container.container-cms-edit, .container.cms-main{
-  margin-top:60px;
+body.controller_content_packages.action_edit,
+body.controller_content_types,
+body.controller_content_packages,
+body.controller_navigation_items {
+  background: #F1F1F1;
+  background-size: 100%;
 }
-.cms-sidebar-tabs .nav-pills li a {
-    font-size: 14px;
-    padding: 11px 10px 9px;
+.container.container-cms-edit #main-header,
+.controller_content_packages #main-header,
+.controller_navigation_items #main-header,
+.controller_content_types #main-header{
+  margin-bottom:60px;
 }
+
 
 /* Edit page */
 
@@ -16,12 +23,8 @@
   float: left;
 }
 .cms-form .form-group > label{
-  background:#f3f3f3;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
   font-size: 17px;
   margin: 0;
-  padding: 7px 14px 2px;
   width: 100%;
 }
 .cms-form .image.input{
@@ -38,10 +41,20 @@
     margin-left:0;
   }
 }
-.cms-form .cms-form .form-group{
-  margin: 0;
-  padding: 0;
+.cms-form .form-group{
+  background: none repeat scroll 0 0 #fff;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 15px;
+  position: relative;
+  width: 100%;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
-.formtastic.content_package .form-actions #content_package_submit_action{
-  margin-right: 16px;
+.tab-content-sitemap {
+    background: none repeat scroll 0 0 #fff;
+    border-radius: 3px;
+    padding: 30px;
 }

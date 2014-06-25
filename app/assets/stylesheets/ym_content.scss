@@ -12,6 +12,7 @@
 @import 'sass/nav';
 @import 'sass/sidebar';
 @import 'sass/type';
+@import 'sass/forms';
 @import 'sass/dashboard';
 
 
@@ -19,10 +20,7 @@
    GENERAL
    General styles for all CMS content
    ======================================================================= */
-.dashboard-well.well{
-  border:0;
-  border-radius:3px;
-}
+
 .paper {
   background-color: white;
   -webkit-box-shadow: 
@@ -92,78 +90,11 @@
     line-height: 30px;
   }
 }
-$help-block: #f5f5f5 !default;
-.cms-form {
-	//disabling the 400px height on textareas for now- a bit hacky - needs sorting properly.
-	textarea {
-		height: 170px !important;
-		overflow: auto;
-	}
-	.form-control {
-		font-size: 16px;
-		color: #000;
-    border-color: #f3f3f3;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-	}
-	.focus .form-control {
-		border-color: #f3f3f3;
-	}
-	.form-group {
-		position: relative;
-		padding: 15px;
-		-moz-border-radius:4px;
-		-webkit-border-radius:4px;
-		border-radius:4px;
-		> label {
-			font-size: 20px;
-		}
-	}
-	.form-group.focus {
-		background: $help-block;
-    padding-bottom:25px;
-		label {
-			-webkit-transition: all 0.3s ease;
-			transition: all 0.3s ease;
-		}
-	}
-	.form-group.text.focus:before {
-			content: "";
-			display: block;
-			background:url(/assets/cms-list-and-link.png) no-repeat top right;
-			width: 46px;
-			height: 19px;
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			opacity: 0.8;
-			-webkit-transition: all 0.3s ease;
-			transition: all 0.3s ease;
-	}
-	.help-block {
-		height: 0;
-		overflow: hidden;
-		margin: 0;
-		opacity: 0;
-		-webkit-transition: all 0.3s ease;
-		transition: all 0.3s ease;
-	}
-	.focus .help-block,
-  .checkbox > .help-block {
-		height: auto;
-		opacity: 1;
-	}
-}
- .cms-persona-box {
-	background: #fff;
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 4px 4px 0px white, 5px 5px 1px rgba(0, 0, 0, 0.1), 8px 9px 0px white, 9px 10px 5px rgba(0, 0, 0, 0.2), 4px 6px 3px rgba(0,0,0,0.2);
-	margin: 0 0 35px;
-}
 
- .container-cms-edit {
- 	width: 100%;
- 	max-width: 100%;
- }
+.container-cms-edit {
+	width: 100%;
+	max-width: 100%;
+}
 .persona-group-select {
 	float: left;
 	width: 45%;
@@ -239,84 +170,6 @@ $help-block: #f5f5f5 !default;
 }
 
 
-/* ===== Redactor =======*/
-
-.redactor_toolbar li:last-child {
-  float:right !important;
-  padding-right:8px;
-}
-.container-cms-edit .redactor_toolbar{
-  background: #f3f3f3;
-  border:0;
-  padding: 10px;
-}
-.container-cms-edit .redactor_box {
-    border: 1px solid #F3F3F3;
-    border-radius: 3px;
-    position: relative;
-}
-.redactor_toolbar li {
-    float: left ;
-    list-style-type: none;
-    padding: 5px 6px 8px 7px;
-}
-.redactor_toolbar li a {
-  border: 2px solid transparent;
-  cursor: pointer;
-  display: block;
-  font-size: 0;
-  line-height: 24px;
-  padding-bottom: 4px;
-  text-decoration: none;
-  &:hover{
-    background-color: lighten($primary1, 60%);
-    border-color: lighten($primary1, 60%);
-    border-radius: 3px;
-  }
-}
-.cms-form .redactor_toolbar li a.redactor_btn_link span{
-  background-position: -302px -2px;
-}
-.cms-form .redactor_toolbar li a.redactor_btn_orderedlist span{
-  background-position: -125px -2px;
-}
-.cms-form .redactor_toolbar li a.redactor_btn_unorderedlist span{
-  background-position: -100px -2px;
-}
-.cms-form .redactor_toolbar li a, .cms-form .redactor_toolbar li a span {
-    height: 29px;
-    width: 28px;
-}
-.redactor_dropdown{
-  padding: 0;
-  a{
-    padding: 12px 13px;
-    &:hover{
-      background-color: lighten($primary1, 60%);
-    }
-  }
-}
-/* ===== Sortable =======*/
-
-.form-sortable {
-  .ui-sortable-helper {
-    background:#ddd;
-  }
-  .well {
-    font-size:16px;
-    padding: 10px 15px;
-    margin-bottom: 15px;
-    cursor: move;
-  }
-  .well-placeholder {
-    background:none;
-    border-style:dashed;
-    height:44px;
-  }
-  .controls{
-    margin-right:180px;
-  }
-}
 
 
 
