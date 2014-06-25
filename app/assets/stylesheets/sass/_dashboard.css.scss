@@ -1,7 +1,4 @@
-
-
-/*==================== Dashboard ====================*/ 
-
+/*==================== Dashboard ====================*/
 .btn-with-number {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -113,6 +110,10 @@ margin-bottom: 20px;
   overflow: hidden;
   max-width: 350px;
   text-overflow: ellipsis;
+}
+// search form
+div.sitemap form.content_search input#content_search_link {
+  width: 50%;
 }
 #content-types.sitemap td.td-name .name{
   max-width: 500px;

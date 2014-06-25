@@ -46,6 +46,10 @@ module YmContent::ContentPackagesController
     if params[:open] && open_content_package = ContentPackage.find_by_id(params[:open])
       @open = [open_content_package] + open_content_package.parents
     end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
