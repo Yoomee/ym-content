@@ -43,7 +43,9 @@
 .btn-cms-status {
   display: none;
 }
-
+.controller_content_types .btn:hover, .btn:focus{
+  color: #fff;
+}
 
 
 .cms-edit-status .btn-group {

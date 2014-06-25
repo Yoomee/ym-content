@@ -1,5 +1,5 @@
 .cms-form {
-  //disabling the 400px height on textareas for now- a bit hacky - needs sorting properly.
+  /* disabling the 400px height on textareas for now- a bit hacky - needs sorting properly. */
   textarea {
     height: 170px !important;
     overflow: auto;
@@ -61,4 +61,100 @@
     height: auto;
     opacity: 1;
   }
+}
+
+/* ===== Redactor =======*/
+
+.redactor_toolbar li:last-child {
+  float:right !important;
+  padding-right:8px;
+}
+.container-cms-edit .redactor_toolbar{
+  background: #f3f3f3;
+  border:0;
+  padding: 10px;
+}
+.container-cms-edit .redactor_box {
+    border: 1px solid #F3F3F3;
+    border-radius: 3px;
+    position: relative;
+}
+.redactor_toolbar li {
+    float: left ;
+    list-style-type: none;
+    padding: 5px 6px 8px 7px;
+}
+.redactor_toolbar li a {
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: block;
+  font-size: 0;
+  line-height: 24px;
+  padding-bottom: 4px;
+  text-decoration: none;
+  &:hover{
+    background-color: lighten($primary1, 60%);
+    border-color: lighten($primary1, 60%);
+    border-radius: 3px;
+  }
+}
+.cms-form .redactor_toolbar li a.redactor_btn_link span{
+  background-position: -302px -2px;
+}
+.cms-form .redactor_toolbar li a.redactor_btn_orderedlist span{
+  background-position: -125px -2px;
+}
+.cms-form .redactor_toolbar li a.redactor_btn_unorderedlist span{
+  background-position: -100px -2px;
+}
+.cms-form .redactor_toolbar li a, .cms-form .redactor_toolbar li a span {
+    height: 29px;
+    width: 28px;
+}
+.redactor_dropdown{
+  padding: 0;
+  a{
+    padding: 12px 13px;
+    &:hover{
+      background-color: lighten($primary1, 60%);
+    }
+  }
+}
+
+/* ===== Sortable =======*/
+
+.form-sortable {
+  .ui-sortable-helper {
+    background:#ddd;
+  }
+  .well {
+    font-size:16px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    cursor: move;
+  }
+  .well-placeholder {
+    background:none;
+    border-style:dashed;
+    height:44px;
+  }
+  .controls{
+    margin-right:180px;
+  }
+}
+
+/* ====== Content types =======*/
+
+.cms-form .nested-fields.well .form-group{
+  background:transparent;
+  padding: 0;
+}
+.main-wrapper .nested-fields .form-group .selectpicker.btn{
+  background:#fff;
+}
+.cms-form .nested-fields .hide-it{
+  display: none;
+  clear: both;
+  float: left;
+  width: 100%;
 }

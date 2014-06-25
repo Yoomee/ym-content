@@ -121,8 +121,12 @@ margin-bottom: 20px;
   display: none;
 }
 
-.dashboard-well.well{
+.dashboard-well.well, .nested-fields.well{
   border:0;
   border-radius:3px;
   background: #fff;
+}
+.dashboard-actions .btn{
+  font-size: 16px;
+  padding:14px;
 }
