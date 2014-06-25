@@ -1,19 +1,16 @@
 :javascript
   $(document).ready(function() {
-    YmContent.Sitemap.init()
-    SearchManager.init()
+    YmContent.Sitemap.init();
+    // set up search form
+    SearchManager.init();
     #{"$('#content-package-#{params[:open]}').effect('highlight', 3500);" if @open}
   });
 =render("content_packages/sitemap_header")
 .tab-content.tab-content-sitemap
   #sitemap.sitemap.tab-pane.active
-
-    -# start search form
     #content_search.form
       =semantic_form_for 'content_search', :remote => true do |form|
-        =form.input :link, :label => false, :input_html => {:placeholder => "Content search"}, :wrapper_html => {:style => "display:block;"}
-    -# end search form
-
+        =form.input :link, :label => false, :input_html => {:placeholder => "Quick find: start typing the title or web address"}, :wrapper_html => {:style => "display:block;"}
     %table.table
       %thead
         %tr
