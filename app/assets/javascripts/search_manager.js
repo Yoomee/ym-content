@@ -1,8 +1,6 @@
 // handles page search - uses navAutocomplete widget
 window.SearchManager = {
   init: function() {
-    // TODO: loading animations, clear input after content replaced
-    // TODO: write test
     function loadContentPageInTree(cp_id) {
       $.ajax({
         type: 'GET',
