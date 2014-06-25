@@ -1,13 +1,6 @@
-// handles page search
+// handles page search - uses navAutocomplete widget
 window.SearchManager = {
   init: function() {
-    $.widget("custom.navAutocomplete", $.ui.autocomplete, {
-      _renderItem: function(ul, item) {
-        return $("<li>").append(
-          $("<a>").html("<span>" + item.label + "</span><br><em>" + item.value + "</em>")
-        ).appendTo(ul);
-      }
-    });
 
     function loadContentPageInTree(cp_id) {
       window.location.href = "/content_packages?open=" + cp_id;

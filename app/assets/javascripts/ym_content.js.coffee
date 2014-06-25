@@ -1,3 +1,4 @@
+#= require widgets
 #= require navigation_manager
 #= require bootstrap-select.min
 #= require custom
