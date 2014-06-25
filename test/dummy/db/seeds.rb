@@ -67,7 +67,7 @@ DEFAULT_USERS   = [
 if (User.count == 0)
   DEFAULT_USERS.each do |user_attrs|
     user = User.new(user_attrs)
-    user.encrypted_password = "$2a$10$0I7i6.g2JMYLoLzYpAZPcujZpGhQ/oJ41RaaMm.8Ff.1k9thCALIm"
+    user.encrypted_password = "$2a$10$e5A0deaeILATXz27sj/Sn.2p.YheKLyrSvIG9ksP41PMaqLH3cNfe"
     user.save(:validate => false)
   end
 end
