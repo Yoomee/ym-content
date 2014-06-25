@@ -8,6 +8,8 @@ window.SearchManager = {
         type: 'GET',
         url: '/content_packages?open=' + cp_id,
         dataType: "script"
+      }).always(function() {
+        $("#content_search_link").val('');
       });
       return false;
     }
