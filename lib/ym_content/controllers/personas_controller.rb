@@ -16,7 +16,7 @@ module YmContent::PersonasController
   end
 
   def index
-    @persona_groups = PersonaGroup.order(:position, :name)
+    @persona_groups = ::PersonaGroup.order(:position, :name)
   end
 
   def new
