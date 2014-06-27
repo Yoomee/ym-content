@@ -93,6 +93,7 @@ end
 
 When(/^I discuss the content package$/) do
   visit edit_content_package_path(@content_package)
+  click_link('Discussion')
   fill_in('post_text', :with => "Some sample text")
   click_button("Post")
 end
@@ -117,7 +118,7 @@ end
 
 When(/^I assign it to an author$/) do
   visit edit_content_package_path(@content_package)
-  select("#{@author.full_name} (#{@author.role})", :from => 'content_package[author_id]')
+  select("#{@author.full_name} (#{@author.role})", :from => 'content_package[author_id]', :visible => false)
   click_button("Save")
 end
 
