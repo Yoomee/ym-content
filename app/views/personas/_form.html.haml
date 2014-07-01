@@ -1,37 +1,38 @@
-=semantic_form_for @persona do |form|
-  =form.inputs do
-    =form.input :group, :prompt => "Please select...", :collection => PersonaGroup.all.map{|p| [p.to_s, p.id] } << ['Add a new group...', 0], :selected => (@persona.group_name.nil? ? @persona.group_id : 0)
-    =form.input :group_name, :label => "New group name", :input_html => {:disabled => @persona.group_name.nil?}, :wrapper_html => {:class => "#{'hide' if @persona.group_name.nil?}"}
-    %hr
-    =form.input :name, :label => "Persona name"
-    =form.input :image, :as => :image
-    =form.input :age
-    =form.input :summary
-    =form.input :benefit_1, :as => :string
-    =form.input :benefit_2, :as => :string
-    =form.input :benefit_3, :as => :string
-    =form.input :benefit_4, :as => :string
-    =form.input :file, :as => :file_with_preview, :label => "Full persona"
-  =form.actions
+.col-md-8.col-md-offset-2
+  =semantic_form_for @persona do |form|
+    =form.inputs do
+      =form.input :group, :prompt => "Please select...", :collection => PersonaGroup.all.map{|p| [p.to_s, p.id] } << ['Add a new group...', 0], :selected => (@persona.group_name.nil? ? @persona.group_id : 0)
+      =form.input :group_name, :label => "New group name", :input_html => {:disabled => @persona.group_name.nil?}, :wrapper_html => {:class => "#{'hide' if @persona.group_name.nil?}"}
+      %hr
+      =form.input :name, :label => "Persona name"
+      =form.input :image, :as => :image
+      =form.input :age
+      =form.input :summary
+      =form.input :benefit_1, :as => :string
+      =form.input :benefit_2, :as => :string
+      =form.input :benefit_3, :as => :string
+      =form.input :benefit_4, :as => :string
+      =form.input :file, :as => :file_with_preview, :label => "Full persona"
+    =form.actions
 
-:javascript
-  PersonaForm = {
-    init: function() {
-      $('#persona_group_id').change(function() {
+  :javascript
+    PersonaForm = {
+      init: function() {
+        $('#persona_group_id').change(function() {
+          PersonaForm.togglePersonaInputs();
+        });
         PersonaForm.togglePersonaInputs();
-      });
-      PersonaForm.togglePersonaInputs();
-    },
-    togglePersonaInputs: function() {
-      if (parseInt($('#persona_group_id').val()) === 0) {
-        $('#persona_group_name_input').removeClass('hide');
-        $('#persona_group_name').removeAttr('disabled');
-      } else {
-        $('#persona_group_name_input').addClass('hide');
-        $('#persona_group_name').attr('disabled', 'disabled');
+      },
+      togglePersonaInputs: function() {
+        if (parseInt($('#persona_group_id').val()) === 0) {
+          $('#persona_group_name_input').removeClass('hide');
+          $('#persona_group_name').removeAttr('disabled');
+        } else {
+          $('#persona_group_name_input').addClass('hide');
+          $('#persona_group_name').attr('disabled', 'disabled');
+        }
       }
-    }
-  };
-  $(document).ready(function(){
-    PersonaForm.init();
-  });
+    };
+    $(document).ready(function(){
+      PersonaForm.init();
+    });

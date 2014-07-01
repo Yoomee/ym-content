@@ -1,9 +1,12 @@
 body.controller_content_packages.action_edit,
 body.controller_content_types,
 body.controller_content_packages,
-body.controller_navigation_items {
+body.controller_navigation_items,
+body.controller_users,
+body.controller_registrations {
   background: #F1F1F1;
   background-size: 100%;
+  color: #555;
 }
 .container.container-cms-edit #main-header,
 .controller_content_packages #main-header,
@@ -12,7 +15,12 @@ body.controller_navigation_items {
   margin-bottom:60px;
 }
 
-
+.center{
+  text-align: center;
+}
+.cms-main{
+  margin-top:60px;
+}
 /* Edit page */
 
 .cms-form .radio,

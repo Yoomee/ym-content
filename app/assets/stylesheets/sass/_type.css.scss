@@ -1,5 +1,6 @@
 a{
   color:$primary1;
+  outline: none !important;
   &:hover{
   color: lighten($primary1, 10%);;
   }

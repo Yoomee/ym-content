@@ -1,9 +1,8 @@
 .container.cms-main
   .row.cms-dashboard
     .col-md-12.mb-3
-      %h2
+      %h1.center
         =title 'Content dashboard'
-        %i.fa.fa-home.pull-left
   .row
     .col-md-8
       .well.dashboard-well
@@ -56,6 +55,6 @@
       .well.dashboard-well.dashboard-actions<
         =link_if_can("Create new content", new_content_package_path, :class => 'btn btn-primary1 btn-block mb-1')
         =link_if_can("Site map", content_packages_path, :class => 'btn btn-primary1 btn-block mb-1')
-        =link_if_can("Users & permissions", '#', :class => 'btn btn-block mb-1')
+        =link_if_can("Users & permissions", '#', :class => 'btn btn-block btn-grey mb-1')
         =link_if_can("Manage personas", personas_path, :class => 'btn btn-primary1 btn-block mb-1')
-        =link_if_can("Request content type", '#', :class => 'btn btn-block mb-1')
+        =link_if_can("Request content type", '#', :class => 'btn btn-grey btn-block mb-1')

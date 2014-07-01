@@ -62,7 +62,11 @@
     opacity: 1;
   }
 }
-
+.formtastic input[type="text"], .formtastic input[type="tel"], .formtastic input[type="password"], .formtastic input[type="email"], .formtastic textarea{
+  height: auto;
+  padding: 10px;
+  width: 100%;
+}
 /* ===== Redactor =======*/
 
 .redactor_toolbar li:last-child {
