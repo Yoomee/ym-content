@@ -16,7 +16,7 @@
               =form.input :parent_id, :as => :hidden
               =form.input :name
               %br
-              =form.input :content_type, :as => :radio, :label => "Select a content type below", :required => false
+              =form.input :content_type, :as => :select, :label => "Select a content type below", :required => false
           #context.tab-pane
             %h5.mb-3 Select the intended audience for this content
 
@@ -25,7 +25,7 @@
                 .persona-group-select
                   %h5.cms-edit-group-title=group
                   =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false
-              %br.clear
+              .clearfix
               %h5 Write an objective/goal for this content
               .cms-edit-context-box
                 =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}, :class => "content-objective-goal"
