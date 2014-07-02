@@ -24,7 +24,7 @@
               -PersonaGroup.all.each do |group|
                 .persona-group-select
                   %h5.cms-edit-group-title=group
-                  =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false
+                  =form.input :personas, :as => :check_boxes, :collection => group.personas.map{|p| [p.to_s,p.id]}, :label => false
               .clearfix
               %h5 Write an objective/goal for this content
               .cms-edit-context-box
