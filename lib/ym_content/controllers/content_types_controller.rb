@@ -17,7 +17,7 @@ module YmContent::ContentTypesController
 
   def destroy
     if @content_type.destroy
-      flash[:notice] = "The content type was cuccessfully deleted"
+      flash[:notice] = "The content type was successfully deleted"
     else
       flash[:error] = "Unable to delete this content type"
     end
