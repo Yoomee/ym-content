@@ -15,7 +15,8 @@
 .btn{
   background: $primary-grey;
 }
-.btn.btn-primary1{
+.btn.btn-primary1,
+.btn.btn-primary{
   background: $primary1;
   color:#fff;
   &:hover, &:focus{
@@ -57,15 +58,14 @@
 .btn#content_package_submit_action{
   float: right;
 }
-// Hide save button for now
+/* Hide save button for now */
+
 .btn-cms-status {
   display: none;
 }
 .controller_content_types .btn:hover, .btn:focus{
   color: #fff;
 }
-
-
 .cms-edit-status .btn-group {
   width: 100% !important;
 }

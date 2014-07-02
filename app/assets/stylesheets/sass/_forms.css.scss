@@ -162,3 +162,14 @@
   float: left;
   width: 100%;
 }
+
+
+#content_search_link{
+  border:0;
+  border-bottom:5px solid $primary1;
+  font-size: 2em;
+  font-weight:lighter;
+  width: 100%;
+  box-shadow: none;
+  border-radius: 0;
+}
