@@ -73,6 +73,7 @@ FactoryGirl.define do
   factory :persona do
     group
     sequence(:name){|n| "Bob Smith #{n}" }
+    category "Persona category"
     age 18
     summary "Persona summary"
     benefit_1 "Benefit 1"

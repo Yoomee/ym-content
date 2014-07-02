@@ -5,6 +5,7 @@
       =form.input :group_name, :label => "New group name", :input_html => {:disabled => @persona.group_name.nil?}, :wrapper_html => {:class => "#{'hide' if @persona.group_name.nil?}"}
       %hr
       =form.input :name, :label => "Persona name"
+      =form.input :category, :label => "Persona category"
       =form.input :image, :as => :image
       =form.input :age
       =form.input :summary
