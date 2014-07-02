@@ -1,8 +1,8 @@
 /*==================== Dashboard ====================*/
 .btn-with-number {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding:8px 12px;
   font-size: 15px;
+  float: left;
 }
 .btn-cms-number {
   background: rgba(0,0,0,0.2);
@@ -27,9 +27,9 @@
 .btn-cms-text {
   text-align: left;
   float: left;
-  margin: 0 0 0 13px;
+  margin: 0 0 0 12px;
   font-size: 16px;
-  line-height: 26px;
+  line-height: 30px;
 }
 .cms-activities {
   float: left;
