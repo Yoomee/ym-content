@@ -15,5 +15,8 @@
             .row
               .col-sm-12.center
                 =image_for(persona, '150x150#')
-                %h4.mv-2=persona
+                %h4.mv-2
+                  =persona.name
+                  %br
+                  %small=persona.category
                 =link_to('View / edit', edit_persona_path(persona), :class => 'btn btn-primary btn-block btn-small')
