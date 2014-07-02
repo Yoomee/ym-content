@@ -41,7 +41,7 @@ end
 When(/^I fill in the new content package form and submit$/) do
   visit new_content_type_content_package_path(@content_type)
   @content_package = FactoryGirl.build(:content_package, :content_type => @content_type, :author => @admin)
-  choose(@content_type)
+  select(@content_type)
   fill_in('content_package_name', :with => @content_package.name)
   select(@content_package.author.full_name, :from => 'content_package[author_id]')
   click_button("Finish")
