@@ -34,7 +34,7 @@
             =form.inputs do
               =form.input :requested_by, :collection => User.where(:role => 'admin')
               =form.input :author, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id] }
-              =form.input :due_date, :order => [:day, :month, :year], :include_blank => false
+              =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
               =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
             =form.action :submit, :label => 'Finish', :wrapper_html => { :class => 'mt-3 btn-primary2' }
 
