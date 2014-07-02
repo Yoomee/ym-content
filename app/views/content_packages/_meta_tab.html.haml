@@ -7,4 +7,4 @@
     =form.input :permalink_path, :prepend => "/" unless @content_package.viewless?
     %hr
     -@content_package.content_attributes.where(:meta => true).each do |content_attribute|
-      =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
+      =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name.gsub('Meta ', ''), :hint => content_attribute.description
