@@ -15,6 +15,11 @@ Scenario: Creating a content type
   When I fill in the new content type form and submit
   Then the content type is created
 
+Scenario: Updating a content type
+  Given there is 1 content type
+  When I update the content type
+  Then the content type should change
+
 Scenario: Viewing a list of content packages
   Given there are 3 content packages
   When I go to the sitemap

@@ -37,3 +37,14 @@ Then(/^the content type is created$/) do
   click_link "Content types"
   expect(page).to have_content(@content_type.to_s)
 end
+
+When(/^I update the content type$/) do
+  visit edit_content_type_path(@content_type)
+  fill_in('content_type_name', :with => 'Modified name')
+  click_button("Update Content type")
+end
+
+Then(/^the content type should change$/) do
+  visit edit_content_type_path(@content_type)
+  expect(find_field('content_type[name]').value).to eq('Modified name')
+end
