@@ -124,7 +124,9 @@
     }
   }
 }
-
+.input-group-addon:first-child {
+    border: 1px solid #e5e5e5;
+}
 /* ===== Sortable =======*/
 
 .form-sortable {
@@ -161,6 +163,26 @@
   clear: both;
   float: left;
   width: 100%;
+}
+
+.cms-main .cms-form .form-group > label{
+  font-size: 16px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+.cms-form .image.input{
+  img{
+    border-radius: 50%;
+    float: left;
+    margin:15px 18px;
+  }
+  .image-inputs {
+    margin: 23px 14px;
+    float: left;
+  }
+  .checkbox.remove-image{
+    margin-left:0;
+  }
 }
 
 

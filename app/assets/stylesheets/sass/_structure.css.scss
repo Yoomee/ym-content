@@ -4,7 +4,8 @@ body.controller_content_packages,
 body.controller_navigation_items,
 body.controller_users,
 body.controller_registrations, 
-body.controller_sessions {
+body.controller_sessions,
+body.controller_personas {
   background: #F1F1F1;
   background-size: 100%;
   color: #555;
@@ -22,33 +23,12 @@ body.controller_sessions {
 .cms-main{
   margin-top:60px;
 }
+
+
 /* Edit page */
 
-.cms-form .radio,
-.cms-form .checkbox{
-  padding-left:34px;
-}
 .cms-title-icon{
   float: left;
-}
-.cms-form .form-group > label{
-  font-size: 17px;
-  margin: 0;
-  width: 100%;
-}
-.cms-form .image.input{
-  img{
-    border-radius: 50%;
-    float: left;
-    margin:15px 18px;
-  }
-  .image-inputs {
-    margin: 23px 14px;
-    float: left;
-  }
-  .checkbox.remove-image{
-    margin-left:0;
-  }
 }
 .cms-form .form-group{
   background: none repeat scroll 0 0 #fff;

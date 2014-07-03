@@ -7,16 +7,14 @@
   background:#c9c9c9;
 }
 .cms-main .btn{
-  color:#fff;
+  background: $primary-grey;
+  color: #666;
   &:hover{
-    color:#fff;
+    color:#666;
   }
 }
-.btn{
-  background: $primary-grey;
-}
-.btn.btn-primary1,
-.btn.btn-primary{
+.cms-main .btn.btn-primary1,
+.cms-main .btn.btn-primary{
   background: $primary1;
   color:#fff;
   &:hover, &:focus{
@@ -24,26 +22,28 @@
     color:#fff;
   }
 }
-.btn.btn-primary2{
+.cms-main .btn.btn-primary2{
   background: $primary2;
+  color:#fff;
   &:hover{
     background: darken($primary2, 10%);
   }
 }
-.btn.btn-primary3{
+.cms-main .btn.btn-primary3{
   background: $primary3;
+  color:#fff;
   &:hover, &:focus{
     background: darken($primary3, 10%);
     color: #fff;
   }
 }
-.btn.btn-primary4{
+.cms-main .btn.btn-primary4{
   background: $primary4;
   &:hover{
     background: darken($primary4, 10%);
   }
 }
-.btn.btn-grey{
+.cms-main .btn.btn-grey{
   background: $primary-grey;
   &:hover{
     background: darken($primary-grey, 10%);
