@@ -34,18 +34,16 @@
       transition: all 0.3s ease;
     }
   }
-  .form-group.text.focus:before {
-      content: "";
-      display: block;
-      background:url(/assets/cms-list-and-link.png) no-repeat top right;
-      width: 46px;
-      height: 19px;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      opacity: 0.8;
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+  .form-group.text:before {
+    display: block;
+    width: 46px;
+    height: 19px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    opacity: 0.8;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
   }
   .help-block {
     height: 0;
@@ -68,6 +66,17 @@
   width: 100%;
 }
 /* ===== Redactor =======*/
+
+.cms-main .redactor_box textarea{
+  background: #fff;
+  padding: 15px;
+}
+.cms-main .redactor_button_disabled:hover{
+  color:#333;
+}
+.cms-main .redactor_toolbar{
+  box-shadow: none;
+}
 
 .redactor_toolbar li:last-child {
   float:right !important;
@@ -96,6 +105,7 @@
   line-height: 24px;
   padding-bottom: 4px;
   text-decoration: none;
+  font-size: 16px;
   &:hover{
     background-color: lighten($primary1, 60%);
     border-color: lighten($primary1, 60%);
@@ -126,6 +136,37 @@
 }
 .input-group-addon:first-child {
     border: 1px solid #e5e5e5;
+}
+
+#inside #redactor_modal{
+  border-radius:3px;
+  padding: 30px;
+  #redactor_modal_header{
+    padding: 0 0 10px 0;
+  }
+  #redactor-modal-link-insert{
+    padding: 0;
+  }
+  #redactor_modal_inner{
+    .redactor_input{
+      font-size: 16px;
+      color: #000;
+      border-color: #e5e5e5;
+      border-radius: 3px;
+      padding: 20px;
+    }
+    footer button.redactor_modal_btn{
+      border-radius: 3px;
+      font-size: 14px;
+      margin: 22px 0 22px 0;
+      padding: 13px 20px;
+      width: auto !important;
+    }
+    footer button.redactor_modal_action_btn{
+      background: $primary1;
+      float: right;
+    }
+  }
 }
 /* ===== Sortable =======*/
 
