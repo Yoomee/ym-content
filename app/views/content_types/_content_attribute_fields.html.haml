@@ -1,15 +1,15 @@
 .nested-fields.well
   =f.inputs do
     =f.input :name
-    =link_to('Show more', '#' , :class => 'btn btn-primary1 btn-small reveal pull-right')
+    =f.input :field_type, :as => :select, :collection => ContentAttribute.field_types.invert, :prompt => "Select..."
+    =#link_to('Show more', '#' , :class => 'btn btn-primary1 btn-small reveal pull-right')
+    =f.input :description, :input_html => {:rows => 2}
+    =#f.input :limit_quantity
+    =#f.input :limit_unit
+    =#f.input :position
+    =f.input :required, :default => false, :label => "This is a required field"
+    =f.input :meta, :default => false, :label => "This is a meta attribute"
     .hide-it
-      =f.input :description, :input_html => {:rows => 4}
-      =f.input :field_type, :as => :select, :collection => ContentAttribute.field_types.invert, :prompt => "Select..."
-      =#f.input :limit_quantity
-      =#f.input :limit_unit
-      =#f.input :position
-      =f.input :required, :default => false, :label => "This is a required field"
-      =f.input :meta, :default => false, :label => "This is a meta attribute"
   -if f.object.removable?
     =f.inputs do
       = link_to_remove_association "Remove this content attribute", f
