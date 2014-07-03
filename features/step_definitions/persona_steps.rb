@@ -16,7 +16,7 @@ end
 
 Then(/^I see the personas$/) do
   @personas.each do |persona|
-    expect(page).to have_content(persona.to_s)
+    expect(page).to have_content(persona.name)
   end
 end
 
@@ -33,5 +33,5 @@ end
 
 Then(/^the persona is created$/) do
   visit personas_path
-  expect(page).to have_content(@persona.to_s)
+  expect(page).to have_content(@persona.name)
 end
