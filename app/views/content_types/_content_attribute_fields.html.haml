@@ -1,9 +1,6 @@
 .nested-fields.well
-  .col-md-12
-    .pull-right
-      -if f.object.removable?
-        =f.inputs do
-          = link_to_remove_association "Remove this content attribute", f
+  =link_to_remove_association "Remove this content attribute", f, :class => 'pull-right'
+  .clearfix
   =f.inputs do
     =f.input :name
     =f.input :field_type, :as => :select, :collection => ContentAttribute.field_types.invert, :prompt => "Select..."
