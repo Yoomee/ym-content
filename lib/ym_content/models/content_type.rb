@@ -6,7 +6,7 @@ module YmContent::ContentType
     else      
       base.has_many :content_attributes, :order => :position
     end
-    base.has_many :content_packages
+    base.has_many :content_packages, -> { where(:deleted_at => nil)}
     base.validates_presence_of :name
     #base.send(:default_scope, { :include => :content_attributes })
     base.accepts_nested_attributes_for :content_attributes, :allow_destroy => true
