@@ -50,8 +50,7 @@
         %ul.cms-activities
           -@activity_items.each do |activity|
             =render("content_packages/activity", :include_name => true, :activity => activity)
-        .padding20px
-        =link_to "See older activity", activity_content_packages_path, :remote => true, :class => 'btn btn-small js-older-activities'
+        =link_to "See older activity", activity_content_packages_path, :remote => true, :class => 'btn btn-small js-older-activities fadeInPop'
     .col-md-4.fadeInSlow
       .well.dashboard-well.dashboard-actions<
         =link_if_can("Create new content", new_content_package_path, :class => 'btn btn-primary1 btn-block mb-1')
