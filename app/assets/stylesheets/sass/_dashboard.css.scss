@@ -74,7 +74,7 @@ margin-bottom: 20px;
   width: 20px;
   height: 36px;
   background: green;
-  background: url(<%=asset_path('sitemap-spacer.png')%>) 0 0 no-repeat;
+  background: url('sitemap-spacer.png') 0 0 no-repeat;
 }
 .sitemap .spacer-mid{
   background-position: 0 -36px;
