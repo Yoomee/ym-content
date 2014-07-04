@@ -31,7 +31,7 @@
                     %li=link_to("Add new content of this type", new_content_type_content_package_path(content_type))
                     %li=link_to('Reorder content attributes', reorder_content_type_path(content_type))
                     -if content_type.destroyable?
-                      %li=link_to('Delete this content type', content_type_path(content_type), :method => :delete, :confirm => "Are you sure you want to delete this content type? This cannot be undone.")
+                      %li=link_to('Delete this content type', content_type_path(content_type), :method => :delete, :data => {:confirm => "Are you sure you want to delete this content type? This cannot be undone."})
           %tr
             %td{:colspan => 7}
               =link_if_can("Add new content type", [:new, ContentType.new], :icon => 'plus')
