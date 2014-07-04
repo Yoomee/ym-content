@@ -27,6 +27,18 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :navigation_items do
+    collection do
+      get 'reorder'
+      put 'reorder' => 'navigation_items#save_order'
+      get :search
+    end
+    member do
+      get 'reorder'
+      put 'reorder' => 'navigation_items#save_order'
+    end
+  end
+
   resources :personas
 
 end

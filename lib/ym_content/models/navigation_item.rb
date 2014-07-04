@@ -3,7 +3,12 @@ module YmContent::NavigationItem
   def self.included(base)
     base.belongs_to :parent, :class_name => 'NavigationItem'
     base.has_one :grandparent, :through => :parent, :source => :parent
-    base.has_many :children, :class_name => 'NavigationItem', :order => :position, :foreign_key => :parent_id
+
+    if Rails::VERSION::MAJOR >= 4
+      base.has_many :children, -> { order(:position) }, :class_name => 'NavigationItem', :foreign_key => :parent_id
+    else
+      base.has_many :children, :class_name => 'NavigationItem', :order => :position, :foreign_key => :parent_id
+    end
 
     base.belongs_to :resource, :polymorphic => true
 

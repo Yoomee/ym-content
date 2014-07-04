@@ -64,6 +64,11 @@ module YmContent::ContentPackage
       }
     end
 
+    def search(term)
+      escaped_term = "%#{term}%"
+      joins(:permalink).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
+    end
+
   end
 
   def deletable?
