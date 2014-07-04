@@ -9,7 +9,7 @@ module YmContent::ContentTypesController
 
   def create
     if @content_type.save
-      redirect_to content_packages_path
+      redirect_to content_types_path
     else
       render :action => 'edit'
     end
