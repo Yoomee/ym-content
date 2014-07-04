@@ -20,8 +20,9 @@
       %h2.mb-3=title @content_package
       %ul.nav.nav-tabs.mb-2
         %li.active=link_to("Content", '#content', 'data-toggle' => 'tab')
-        %li=link_to("Meta", '#meta', 'data-toggle' => 'tab')
-        %li=link_to("Related content", '#related', 'data-toggle' => 'tab')
+        %li=link_to("Page settings", '#meta', 'data-toggle' => 'tab')
+        %li=link_to("Editor settings", '#editor', 'data-toggle' => 'tab')
+        -#%li=link_to("Related content", '#related', 'data-toggle' => 'tab')
       =semantic_form_for @content_package do |form|
         .tab-content.mb-2
           #content.tab-pane.active.cms-form
@@ -31,6 +32,21 @@
               -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
                 =form.content_input content_attribute, :input_html => { :data => Hash.new.tap { |h| h[:limit_quantity] = content_attribute.limit_quantity if content_attribute.limit_quantity.to_i > 0 } }
           =render("meta_tab", :form => form)
+          #editor.tab-pane.cms-form
+            =form.inputs do
+              =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}
+              .form-group#content_package_personas
+                %label.control-label Personas
+                -PersonaGroup.all.each_slice(2) do |groups|
+                  .row
+                    -groups.each do |group|
+                      .col-md-6
+                        %h5.mb-1=group
+                        =form.input :personas, :as => :check_boxes, :collection => group.personas.map{|p| [p.to_s,p.id]}, :label => false
+              .clearfix
+              =form.input :requested_by, :collection => User.where(:role => 'admin')
+              =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
+              =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
           #related.tab-pane
         =form.actions do
           =form.action :submit, :label => "Update #{@content_package.package_name}"

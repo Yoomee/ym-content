@@ -97,7 +97,7 @@ module YmContent::ContentPackagesController
 
   private
     def content_package_params
-      params.require(:content_package).permit(*params[:content_package].try(:keys))
+      params.require(:content_package).permit(*params[:content_package].try(:keys) + [:persona_ids => []])
     end
 
 

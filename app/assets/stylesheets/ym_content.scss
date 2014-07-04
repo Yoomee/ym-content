@@ -105,6 +105,11 @@
 	font-weight: normal;
 	font-family: "Proxima N W15 Reg", helvetica, sans-serif;
 }
+.form-group#content_package_personas {
+  .form-group {
+    padding:0px 10px;
+  }
+}
 .cms-edit-context-box .control-label {
 	display: none;
 }
