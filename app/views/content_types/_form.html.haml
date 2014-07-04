@@ -6,6 +6,16 @@
         alert('done');
       }
     });
+    $(document).ready(function(){
+      $("form.content_type").on('change', 'select[name$="[field_type]"]', function(){
+        var inputs = $(this).parents('.nested-fields fieldset.inputs').find('.character-limit-inputs');
+        if(this.value == 'text' || this.value == 'string') {
+          inputs.show();
+        } else {
+          inputs.hide();
+        }
+      });
+    });
     
 =semantic_form_for @content_type do |form|
   =form.inputs do

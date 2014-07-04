@@ -49,6 +49,10 @@ module YmContent::ContentAttribute
     end
   end
 
+  def limitable?
+    %w{string text}.include?(field_type.to_s)
+  end
+
   def removable?
     new_record? || content_type.missing_view?
   end
