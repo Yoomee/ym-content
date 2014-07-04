@@ -3,10 +3,11 @@ module YmContent::ContentType
   def self.included(base)
     if Rails::VERSION::MAJOR >= 4
       base.has_many :content_attributes, -> { order(:position, :id) }
+      base.has_many :content_packages, -> { where(:deleted_at => nil)}
     else      
       base.has_many :content_attributes, :order => :position
+      base.has_many :content_packages, :conditions => {:deleted_at => nil}
     end
-    base.has_many :content_packages, -> { where(:deleted_at => nil)}
     base.validates_presence_of :name
     #base.send(:default_scope, { :include => :content_attributes })
     base.accepts_nested_attributes_for :content_attributes, :allow_destroy => true
