@@ -2,7 +2,7 @@
 #= require navigation_manager
 #= require bootstrap-select.min
 #= require custom
-#= require character_limits
+#= #require character_limits
 #= require tabs
 #= require search_manager
 
@@ -72,9 +72,9 @@ window.YmContent =
           $(e.currentTarget).parents(".form-group").addClass("focus")
         blurCallback: (e) ->
           $(e.currentTarget).parents(".form-group").removeClass("focus")
-        initCallback: (e) ->
-          if CharacterLimits
-            CharacterLimits.registerRedactor(this)
+        #initCallback: (e) ->
+        #  if CharacterLimits
+        #    CharacterLimits.registerRedactor(this)
 
   Sitemap:
     init: ->
