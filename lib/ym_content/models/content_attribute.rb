@@ -28,6 +28,10 @@ module YmContent::ContentAttribute
 
   end
 
+  def default_attribute
+      ContentAttribute.find(default_attribute_id).try(:name)
+    end
+
   def field_type
     ActiveSupport::StringInquirer.new(read_attribute(:field_type).to_s)
   end

@@ -4,7 +4,9 @@
     =link_to('Show more', '#' , :class => 'btn btn-primary1 btn-small reveal pull-right')
     .hide-it
       =f.input :description, :input_html => {:rows => 4}
-      =f.input :meta_tag_name
+      #meta-attributes
+        =f.input :meta_tag_name
+        =f.input :default_attribute_id, :as => :select, :collection => @content_type.content_attributes.select{|a| !a.meta?}, :label => "Select an attribute for this meta tag to default to", :prompt => "Select..."
       =f.input :field_type, :as => :select, :collection => ContentAttribute.field_types.invert, :prompt => "Select..."
       =#f.input :limit_quantity
       =#f.input :limit_unit

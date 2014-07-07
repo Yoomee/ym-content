@@ -13,6 +13,7 @@ class CreateContentAttributes < ActiveRecord::Migration
       t.boolean :required, :default => false
       t.boolean :meta, :default => false
       t.string :meta_tag_name
+      t.integer :default_attribute_id
     end
     add_index :content_attributes, :content_type_id
   end
