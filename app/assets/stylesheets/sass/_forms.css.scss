@@ -264,3 +264,28 @@
 }
 
 
+/* Radio input styling specific 
+
+.control-label input[type="radio"],
+.control-label input[type="checkbox"] {
+  display:none;
+}
+.control-label input[type="radio"] + span:before,
+.control-label input[type="checkbox"] + span:before {
+  font-family: 'FontAwesome';
+  padding-right: 3px;
+  font-size: 20px;
+}
+.control-label input[type="radio"] + span:before {
+  content: "\f10c"; 
+}
+.control-label input[type="radio"]:checked + span:before {
+  content: "\f111"; 
+}
+.control-label input[type="checkbox"] + span:before {
+  content: "\f096"; 
+}
+.control-label input[type="checkbox"]:checked + span:before {
+  content: "\f046"; 
+}
+*/
