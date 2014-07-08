@@ -2,10 +2,18 @@ window.CharacterLimits = (->
   input = null
 
   length = ->
-    if input.hasClass("redactor_editor") then input.text().length - 1 else input.val().length
+    if unit() == "word"
+      text = if input.hasClass("redactor_editor") then input.text() else input.val()
+      words = text.trim().replace(/\s+/gi, ' ').split(' ')
+      if words[0] == "" then 0 else words.length
+    else
+      if input.hasClass("redactor_editor") then input.text().length - 1 else input.val().length
 
   limit = ->
     if input.hasClass("redactor_editor") then input.siblings("[data-limit-quantity]").data("limit-quantity") else input.data("limit-quantity")
+
+  unit = ->
+    if input.hasClass("redactor_editor") then input.siblings("[data-limit-unit]").data("limit-unit") else input.data("limit-unit")
 
   updateCounter = ->
     input.siblings(".js-limit-quantity").text counterText
