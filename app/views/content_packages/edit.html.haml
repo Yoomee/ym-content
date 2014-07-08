@@ -79,14 +79,14 @@
                 %h5.hide Audience/personas
                 -@content_package.personas.each do |persona|
                   .cms-persona-box.p-2.mt-2
-                    .row.mb-2
+                    .row
                       .col-sm-4
                         =image_for(persona, '120x120#')
                       .col-sm-8
                         %h4=persona
                         %h5="Age #{persona.age}"
-                      .btn.btn-small.pull-right.more-persona.mr-2.mt-1 Read more
-                    .persona-summary
+                      .btn.btn-small.pull-right.more-persona.mr-2.mt-1.btn-primary3 Read more
+                    .persona-summary.mt-2
                       %p
                         %em=persona.summary
                       -if persona.benefits.present?
@@ -96,7 +96,7 @@
                           -persona.benefits.each do |benefit|
                             %li=benefit
                       -if persona.file
-                        =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right')
+                        =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right mt-2 btn-primary2', :icon => 'download')
                     .clearfix
               -if @content_package.notes.present?
                 %h5 Content objective/goal

@@ -1,7 +1,6 @@
 .controller_content_packages .cms-main .btn{
   float: right;
   min-width: 150px;
-  font-size: 16px;
 }
 .action_dashboard .cms-dashboard .btn{
   background:#c9c9c9;
@@ -96,4 +95,6 @@
 .content_package .bootstrap-select.btn-group .btn .caret {
   border-top-color: #666;
  }
-
+.controller_content_packages .cms-main .cms-persona-box .btn{
+  min-width: 0;
+}
