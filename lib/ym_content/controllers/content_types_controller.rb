@@ -28,6 +28,15 @@ module YmContent::ContentTypesController
     @activity_items = ActivityItem.where(:resource_type => "ContentPackage").paginate(:page => 1, :per_page => 5)
   end
 
+  def duplicate
+    @seed_content_type = @content_type
+    @content_type = ContentType.new
+    @seed_content_type.content_attributes.each do |content_attribute|
+      @content_type.content_attributes.build(content_attribute.attributes.slice(*ContentAttribute.fields_to_duplicate))
+    end
+    render :action => 'new'
+  end
+
   def edit
     @content_type.content_attributes.build if @content_type.content_attributes.count.zero?
   end

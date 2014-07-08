@@ -25,6 +25,10 @@ module YmContent::ContentAttribute
       }
     end
 
+    def fields_to_duplicate
+      column_names - %w{id content_type_id slug position}
+    end
+
   end
 
   def field_type

@@ -48,3 +48,24 @@ Then(/^the content type should change$/) do
   visit edit_content_type_path(@content_type)
   expect(find_field('content_type[name]').value).to eq('Modified name')
 end
+
+When(/^I duplicate the content type$/) do
+  visit duplicate_content_type_path(@content_type)
+end
+
+Then(/^I see a new content type with all the same attributes$/) do
+  @content_type.content_attributes.each_with_index do |content_attribute, idx|
+    ContentAttribute.fields_to_duplicate.each do |attribute|
+      expected_value = content_attribute.send(attribute)
+      if expected_value.is_a?(TrueClass) || expected_value.is_a?(FalseClass)
+        if expected_value
+          expect(find_field("content_type[content_attributes_attributes][#{idx}][#{attribute}]")).to be_checked
+        else
+          expect(find_field("content_type[content_attributes_attributes][#{idx}][#{attribute}]")).to_not be_checked
+        end
+      elsif expected_value.to_s.present?
+        expect(find_field("content_type[content_attributes_attributes][#{idx}][#{attribute}]").value.to_s).to eq(expected_value.to_s)
+      end
+    end
+  end
+end
