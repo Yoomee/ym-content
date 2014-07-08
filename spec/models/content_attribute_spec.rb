@@ -9,7 +9,7 @@ describe ContentAttribute do
   it { should validate_presence_of(:field_type) }
 
   it 'is valid' do
-    expect(content_attribute.valid?).to be_true
+    expect(content_attribute.valid?).to be_truthy
   end
 
   describe 'slug' do

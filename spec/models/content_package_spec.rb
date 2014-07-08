@@ -9,7 +9,7 @@ describe ContentPackage do
   it 'is valid' do
     content_package.valid?
     expect(content_package.errors.full_messages).to eq([])
-    expect(content_package.valid?).to be_true
+    expect(content_package.valid?).to be_truthy
   end
 
   describe 'getting attribute' do
@@ -80,7 +80,7 @@ describe ContentPackage do
     end
     it 'are invalid with bad URL ' do
       content_package.video_url = "http://www.youtube.com/watch?v=qvmc9d0dlO"
-      expect(content_package.valid?).to be_false
+      expect(content_package.valid?).to be_falsey
     end
     it 'fetches HTML' do
       content_package.video_url = "http://www.youtube.com/watch?v=qvmc9d0dlO"
@@ -177,7 +177,7 @@ describe ContentPackage do
   it 'can be deleted' do
     content_package.slug = nil
     content_package.delete
-    expect(content_package.deleted?).to be_true
+    expect(content_package.deleted?).to be_truthy
   end
 
   it 'has its children deleted too' do
@@ -185,19 +185,19 @@ describe ContentPackage do
     content_package.children << FactoryGirl.create(:content_package, :parent => content_package, :slug => nil)
     content_package.delete
     content_package.reload
-    expect(content_package.children.all?(&:deleted?)).to be_true
+    expect(content_package.children.all?(&:deleted?)).to be_truthy
   end
 
   it 'cannot be deleted if it has a slug' do
     content_package.delete
-    expect(content_package.deleted?).to be_false
+    expect(content_package.deleted?).to be_falsey
   end
 
   it 'cannot be deleted if it has a child with a slug' do
     content_package.slug = nil
     content_package.children << FactoryGirl.build(:content_package, :parent => content_package)
     content_package.delete
-    expect(content_package.deleted?).to be_false
+    expect(content_package.deleted?).to be_falsey
   end
 
 end
