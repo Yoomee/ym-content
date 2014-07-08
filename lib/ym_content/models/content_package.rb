@@ -64,6 +64,11 @@ module YmContent::ContentPackage
       }
     end
 
+    def search(term)
+      escaped_term = "%#{term}%"
+      joins(:permalink).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
+    end
+
   end
 
   def deletable?
@@ -118,7 +123,7 @@ module YmContent::ContentPackage
     return true unless deleted?
     deletion_occurred_at = deleted_at.dup
     self.update_attribute(:deleted_at, nil)
-    deleted_children.where("deleted_at > ? && deleted_at < ?",deletion_occurred_at - 1.minute, deletion_occurred_at + 1.minute).each(&:restore)
+    deleted_children.where("deleted_at > ? AND deleted_at < ?",deletion_occurred_at - 1.minute, deletion_occurred_at + 1.minute).each(&:restore)
   end
 
   def restore_warning

@@ -34,18 +34,16 @@
       transition: all 0.3s ease;
     }
   }
-  .form-group.text.focus:before {
-      content: "";
-      display: block;
-      background:url(/assets/cms-list-and-link.png) no-repeat top right;
-      width: 46px;
-      height: 19px;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      opacity: 0.8;
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+  .form-group.text:before {
+    display: block;
+    width: 46px;
+    height: 19px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    opacity: 0.8;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
   }
   .help-block {
     height: 0;
@@ -62,8 +60,23 @@
     opacity: 1;
   }
 }
-
+.formtastic input[type="text"], .formtastic input[type="tel"], .formtastic input[type="password"], .formtastic input[type="email"], .formtastic textarea{
+  height: auto;
+  padding: 10px;
+  width: 100%;
+}
 /* ===== Redactor =======*/
+
+.cms-main .redactor_box textarea{
+  background: #fff;
+  padding: 15px;
+}
+.cms-main .redactor_button_disabled:hover{
+  color:#333;
+}
+.cms-main .redactor_toolbar{
+  box-shadow: none;
+}
 
 .redactor_toolbar li:last-child {
   float:right !important;
@@ -92,10 +105,12 @@
   line-height: 24px;
   padding-bottom: 4px;
   text-decoration: none;
+  font-size: 16px;
   &:hover{
     background-color: lighten($primary1, 60%);
     border-color: lighten($primary1, 60%);
     border-radius: 3px;
+    color:#333;
   }
 }
 .cms-form .redactor_toolbar li a.redactor_btn_link span{
@@ -120,7 +135,40 @@
     }
   }
 }
+.input-group-addon:first-child {
+    border: 1px solid #e5e5e5;
+}
 
+#inside #redactor_modal{
+  border-radius:3px;
+  padding: 30px;
+  #redactor_modal_header{
+    padding: 0 0 10px 0;
+  }
+  #redactor-modal-link-insert{
+    padding: 0;
+  }
+  #redactor_modal_inner{
+    .redactor_input{
+      font-size: 16px;
+      color: #000;
+      border-color: #e5e5e5;
+      border-radius: 3px;
+      padding: 20px;
+    }
+    footer button.redactor_modal_btn{
+      border-radius: 3px;
+      font-size: 14px;
+      margin: 22px 0 22px 0;
+      padding: 13px 20px;
+      width: auto !important;
+    }
+    footer button.redactor_modal_action_btn{
+      background: $primary1;
+      float: right;
+    }
+  }
+}
 /* ===== Sortable =======*/
 
 .form-sortable {
@@ -158,3 +206,86 @@
   float: left;
   width: 100%;
 }
+
+.cms-main .cms-form .form-group > label{
+  font-size: 16px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+.cms-form .image.input{
+  img{
+    border-radius: 50%;
+    float: left;
+    margin:15px 18px;
+  }
+  .image-inputs {
+    margin: 23px 14px;
+    float: left;
+  }
+  .checkbox.remove-image{
+    margin-left:0;
+  }
+}
+#content_search_link{
+  border:0;
+  border-bottom:5px solid $primary1;
+  font-size: 1.8em;
+  font-weight:lighter;
+  width: 100%;
+  box-shadow: none;
+  border-radius: 0;
+  background: url('search-sitemap.png') no-repeat scroll 7px 7px;
+  padding-left:44px;
+}
+
+.ui-autocomplete{
+  font-family: Helvetica, Arial, Sans-serif;
+  overflow: scroll;
+  height: 300px;
+}
+.ui-widget .ui-menu-item span{
+  font-size: 1em;
+}
+.ui-widget .ui-menu-item em{
+  font-size: 0.8em;
+  color:#666;
+}
+#inside .ui-state-hover,
+#inside .ui-widget-content .ui-state-hover,
+#inside .ui-widget-header .ui-state-hover,
+#inside .ui-state-focus,
+#inside .ui-widget-content .ui-state-focus,
+#inside .ui-widget-header .ui-state-focus{
+  background-color: #F2F2F2;
+  background-image:none;
+  border:0;
+  border-radius:0;
+  padding: 2px 0.4em;
+}
+
+
+/* Radio input styling specific 
+
+.control-label input[type="radio"],
+.control-label input[type="checkbox"] {
+  display:none;
+}
+.control-label input[type="radio"] + span:before,
+.control-label input[type="checkbox"] + span:before {
+  font-family: 'FontAwesome';
+  padding-right: 3px;
+  font-size: 20px;
+}
+.control-label input[type="radio"] + span:before {
+  content: "\f10c"; 
+}
+.control-label input[type="radio"]:checked + span:before {
+  content: "\f111"; 
+}
+.control-label input[type="checkbox"] + span:before {
+  content: "\f096"; 
+}
+.control-label input[type="checkbox"]:checked + span:before {
+  content: "\f046"; 
+}
+*/

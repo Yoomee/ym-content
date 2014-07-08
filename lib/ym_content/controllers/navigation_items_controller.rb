@@ -37,7 +37,11 @@ module YmContent::NavigationItemsController
   end
 
   def search
-    term = Riddle.escape(params[:term])
+    if defined?(Riddle)
+      term = Riddle.escape(params[:term])
+    else
+      term = params[:term]
+    end
     render :json => ContentPackage.search(term).map{|cp| {
       :id => cp.id,
       :label => cp.name.truncate(60),

@@ -1,9 +1,8 @@
 .container.cms-main
   .row
     .col-md-6.col-md-offset-3.mb-4
-      %h2
+      %h1.center
         =title "New content"
-        %i.fa.fa-file.pull-left
       .tabs-wrap
         %ul.nav.nav-tabs
           %li.active=link_to("Content type", '#content-type', 'data-toggle' => 'tab')
@@ -17,18 +16,17 @@
               =form.input :parent_id, :as => :hidden
               =form.input :name
               %br
-              =form.input :content_type, :as => :radio, :label => "Select a content type below", :required => false
+              =form.input :content_type, :as => :select, :label => "Select a content type below", :required => false
           #context.tab-pane
-            %i.fa.fa-group.pull-left
-            %h4.mb-3 Select the intended audience for this content
+            %h5.mb-3 Select the intended audience for this content
 
             =form.inputs do
               -PersonaGroup.all.each do |group|
                 .persona-group-select
                   %h5.cms-edit-group-title=group
-                  =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false
-              %br.clear
-              %h4 Write an objective/goal for this content
+                  =form.input :personas, :as => :check_boxes, :collection => group.personas.map{|p| [p.to_s,p.id]}, :label => false
+              .clearfix
+              %h5 Write an objective/goal for this content
               .cms-edit-context-box
                 =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}, :class => "content-objective-goal"
  
@@ -36,10 +34,10 @@
             =form.inputs do
               =form.input :requested_by, :collection => User.where(:role => 'admin')
               =form.input :author, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id] }
-              =form.input :due_date, :order => [:day, :month, :year], :include_blank => false
+              =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
               =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
-            =form.action :submit, :label => 'Finish', :wrapper_html => { :class => 'mt-3' }
+            =form.action :submit, :label => 'Finish', :wrapper_html => { :class => 'mt-3 btn-primary2' }
 
         =link_to("Next", '#', :class => 'btn btn-primary3 mt-3 js-tab-next')
-        =link_to("Previous", '#', :class => 'btn pull-left mt-3 js-tab-previous', :style => 'display: none')
+        =link_to("Previous", '#', :class => 'btn btn-grey pull-left mt-3 js-tab-previous', :style => 'display: none')
 

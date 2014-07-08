@@ -23,6 +23,10 @@ module YmContent::Persona
     self.group = PersonaGroup.new(:name => name)
   end
   
+  def to_s
+    [name, category].select(&:present?).join(' - ')
+  end
+
   private
   def group_name_is_valid
     return true unless group

@@ -41,7 +41,7 @@ end
 When(/^I fill in the new content package form and submit$/) do
   visit new_content_type_content_package_path(@content_type)
   @content_package = FactoryGirl.build(:content_package, :content_type => @content_type, :author => @admin)
-  choose(@content_type)
+  select(@content_type)
   fill_in('content_package_name', :with => @content_package.name)
   select(@content_package.author.full_name, :from => 'content_package[author_id]')
   click_button("Finish")
@@ -135,21 +135,23 @@ When(/^I go to edit the content package$/) do
   visit edit_content_package_path(@content_package)
 end
 
-When(/^I fill in a content attribute with a word limit$/) do
+When(/^I fill in a content attribute with a (character|word) limit$/) do |word_character|
+  word = word_character == 'word'
   visit edit_content_package_path(@content_package)
-  fill_in('content_package_title', :with => "0123456789")
+  fill_in("content_package_#{word ? 'text' : 'title'}", :with => (word ? "a " : "a") * 10, :visible => false)
 end
 
-Then(/^the character counter should increase$/) do
+Then(/^the (character|word) counter should increase$/) do |word_character|
   expect(page).to have_content("10/30")
 end
 
-When(/^I exceed the word limit of a content attribute$/) do
+When(/^I exceed the (character|word) limit of a content attribute$/) do |word_character|
+  word = word_character == 'word'
   visit edit_content_package_path(@content_package)
-  fill_in('content_package_title', :with => "0123456789012345678901234567891")
+  fill_in("content_package_#{word ? 'text' : 'title'}", :with => (word ? "a " : "a") * 31, :visible => false)
 end
 
-Then(/^the character counter should go red$/) do
-  puts find('#content_package_title_input')['class']
-  find('#content_package_title_input')['class'].include? ".word-count-exceeded"
+Then(/^the (character|word) counter should go red$/) do |word_character|
+  word = word_character == 'word'
+  expect(find("#content_package_#{word ? 'text' : 'title'}_input")['class']).to include("word-count-exceeded")
 end

@@ -40,10 +40,13 @@ window.YmContent =
           depth = row.data('depth')
           loop
             row = row.next()
-            if row.data('depth') == (depth + 1)
-              row.show()
-            else if row.data('depth') == depth
-              break
+            if row.data('depth')?
+              if row.data('depth') == (depth + 1)
+                row.show()
+              else if row.data('depth') == depth
+                break
+             else
+               break
         else
           content_type_id = row.attr('id').split('-').slice(-1)[0]
           link.data('loaded',0)
@@ -70,7 +73,7 @@ window.YmContent =
         blurCallback: (e) ->
           $(e.currentTarget).parents(".form-group").removeClass("focus")
         initCallback: (e) ->
-          if CharacterLimits
+          if CharacterLimits && this.$source.data('limit-quantity')
             CharacterLimits.registerRedactor(this)
 
   Sitemap:
@@ -100,10 +103,13 @@ window.YmContent =
           depth = row.data('depth')
           loop
             row = row.next()
-            if row.data('depth') == (depth + 1)
-              row.show()
-            else if row.data('depth') == depth
-              break
+            if row.data('depth')?
+              if row.data('depth') == (depth + 1)
+                row.show()
+              else if row.data('depth') == depth
+                break
+             else
+               break
         else
           content_package_id = row.attr('id').split('-').slice(-1)[0]
           link.data('loaded',0)

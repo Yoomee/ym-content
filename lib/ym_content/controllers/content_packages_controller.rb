@@ -58,7 +58,6 @@ module YmContent::ContentPackagesController
     @content_package.requested_by = current_user
     @content_package.review_frequency = 1
     @content_package.due_date = Date.today
-
   end
 
   def reorder
@@ -88,8 +87,13 @@ module YmContent::ContentPackagesController
 
   def update
     if @content_package.update_attributes(content_package_params)
+      flash[:notice] = "Updated \"#{@content_package}\""      
       current_user.record_activity!(@content_package, :text => "updated")
-      redirect_to @content_package
+      if @content_package.missing_view?
+        redirect_to content_packages_path(:open => @content_package)
+      else
+        redirect_to @content_package
+      end
     else
       render :action => 'edit'
     end
@@ -97,7 +101,7 @@ module YmContent::ContentPackagesController
 
   private
     def content_package_params
-      params.require(:content_package).permit(*params[:content_package].try(:keys))
+      params.require(:content_package).permit(*params[:content_package].try(:keys) + [:persona_ids => []])
     end
 
 

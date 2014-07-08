@@ -104,10 +104,9 @@
 
 /* tabs  */
 
-.nav-tabs{
+.cms-main ul.nav.nav-tabs{
   border:0;
 }
-
 .controller_content_packages .tabs-wrap{
   position: relative;
   margin-bottom:30px;
@@ -123,13 +122,13 @@
   z-index: -1;
 }
 .controller_content_packages  .tabs-wrap  .nav-tabs{
-  width: 576px;
+  width: 640px;
   margin:30px 0 0 0;
   border-bottom: 0;
 }
 .controller_content_packages .tabs-wrap .nav > li{
   float: left;
-  margin: 0 38px 0 0 !important;
+  margin: 0 59px 0 0 !important;
   text-align: center;
   width: 153px !important;
 }
@@ -145,26 +144,27 @@
 .controller_content_packages .tabs-wrap  .nav > li.active > a{
   border-radius: 3px;
   border:0;
-  background:$primary2;
+  background:$primary1;
   color: #fff;
 }
-.controller_content_packages {
-  ul.nav.nav-tabs {
-    a{
-      border: 0 none;
-      border-radius: 0;
-      font-size: 17px;
-      font-weight: bolder;
-      -webkit-transition: all .2s ease-in-out;
-      -moz-transition: all .2s ease-in-out;
-      -o-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
-    }
-    li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
-      background:$primary1;
-      border:0;
-      color: #fff;
-      border-radius: 3px;
-    }
+
+
+.cms-main ul.nav.nav-tabs {
+  margin-bottom:20px;
+  a{
+    border: 0 none;
+    border-radius: 0;
+    font-weight: bolder;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    background:$primary1;
+    border:0;
+    color: #fff;
+    border-radius: 3px;
   }
 }
+

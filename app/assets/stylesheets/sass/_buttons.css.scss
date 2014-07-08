@@ -1,33 +1,51 @@
 .controller_content_packages .cms-main .btn{
   float: right;
   min-width: 150px;
-  font-size: 16px;
 }
 .action_dashboard .cms-dashboard .btn{
   background:#c9c9c9;
 }
-.btn.btn-primary1{
-  background: $primary1;
+.cms-main .btn{
+  background: $primary-grey;
+  color: #666;
   &:hover{
-    background: darken($primary1, 10%);
+    color:#666;
   }
 }
-.btn.btn-primary2{
+.cms-main .btn.btn-primary1,
+.cms-main .btn.btn-primary{
+  background: $primary1;
+  color:#fff;
+  &:hover, &:focus{
+    background: darken($primary1, 10%);
+    color:#fff;
+  }
+}
+.cms-main .btn.btn-primary2{
   background: $primary2;
+  color:#fff;
   &:hover{
     background: darken($primary2, 10%);
   }
 }
-.btn.btn-primary3{
+.cms-main .btn.btn-primary3{
   background: $primary3;
-  &:hover{
+  color:#fff;
+  &:hover, &:focus{
     background: darken($primary3, 10%);
+    color: #fff;
   }
 }
-.btn.btn-primary4{
+.cms-main .btn.btn-primary4{
   background: $primary4;
   &:hover{
     background: darken($primary4, 10%);
+  }
+}
+.cms-main .btn.btn-grey{
+  background: $primary-grey;
+  &:hover{
+    background: darken($primary-grey, 10%);
   }
 }
 .open .btn-default.dropdown-toggle{
@@ -39,19 +57,18 @@
 .btn#content_package_submit_action{
   float: right;
 }
-// Hide save button for now
+/* Hide save button for now */
+
 .btn-cms-status {
   display: none;
 }
 .controller_content_types .btn:hover, .btn:focus{
   color: #fff;
 }
-
-
 .cms-edit-status .btn-group {
   width: 100% !important;
 }
-.main-wrapper .selectpicker.btn {
+.cms-main .selectpicker.btn {
   background: #fff;
   border-radius:3px;
   color: #666;
@@ -59,9 +76,13 @@
   min-width: 0;
 }
 .main-wrapper .cms-sidebar .selectpicker.btn, 
-.main-wrapper .form-group .selectpicker.btn{
+.cms-main .form-group .selectpicker.btn{
     background: #f6f6f6;
     border: 1px solid #e5e5e5;
+    padding: 12px 20px;
+    &:hover{
+      color:#333;
+    }
 }
 .sitemap .selectpicker.btn{
   background:#f3f3f3;
@@ -74,4 +95,6 @@
 .content_package .bootstrap-select.btn-group .btn .caret {
   border-top-color: #666;
  }
-
+.controller_content_packages .cms-main .cms-persona-box .btn{
+  min-width: 0;
+}

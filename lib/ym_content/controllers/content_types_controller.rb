@@ -9,7 +9,7 @@ module YmContent::ContentTypesController
 
   def create
     if @content_type.save
-      redirect_to content_packages_path
+      redirect_to content_types_path
     else
       render :action => 'edit'
     end
@@ -60,6 +60,6 @@ module YmContent::ContentTypesController
 
   private
   def content_type_params
-    params.require(:content_type).permit(:id, :name, :description, :singleton, :package_name, :viewless, :view_name, :use_workflow, :content_attributes_attributes => [:id, :name, :default_attribute_id, :description, :field_type, :required, :meta, :meta_tag_name, :_destroy])
+    params.require(:content_type).permit(:id, :name, :description, :singleton, :package_name, :viewless, :view_name, :use_workflow, :content_attributes_attributes => [:id, :_destroy, :name, :description, :field_type, :required, :meta, :meta_tag_name, :limit_quantity, :limit_unit])
   end
 end

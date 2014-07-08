@@ -1,26 +1,27 @@
-.col-md-8
-  %h3=title(@content_package)
-  -@content_package.content_attributes.each do |attribute|
-    %h4.mt-3
-      =attribute.name
-      -if Rails.env.development?
-        %small="@content_package.#{attribute.slug}"
-    -case attribute.field_type
-    -when 'file'
-      -if file = @content_package.send(attribute.slug)
-        %p=link_to(file.name, file.url, :target => '_blank')
-    -when 'image'
-      =image_for(@content_package, '300x200#', :method => attribute.slug.chomp('_uid'))
-    -when 'link'
-      -if link = @content_package.send(attribute.slug).try(:value)
-        =link_to(link, link, :target => '_blank')
-    -when 'tags'
-      =@content_package.send(attribute.slug).map(&:to_s).join(', ')
-    -when 'text'
-      =@content_package.send(attribute.slug).try(:html_safe)
-    -when 'embeddable'
-      =@content_package.send(attribute.slug)
-    -when 'location'
-      =@content_package.send(attribute.slug)
-    -else
-      %p=@content_package.send(attribute.slug)
+.container.cms-main
+  .col-md-8
+    %h3=title(@content_package)
+    -@content_package.content_attributes.each do |attribute|
+      %h4.mt-3
+        =attribute.name
+        -if Rails.env.development?
+          %small="@content_package.#{attribute.slug}"
+      -case attribute.field_type
+      -when 'file'
+        -if file = @content_package.send(attribute.slug)
+          %p=link_to(file.name, file.url, :target => '_blank')
+      -when 'image'
+        =image_for(@content_package, '300x200#', :method => attribute.slug.chomp('_uid'))
+      -when 'link'
+        -if link = @content_package.send(attribute.slug).try(:value)
+          =link_to(link, link, :target => '_blank')
+      -when 'tags'
+        =@content_package.send(attribute.slug).map(&:to_s).join(', ')
+      -when 'text'
+        =@content_package.send(attribute.slug).try(:html_safe)
+      -when 'embeddable'
+        =@content_package.send(attribute.slug)
+      -when 'location'
+        =@content_package.send(attribute.slug)
+      -else
+        %p=@content_package.send(attribute.slug)

@@ -4,6 +4,7 @@ class CreatePersonas < ActiveRecord::Migration
     create_table :personas do |t|
       t.belongs_to :group
       t.string :name
+      t.string :category
       t.integer :age
       t.text :summary
       t.text :benefit_1

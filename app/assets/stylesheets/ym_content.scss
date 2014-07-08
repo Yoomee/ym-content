@@ -13,6 +13,7 @@
 @import 'sass/sidebar';
 @import 'sass/type';
 @import 'sass/forms';
+@import 'sass/character-limits';
 @import 'sass/dashboard';
 
 
@@ -90,11 +91,6 @@
     line-height: 30px;
   }
 }
-
-.container-cms-edit {
-	width: 100%;
-	max-width: 100%;
-}
 .persona-group-select {
 	float: left;
 	width: 45%;
@@ -109,6 +105,11 @@
 .persona-group-select .choice {
 	font-weight: normal;
 	font-family: "Proxima N W15 Reg", helvetica, sans-serif;
+}
+.form-group#content_package_personas {
+  .form-group {
+    padding:0px 10px;
+  }
 }
 .cms-edit-context-box .control-label {
 	display: none;
