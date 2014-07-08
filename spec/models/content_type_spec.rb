@@ -19,6 +19,13 @@ describe ContentType do
     expect(content_type.destroy).to be_falsey
   end
 
+  it 'has positions set on its content attributes' do
+    content_type.save
+    content_type.content_attributes.each_with_index do |content_attribute, idx|
+      expect(content_attribute.position).to eq(idx)
+    end
+  end
+
   describe 'missing_view?' do
 
     it 'returns false if viewless' do
