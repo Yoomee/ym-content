@@ -29,12 +29,16 @@ module YmContent::ContentTypesController
   end
 
   def duplicate
-    @seed_content_type = @content_type
-    @content_type = ContentType.new
-    @seed_content_type.content_attributes.each do |content_attribute|
+    seed = @content_type
+    if params[:to]
+      @content_type = ContentType.find(params[:to])
+    else
+      @content_type = ContentType.new
+    end
+    seed.content_attributes.each do |content_attribute|
       @content_type.content_attributes.build(content_attribute.attributes.slice(*ContentAttribute.fields_to_duplicate))
     end
-    render :action => 'new'
+    render :action => @content_type.new_record? ? 'new' : 'edit'
   end
 
   def edit

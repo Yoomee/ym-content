@@ -25,6 +25,11 @@ Scenario: Duplicating a content type
   When I duplicate the content type
   Then I see a new content type with all the same attributes
 
+Scenario: Adding the content attributes of one content type to another
+  Given there are 2 content types
+  When I duplicate the first content type onto the second
+  Then I see a second content type with all the attributes of the first
+
 Scenario: Viewing a list of content packages
   Given there are 3 content packages
   When I go to the sitemap
