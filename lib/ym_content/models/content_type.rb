@@ -37,6 +37,10 @@ module YmContent::ContentType
     read_attribute(:package_name).presence || name.try(:downcase)
   end
 
+  def to_s
+    name
+  end
+
   private
   def set_content_attribute_positions
     self.content_attributes.each_with_index do |content_attribute, idx|
