@@ -20,5 +20,5 @@
                 =link_to('Restore', restore_content_package_path(content_package), :method => :put, :data => {:confirm => content_package.restore_warning})
               -if current_user.admin?
                 %td
-                  =link_to('Destroy', content_package_path(content_package), :method => :delete, :data => {:confirm => "Are you sure you want to destroy this?\n\rTHERE IS NO UNDO!"})
+                  =link_to('Destroy', content_package_path(content_package), :method => :delete, :data => {:confirm => "Are you sure you want to destroy this content package?\n\rTHERE IS NO UNDO!"})
       =will_paginate(@deleted_content_packages)
