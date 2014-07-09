@@ -8,7 +8,7 @@
 
 
 $(document).ready ->
-  $("select").selectpicker()
+  $("select:not('.noselectpicker')").selectpicker()
 
   $('input,textarea,select').focusin ->
     $(this).parents('.form-group').addClass('focus')
