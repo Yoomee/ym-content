@@ -22,11 +22,13 @@
     =form.input :name
     -if current_user.yoomee_staff?
       =form.input :description, :input_html => {:rows => 4}
-      =form.input :singleton
       =form.input :package_name
-      =form.input :viewless
       =form.input :view_name
-      =form.input :use_workflow
+      .form-group
+        %label Advanced
+        =form.input :viewless
+        =form.input :singleton
+        =#form.input :use_workflow
     %hr.pv-3
     #content_attributes
       %h3.mb-3.center Content attributes
