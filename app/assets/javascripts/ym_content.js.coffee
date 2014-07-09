@@ -56,6 +56,15 @@ window.YmContent =
             link.data('open',1)
             link.find('i.sitemap-caret').removeClass('fa-spin').removeClass('fa-spinner').removeClass('fa-caret-right')
             link.find('i.sitemap-caret').addClass('fa-caret-down')
+      $('.js-duplicate-link').on 'click', ->
+        YmContent.ContentTypes.seedId = $(this).data('content-type-id')
+        $('#duplicate-modal').modal()
+      $('.js-duplicate-submit').on 'click', ->
+        path = "/content_types/#{YmContent.ContentTypes.seedId}/duplicate"
+        duplicateTo = $('#duplicate_to').val()
+        if duplicateTo != ""
+          path += "?to=#{duplicateTo}"
+        window.location = path
     loading:(id) ->
       link = $("#content-type-#{id} td.td-name")
       if link.data('loaded') == 0
