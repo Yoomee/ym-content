@@ -26,6 +26,10 @@ module YmContent::ContentAttribute
       }
     end
 
+    def fields_to_duplicate
+      column_names - %w{id content_type_id slug position}
+    end
+
   end
 
   def default_attribute
@@ -73,7 +77,7 @@ module YmContent::ContentAttribute
 
   def set_slug
     if slug.blank? && name.present? && errors['name'].blank?
-      slug_name = name.gsub('-',' ').parameterize("_").sub(/^\d+/,'n\0')
+      slug_name = name.gsub('-',' ').parameterize("_").sub(/^\d+/,'n')
       if ::ContentPackage.new().respond_to_without_content_attributes?(slug_name,true)
         slug_name = 'content_package_' + slug_name
       end

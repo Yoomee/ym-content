@@ -11,6 +11,7 @@ module YmContent::ContentType
     base.validates_presence_of :name
     #base.send(:default_scope, { :include => :content_attributes })
     base.accepts_nested_attributes_for :content_attributes, :allow_destroy => true
+    base.before_save(:set_content_attribute_positions)
     base.before_destroy(:destroyable?)
   end
 
@@ -34,6 +35,13 @@ module YmContent::ContentType
 
   def package_name
     read_attribute(:package_name).presence || name.try(:downcase)
+  end
+
+  private
+  def set_content_attribute_positions
+    self.content_attributes.each_with_index do |content_attribute, idx|
+      content_attribute.position = idx
+    end
   end
 
 end
