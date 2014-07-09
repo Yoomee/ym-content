@@ -1,0 +1,163 @@
+/* =======================================================================
+   GENERAL
+   General styles for all CMS content
+   ======================================================================= */
+
+.paper {
+  background-color: white;
+  -webkit-box-shadow: 
+        1px 1px   0 rgba(0,   0,   0,   0.100), 
+        3px 3px   0 rgba(255, 255, 255, 1.0), 
+        4px 4px   0 rgba(0,   0,   0,   0.125), 
+        6px 6px   0 rgba(255, 255, 255, 1.0),  
+        7px 7px   0 rgba(0,   0,   0,   0.150);
+  -moz-box-shadow: 
+        1px 1px   0 rgba(0,   0,   0,   0.100), 
+        3px 3px   0 rgba(255, 255, 255, 1.0), 
+        4px 4px   0 rgba(0,   0,   0,   0.125), 
+        6px 6px   0 rgba(255, 255, 255, 1.0),  
+        7px 7px   0 rgba(0,   0,   0,   0.150);
+  box-shadow: 
+        1px 1px   0 rgba(0,   0,   0,   0.100), 
+        3px 3px   0 rgba(255, 255, 255, 1.0), 
+        4px 4px   0 rgba(0,   0,   0,   0.125), 
+        6px 6px   0 rgba(255, 255, 255, 1.0),  
+        7px 7px   0 rgba(0,   0,   0,   0.150);
+  -webkit-transition: all 0.5s ease;                  
+  -moz-transition: all 0.5s ease;                 
+  -o-transition: all 0.5s ease;   
+  -ms-transition: all 0.5s ease;          
+  transition: all 0.5s ease;
+  img {
+    opacity: 0.9;
+    -webkit-transition: all 0.5s ease;                  
+    -moz-transition: all 0.5s ease;                 
+    -o-transition: all 0.5s ease;   
+    -ms-transition: all 0.5s ease;          
+    transition: all 0.5s ease;
+  }
+  &:hover img {
+    opacity: 1;
+    -webkit-transition: all 0.8s ease;                  
+    -moz-transition: all 0.8s ease;                 
+    -o-transition: all 0.8s ease;   
+    -ms-transition: all 0.8s ease;          
+    transition: all 0.8s ease;
+  }
+  &:hover {
+    -webkit-box-shadow: 
+          0px 0px   0 rgba(0,   0,   0,   0.100), 
+          0px 0px   0 rgba(255, 255, 255, 1.0), 
+          0px 0px   0 rgba(0,   0,   0,   0.125), 
+          0px 0px   0 rgba(255, 255, 255, 1.0),  
+          0px 0px   0 rgba(0,   0,   0,   0.150);
+    -moz-box-shadow: 
+          0px 0px   0 rgba(0,   0,   0,   0.100), 
+          0px 0px   0 rgba(255, 255, 255, 1.0), 
+          0px 0px   0 rgba(0,   0,   0,   0.125), 
+          0px 0px   0 rgba(255, 255, 255, 1.0),  
+          0px 0px   0 rgba(0,   0,   0,   0.150);
+    box-shadow: 
+          0px 0px   0 rgba(0,   0,   0,   0.100), 
+          0px 0px   0 rgba(255, 255, 255, 1.0), 
+          0px 0px   0 rgba(0,   0,   0,   0.125), 
+          0px 0px   0 rgba(255, 255, 255, 1.0),  
+          0px 0px   0 rgba(0,   0,   0,   0.150);
+  }
+}
+.table-content-types {
+  > tbody > tr.content-type > th {
+    background: #666;
+    color: #fff;
+    line-height: 30px;
+  }
+}
+.persona-group-select {
+  float: left;
+  width: 45%;
+  margin: 0 5% 20px 0;
+}
+.cms-edit-group-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 15px;
+  padding: 0 0 5px;
+  margin: 0 0 13px;
+}
+.persona-group-select .choice {
+  font-weight: normal;
+  font-family: "Proxima N W15 Reg", helvetica, sans-serif;
+}
+.form-group#content_package_personas {
+  .form-group {
+    padding:0px 10px;
+  }
+}
+.cms-edit-context-box .control-label {
+  display: none;
+}
+#content_package_notes {
+  height: auto !important;
+  min-height: 160px;
+}
+
+.discussion-item {
+  float: left;
+  width: 100%;
+  margin: 20px 0 8px;
+  .details {
+    color: #999;
+  }
+}
+.discussion-bubble {
+  display: block;
+  background: #4B9AC5;
+  padding: 20px;
+  margin: 0 0 20px;
+  border-radius: 10px;
+  color: #fff;
+  position: relative;
+}
+.discussion-bubble:after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: -20px;
+  left: 20px;
+  border: 10px solid transparent;
+  border-top: 10px solid #4B9AC5;
+}
+.discussion-avatar {
+  float: left;
+  width: 27px;
+  margin: -5px 10px 0 18px;
+}
+
+.td-status {
+  border-left: 14px solid #eee;
+  border-left-color: rgba(0,0,0,0.05);
+}
+.td-status-ready-to-review, .td-status-pending {
+  border-left-color: #F7AE42;
+}
+.td-status-published{
+  border-left-color: #58AB58;
+}
+
+.content-boolean input[type=checkbox] { 
+  margin-left: 0px;
+  margin-right: 5px;
+}
+.alert.alert-info{
+  margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
