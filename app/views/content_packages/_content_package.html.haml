@@ -12,7 +12,7 @@
   %td{:class => "td-status td-status-#{content_package.status}"}
     =content_package.due_date.try(:strftime, '%b %d, %Y')
   %td
-    =link_to('View', content_package) unless content_package.viewless?
+    =link_to('View', content_package) unless content_package.viewless? || content_package.missing_view?
   %td
     -if can? :edit, content_package
       =link_to('Edit', edit_content_package_path(content_package))
