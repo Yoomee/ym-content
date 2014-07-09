@@ -24,7 +24,7 @@
         -if content_package.children.count > 1
           %li=link_to('Reorder children', reorder_content_package_path(content_package))
         -if content_package.deletable?
-          %li=link_to('Delete', content_package_path(content_package), :method => :delete, :data => {:confirm => "Are you sure you want to delete this content package#{" and all it's children" if content_package.children.count.nonzero?}?"})
+          %li=link_to('Delete', delete_content_package_path(content_package), :method => :put, :data => {:confirm => "Are you sure you want to delete this content package#{" and all it's children" if content_package.children.count.nonzero?}?"})
 - parents << content_package
 -if open
   -content_package.children.each do |child|

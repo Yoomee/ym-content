@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
     member do
       get 'children'
+      put 'delete'
       get 'reorder'
       put 'reorder' => 'content_packages#save_order'
       put 'restore'
