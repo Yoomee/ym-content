@@ -23,10 +23,10 @@
                   =needs_design(content_type)
               %td
               %td
-                =link_to('Edit', edit_content_type_path(content_type), :icon => 'pencil')
+                =link_to('Edit', edit_content_type_path(content_type))
               %td
                 .dropdown
-                  =link_to('More'.html_safe, '#', 'data-toggle' => 'dropdown', :icon => 'ellipsis-v')
+                  =link_to('More'.html_safe, '#', 'data-toggle' => 'dropdown', :icon => 'angle-down', :icon_last => true)
                   %ul.dropdown-menu.dropdown-menu-right
                     %li=link_to("Add new content of this type", new_content_type_content_package_path(content_type))
                     %li=link_to('Duplicate...', '#', :class => 'js-duplicate-link', :data => {:content_type_id => content_type.id})

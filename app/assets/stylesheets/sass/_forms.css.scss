@@ -7,11 +7,11 @@
   .form-control {
     font-size: 16px;
     color: #000;
-    border-color: #e5e5e5;
+    border-color: #AFAFAF;
     border-radius: 3px;
   }
   .focus .form-control {
-    border-color: #f3f3f3;
+    border-color: #AFAFAF;
   }
   .form-group {
     position: relative;
@@ -83,12 +83,12 @@
   padding-right:8px;
 }
 .container-cms-edit .redactor_toolbar{
-  background: #f3f3f3;
+  background: #AFAFAF;
   border:0;
   padding: 10px;
 }
 .container-cms-edit .redactor_box {
-    border: 1px solid #F3F3F3;
+    border: 1px solid #AFAFAF;
     border-radius: 3px;
     position: relative;
 }
@@ -136,7 +136,7 @@
   }
 }
 .input-group-addon:first-child {
-    border: 1px solid #e5e5e5;
+    border: 1px solid #AFAFAF;
 }
 
 #inside #redactor_modal{
@@ -152,7 +152,7 @@
     .redactor_input{
       font-size: 16px;
       color: #000;
-      border-color: #e5e5e5;
+      border-color: #AFAFAF;
       border-radius: 3px;
       padding: 20px;
     }
@@ -262,7 +262,9 @@
   border-radius:0;
   padding: 2px 0.4em;
 }
-
+.form-control {
+  border: 1px solid #AFAFAF;
+}
 
 /* Radio input styling specific 
 

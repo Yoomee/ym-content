@@ -22,7 +22,7 @@
               %span.btn-cms-text  
                 Ready to review
           .col-md-4
-            =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-primary4 btn-with-number btn-cms-old fadeInPop" do
+            =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-grey btn-with-number btn-cms-old fadeInPop" do
               %span.btn-cms-number
                 =ContentPackage.expiring.count
               %span.btn-cms-text  

@@ -58,7 +58,11 @@
   }
 }
 
-
+.nav-div {
+  border-right: 1px solid rgba(0,0,0,0.2);
+  height: 50px;
+  margin: 0px 20px;
+}
 
 /* ======= Navigation manager =======*/
 
@@ -152,7 +156,7 @@
 }
 .controller_content_packages .tabs-wrap .nav > li{
   float: left;
-  margin: 0 59px 0 0 !important;
+  margin: 0 50px 0 0 !important;
   text-align: center;
   width: 153px !important;
 }
@@ -190,3 +194,6 @@
   }
 }
 
+.sitemap-tabs i {
+  margin-right: 5px;
+}
