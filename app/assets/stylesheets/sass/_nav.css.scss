@@ -58,7 +58,11 @@
   }
 }
 
-
+.nav-div {
+  border-right: 1px solid rgba(0,0,0,0.2);
+  height: 50px;
+  margin: 0px 20px;
+}
 
 /* ======= Navigation manager =======*/
 
@@ -190,3 +194,6 @@
   }
 }
 
+.sitemap-tabs i {
+  margin-right: 5px;
+}
