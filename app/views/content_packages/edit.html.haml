@@ -27,6 +27,14 @@
       =semantic_form_for @content_package do |form|
         .tab-content.mb-2
           #content.tab-pane.active.cms-form
+            -if @content_package.notes.present?
+              .form-group
+                .row
+                  .col-md-1
+                    %i.fa.fa-flag.fa-3x
+                  .col-md-11
+                    %label Content objective/goal
+                    %p=@content_package.notes
             =form.inputs do
               -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
                 =form.content_input content_attribute
