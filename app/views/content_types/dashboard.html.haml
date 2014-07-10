@@ -15,7 +15,7 @@
                 =ContentPackage.where(:status => 'draft').count
               %span.btn-cms-text  
                 Drafts
-          .col-md-4
+          .col-md-4.p-0
             =link_to filter_content_packages_path(:filter => 'pending'), :class=>"btn btn-block btn-primary2 btn-with-number btn-cms-review fadeInPop" do
               %span.btn-cms-number
                 =ContentPackage.where(:status => 'pending').count
