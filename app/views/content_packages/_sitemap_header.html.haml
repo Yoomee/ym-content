@@ -8,6 +8,6 @@
           =link_to("Content list", content_packages_path, :icon => 'list')
         -if can? :manage, ContentType
           %li{:class => @content_types  ? 'active' : nil}
-            =link_to("Content types", content_types_path, :icon => 'file-text-o')
+            =link_to("Content templates", content_types_path, :icon => 'file-text-o')
         %li{:class => @deleted_content_packages  ? 'active' : nil}
           =link_to("Deleted content", deleted_content_packages_path, :icon => 'trash-o')
