@@ -1,7 +1,7 @@
 .container.cms-main
   .row
     .col-md-12
-      %h1.mb-3.center.mt-5=title 'Content list'
+      %h1.mb-3.center=title 'Content list'
       .clearfix
       %ul.nav.nav-tabs.sitemap-tabs
         %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
