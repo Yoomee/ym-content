@@ -19,7 +19,7 @@
   %td
     .dropdown
       =link_to('More&hellip;'.html_safe, '#', 'data-toggle' => 'dropdown')
-      %ul.dropdown-menu
+      %ul.dropdown-menu.dropdown-menu-right
         %li=link_to('Add child', new_content_package_path(:parent => content_package.id))
         -if content_package.children.count > 1
           %li=link_to('Reorder children', reorder_content_package_path(content_package))

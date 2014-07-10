@@ -27,7 +27,7 @@
               %td
                 .dropdown
                   =link_to('More'.html_safe, '#', 'data-toggle' => 'dropdown', :icon => 'ellipsis-v')
-                  %ul.dropdown-menu
+                  %ul.dropdown-menu.dropdown-menu-right
                     %li=link_to("Add new content of this type", new_content_type_content_package_path(content_type))
                     %li=link_to('Duplicate...', '#', :class => 'js-duplicate-link', :data => {:content_type_id => content_type.id})
                     %li=link_to('Reorder content attributes', reorder_content_type_path(content_type))
