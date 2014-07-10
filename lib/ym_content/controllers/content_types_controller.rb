@@ -73,6 +73,6 @@ module YmContent::ContentTypesController
 
   private
   def content_type_params
-    params.require(:content_type).permit(:name, :description, :singleton, :package_name, :viewless, :view_name, :use_workflow, :content_attributes_attributes => [:id, :_destroy, :name, :description, :field_type, :required, :meta, :limit_quantity, :limit_unit])
+    params.require(:content_type).permit(:name, :description, :singleton, :package_name, :viewless, :view_name, :use_workflow, :content_attributes_attributes => [:id, :_destroy, :name, :description, :field_type, :required, :meta, :limit_quantity, :limit_unit, :position])
   end
 end

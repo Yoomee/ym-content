@@ -13,12 +13,16 @@
           if($('.nested-fields:visible').length > 1){
             added.before($('#add-another-link').html());
           }
+          $('.nested-fields:visible').each(function(idx){$(this).find('input[name$="[position]"]').val(idx)});
         })
         .on("cocoon:before-remove", function(e,removed) {
           if($('.links:visible').length > 1){
             removed.next('.links').remove();
           }
-      });
+        })
+        .on("cocoon:after-remove", function(e,removed) {
+          $('.nested-fields:visible').each(function(idx){$(this).find('input[name$="[position]"]').val(idx)});
+        });
       $("form.content_type").on('change', 'select[name$="[field_type]"]', function(){
         var inputs = $(this).parents('.nested-fields fieldset.inputs').find('.character-limit-inputs');
         if(this.value == 'text' || this.value == 'string') {
@@ -44,7 +48,7 @@
     %hr.pv-3
     #content_attributes
       %h3.mb-3.center Content attributes
-      =form.semantic_fields_for :content_attributes do |content_attribute|
+      =form.semantic_fields_for :content_attributes, @content_type.content_attributes.sort_by(&:position) do |content_attribute|
         =render 'content_attribute_fields', :f => content_attribute
         .links.mb-2
           %i.fa.fa-plus-circle
