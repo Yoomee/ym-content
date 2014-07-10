@@ -59,7 +59,7 @@
                 =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
           #related.tab-pane
         =form.actions do
-          =form.action :submit, :label => "Update #{@content_package.package_name}", :input_html => {:class => 'btn btn-primary1'}
+          =form.action :submit, :label => "Save", :button_html => {:class => 'btn btn-primary2'}
           .mb-6
     .col-md-5.cms-sidebar-wrap.ph-0
       #cms-sidebar.cms-sidebar
