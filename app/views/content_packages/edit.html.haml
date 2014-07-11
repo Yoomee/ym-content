@@ -28,11 +28,11 @@
         .tab-content.mb-2
           #content.tab-pane.active.cms-form
             -if @content_package.notes.present?
-              .form-group
+              .form-group.objective
                 .row
                   .col-md-1
-                    %i.fa.fa-flag.fa-3x
-                  .col-md-11
+                    %i.fa.fa-flag.fa-2x
+                  .col-md-10.ml-2
                     %label Content objective/goal
                     %p=@content_package.notes
             =form.inputs do

@@ -98,3 +98,23 @@
 .controller_content_packages .cms-main .cms-persona-box .btn{
   min-width: 0;
 }
+.btn.new-content{
+  position: absolute;
+  right: 0;
+  top: -52px;
+}
+.cms-dashboard-btn div:nth-child(2){
+  @include media-query (md) {
+    padding:0;
+  }
+}
+.cms-dashboard-btn .btn{
+  @include media-query (sm-max) {
+    margin:5px 0;
+  }
+}
+.cms-dashboard-btn .btn-cms-text{
+  @include media-query (md-max) {
+    font-size: 14px;
+  }
+}
