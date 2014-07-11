@@ -47,10 +47,12 @@ module YmContent::ContentChunk
 
   private
   def geocode_if_geocodeable
-    if content_attribute.field_type == "location"
-      do_lookup(false) do |o,rs|
-        if r = rs.first
-          self.html = r.coordinates.join(',')
+    if content_attribute
+      if content_attribute.field_type == "location"
+        do_lookup(false) do |o,rs|
+          if r = rs.first
+            self.html = r.coordinates.join(',')
+          end
         end
       end
     end
