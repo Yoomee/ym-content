@@ -9,7 +9,7 @@
 
 .container
   .tab-content.tab-content-sitemap.mb-5.relative
-    =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'new-content btn btn-primary1')
+    =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'new-content btn btn-primary')
     #sitemap.sitemap.tab-pane.active
       #content_search.form
         =semantic_form_for 'content_search', :remote => true do |form|
@@ -30,4 +30,4 @@
             =render('content_package', :content_package => content_package)
           %tr
             %td{:colspan => 7}
-              =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-primary1')
+              =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn')
