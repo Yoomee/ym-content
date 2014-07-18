@@ -9,6 +9,7 @@ module Formtastic
           :hint => content_attribute.description,
           :required => content_attribute.required
         )
+        options.reverse_merge!(content_attribute.input_options)
         input_html_options = {}.tap do |hash|
           if content_attribute.limit_quantity.to_i > 0
             hash[:data] = {
