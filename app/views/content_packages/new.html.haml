@@ -5,7 +5,7 @@
         =title "New content"
       .tabs-wrap
         %ul.nav.nav-tabs
-          %li.active=link_to("Content type", '#content-type', 'data-toggle' => 'tab')
+          %li.active=link_to("Content template", '#content-type', 'data-toggle' => 'tab')
           %li=link_to("Add context", '#context', 'data-toggle' => 'tab')
           %li=link_to("Assign author", '#author', 'data-toggle' => 'tab')
         %hr
@@ -16,7 +16,7 @@
               =form.input :parent_id, :as => :hidden
               =form.input :name
               %br
-              =form.input :content_type, :as => :select, :label => "Select a content type below", :required => false
+              =form.input :content_type, :as => :select, :label => "Select a content template below", :required => false
           #context.tab-pane
             %h5 Write an objective/goal for this content
             .cms-edit-context-box

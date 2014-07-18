@@ -17,9 +17,9 @@ module YmContent::ContentTypesController
 
   def destroy
     if @content_type.destroy
-      flash[:notice] = "The content type was cuccessfully deleted"
+      flash[:notice] = "The content template was cuccessfully deleted"
     else
-      flash[:error] = "Unable to delete this content type"
+      flash[:error] = "Unable to delete this content template"
     end
     redirect_to content_packages_path(:anchor => 'content-types')
   end
