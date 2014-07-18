@@ -27,6 +27,9 @@ body.controller_personas {
 }
 .container-cms-edit {
   max-width: 100%;
+  .nav-tabs li i {
+    margin-right: 5px;
+  }
 }
 
 /* Edit page */
