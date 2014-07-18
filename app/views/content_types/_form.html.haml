@@ -15,6 +15,15 @@
           inputs.hide();
         }
       });
+
+      $("form.content_type").on('change', 'input[name$="[meta]"]', function(){
+        var inputs = $(this).parents('.nested-fields fieldset.inputs').find('.meta-attributes');
+        if(this.checked) {
+          inputs.removeClass('hide');
+        } else {
+          inputs.addClass('hide');
+        }
+      });
     });
     
 =semantic_form_for @content_type do |form|

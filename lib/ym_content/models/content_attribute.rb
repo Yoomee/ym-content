@@ -2,6 +2,7 @@ module YmContent::ContentAttribute
   
   def self.included(base)
     base.belongs_to :content_type
+    base.belongs_to :default_attribute, :class_name => 'ContentAttribute'
     base.after_validation :set_meta_title, :if => :meta?
     base.after_validation :set_slug
     base.validates :slug, :name, :field_type, :presence => true
@@ -31,10 +32,6 @@ module YmContent::ContentAttribute
     end
 
   end
-
-  def default_attribute
-      ContentAttribute.find(default_attribute_id).try(:name)
-    end
 
   def field_type
     ActiveSupport::StringInquirer.new(read_attribute(:field_type).to_s)

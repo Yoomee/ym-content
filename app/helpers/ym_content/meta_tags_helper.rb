@@ -1,29 +1,53 @@
 module YmContent::MetaTagsHelper
 
   def ym_content_meta_tags
+    meta_tags = ''
     if @content_package.try(:hide_from_robots?)
-      "<meta name='robots' content='noindex, nofollow' />".html_safe
+      meta_tags += "<meta name='robots' content='noindex, nofollow' />\n"
     end
+    meta_tags += user_generated_meta_tags
+    meta_tags.html_safe
   end
 
   def user_generated_meta_tags
+    meta_tags = ""
+
     if @content_package.present?
-      meta_tags = "<meta content='"
-      meta_attributes = @content_package.content_type.content_attributes.select{|a| a.meta?}
+      meta_title = @content_package.content_chunk_value_by_attribute_slug('meta_title')
+      meta_description = @content_package.content_chunk_value_by_attribute_slug('meta_description')
+      meta_image = @content_package.content_chunk_value_by_attribute_slug('meta_image')
+      meta_keywords = @content_package.content_chunk_value_by_attribute_slug('meta_keywords')
 
-      meta_attributes.each do |meta_attribute|
-        default_value = ContentChunk.where(:content_package_id => @content_package.id).where(:content_attribute_id => meta_attribute.default_attribute_id).first.try(:value) if meta_attribute.default_attribute_id.present?
-        user_value = ContentChunk.where(:content_package_id => @content_package.id).where(:content_attribute_id => meta_attribute.id).first.try(:value)
-
-        meta_tags << "#{meta_attribute.meta_tag_name}=#{user_value || default_value}, "
+      if meta_title.present?
+        meta_tags << "<meta itemprop='name' content='#{meta_title}'>\n"
+        meta_tags << "<meta name='twitter:card' content='#{meta_title}'>\n"
+        meta_tags << "<meta name='twitter:title' content='#{meta_title}'>\n"
+        meta_tags << "<meta property='og:title' content='#{meta_title}' />\n"
       end
 
-      2.times do
-        meta_tags.chop!
+      if meta_description.present?
+        meta_tags << "<meta itemprop='description' content='#{meta_description}'>\n"
+        meta_tags << "<meta name='twitter:description' content='#{meta_description}'>\n"
+        meta_tags << "<meta property='og:description' content='#{meta_description}' />\n"
       end
 
-      (meta_tags << "'/>").html_safe
+      if meta_image.present?
+          meta_tags << "<meta itemprop='image' content='#{meta_image}'>\n"
+          meta_tags << "<meta name='twitter:image:src' content='#{meta_image}'>\n"
+          meta_tags << "<meta property='og:image' content='#{meta_image}'/>\n"
+      end
+
+      if meta_keywords.present?
+        meta_tags << "<meta name='keywords' content='#{meta_keywords}'>\n"
+      end
+
+      meta_tags << "<meta property='og:url' content='#{request.original_url}' />\n"
+      meta_tags << "<meta property='og:site_name' content='#{Settings.site_name}'/>\n"
+      meta_tags << "<meta property='article:published_time' content='#{@content_package.created_at}' />\n"
+      meta_tags << "<meta property='article:modified_time' content='#{@content_package.updated_at}' />\n"
     end
+
+    meta_tags
   end
 
 end

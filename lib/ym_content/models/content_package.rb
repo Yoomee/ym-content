@@ -89,6 +89,12 @@ module YmContent::ContentPackage
     deleted_at.present?
   end
 
+  def content_chunk_value_by_attribute_slug(slug)
+    attribute = ContentAttribute.where(:content_type_id => content_type.id).where(:slug => slug).first
+    chunk = content_chunks.select{|c|c.content_attribute.id == attribute.id}.first.try(:raw_value) || content_chunks.select{|c|c.content_attribute.id == attribute.default_attribute.try(:id)}.first.try(:raw_value)    
+    ActionController::Base.helpers.strip_tags(chunk)
+  end
+
   def content_chunks
     @content_chunks ||= super.to_a
   end
