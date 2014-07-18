@@ -35,8 +35,9 @@ module YmContent::ContentTypesController
     else
       @content_type = ContentType.new
     end
-    seed.content_attributes.each do |content_attribute|
-      @content_type.content_attributes.build(content_attribute.attributes.slice(*ContentAttribute.fields_to_duplicate))
+    first_position = @content_type.content_attributes.size
+    seed.content_attributes.each_with_index do |content_attribute, idx|
+      @content_type.content_attributes.build(content_attribute.attributes.slice(*ContentAttribute.fields_to_duplicate).merge(:position => first_position + idx))
     end
     render :action => @content_type.new_record? ? 'new' : 'edit'
   end

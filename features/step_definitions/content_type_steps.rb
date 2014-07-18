@@ -10,8 +10,11 @@ Given(/^there (is|are) (\d+) content types?$/) do |ia,n|
   @content_type = @content_types.first
 end
 
+When(/^I go to the list of content types$/) do
+  visit content_types_path
+end
+
 Then(/^I see the content types$/) do
-  click_link "Content types"
   @content_types.each do |content_type|
     expect(page).to have_content(content_type.to_s)
   end
@@ -22,7 +25,7 @@ When(/^I fill in the new content type form and submit$/) do
   @content_type = FactoryGirl.build(:content_type)
   fill_in('content_type_name', :with => @content_type.name)
   @content_type.content_attributes.each_with_index do |content_attribute, idx|
-    click_link('Add content attribute') unless idx.zero?
+    click_link('Add another content attribute') unless idx.zero?
     all(".nested-fields input[id$='_name']")[idx].set(content_attribute.name)
     all(".nested-fields textarea[id$='_description']")[idx].set(content_attribute.description)
     Capybara.ignore_hidden_elements = false
@@ -33,8 +36,7 @@ When(/^I fill in the new content type form and submit$/) do
 end
 
 Then(/^the content type is created$/) do
-  step "I go to the sitemap"
-  click_link "Content types"
+  step "I go to the list of content types"
   expect(page).to have_content(@content_type.to_s)
 end
 

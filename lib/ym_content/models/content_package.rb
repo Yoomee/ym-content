@@ -204,7 +204,7 @@ module YmContent::ContentPackage
       if method == 'id'
         instance_variable_set("@#{content_attribute.slug}_id".to_sym, content_chunk.try(:raw_value))
       else
-        instance_variable_set("@#{content_attribute.slug}_id".to_sym, content_chunk.try(:value))
+        instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
       end
     when 'location'
       if method == 'lat_lng'

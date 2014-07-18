@@ -56,11 +56,11 @@ end
 When(/^I update the content package$/) do
   visit edit_content_package_path(@content_package)
   fill_in('content_package_title', :with => 'Modified title')
-  fill_in('content_package_person_id', :with => User.first.id)
+  select(User.first, :from => 'content_package_person_id')
   attach_file('content_package_photo', File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
   attach_file('content_package_document', File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
   check('content_package_special')
-  click_button("Update #{@content_package.package_name}")
+  find(".content-package-submit").click
 end
 
 Then(/^the content package should change$/) do
@@ -74,7 +74,7 @@ end
 Given(/^I remove an image$/) do
   visit edit_content_package_path(@content_package)
   check 'content_package_remove_photo'
-  click_button("Update #{@content_package.package_name}")
+  find(".content-package-submit").click
 end
 
 Then(/^the image should be removed$/) do
@@ -119,7 +119,7 @@ end
 When(/^I assign it to an author$/) do
   visit edit_content_package_path(@content_package)
   select("#{@author.full_name} (#{@author.role})", :from => 'content_package[author_id]', :visible => false)
-  click_button("Save")
+  find(".cms-edit-status input[type='submit']").click
 end
 
 Then(/^the content package author should change$/) do

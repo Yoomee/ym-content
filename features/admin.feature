@@ -6,7 +6,7 @@ Feature: CMS admin
 
 Scenario: Viewing a list of content types
   Given there are 3 content types
-  When I go to the sitemap
+  When I go to the list of content types
   Then I see the content types
 
 @javascript
