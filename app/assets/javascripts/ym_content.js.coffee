@@ -131,9 +131,11 @@ window.YmContent =
     filter: ->
       status = $('select#status').val()
       if status.length > 0
+        $('h1').text("Content list - #{$('select#status option:selected').text()}")
         $("#sitemap tr.content-package").hide()
         $("#sitemap tr.status-#{status}").show()
       else
+        $('h1').text('Content list')
         $("#sitemap tr.content-package").show()
     loading:(id) ->
       link = $("#content-package-#{id} td.td-name")

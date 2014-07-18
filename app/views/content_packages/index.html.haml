@@ -5,8 +5,7 @@
     SearchManager.init();
     #{"$('#content-package-#{params[:open]}').effect('highlight', 3500);" if @open}
   });
-=render("content_packages/sitemap_header")
-
+=render("content_packages/sitemap_header", :header_title => "Content list")
 .container
   .tab-content.tab-content-sitemap.mb-5.relative
     =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'new-content btn btn-primary')
