@@ -1,5 +1,5 @@
 module YmContent::ContentAttribute
-  
+
   def self.included(base)
     base.belongs_to :content_type
     base.belongs_to :default_attribute, :class_name => 'ContentAttribute'
@@ -32,6 +32,8 @@ module YmContent::ContentAttribute
     end
 
   end
+
+  META_TAG_TYPES = ["title", "description", "image", "keywords", "robots"]
 
   def field_type
     ActiveSupport::StringInquirer.new(read_attribute(:field_type).to_s)
