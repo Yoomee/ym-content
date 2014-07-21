@@ -16,7 +16,6 @@ body.controller_personas {
 .controller_content_types #main-header{
   margin-bottom:60px;
 }
-
 .center{
   text-align: center;
 }
@@ -28,7 +27,11 @@ body.controller_personas {
 }
 .container-cms-edit {
   max-width: 100%;
+  .nav-tabs li i {
+    margin-right: 5px;
+  }
 }
+
 /* Edit page */
 
 .cms-title-icon{
@@ -50,4 +53,17 @@ body.controller_personas {
     background: none repeat scroll 0 0 #fff;
     border-radius: 3px;
     padding: 30px;
+}
+.sitemap .table td {
+    border-top: medium none;
+    min-width: 77px;
+    text-align: right;
+}
+.objective .fa-flag{
+  background: $primary1;
+  color: #fff;
+  padding:10px;
+  border-radius: 50%;
+  float: left;
+  margin-right:20px;
 }

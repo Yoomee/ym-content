@@ -1,5 +1,5 @@
 .nested-fields.well
-  =link_to_remove_association "Remove this content attribute", f, :class => 'pull-right'
+  =link_to_remove_association "Remove this content attribute", f, :class => 'pull-right', :icon => 'trash-o'
   .clearfix
   =f.inputs do
     =f.input :name
@@ -12,6 +12,6 @@
     .character-limit-inputs{:class => f.object.limitable? ? '' : 'hide'}
       =f.input :limit_quantity
       =f.input :limit_unit, :as => :select, :collection => [['Characters', 'character'], ['Words', 'word']], :include_blank => false
-    =#f.input :position
+    =f.input :position, :as => :hidden
     =f.input :required, :default => false, :label => "This is a required field"
     =f.input :meta, :default => false, :label => "This is a meta attribute"

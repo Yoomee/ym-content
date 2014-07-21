@@ -42,6 +42,7 @@ module YmContent::ContentAttribute
     when 'file' then 'file_with_preview'
     when 'text' then 'redactor'
     when 'boolean' then 'content_boolean'
+    when 'user' then 'select'
     else field_type
     end
   end
@@ -52,6 +53,17 @@ module YmContent::ContentAttribute
     when 'tags' then slug.singularize + "_list"
     when 'user' then slug + "_id"
     else slug
+    end
+  end
+
+  def input_options
+    case field_type
+    when 'user'
+      {
+        :collection => ::User.all,
+        :prompt => "None selected"
+      }
+    else {}
     end
   end
 

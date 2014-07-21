@@ -9,12 +9,12 @@ module YmContent::ContentPackage
     base.belongs_to :parent, :class_name => "ContentPackage"
     if Rails::VERSION::MAJOR >= 4
       base.has_many :children, -> { where(:deleted_at => nil).order(:position, :id) }, :class_name => "ContentPackage", :foreign_key => 'parent_id'
-    else      
+    else
       base.has_many :children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => {:deleted_at => nil}
     end
     if Rails::VERSION::MAJOR >= 4
       base.has_many :deleted_children, -> { where("deleted_at IS NOT NULL").order(:position, :id) }, :class_name => "ContentPackage", :foreign_key => 'parent_id'
-    else      
+    else
       base.has_many :deleted_children, :class_name => "ContentPackage", :foreign_key => 'parent_id', :order => [:position, :id], :conditions => "deleted_at IS NOT NULL"
     end
     base.has_many :posts, :as => :target, :dependent => :destroy
@@ -52,6 +52,7 @@ module YmContent::ContentPackage
         s[:draft] = 'Draft' if user.try(:role_is?, :admin) || user.try(:role_is?, :editor)
         s[:pending] = 'Ready to review'
         s[:published] = 'Published' if user.try(:role_is?, :admin) || user.try(:role_is?, :editor)
+        s[:expiring] = 'Getting old' if user.try(:role_is?, :admin) || user.try(:role_is?, :editor)
       end
     end
 
@@ -91,7 +92,9 @@ module YmContent::ContentPackage
 
   def content_chunk_value_by_attribute_slug(slug)
     attribute = ContentAttribute.where(:content_type_id => content_type.id).where(:slug => slug).first
-    chunk = content_chunks.select{|c|c.content_attribute.id == attribute.id}.first.try(:raw_value) || content_chunks.select{|c|c.content_attribute.id == attribute.default_attribute.try(:id)}.first.try(:raw_value)    
+    # TODO: don't fail if a matching attribute is not found
+    return nil unless attribute
+    chunk = content_chunks.select{|c|c.content_attribute.id == attribute.id}.first.try(:raw_value) || content_chunks.select{|c|c.content_attribute.id == attribute.default_attribute.try(:id)}.first.try(:raw_value)
     ActionController::Base.helpers.strip_tags(chunk)
   end
 
@@ -158,16 +161,18 @@ module YmContent::ContentPackage
 
   def embeddable_attributes
     self.content_chunks.each do |content_chunk|
-      if content_chunk.content_attribute.field_type.embeddable? && content_chunk.value_changed?
-        if content_chunk.value.blank?
-          content_chunk.value = nil
-          content_chunk.html = nil
-        else
-          begin
-            content_chunk.html = OEmbed::Providers.get(content_chunk.value).html
-          rescue OEmbed::NotFound => e
+      if content_chunk.content_attribute
+        if content_chunk.content_attribute.field_type.embeddable? && content_chunk.value_changed?
+          if content_chunk.value.blank?
+            content_chunk.value = nil
             content_chunk.html = nil
-            self.errors.add(content_chunk.content_attribute.slug + '_url', "No embeddable content found at this URL")
+          else
+            begin
+              content_chunk.html = OEmbed::Providers.get(content_chunk.value).html
+            rescue OEmbed::NotFound => e
+              content_chunk.html = nil
+              self.errors.add(content_chunk.content_attribute.slug + '_url', "No embeddable content found at this URL")
+            end
           end
         end
       end
@@ -207,7 +212,7 @@ module YmContent::ContentPackage
       if method == 'id'
         instance_variable_set("@#{content_attribute.slug}_id".to_sym, content_chunk.try(:raw_value))
       else
-        instance_variable_set("@#{content_attribute.slug}_id".to_sym, content_chunk.try(:value))
+        instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
       end
     when 'location'
       if method == 'lat_lng'

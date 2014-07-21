@@ -8,7 +8,7 @@
 
 
 $(document).ready ->
-  $("select").selectpicker()
+  $("select:not('.noselectpicker')").selectpicker()
 
   $('input,textarea,select').focusin ->
     $(this).parents('.form-group').addClass('focus')
@@ -56,6 +56,15 @@ window.YmContent =
             link.data('open',1)
             link.find('i.sitemap-caret').removeClass('fa-spin').removeClass('fa-spinner').removeClass('fa-caret-right')
             link.find('i.sitemap-caret').addClass('fa-caret-down')
+      $('.js-duplicate-link').on 'click', ->
+        YmContent.ContentTypes.seedId = $(this).data('content-type-id')
+        $('#duplicate-modal').modal()
+      $('.js-duplicate-submit').on 'click', ->
+        path = "/content_types/#{YmContent.ContentTypes.seedId}/duplicate"
+        duplicateTo = $('#duplicate_to').val()
+        if duplicateTo != ""
+          path += "?to=#{duplicateTo}"
+        window.location = path
     loading:(id) ->
       link = $("#content-type-#{id} td.td-name")
       if link.data('loaded') == 0
@@ -122,9 +131,11 @@ window.YmContent =
     filter: ->
       status = $('select#status').val()
       if status.length > 0
+        $('h1').text("Content list - #{$('select#status option:selected').text()}")
         $("#sitemap tr.content-package").hide()
         $("#sitemap tr.status-#{status}").show()
       else
+        $('h1').text('Content list')
         $("#sitemap tr.content-package").show()
     loading:(id) ->
       link = $("#content-package-#{id} td.td-name")

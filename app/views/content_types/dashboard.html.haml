@@ -22,7 +22,7 @@
               %span.btn-cms-text  
                 Ready to review
           .col-md-4
-            =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-primary4 btn-with-number btn-cms-old fadeInPop" do
+            =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-grey btn-with-number btn-cms-old fadeInPop" do
               %span.btn-cms-number
                 =ContentPackage.expiring.count
               %span.btn-cms-text  
@@ -57,4 +57,4 @@
         =link_if_can("Content list", content_packages_path, :class => 'btn btn-primary1 btn-block mb-1')
         =link_if_can("Users & permissions", '#', :class => 'btn btn-block btn-grey mb-1')
         =link_if_can("Manage personas", personas_path, :class => 'btn btn-primary1 btn-block mb-1')
-        =link_if_can("Request content type", '#', :class => 'btn btn-grey btn-block mb-1')
+        =link_if_can("Request content template", '#', :class => 'btn btn-grey btn-block mb-1')

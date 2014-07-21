@@ -12,19 +12,19 @@
   %td{:class => "td-status td-status-#{content_package.status}"}
     =content_package.due_date.try(:strftime, '%b %d, %Y')
   %td
-    =link_to('View', content_package) unless content_package.viewless?
+    =link_to('View', content_package) unless content_package.viewless? || content_package.missing_view?
   %td
     -if can? :edit, content_package
       =link_to('Edit', edit_content_package_path(content_package))
   %td
     .dropdown
-      =link_to('More&hellip;'.html_safe, '#', 'data-toggle' => 'dropdown')
-      %ul.dropdown-menu
+      =link_to('More'.html_safe, '#', 'data-toggle' => 'dropdown', :icon => 'angle-down', :icon_last => true)
+      %ul.dropdown-menu.dropdown-menu-right
         %li=link_to('Add child', new_content_package_path(:parent => content_package.id))
         -if content_package.children.count > 1
           %li=link_to('Reorder children', reorder_content_package_path(content_package))
         -if content_package.deletable?
-          %li=link_to('Delete', content_package_path(content_package), :method => :delete, :data => {:confirm => "Are you sure you want to delete this content package#{" and all it's children" if content_package.children.count.nonzero?}?"})
+          %li=link_to('Delete', delete_content_package_path(content_package), :method => :put, :data => {:confirm => "Are you sure you want to delete this content package#{" and all it's children" if content_package.children.count.nonzero?}?"})
 - parents << content_package
 -if open
   -content_package.children.each do |child|

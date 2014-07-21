@@ -2,14 +2,15 @@
   $(document).ready(function(){
     YmContent.ContentTypes.init()
   });
-=render("content_packages/sitemap_header")
+=render("content_packages/sitemap_header", :header_title => "Content templates")
 .container
-  .tab-content.tab-content-sitemap.mb-5
+  .tab-content.tab-content-sitemap.mb-5.relative
+    =link_if_can("Add new content template", [:new, ContentType.new], :icon => 'plus', :class => 'new-content btn btn-primary')
     #content-types.tab-pane.active.sitemap
       %table.table.table-content-types
         %thead
           %tr
-            %th.col-md-10{:colspan => 4} Content type / Name
+            %th.col-md-10{:colspan => 4} Content template / Name
         %tbody
           -@content_types.each do |content_type|
             %tr.content-type{:id => "content-type-#{content_type.id}", :class => "#{'has-children' unless content_type.content_packages.count.zero?}", :data => {:depth => 0}}
@@ -26,12 +27,26 @@
                 =link_to('Edit', edit_content_type_path(content_type))
               %td
                 .dropdown
-                  =link_to('More&hellip;'.html_safe, '#', 'data-toggle' => 'dropdown')
-                  %ul.dropdown-menu
+                  =link_to('More'.html_safe, '#', 'data-toggle' => 'dropdown', :icon => 'angle-down', :icon_last => true)
+                  %ul.dropdown-menu.dropdown-menu-right
                     %li=link_to("Add new content of this type", new_content_type_content_package_path(content_type))
+                    %li=link_to('Duplicate...', '#', :class => 'js-duplicate-link', :data => {:content_type_id => content_type.id})
                     %li=link_to('Reorder content attributes', reorder_content_type_path(content_type))
                     -if content_type.destroyable?
-                      %li=link_to('Delete this content type', content_type_path(content_type), :method => :delete, :data => {:confirm => "Are you sure you want to delete this content type? This cannot be undone."})
+                      %li=link_to('Delete this content template', content_type_path(content_type), :method => :delete, :data => {:confirm => "Are you sure you want to delete this content template? This cannot be undone."})
           %tr
             %td{:colspan => 7}
-              =link_if_can("Add new content type", [:new, ContentType.new], :icon => 'plus')
+              =link_if_can("Add new content template", [:new, ContentType.new], :icon => 'plus', :class => 'new-content btn btn-primary')
+.modal.fade#duplicate-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{:type => "button", :data => {:dismiss => "modal"}} &times;
+        %h4.modal-title Duplicate
+      .modal-body
+        %p
+          Copy the content attributes of this content template onto
+          =select_tag(:duplicate_to, options_from_collection_for_select(@content_types, "id", "name"), :prompt => "A new content template", :class => 'noselectpicker')
+      .modal-footer
+        %button.btn.btn-default.pull-left{:type => "button", :data => {:dismiss => "modal"}} Cancel
+        %button.btn.btn-primary.js-duplicate-submit{:type => "button", :data => {:dismiss => "modal"}} Duplicate

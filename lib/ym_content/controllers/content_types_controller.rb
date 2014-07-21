@@ -1,5 +1,5 @@
 module YmContent::ContentTypesController
-  
+
   def self.included(base)
     base.load_and_authorize_resource
   end
@@ -17,9 +17,9 @@ module YmContent::ContentTypesController
 
   def destroy
     if @content_type.destroy
-      flash[:notice] = "The content type was successfully deleted"
+      flash[:notice] = "The content template was successfully deleted"
     else
-      flash[:error] = "Unable to delete this content type"
+      flash[:error] = "Unable to delete this content template"
     end
     redirect_to content_packages_path(:anchor => 'content-types')
   end
@@ -35,8 +35,9 @@ module YmContent::ContentTypesController
     else
       @content_type = ContentType.new
     end
-    seed.content_attributes.each do |content_attribute|
-      @content_type.content_attributes.build(content_attribute.attributes.slice(*ContentAttribute.fields_to_duplicate))
+    first_position = @content_type.content_attributes.size
+    seed.content_attributes.each_with_index do |content_attribute, idx|
+      @content_type.content_attributes.build(content_attribute.attributes.slice(*ContentAttribute.fields_to_duplicate).merge(:position => first_position + idx))
     end
     render :action => @content_type.new_record? ? 'new' : 'edit'
   end
@@ -72,7 +73,30 @@ module YmContent::ContentTypesController
   end
 
   private
+  
   def content_type_params
-    params.require(:content_type).permit(:id, :name, :description, :singleton, :package_name, :viewless, :view_name, :use_workflow, :content_attributes_attributes => [:id, :_destroy, :default_attribute_id, :name, :description, :field_type, :required, :meta, :meta_tag_name, :limit_quantity, :limit_unit])
+    params.require(:content_type).permit(
+      :name,
+      :description,
+      :singleton,
+      :package_name,
+      :viewless,
+      :view_name,
+      :use_workflow,
+      :content_attributes_attributes => [
+        :id,
+        :_destroy,
+        :default_attribute_id,
+        :name,
+        :description,
+        :field_type,
+        :required,
+        :meta,
+        :meta_tag_name,
+        :limit_quantity,
+        :limit_unit,
+        :position
+      ]
+    )
   end
 end
