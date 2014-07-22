@@ -16,6 +16,18 @@ $(document).ready ->
     $(this).parents('.form-group').removeClass('focus')
 
 window.YmContent =
+  ContentPackages:
+    initForm: ->
+      $('#content_package_content_type_id').change ->
+        YmContent.ContentPackages.updateGoal()
+      $('#content_package_notes').change ->
+        YmContent.ContentPackages.goalChangedByUser = true
+      YmContent.ContentPackages.updateGoal()
+    updateGoal: ->
+      unless YmContent.ContentPackages.goalChangedByUser
+        goal = YmContent.ContentPackages.descriptions[$('#content_package_content_type_id').val()]
+        $('#content_package_notes').val(goal)
+    goalChangedByUser: false
   ContentTypes:
     init: ->
       $('.sitemap').on 'click', 'td.td-name', ->

@@ -1,3 +1,8 @@
+:javascript
+  YmContent.ContentPackages.descriptions = #{Hash[ContentType.all.map{|ct| [ct.id, ct.description]}].to_json};
+  $(document).ready(function(){
+    YmContent.ContentPackages.initForm();
+  });
 .container.cms-main
   .row
     .col-md-6.col-md-offset-3.mb-4
