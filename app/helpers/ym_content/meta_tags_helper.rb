@@ -32,7 +32,7 @@ module YmContent::MetaTagsHelper
         when 'description'
           meta_description = mc.value
         when 'image'
-          meta_image = mc.value
+          meta_image = mc.value.url(:host => Settings.site_url)
         else
           Rails.logger.info('Unsupported meta tag: #{mc.content_attribute.meta_tag_name}')
         end
@@ -60,8 +60,8 @@ module YmContent::MetaTagsHelper
       end
 
       if meta_image.present?
-        meta_tags << "<meta itemprop=\"image\" content=\"#{meta_image.url(:host => Settings.site_url)}\">\n"
-        meta_tags << "<meta property=\"og:image\" content=\"#{meta_image.url(:host => Settings.site_url)}\"/>\n"
+        meta_tags << "<meta itemprop=\"image\" content=\"#{meta_image}\">\n"
+        meta_tags << "<meta property=\"og:image\" content=\"#{meta_image}\"/>\n"
       end
 
       if meta_keywords.present?
