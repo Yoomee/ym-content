@@ -42,8 +42,6 @@ module YmContent::MetaTagsHelper
   end
 
   def build_meta_tags(meta_values)
-    puts 'META VALUES IN GEM'
-    puts meta_values
     meta_title, meta_description, meta_image, meta_keywords = meta_values
     meta_tags = ""
     if @content_package.present?
@@ -62,8 +60,8 @@ module YmContent::MetaTagsHelper
       end
 
       if meta_image.present?
-        meta_tags << "<meta itemprop=\"image\" content=\"#{meta_image}\">\n"
-        meta_tags << "<meta property=\"og:image\" content=\"#{meta_image}\"/>\n"
+        meta_tags << "<meta itemprop=\"image\" content=\"#{meta_image.url(:host => Settings.site_url)}\">\n"
+        meta_tags << "<meta property=\"og:image\" content=\"#{meta_image.url(:host => Settings.site_url)}\"/>\n"
       end
 
       if meta_keywords.present?
