@@ -33,7 +33,7 @@ module YmContent::ContentAttribute
 
   end
 
-  META_TAG_TYPES = ["title", "description", "image", "keywords", "robots"]
+  META_TAG_TYPES = ["title", "description", "image", "keywords"]
 
   def field_type
     ActiveSupport::StringInquirer.new(read_attribute(:field_type).to_s)

@@ -13,5 +13,5 @@
     =f.input :required, :default => false, :label => "This is a required field"
     =f.input :meta, :default => false, :label => "This is a meta attribute"
     .meta-attributes{:class => f.object.meta? ? '' : 'hide'}
-      =f.input :meta_tag_name, :as => :select, :collection => ContentAttribute::META_TAG_TYPES
-      =f.input :default_attribute, :as => :select, :collection => @content_type.content_attributes.select{|a| !a.meta?}, :label => "Select an attribute for this meta tag to default to", :prompt => "Select..."
+      =f.input :meta_tag_name, :as => :select, :collection => ContentAttribute::META_TAG_TYPES, :label => 'Choose the type of meta tag', :hint => "This is some hint text"
+      =f.input :default_attribute, :as => :select, :collection => @content_type.content_attributes.select{|a| !a.meta?}, :label => "Select a value for this meta tag to default to", :prompt => "Select..."

@@ -92,10 +92,13 @@ module YmContent::ContentPackage
 
   def content_chunk_value_by_attribute_slug(slug)
     attribute = ContentAttribute.where(:content_type_id => content_type.id).where(:slug => slug).first
-    # TODO: don't fail if a matching attribute is not found
-    return nil unless attribute
     chunk = content_chunks.select{|c|c.content_attribute.id == attribute.id}.first.try(:raw_value) || content_chunks.select{|c|c.content_attribute.id == attribute.default_attribute.try(:id)}.first.try(:raw_value)
     ActionController::Base.helpers.strip_tags(chunk)
+  end
+
+  def get_meta_content_chunks
+    ca = self.content_type.content_attributes.where(:meta => true).pluck(:id)
+    ContentChunk.where(:content_attribute_id => ca).includes(:content_attribute)
   end
 
   def content_chunks
