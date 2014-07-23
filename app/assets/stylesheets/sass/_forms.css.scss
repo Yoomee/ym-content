@@ -55,7 +55,8 @@
     margin-top:10px;
   }
   .focus .help-block,
-  .checkbox > .help-block {
+  .checkbox > .help-block,
+  .bootstrap-select + .help-block {
     height: auto;
     opacity: 1;
   }
@@ -266,7 +267,7 @@
   border: 1px solid #AFAFAF;
 }
 
-/* Radio input styling specific 
+/* Radio input styling specific
 
 .control-label input[type="radio"],
 .control-label input[type="checkbox"] {
@@ -279,15 +280,15 @@
   font-size: 20px;
 }
 .control-label input[type="radio"] + span:before {
-  content: "\f10c"; 
+  content: "\f10c";
 }
 .control-label input[type="radio"]:checked + span:before {
-  content: "\f111"; 
+  content: "\f111";
 }
 .control-label input[type="checkbox"] + span:before {
-  content: "\f096"; 
+  content: "\f096";
 }
 .control-label input[type="checkbox"]:checked + span:before {
-  content: "\f046"; 
+  content: "\f046";
 }
 */
