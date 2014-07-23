@@ -19,6 +19,15 @@ module YmContent::ContentPackagesController
   def children
   end
 
+  def edit
+    @content_package = ContentPackage.includes(
+      {:content_type => :content_attributes},
+      :personas
+    ).find(params[:id])
+    @activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
+    @persona_groups = PersonaGroup.all
+  end
+
   def create
     if @content_package.save
       current_user.record_activity!(@content_package, :text => "created")
@@ -96,7 +105,7 @@ module YmContent::ContentPackagesController
 
   def update
     if @content_package.update_attributes(content_package_params)
-      flash[:notice] = "Updated \"#{@content_package}\""      
+      flash[:notice] = "Updated \"#{@content_package}\""
       current_user.record_activity!(@content_package, :text => "updated")
       if @content_package.missing_view?
         redirect_to content_packages_path(:open => @content_package)
