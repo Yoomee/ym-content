@@ -12,4 +12,12 @@ $(document).ready(function(){
       $(this).text('Show more');
     }
   });
+  $('select#content_package_status').change(function() {
+    if ($('select#content_package_status option:selected').val() === 'published'){
+      $('#content_package_publish_at_fields').addClass('hidden');
+    }
+    else{
+      $('#content_package_publish_at_fields').removeClass('hidden');
+    }
+  });
 });

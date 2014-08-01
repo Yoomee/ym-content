@@ -70,6 +70,14 @@ module YmContent::ContentPackage
       joins(:permalink).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
     end
 
+    def publish_scheduled_packages
+      where('publish_at IS NOT NULL').each do |content_package|
+        if content_package.publish_at == Date.today
+          content_package.update_attributes(:status => 'published', :publish_at => nil)
+        end
+      end
+    end
+
   end
 
   def deletable?
