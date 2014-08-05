@@ -41,7 +41,7 @@ module YmContent::ContentPackage
     base.extend(ClassMethods)
 
     base.scope :root, -> { base.where(:parent_id => nil, :deleted_at => nil).order(:position, :id) }
-    base.scope :published, -> { base.where(:status => 'published') }
+    base.scope :published, -> { base.where(:status => 'published').where('publish_at <= ? OR publish_at IS NULL', Date.today) }
     base.scope :expiring, -> { base.where('next_review < ?', Date.today) }
   end
 
@@ -68,14 +68,6 @@ module YmContent::ContentPackage
     def search(term)
       escaped_term = "%#{term}%"
       joins(:permalink).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
-    end
-
-    def publish_scheduled_packages
-      where('publish_at IS NOT NULL').each do |content_package|
-        if content_package.publish_at == Date.today
-          content_package.update_attributes(:status => 'published', :publish_at => nil)
-        end
-      end
     end
 
   end
@@ -106,11 +98,15 @@ module YmContent::ContentPackage
     [parent, parent.try(:parents)].flatten.compact
   end
 
+  def published?
+    status == 'published' && (publish_at.nil? || publish_at <= Date.today)
+  end
+
   def visible_to_user?(user)
     if logged_in_only?
-      user && status == 'published' && !deleted? && !missing_view?
+      user && published? && !deleted? && !missing_view?
     else
-      status == 'published' && !deleted? && !missing_view?
+      published? && !deleted? && !missing_view?
     end
   end
 

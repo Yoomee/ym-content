@@ -81,9 +81,11 @@
               =form.input :author_id, :as => :select, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id, {:'data-role' => u.role }] }, :include_blank => true, :label => false
               %label{for: "content_package_status"} Status
               =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false, :label => false
-              #content_package_publish_at_fields{:class => @content_package.status == 'published' ? 'hidden' : ''}
-                %label{for: "content_package_publish_at"} Publish At
+              #content_package_publish_at_fields{:class => @content_package.status == 'published' ? '' : 'hidden'}
+                %label{for: "content_package_publish_at"} Publish at (optional)
                 =form.input :publish_at, :as => :datepicker, :label => false
+                .help-block{:class => @content_package.publish_at.present? ? '' : 'hidden'}
+                  %p Page will be published but not shown to the public until this date.
             -if current_user.role == "author"
               =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-primary1 btn-block"}
               =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-confirm btn-block js-save-progress"}

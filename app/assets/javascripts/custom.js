@@ -14,10 +14,18 @@ $(document).ready(function(){
   });
   $('select#content_package_status').change(function() {
     if ($('select#content_package_status option:selected').val() === 'published'){
-      $('#content_package_publish_at_fields').addClass('hidden');
+      $('#content_package_publish_at_fields').removeClass('hidden');
     }
     else{
-      $('#content_package_publish_at_fields').removeClass('hidden');
+      $('#content_package_publish_at_fields').addClass('hidden');
+    }
+  });
+  $('input#content_package_publish_at').change(function() {
+    if ($('input#content_package_publish_at').val()) {
+      $('#content_package_publish_at_fields .help-block').removeClass('hidden');
+    }
+    else{
+      $('#content_package_publish_at_fields .help-block').addClass('hidden');
     }
   });
 });
