@@ -10,16 +10,12 @@ body.controller_personas {
   background-size: 100%;
   color: #555;
 }
-.container.container-cms-edit #main-header,
-.controller_content_packages #main-header,
-.controller_navigation_items #main-header,
-.controller_content_types #main-header{
-  margin-bottom:60px;
-}
+ 
 .center{
   text-align: center;
 }
-.cms-main{
+.cms-main, 
+.container.cms-main{
   margin-top:60px;
   a{
     color: $primary1;
