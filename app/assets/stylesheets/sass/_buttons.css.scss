@@ -104,17 +104,17 @@
   top: -52px;
 }
 .cms-dashboard-btn div:nth-child(2){
-  @include media-query (md) {
+  @include ym_content_mq (md) {
     padding:0;
   }
 }
 .cms-dashboard-btn .btn{
-  @include media-query (sm-max) {
+  @include ym_content_mq (sm-max) {
     margin:5px 0;
   }
 }
 .cms-dashboard-btn .btn-cms-text{
-  @include media-query (md-max) {
+  @include ym_content_mq (md-max) {
     font-size: 14px;
   }
 }

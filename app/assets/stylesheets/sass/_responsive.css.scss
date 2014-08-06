@@ -16,7 +16,7 @@ $md-end:          $lg-start - 1px!default;
 
 
 
-@mixin media-query($media-query) {
+@mixin ym_content_mq($media-query) {
 
   @if $media-query == xs {
 
