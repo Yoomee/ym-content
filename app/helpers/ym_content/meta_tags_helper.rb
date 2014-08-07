@@ -12,6 +12,7 @@ module YmContent::MetaTagsHelper
     meta_tags.html_safe
   end
 
+  # builds meta data needed for generating meta tags
   def build_meta_values
     if @content_package.present?
 
@@ -21,7 +22,7 @@ module YmContent::MetaTagsHelper
       meta_image = "#{Settings.site_url}#{Settings.default_meta_image}"
       meta_keywords = Settings.default_meta_keywords
 
-      # override defaults with custom meta from package
+      # override defaults with custom meta tags from package
       meta_content = @content_package.get_meta_content_chunks
       meta_content.each do |mc|
         case mc.content_attribute.meta_tag_name
@@ -41,6 +42,7 @@ module YmContent::MetaTagsHelper
     [meta_title, meta_description, meta_image, meta_keywords]
   end
 
+  # generates meta tags from data
   def build_meta_tags(meta_values)
     meta_title, meta_description, meta_image, meta_keywords = meta_values
     meta_tags = ""
@@ -48,7 +50,7 @@ module YmContent::MetaTagsHelper
       # build actual tags from values
       if meta_title.present?
         meta_tags << "<meta itemprop=\"name\" content=\"#{meta_title}\">\n"
-        meta_tags << "<meta name=\"twitter:card\" content=\"#{meta_title}\">\n"
+        meta_tags << "<meta name=\"twitter:card\" content=\"summary\">\n"
         meta_tags << "<meta name=\"twitter:title\" content=\"#{meta_title}\">\n"
         meta_tags << "<meta property=\"og:title\" content=\"#{meta_title}\" />\n"
       end
