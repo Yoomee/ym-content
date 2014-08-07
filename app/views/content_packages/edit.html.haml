@@ -42,7 +42,8 @@
             -if @meta_content_attributes.present?
               =form.inputs do
                 -@meta_content_attributes.each do |content_attribute|
-                  =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
+                  -# =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
+                  =form.content_input content_attribute, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
             -else
               %p
                 This page uses the site default meta tags. Update the template to allow them to be overrided.
