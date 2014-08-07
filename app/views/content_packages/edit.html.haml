@@ -36,12 +36,16 @@
                     %label Content objective/goal
                     %p=@content_package.notes
             =form.inputs do
-              -@content_package.content_attributes.where(:meta => false).each do |content_attribute|
+              -@non_meta_content_attributes.each do |content_attribute|
                 =form.content_input content_attribute
           #meta.tab-pane.cms-form
-            =form.inputs do
-              -@content_package.content_attributes.where(:meta => true).each do |content_attribute|
-                =form.input content_attribute.slug, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
+            -if @meta_content_attributes.present?
+              =form.inputs do
+                -@meta_content_attributes.each do |content_attribute|
+                  =form.content_input content_attribute, :as => content_attribute.field_type, :label => content_attribute.name, :hint => content_attribute.description
+            -else
+              %p
+                This page uses the site default meta tags. Update the template to allow them to be overrided.
           -if current_user.admin?
             #settings.tab-pane.cms-form
               %h4.mt-0.mb-1.ml-1 Editor settings
@@ -51,7 +55,7 @@
                 =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}
                 .form-group#content_package_personas
                   %label.control-label Personas
-                  -PersonaGroup.all.each_slice(2) do |groups|
+                  -@persona_groups.each_slice(2) do |groups|
                     .row
                       -groups.each do |group|
                         .col-md-6
@@ -140,10 +144,9 @@
             #activity.tab-pane
               .cms-dashboard-well.clearfix.fadeIn
                 %ul.cms-activities
-                  -activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
-                  -activity_items.each do |activity|
+                  -@activity_items.each do |activity|
                     =render("content_packages/activity", :include_name => true, :activity => activity)
-                -if activity_items.total_pages != activity_items.current_page
+                -if @activity_items.total_pages != @activity_items.current_page
                   =link_to "See older activity", activity_content_packages_path(@content_package), :remote => true, :class => 'btn btn-small js-older-activities pull-right mt-1'
 
             #content-scorecard.tab-pane
