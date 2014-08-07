@@ -24,18 +24,20 @@ module YmContent::MetaTagsHelper
 
       # override defaults with custom meta tags from package
       meta_content = @content_package.get_meta_content_chunks
-      meta_content.each do |mc|
-        case mc.content_attribute.meta_tag_name
-        when 'title'
-          meta_title = mc.value
-        when 'keywords'
-          meta_keywords += (', ' + mc.value)
-        when 'description'
-          meta_description = mc.value
-        when 'image'
-          meta_image = mc.value.url(:host => Settings.site_url)
-        else
-          Rails.logger.info('Unsupported meta tag: #{mc.content_attribute.meta_tag_name}')
+      if meta_content
+        meta_content.each do |mc|
+          case mc.content_attribute.meta_tag_name
+          when 'title'
+            meta_title = mc.value
+          when 'keywords'
+            meta_keywords += (', ' + mc.value)
+          when 'description'
+            meta_description = mc.value
+          when 'image'
+            meta_image = mc.value.url(:host => Settings.site_url)
+          else
+            Rails.logger.info('Unsupported meta tag: #{mc.content_attribute.meta_tag_name}')
+          end
         end
       end
     end

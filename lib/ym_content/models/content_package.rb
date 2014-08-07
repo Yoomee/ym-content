@@ -97,8 +97,10 @@ module YmContent::ContentPackage
   end
 
   def get_meta_content_chunks
-    ca = self.content_type.content_attributes.where(:meta => true).pluck(:id)
-    ContentChunk.where(:content_attribute_id => ca).includes(:content_attribute)
+    if self.content_type.present?
+      ca = self.content_type.content_attributes.where(:meta => true).pluck(:id)
+      ContentChunk.where(:content_attribute_id => ca).includes(:content_attribute)
+    end
   end
 
   def content_chunks
