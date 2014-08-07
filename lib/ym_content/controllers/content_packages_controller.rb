@@ -25,7 +25,6 @@ module YmContent::ContentPackagesController
       :personas
     ).find(params[:id])
     @activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
-    @persona_groups = PersonaGroup.all
     @non_meta_content_attributes = @content_package.content_attributes.where(:meta => false)
     @meta_content_attributes = @content_package.content_attributes.where(:meta => true)
   end

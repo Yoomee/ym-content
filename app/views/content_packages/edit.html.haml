@@ -55,7 +55,7 @@
                 =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}
                 .form-group#content_package_personas
                   %label.control-label Personas
-                  -@persona_groups.each_slice(2) do |groups|
+                  -PersonaGroup.all.each_slice(2) do |groups|
                     .row
                       -groups.each do |group|
                         .col-md-6
