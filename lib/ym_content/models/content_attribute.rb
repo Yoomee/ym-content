@@ -1,5 +1,5 @@
 module YmContent::ContentAttribute
-  
+
   def self.included(base)
     base.belongs_to :content_type
     base.after_validation :set_slug
@@ -71,6 +71,10 @@ module YmContent::ContentAttribute
 
   def removable?
     new_record? || content_type.missing_view?
+  end
+
+  def to_s
+    name
   end
 
   private
