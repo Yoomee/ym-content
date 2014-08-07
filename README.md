@@ -48,7 +48,8 @@ live_site_url: http://vinspired.com
 default_meta_title: Your site title
 default_meta_description: Your site description
 default_meta_keywords: comma, separated, keywords
-default_meta_image: /absolute/path/to/your-image.jpg
+default_fb_meta_image: /absolute/path/to/your-image.jpg
+default_twitter_meta_image: /absolute/path/to/your-image.jpg
 ```
 
 ## Tests

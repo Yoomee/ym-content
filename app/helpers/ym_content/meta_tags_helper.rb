@@ -19,7 +19,7 @@ module YmContent::MetaTagsHelper
       # get site defaults
       meta_title = Settings.default_meta_title || 'Site title'
       meta_description = Settings.default_meta_description
-      meta_image = "#{Settings.site_url}#{Settings.default_meta_image}"
+      meta_image = "#{Settings.site_url}#{Settings.default_fb_meta_image}"
       meta_keywords = Settings.default_meta_keywords
 
       # override defaults with custom meta tags from package
