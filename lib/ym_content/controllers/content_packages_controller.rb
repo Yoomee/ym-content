@@ -20,6 +20,8 @@ module YmContent::ContentPackagesController
   end
 
   def edit
+    # added double colon to access global scope... #TODO: this needs reviewing
+    @persona_groups = ::PersonaGroup.all
     @content_package = ContentPackage.includes(
       {:content_type => :content_attributes},
       :personas
