@@ -34,7 +34,9 @@ module YmContent::MetaTagsHelper
           when 'description'
             meta_description = mc.value
           when 'image'
-            meta_image = mc.value.url(:host => Settings.site_url)
+            if mc.value
+              meta_image = mc.value.url(:host => Settings.site_url)
+            end
           else
             Rails.logger.info('Unsupported meta tag: #{mc.content_attribute.meta_tag_name}')
           end
