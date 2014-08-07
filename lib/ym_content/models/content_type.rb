@@ -70,7 +70,9 @@ module YmContent::ContentType
       :name => 'Keywords',
       :field_type => 'string',
       :description => 'Meta keywords: comma separated',
-      :meta_tag_name => 'keywords'
+      :meta_tag_name => 'keywords',
+      :limit_quantity => 2,
+      :limit_unit => 'word'
     )
     self.save
   end
