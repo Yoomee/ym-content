@@ -1,5 +1,5 @@
 module YmContent::ContentTypesController
-  
+
   def self.included(base)
     base.load_and_authorize_resource
   end
@@ -17,7 +17,7 @@ module YmContent::ContentTypesController
 
   def destroy
     if @content_type.destroy
-      flash[:notice] = "The content template was cuccessfully deleted"
+      flash[:notice] = "The content template was successfully deleted"
     else
       flash[:error] = "Unable to delete this content template"
     end
@@ -73,7 +73,30 @@ module YmContent::ContentTypesController
   end
 
   private
+
   def content_type_params
-    params.require(:content_type).permit(:name, :description, :singleton, :package_name, :viewless, :view_name, :use_workflow, :content_attributes_attributes => [:id, :_destroy, :name, :description, :field_type, :required, :meta, :limit_quantity, :limit_unit, :position])
+    params.require(:content_type).permit(
+      :name,
+      :description,
+      :singleton,
+      :package_name,
+      :viewless,
+      :view_name,
+      :use_workflow,
+      :content_attributes_attributes => [
+        :id,
+        :_destroy,
+        :default_attribute_id,
+        :name,
+        :description,
+        :field_type,
+        :required,
+        :meta,
+        :meta_tag_name,
+        :limit_quantity,
+        :limit_unit,
+        :position
+      ]
+    )
   end
 end

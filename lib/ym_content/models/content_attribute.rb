@@ -1,7 +1,9 @@
 module YmContent::ContentAttribute
-  
+
   def self.included(base)
     base.belongs_to :content_type
+    base.belongs_to :default_attribute, :class_name => 'ContentAttribute'
+    base.after_validation :set_meta_title, :if => :meta?
     base.after_validation :set_slug
     base.validates :slug, :name, :field_type, :presence => true
     base.validates :slug, :name, :uniqueness => { :scope => :content_type_id }
@@ -30,6 +32,8 @@ module YmContent::ContentAttribute
     end
 
   end
+
+  META_TAG_TYPES = ["title", "description", "image", "keywords"]
 
   def field_type
     ActiveSupport::StringInquirer.new(read_attribute(:field_type).to_s)
@@ -73,7 +77,19 @@ module YmContent::ContentAttribute
     new_record? || content_type.missing_view?
   end
 
+  def to_s
+    name
+  end
+
   private
+
+  def set_meta_title
+    unless name.start_with?('Meta ')
+      self.name = 'Meta ' << name
+      valid?
+    end
+  end
+
   def set_slug
     if slug.blank? && name.present? && errors['name'].blank?
       slug_name = name.gsub('-',' ').parameterize("_").sub(/^\d+/,'n')
