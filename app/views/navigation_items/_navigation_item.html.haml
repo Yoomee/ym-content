@@ -1,5 +1,5 @@
 - parents = parents.try(:dup) || []
-%tr
+%tr.navigation-item{:class => "#{'has-children' unless navigation_item.children.count.zero?}"}
   %td.td-name
     =sitemap_spacers(navigation_item, parents)
     %span.name
