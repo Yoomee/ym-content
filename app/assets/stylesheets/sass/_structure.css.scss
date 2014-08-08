@@ -55,6 +55,12 @@ body.controller_personas {
     min-width: 77px;
     text-align: right;
 }
+.sitemap .table td.td-actions {
+    min-width: 300px;
+}
+.sitemap .table td.td-name {
+    min-width: 360px;
+}
 .objective .fa-flag{
   background: $primary1;
   color: #fff;
@@ -63,3 +69,7 @@ body.controller_personas {
   float: left;
   margin-right:20px;
 }
+.hide{
+  display: none;
+}
+
