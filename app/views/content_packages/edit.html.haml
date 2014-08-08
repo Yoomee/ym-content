@@ -138,7 +138,10 @@
                 =@content_package.requested_by.try(:full_name)
               %h5 Content assigned to
               .cms-edit-context-box
-                =@content_package.author.try(:full_name)
+                -if @content_package.author
+                  =@content_package.author.try(:full_name)
+                -else
+                  Nobody
             #discussion.tab-pane
               =render("discussion")
             #activity.tab-pane
