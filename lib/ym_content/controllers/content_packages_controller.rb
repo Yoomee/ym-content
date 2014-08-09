@@ -125,17 +125,6 @@ module YmContent::ContentPackagesController
     end
 
     def get_view_data
-      @persona_groups = ::PersonaGroup.all
-      @content_package = ContentPackage.includes(
-        {:content_type => :content_attributes},
-        :personas
-      ).find(params[:id])
-      @activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
-      @non_meta_content_attributes = @content_package.content_attributes.where(:meta => false)
-      @meta_content_attributes = @content_package.content_attributes.where(:meta => true)
-    end
-
-    def get_view_data
       # added double colon to access global scope... #TODO: this needs reviewing
       @persona_groups = ::PersonaGroup.all
       @activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
