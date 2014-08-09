@@ -2,6 +2,8 @@ module YmContent::ContentPackagesController
 
   def self.included(base)
     base.load_and_authorize_resource
+    base.before_filter :get_view_data, only: [:edit, :update]
+
   end
 
   def activity
@@ -20,15 +22,10 @@ module YmContent::ContentPackagesController
   end
 
   def edit
-    # added double colon to access global scope... #TODO: this needs reviewing
-    @persona_groups = ::PersonaGroup.all
     @content_package = ContentPackage.includes(
       {:content_type => :content_attributes},
       :personas
     ).find(params[:id])
-    @activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
-    @non_meta_content_attributes = @content_package.content_attributes.where(:meta => false)
-    @meta_content_attributes = @content_package.content_attributes.where(:meta => true)
   end
 
   def create
@@ -116,6 +113,8 @@ module YmContent::ContentPackagesController
         redirect_to @content_package
       end
     else
+      #TODO change to flash[:error] when the style has been made
+      flash[:notice] = "Sorry there was a problem saving this page: #{@content_package.errors.full_messages.to_sentence}"
       render :action => 'edit'
     end
   end
@@ -125,6 +124,24 @@ module YmContent::ContentPackagesController
       params.require(:content_package).permit(*params[:content_package].try(:keys) + [:persona_ids => []])
     end
 
+    def get_view_data
+      @persona_groups = ::PersonaGroup.all
+      @content_package = ContentPackage.includes(
+        {:content_type => :content_attributes},
+        :personas
+      ).find(params[:id])
+      @activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
+      @non_meta_content_attributes = @content_package.content_attributes.where(:meta => false)
+      @meta_content_attributes = @content_package.content_attributes.where(:meta => true)
+    end
+
+    def get_view_data
+      # added double colon to access global scope... #TODO: this needs reviewing
+      @persona_groups = ::PersonaGroup.all
+      @activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
+      @non_meta_content_attributes = @content_package.content_attributes.where(:meta => false)
+      @meta_content_attributes = @content_package.content_attributes.where(:meta => true)
+    end
 
   def render_content_package_view
     if template_exists?("content_packages/views/#{@content_package.view_name}")
