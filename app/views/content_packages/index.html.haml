@@ -16,9 +16,11 @@
       %table.table
         %thead
           %tr
-            %th.col-md-6 Name
-            %th.col-md-2 Status
-            %th.col-md-2 Due Date
+            %th.col-md-6
+              Name
+            %th.col-md-2.center Status
+            %th.col-md-2.center Assigned to
+            %th.col-md-2.center  Due Date
             %th{:colspan => 4}
               .sitemap-filter.pull-right
                 %strong Filter
@@ -28,5 +30,5 @@
           -@content_packages.each do |content_package|
             =render('content_package', :content_package => content_package)
           %tr
-            %td{:colspan => 7}
+            %td{:colspan => 8}
               =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-primary1')

@@ -8,7 +8,13 @@
         %i.fa.sitemap-caret{:class => "fa-caret-#{open ? 'down' : 'right'}"}
       =content_package
   %td{:class => "td-status td-status-#{content_package.status}"}
-    =status(content_package.status)
+    %center=status(content_package.status)
+  %td{:class => "td-status td-status-#{content_package.status}"}
+    %center
+      -if content_package.author == current_user
+        You
+      -else
+        =content_package.author
   %td{:class => "td-status td-status-#{content_package.status}"}
     =content_package.due_date.try(:strftime, '%b %d, %Y')
   %td
