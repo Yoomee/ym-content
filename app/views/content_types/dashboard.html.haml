@@ -25,7 +25,7 @@
             =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-grey btn-with-number btn-cms-old fadeInPop" do
               %span.btn-cms-number
                 =ContentPackage.expiring.count
-              %span.btn-cms-text  
+              %span.btn-cms-text
                 Getting old
       -if current_user && ContentPackage.where(:author_id => current_user.try(:id)).count.nonzero?
         .well.dashboard-well.cms-dashboard-well.clearfix.table-cms-dashboard.fadeInSlow
@@ -43,7 +43,8 @@
                 %td=status(content_package.status)
                 %td=content_package.due_date.try(:strftime, '%b %d, %Y')
                 %td.text-right
-                  =link_to "View", content_package, :class=>"cms-table-view btn btn-small"
+                  -if !content_package.missing_view?
+                    =link_to "View", content_package, :class=>"cms-table-view btn btn-small"
                   =link_to "Edit", edit_content_package_path(content_package), :class=>"cms-table-view btn btn-small"
       .well.dashboard-well.cms-dashboard-well.clearfix.fadeInSlow3
         %h4.mt-0.b-1 Recent Activity
