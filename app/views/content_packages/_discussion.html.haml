@@ -1,9 +1,5 @@
 .mt-1
 =render("posts/remote_form", :post => current_user.posts.build(:target => @content_package))
 .posts
-  -if @content_package.posts.empty?
-    .row.no-discussion
-      %h5.text-center This content package has no discussion
-  -else
-    -@content_package.posts.each do |post|
-      =render("discussion_post", :post => post)
+  -@content_package.posts.each do |post|
+    =render("discussion_post", :post => post)
