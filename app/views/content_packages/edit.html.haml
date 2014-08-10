@@ -99,12 +99,20 @@
         %hr
         .cms-sidebar-tabs
           %ul.nav.nav-pills.mb-3
-            %li.active=link_to("Context", '#context', 'data-toggle' => 'pill')
+            %li.active=link_to("Activity", '#activity', 'data-toggle' => 'pill')
+            %li=link_to("Personas", '#personas', 'data-toggle' => 'pill')
+            %li=link_to("Context", '#context', 'data-toggle' => 'pill')
             %li=link_to("Discussion", '#discussion', 'data-toggle' => 'pill')
-            %li=link_to("Activity", '#activity', 'data-toggle' => 'pill')
             %li=link_to("Scorecard", '#content-scorecard', 'data-toggle' => 'pill')
           .tab-content.mb-2
-            #context.tab-pane.active
+            #activity.tab-pane.active
+              .cms-dashboard-well.clearfix.fadeIn
+                %ul.cms-activities
+                  -@activity_items.each do |activity|
+                    =render("content_packages/activity", :include_name => true, :activity => activity)
+                -if @activity_items.total_pages != @activity_items.current_page
+                  =link_to "See older activity", activity_content_packages_path(@content_package), :remote => true, :class => 'btn btn-small js-older-activities pull-right mt-1'
+            #personas.tab-pane
               - if @content_package.personas.present?
                 %h5.hide Audience/personas
                 -@content_package.personas.each do |persona|
@@ -129,27 +137,15 @@
                       -if persona.file
                         =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right mt-2 btn-primary2', :icon => 'download')
                     .clearfix
+            #context.tab-pane
               -if @content_package.notes.present?
-                %h5 Content objective/goal
+                %h5 Content type
                 .cms-edit-context-box
-                  =simple_format(@content_package.notes)
+                  =@content_package.content_type
               %h5 Content requested by
-              .cms-edit-context-box.requested-by.mb-2
+              .cms-edit-context-box.requested-by
                 =@content_package.requested_by.try(:full_name)
-              %h5 Content assigned to
-              .cms-edit-context-box
-                -if @content_package.author
-                  =@content_package.author.try(:full_name)
-                -else
-                  Nobody
             #discussion.tab-pane
               =render("discussion")
-            #activity.tab-pane
-              .cms-dashboard-well.clearfix.fadeIn
-                %ul.cms-activities
-                  -@activity_items.each do |activity|
-                    =render("content_packages/activity", :include_name => true, :activity => activity)
-                -if @activity_items.total_pages != @activity_items.current_page
-                  =link_to "See older activity", activity_content_packages_path(@content_package), :remote => true, :class => 'btn btn-small js-older-activities pull-right mt-1'
-
             #content-scorecard.tab-pane
+              Not defined yet
