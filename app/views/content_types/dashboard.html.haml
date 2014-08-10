@@ -44,8 +44,8 @@
                 %td=content_package.due_date.try(:strftime, '%b %d, %Y')
                 %td.text-right
                   -if !content_package.missing_view?
-                    =link_to "View", content_package, :class=>"cms-table-view btn btn-small"
-                  =link_to "Edit", edit_content_package_path(content_package), :class=>"cms-table-view btn btn-small"
+                    =link_to "View", content_package, :class=>"cms-table-view"
+                  =link_to "Edit", edit_content_package_path(content_package), :class=>"cms-table-view"
       .well.dashboard-well.cms-dashboard-well.clearfix.fadeInSlow3
         %h4.mt-0.b-1 Recent Activity
         %ul.cms-activities
