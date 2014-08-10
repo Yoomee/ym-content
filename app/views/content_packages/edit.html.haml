@@ -130,7 +130,7 @@
                         %em=persona.summary
                       -if persona.benefits.present?
                         %p
-                          %strong Fact checker benefits
+                          %strong="Goals for #{persona.name}"
                         %ul
                           -persona.benefits.each do |benefit|
                             %li=benefit
