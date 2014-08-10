@@ -13,13 +13,13 @@
             =link_to filter_content_packages_path(:filter => 'draft'), :class=>"btn btn-primary3 btn-block btn-with-number btn-cms-drafts fadeInPop" do
               %span.btn-cms-number
                 =ContentPackage.where(:status => 'draft').count
-              %span.btn-cms-text  
+              %span.btn-cms-text
                 Drafts
           .col-md-4
             =link_to filter_content_packages_path(:filter => 'pending'), :class=>"btn btn-block btn-primary2 btn-with-number btn-cms-review fadeInPop" do
               %span.btn-cms-number
                 =ContentPackage.where(:status => 'pending').count
-              %span.btn-cms-text  
+              %span.btn-cms-text
                 Ready to review
           .col-md-4
             =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block  btn-grey btn-with-number btn-cms-old fadeInPop" do
@@ -37,7 +37,7 @@
                 %th Status
                 %th Due date
                 %th
-            -ContentPackage.where(:author_id => current_user.try(:id)).each do |content_package|
+            -@my_content.each do |content_package|
               %tr
                 %td=content_package
                 %td=status(content_package.status)

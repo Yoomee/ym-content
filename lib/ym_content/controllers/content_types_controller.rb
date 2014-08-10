@@ -26,6 +26,7 @@ module YmContent::ContentTypesController
 
   def dashboard
     @activity_items = ActivityItem.where(:resource_type => "ContentPackage").paginate(:page => 1, :per_page => 5)
+    @my_content = ContentPackage.where(:author_id => current_user.try(:id)).order('due_date, id')
   end
 
   def duplicate
