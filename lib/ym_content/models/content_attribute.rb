@@ -14,8 +14,8 @@ module YmContent::ContentAttribute
 
     def field_types
       {
-        :string => 'Text',
-        :text => 'Text area',
+        :string => 'Single line of text',
+        :text => 'Block of text',
         :link => 'Link',
         :image => 'Image',
         :file => 'File',
