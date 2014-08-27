@@ -1,5 +1,9 @@
 module YmContent::ContentHelper
-  
+
+  def content_package_publish_at_class
+    @content_package.status == 'published' && ContentPackage.statuses(current_user).has_key?(:published)  ? 'hidden' : ''
+  end
+
   def needs_design(content_package)
     return nil unless content_package.missing_view?
     content_tag(:span, 'Needs design', :class => 'label label-default')
@@ -13,7 +17,7 @@ module YmContent::ContentHelper
     out << content_tag(:div, form.select(:parent_id, content_tag(:option, 'None', :value => '') + parent_content_package_option_tags(current_page)), :class => 'controls')
     content_tag(:div, out, :class => 'select form-group optional', :id => 'content_package_parent_input')
   end
-  
+
   def parent_content_package_option_tags(current_page, options = {})
     options.reverse_merge!(:pages => ContentPackage.root, :indent => 0)
     parent_pages = options[:pages].without([current_page] + current_page.children)
