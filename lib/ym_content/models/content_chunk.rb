@@ -1,7 +1,7 @@
 module YmContent::ContentChunk
 
   def self.included(base)
-    base.belongs_to :content_package
+    base.belongs_to :content_package, touch: true
     base.belongs_to :content_attribute
     base.send(:file_accessor, :file)
     base.send(:geocoded_by, :value)
