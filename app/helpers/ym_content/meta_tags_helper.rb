@@ -1,15 +1,17 @@
 module YmContent::MetaTagsHelper
 
   def ym_content_meta_tags
-    meta_tags = ''
+    cache content_package_meta_tags_cache_key(@content_package) do
+      meta_tags = ''
 
-    if @content_package.try(:hide_from_robots?)
-      meta_tags += "<meta name='robots' content='noindex, nofollow' />\n"
+      if @content_package.try(:hide_from_robots?)
+        meta_tags += "<meta name='robots' content='noindex, nofollow' />\n"
+      end
+
+      meta_values = build_meta_values
+      meta_tags += build_meta_tags(meta_values)
+      meta_tags.html_safe
     end
-
-    meta_values = build_meta_values
-    meta_tags += build_meta_tags(meta_values)
-    meta_tags.html_safe
   end
 
   # builds meta data needed for generating meta tags
