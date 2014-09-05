@@ -10,7 +10,7 @@ module YmContent::MetaTagsHelper
   # builds meta data needed for generating meta tags
   def build_meta_values
     if @content_package.present?
-      cache content_package_meta_tags_cache_key(@content_package) do
+      # cache content_package_meta_tags_cache_key(@content_package) do
 
         # get site defaults
         meta_title = Settings.default_meta_title || 'Site title'
@@ -44,7 +44,7 @@ module YmContent::MetaTagsHelper
         end
         [meta_title, meta_description, meta_image, meta_keywords, meta_hide_from_robots]
       end
-    end
+    # end
   end
 
   # generates meta tags from data
