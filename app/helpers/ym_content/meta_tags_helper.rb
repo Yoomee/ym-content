@@ -1,51 +1,50 @@
 module YmContent::MetaTagsHelper
 
   def ym_content_meta_tags
-    cache content_package_meta_tags_cache_key(@content_package) do
-      meta_tags = ''
-
-      if @content_package.try(:hide_from_robots?)
-        meta_tags += "<meta name='robots' content='noindex, nofollow' />\n"
-      end
-
-      meta_values = build_meta_values
-      meta_tags += build_meta_tags(meta_values)
-      meta_tags.html_safe
-    end
+    meta_tags = ''
+    meta_values = build_meta_values
+    meta_tags += build_meta_tags(meta_values)
+    meta_tags.html_safe
   end
 
   # builds meta data needed for generating meta tags
   def build_meta_values
     if @content_package.present?
+      cache content_package_meta_tags_cache_key(@content_package) do
 
-      # get site defaults
-      meta_title = Settings.default_meta_title || 'Site title'
-      meta_description = Settings.default_meta_description
-      meta_image = "#{Settings.site_url}#{Settings.default_fb_meta_image}"
-      meta_keywords = Settings.default_meta_keywords
+        # get site defaults
+        meta_title = Settings.default_meta_title || 'Site title'
+        meta_description = Settings.default_meta_description
+        meta_image = "#{Settings.site_url}#{Settings.default_fb_meta_image}"
+        meta_keywords = Settings.default_meta_keywords
 
-      # override defaults with custom meta tags from package
-      meta_content = @content_package.get_meta_content_chunks
-      if meta_content
-        meta_content.each do |mc|
-          case mc.content_attribute.meta_tag_name
-          when 'title'
-            meta_title = mc.value
-          when 'keywords'
-            meta_keywords += (', ' + mc.value)
-          when 'description'
-            meta_description = mc.value
-          when 'image'
-            if mc.value
-              meta_image = mc.value.url(:host => Settings.site_url)
+        if @content_package.hide_from_robots?
+          meta_hide_from_robots = "<meta name='robots' content='noindex, nofollow' />\n"
+        end
+
+        # override defaults with custom meta tags from package
+        meta_content = @content_package.get_meta_content_chunks
+        if meta_content
+          meta_content.each do |mc|
+            case mc.content_attribute.meta_tag_name
+            when 'title'
+              meta_title = mc.value
+            when 'keywords'
+              meta_keywords += (', ' + mc.value)
+            when 'description'
+              meta_description = mc.value
+            when 'image'
+              if mc.value
+                meta_image = mc.value.url(:host => Settings.site_url)
+              end
+            else
+              Rails.logger.info('Unsupported meta tag: #{mc.content_attribute.meta_tag_name}')
             end
-          else
-            Rails.logger.info('Unsupported meta tag: #{mc.content_attribute.meta_tag_name}')
           end
         end
+        [meta_title, meta_description, meta_image, meta_keywords, meta_hide_from_robots]
       end
     end
-    [meta_title, meta_description, meta_image, meta_keywords]
   end
 
   # generates meta tags from data
