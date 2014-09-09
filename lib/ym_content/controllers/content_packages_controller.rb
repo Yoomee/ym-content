@@ -104,9 +104,14 @@ module YmContent::ContentPackagesController
   end
 
   def update
+    previous_status = @content_package.status
     if @content_package.update_attributes(content_package_params)
       flash[:notice] = "Updated \"#{@content_package}\""
       current_user.record_activity!(@content_package, :text => "updated")
+      if @content_package.status == 'published' && previous_status != 'published'
+        @content_package.published_at = DateTime.now
+        @content_package.save
+      end
       if @content_package.missing_view?
         redirect_to content_packages_path(:open => @content_package)
       else
