@@ -3,18 +3,34 @@ body.controller_content_types,
 body.controller_content_packages,
 body.controller_navigation_items,
 body.controller_users,
-body.controller_registrations, 
+body.controller_registrations,
 body.controller_sessions,
 body.controller_personas {
   background: #F1F1F1;
   background-size: 100%;
   color: #555;
 }
- 
+
 .center{
   text-align: center;
 }
-.cms-main, 
+.cms-main-header {
+  transition: all 0.2s ease-in;
+}
+.cms-main-header.affix {
+  z-index: 10000;
+  background: #FFF;
+  width: 100%;
+  left: 0;
+  top: 0;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.cms-main-header-spacer.affix {
+  position: static;
+  height: 43px;
+}
+.cms-main,
 .container.cms-main{
   margin-top:60px;
   a{

@@ -13,12 +13,23 @@
     });
   });
 
-.container
-.container.container-cms-edit.cms-main
-  =semantic_form_for @content_package do |form|
+.container.cms-main
+=semantic_form_for @content_package do |form|
+  .cms-main-header-spacer{"data-offset-top" => "227", "data-spy" => "affix"}
+  .cms-main-header{"data-offset-top" => "227", "data-spy" => "affix"}
+    .container
+      .row
+        .col-xs-10
+          %h2.m0=title @content_package
+        .col-xs-2
+          -if current_user.role == "author"
+            =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-primary1 btn-block"}
+            =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-confirm btn-block js-save-progress"}
+          -else
+            =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-primary2 btn-confirm btn ph-6 pull-right"}
+  .container.container-cms-edit.cms-main
     .row
       .col-md-7.pr-3
-        %h2.mb-3=title @content_package
         %ul.nav.nav-tabs.mb-2
           %li.active=link_to("Content", '#content', 'data-toggle' => 'tab', :icon => 'paragraph')
           %li=link_to("Meta", '#meta', 'data-toggle' => 'tab', :icon => 'tag')
@@ -74,7 +85,7 @@
                 =form.input :hide_from_robots, :as => :content_boolean, :label => "Exclude from search engine indexing"
           #related.tab-pane
           .mb-6
-      .col-md-5.cms-sidebar-wrap.ph-0
+      .col-md-5.cms-sidebar-wrap
         #cms-sidebar.cms-sidebar
           .cms-edit-status.mb-2
             %div{:class => ("hidden" unless current_user.role != "author")}
@@ -87,11 +98,6 @@
                 =form.input :publish_at, :as => :datepicker, :label => false
                 .help-block{:class => @content_package.publish_at.present? ? '' : 'hidden'}
                   %p Page will be published but not shown to the public until this date.
-            -if current_user.role == "author"
-              =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-primary1 btn-block"}
-              =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-confirm btn-block js-save-progress"}
-            -else
-              =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-primary2 btn-confirm btn ph-6 pull-right"}
           .clearfix
           %hr
           .cms-sidebar-tabs
