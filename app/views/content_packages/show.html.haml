@@ -21,8 +21,7 @@
           -if Rails.env.development?
             %small
               image_for(@content_package, '300x200#', :method =>
-              =succeed ')' do
-                =attribute.slug.chomp('_uid')
+              =":#{attribute.slug.chomp('_uid')})"
         =image_for(@content_package, '300x200#', :method => attribute.slug.chomp('_uid'))
       -when 'link'
         %h4.mt-3
