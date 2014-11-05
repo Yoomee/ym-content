@@ -36,6 +36,8 @@ module YmContent::ContentPackage
 
     base.acts_as_taggable_on :acts_as_taggable_on_tags
 
+    base.image_accessor :meta_image
+
     base.alias_method_chain(:set_permalink_path, :viewless)
 
     base.extend(ClassMethods)
@@ -94,15 +96,6 @@ module YmContent::ContentPackage
     attribute = ContentAttribute.where(:content_type_id => content_type.id).where(:slug => slug).first
     chunk = content_chunks.select{|c|c.content_attribute.id == attribute.id}.first.try(:raw_value) || content_chunks.select{|c|c.content_attribute.id == attribute.default_attribute.try(:id)}.first.try(:raw_value)
     ActionController::Base.helpers.strip_tags(chunk)
-  end
-
-  def get_meta_content_chunks
-    if self.content_type.present?
-      ca = self.content_type.content_attributes.where(:meta => true).pluck(:id)
-      ::ContentChunk.where(
-        :content_attribute_id => ca,
-        :content_package_id => self.id).includes(:content_attribute)
-    end
   end
 
   def content_chunks

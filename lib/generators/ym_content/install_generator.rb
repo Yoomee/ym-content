@@ -36,6 +36,7 @@ module YmContent
         try_migration_template "migrations/create_personas.rb",           "db/migrate/create_personas.rb"
         try_migration_template "migrations/create_navigation_items.rb",   "db/migrate/create_navigation_items.rb"
         try_migration_template "migrations/create_navigation_items.rb",   "db/migrate/create_navigation_items.rb"
+        try_migration_template "migrations/add_meta_information_to_content_packages.rb",   "db/migrate/add_meta_information_to_content_packages.rb"
 
         #Copy features folder
         directory "../../../../features/", "features"
