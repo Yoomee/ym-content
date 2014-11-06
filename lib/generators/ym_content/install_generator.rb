@@ -29,12 +29,14 @@ module YmContent
         copy_file "controllers/navigation_items_controller.rb",   "app/controllers/navigation_items_controller.rb"
 
         # migrations
-        try_migration_template "migrations/create_content_types.rb",      "db/migrate/create_content_types"
-        try_migration_template "migrations/create_content_attributes.rb", "db/migrate/create_content_attributes"
-        try_migration_template "migrations/create_content_packages.rb",   "db/migrate/create_content_packages"
-        try_migration_template "migrations/create_content_chunks.rb",     "db/migrate/create_content_chunks"
-        try_migration_template "migrations/create_personas.rb",           "db/migrate/create_personas"
-        try_migration_template "migrations/create_navigation_items.rb",   "db/migrate/create_navigation_items"
+        try_migration_template "migrations/create_content_types.rb",      "db/migrate/create_content_types.rb"
+        try_migration_template "migrations/create_content_attributes.rb", "db/migrate/create_content_attributes.rb"
+        try_migration_template "migrations/create_content_packages.rb",   "db/migrate/create_content_packages.rb"
+        try_migration_template "migrations/create_content_chunks.rb",     "db/migrate/create_content_chunks.rb"
+        try_migration_template "migrations/create_personas.rb",           "db/migrate/create_personas.rb"
+        try_migration_template "migrations/create_navigation_items.rb",   "db/migrate/create_navigation_items.rb"
+        try_migration_template "migrations/create_navigation_items.rb",   "db/migrate/create_navigation_items.rb"
+        try_migration_template "migrations/add_meta_information_to_content_packages.rb",   "db/migrate/add_meta_information_to_content_packages.rb"
 
         #Copy features folder
         directory "../../../../features/", "features"
