@@ -4,7 +4,7 @@ namespace :ym_content do
     # for each content chunk, update the appropriate field of its content package
     meta_content_chunks.each do |chunk|
       package = chunk.content_package
-      package.update_attribute("meta_#{chunk.content_attribute.meta_tag_name}", chunk.value)
+      package.update_attribute("meta_#{chunk.content_attribute.meta_tag_name}", chunk.value) if package
     end
   end
 
