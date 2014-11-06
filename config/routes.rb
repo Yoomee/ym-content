@@ -42,5 +42,6 @@ Rails.application.routes.draw do
   end
 
   resources :personas
+  resources :meta_data
 
 end

@@ -18,6 +18,7 @@ module YmContent
         copy_file "models/persona_group.rb",     "app/models/persona_group.rb"
         copy_file "models/navigation_item.rb",   "app/models/navigation_item.rb"
         insert_into_file "app/models/user.rb", "\n  def self.available_roles\n    %w(admin editor author)\n  end\n", :after => "class User < ActiveRecord::Base"
+        copy_file "models/meta_datum.rb",   "app/models/meta_datum.rb"
 
         # views
         copy_file "views/users/_form.html.haml", "app/views/users/_form.html.haml"
@@ -27,6 +28,7 @@ module YmContent
         copy_file "controllers/content_packages_controller.rb",   "app/controllers/content_packages_controller.rb"
         copy_file "controllers/personas_controller.rb",           "app/controllers/personas_controller.rb"
         copy_file "controllers/navigation_items_controller.rb",   "app/controllers/navigation_items_controller.rb"
+        copy_file "controllers/meta_data_controller.rb",   "app/controllers/meta_data_controller.rb"
 
         # migrations
         try_migration_template "migrations/create_content_types.rb",      "db/migrate/create_content_types.rb"
@@ -36,7 +38,8 @@ module YmContent
         try_migration_template "migrations/create_personas.rb",           "db/migrate/create_personas.rb"
         try_migration_template "migrations/create_navigation_items.rb",   "db/migrate/create_navigation_items.rb"
         try_migration_template "migrations/create_navigation_items.rb",   "db/migrate/create_navigation_items.rb"
-        try_migration_template "migrations/add_meta_information_to_content_packages.rb",   "db/migrate/add_meta_information_to_content_packages.rb"
+        try_migration_template "migrations/add_meta_data_to_content_packages.rb",   "db/migrate/add_meta_data_to_content_packages.rb"
+        try_migration_template "migrations/create_meta_data.rb",   "db/migrate/create_meta_data.rb"
 
         #Copy features folder
         directory "../../../../features/", "features"

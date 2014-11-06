@@ -1,4 +1,4 @@
-class AddMetaInformationToContentPackages < ActiveRecord::Migration
+class AddMetaDataToContentPackages < ActiveRecord::Migration
   def change
     add_column :content_packages, :meta_title, :string
     add_column :content_packages, :meta_description, :text
