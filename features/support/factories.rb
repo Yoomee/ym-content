@@ -82,4 +82,11 @@ FactoryGirl.define do
     benefit_4 "Benefit 4"
   end
 
+  factory :meta_data do
+    page_slug 'page_slug'
+    sequence(:title) { |n| "Meta title #{n}" }
+    sequence(:description) { |n| "Meta description #{n}" }
+    sequence(:keywords) { |n| "Meta keywords #{n}" }
+  end
+
 end

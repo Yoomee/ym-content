@@ -11,3 +11,6 @@
             =link_to("Content templates", content_types_path, :icon => 'file-text-o')
         %li{:class => @deleted_content_packages  ? 'active' : nil}
           =link_to("Deleted content", deleted_content_packages_path, :icon => 'trash-o')
+        -if can? :manage, MetaDatum
+          %li{:class => @meta_data ? 'active' : nil}
+            =link_to('Non CMS meta data', meta_data_path)
