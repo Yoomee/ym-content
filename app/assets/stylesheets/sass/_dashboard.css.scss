@@ -81,6 +81,9 @@ margin-bottom: 20px;
 .sitemap tbody tr:hover {
   background:#f2f2f2;
 }
+.sitemap tbody tr:last-of-type:hover {
+  background: transparent;
+}
 .sitemap .table td{
   border-top: none;
 }

@@ -62,20 +62,23 @@ body.controller_personas {
   transition: all .2s ease-in-out;
 }
 .tab-content-sitemap {
-    background: none repeat scroll 0 0 #fff;
-    border-radius: 3px;
-    padding: 30px;
+  background: none repeat scroll 0 0 #fff;
+  border-radius: 3px;
+  padding: 30px;
 }
 .sitemap .table td {
-    border-top: medium none;
-    min-width: 77px;
-    text-align: right;
+  border-top: medium none;
+  min-width: 77px;
 }
 .sitemap .table td.td-actions {
-    min-width: 300px;
+  min-width: 300px;
+  text-align: right;
 }
 .sitemap .table td.td-name {
-    min-width: 100%;
+  min-width: 350px;
+}
+.sitemap .table td.td-link {
+  word-break: break-word;
 }
 .objective .fa-flag{
   background: $primary1;
