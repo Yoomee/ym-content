@@ -50,6 +50,7 @@ module YmContent::MetaTagsHelper
     end
 
     if meta_description.present?
+      meta_tags << "<meta name=\"description\" content=\"#{meta_description}\">\n"
       meta_tags << "<meta itemprop=\"description\" content=\"#{meta_description}\">\n"
       meta_tags << "<meta name=\"twitter:description\" content=\"#{meta_description}\">\n"
       meta_tags << "<meta property=\"og:description\" content=\"#{meta_description}\" />\n"
