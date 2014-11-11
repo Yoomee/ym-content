@@ -13,6 +13,12 @@ $(document).ready ->
   $('input,textarea,select').focusout ->
     $(this).parents('.form-group').removeClass('focus')
 
+  # Set quick find menu width to be size of container
+  $.ui.autocomplete::_resizeMenu = ->
+    ul = @menu.element
+    ul.outerWidth @element.outerWidth()
+    return
+
 window.YmContent =
   ContentPackages:
     initForm: ->
