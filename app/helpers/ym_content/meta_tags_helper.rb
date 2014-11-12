@@ -5,8 +5,14 @@ module YmContent::MetaTagsHelper
     meta_title
   end
 
-  def ym_content_meta_tags
-    meta_values = build_meta_values
+  # Takes an optional parameter of meta_values
+  # If not provided meta_values are auto-generated where possible
+  # Params:
+  # meta_values  [meta_title, meta_description, meta_image, meta_keywords, meta_hide_from_robots]
+  def ym_content_meta_tags(meta_values = nil)
+    if meta_values.nil?
+      meta_values = build_meta_values
+    end
     meta_tags = build_meta_tags(meta_values)
     meta_tags.html_safe
   end
@@ -40,7 +46,6 @@ module YmContent::MetaTagsHelper
   def build_meta_tags(meta_values)
     meta_title, meta_description, meta_image, meta_keywords, meta_hide_from_robots = meta_values
     meta_tags = meta_hide_from_robots.to_s
-
     # build actual tags from values
     if meta_title.present?
       meta_tags << "<meta itemprop=\"name\" content=\"#{meta_title}\">\n"
