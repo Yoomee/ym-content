@@ -17,10 +17,10 @@ module YmContent::MetaTagsHelper
     if @content_package.present?
       # cache content_package_meta_tags_cache_key(@content_package) do
 
-        meta_title = @content_package.meta_title || Settings.default_meta_title
-        meta_description = @content_package.meta_description || Settings.default_meta_description
+        meta_title = @content_package.meta_title.presence || Settings.default_meta_title
+        meta_description = @content_package.meta_description.presence || Settings.default_meta_description
         meta_image = @content_package.meta_image_uid ? "#{Settings.site_url}#{@content_package.meta_image.thumb('300x300#').url}" : "#{Settings.site_url}#{Settings.default_fb_meta_image}"
-        meta_keywords = @content_package.meta_keywords || Settings.default_meta_keywords
+        meta_keywords = @content_package.meta_keywords.presence || Settings.default_meta_keywords
 
         if @content_package.hide_from_robots?
           meta_hide_from_robots = "<meta name='robots' content='noindex, nofollow' />\n"
