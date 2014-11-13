@@ -1,6 +1,8 @@
 =render('content_packages/sitemap_header', header_title: 'Non CMS meta data')
 .container
   .tab-content.tab-content-sitemap.mb-5.relative
+    .well.well-sm.p1
+      Override the default meta data for pages that are not controlled by the CMS.
     =link_if_can('Add new meta data', [:new, MetaDatum.new], :icon => 'plus', :class => 'new-content btn btn-primary')
     #meta-datas.tab-pane.active
       %table.table
