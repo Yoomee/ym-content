@@ -80,15 +80,19 @@ body.controller_personas {
 .sitemap .table td.td-link {
   word-break: break-word;
 }
-.objective .fa-flag{
-  background: $primary1;
-  color: #fff;
-  padding:10px;
-  border-radius: 50%;
-  float: left;
-  margin-right:20px;
+
+.objective {
+  .fa-flag,
+  .fa-tags {
+    background: $primary1;
+    color: #fff;
+    padding:10px;
+    border-radius: 50%;
+    float: left;
+    margin-right:20px;
+  }
 }
+
 .hide{
   display: none;
 }
-
