@@ -3,7 +3,7 @@ module YmContent::ContentPackagesController
   def self.included(base)
     base.load_and_authorize_resource
     base.before_filter :get_view_data, only: [:edit, :update]
-
+    base.before_filter :redirect_to_friendly_url, only: [:show]
   end
 
   def activity
@@ -141,6 +141,13 @@ module YmContent::ContentPackagesController
     if template_exists?("content_packages/views/#{@content_package.view_name}")
       render "content_packages/views/#{@content_package.view_name}" and return
     end
+  end
+
+  def redirect_to_friendly_url
+    return true if env['ORIGINAL_PATH_INFO']
+    permalink = @content_package.permalinks.where(:active => true).first
+    return true unless permalink
+    redirect_to '/' + permalink.path, status: 301
   end
 
 end
