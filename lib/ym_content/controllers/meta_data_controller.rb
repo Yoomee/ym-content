@@ -18,7 +18,7 @@ module YmContent::MetaDataController
     else
       flash[:error] = "\"#{@meta_datum}\" couldn't be destroyed"
     end
-    redirect_to meta_datum_path
+    redirect_to meta_data_path
   end
 
   def edit

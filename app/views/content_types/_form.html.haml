@@ -9,7 +9,6 @@
     $(document).ready(function(){
       $('form.content_type')
         .on('cocoon:after-insert', function(e,added) {
-          added.find("select:not('.noselectpicker')").selectpicker()
           if($('.nested-fields:visible').length > 1){
             added.before($('#add-another-link').html());
           }
@@ -55,8 +54,3 @@
           =link_to_add_association 'Add another content attribute', form, :content_attributes
 
   =form.actions
-  
-  #add-another-link.hide
-    .links.mb-2
-      %i.fa.fa-plus-circle
-      =link_to_add_association 'Add another content attribute', form, :content_attributes
