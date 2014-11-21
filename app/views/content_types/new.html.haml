@@ -1,5 +1,7 @@
-.container.cms-main
-  %h2.mb-2.center.text-center
-    =title 'New content template'
-  .cms-form.col-md-8.col-md-offset-2.mb-5
-    =render 'form'
+.container.cms-main#cms-style-container
+  .row
+    .col-xs-12
+      %h1.cms-page-header=title 'New content template'
+  .row
+    .cms-form.col-md-8.col-md-offset-2.mb-5
+      =render 'form'

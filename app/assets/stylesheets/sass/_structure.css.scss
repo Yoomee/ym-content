@@ -11,32 +11,8 @@ body.controller_personas {
   color: #555;
 }
 
-.center{
-  text-align: center;
-}
-.cms-main-header {
-  transition: all 0.2s ease-in;
-}
-.cms-main-header.affix {
-  z-index: 10000;
-  background: #FFF;
-  width: 100%;
-  left: 0;
-  top: 0;
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-.cms-main-header-spacer.affix {
-  position: static;
-  height: 43px;
-}
-.cms-main,
-.container.cms-main{
-  margin-top:60px;
-  a{
-    color: $primary1;
-  }
-}
+
+
 .container-cms-edit {
   max-width: 100%;
   .nav-tabs li i {
@@ -83,7 +59,8 @@ body.controller_personas {
 
 .objective {
   .fa-flag,
-  .fa-tags {
+  .fa-tags,
+  .fa-cog {
     background: $primary1;
     color: #fff;
     padding:10px;
@@ -96,3 +73,54 @@ body.controller_personas {
 .hide{
   display: none;
 }
+
+
+
+
+/* =======================================================================
+   STRUCTURE
+   ======================================================================= */
+
+// GENERAL STRUCTURE AND LAYOUT
+
+.cms-main {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  @include media-query (sm) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+.cms-page-header {
+  margin: 0 0 30px;
+  text-align: center;
+  @include media-query (sm) {
+    margin: 0 0 60px;
+  }
+}
+.cms-well {
+  border-radius: 4px;
+  background: #FFF; // variable-well-color
+  padding: 20px;
+  margin-bottom: 20px;
+  @include media-query (sm) {
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+}
+.cms-fixed-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  background: white;
+  border-top: 1px solid #E7E7E7;
+  z-index: 1000;
+}
+
+
+
+
+
+

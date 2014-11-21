@@ -13,24 +13,23 @@
     });
   });
 
-.container.cms-main
-=semantic_form_for @content_package do |form|
-  .cms-main-header-spacer{"data-offset-top" => "227", "data-spy" => "affix"}
-  .cms-main-header{"data-offset-top" => "227", "data-spy" => "affix"}
-    .container
-      .row
-        .col-xs-10
-          %h2.m0=title @content_package
-        .col-xs-2
-          -if current_user.role == "author"
-            =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-primary1 btn-block"}
-            =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-confirm btn-block js-save-progress"}
-          -else
-            =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-primary2 btn-confirm btn ph-6 pull-right"}
-  .container.container-cms-edit.cms-main
+.container.cms-main#cms-style-container
+  =semantic_form_for @content_package do |form|
+    .cms-fixed-toolbar
+      .container
+        .row
+          .col-sm-2.col-sm-offset-10
+            -if current_user.role == "author"
+              =form.action :submit, :label => "Save Progress", :button_html => {:class => "btn btn-small btn-success js-save-progress btn-block"}
+              =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-small btn-primary btn-block"}
+            -else
+              =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-small btn-success btn-block"}
+    .row
+      .col-xs-10
+        %h1=title @content_package
     .row
       .col-md-7.pr-3
-        %ul.nav.nav-tabs.mb-2
+        %ul.cms-tabs
           %li.active=link_to("Content", '#content', 'data-toggle' => 'tab', :icon => 'paragraph')
           %li=link_to("Meta", '#meta', 'data-toggle' => 'tab', :icon => 'tag')
           -if current_user.admin?
@@ -64,6 +63,13 @@
               =form.input :meta_image, as: :image
           -if current_user.admin?
             #settings.tab-pane.cms-form
+              .form-group.objective
+                .row
+                  .col-md-1
+                    %i.fa.fa-cog.fa-2x
+                  .col-md-10.ml-2
+                    %label Settings
+                    %p Change page settings
               %h4.mt-0.mb-1.ml-1 Editor settings
               =form.inputs do
                 =form.input :content_type_id, :as => :hidden
@@ -106,7 +112,7 @@
           .clearfix
           %hr
           .cms-sidebar-tabs
-            %ul.nav.nav-pills.mb-3
+            %ul.cms-tabs
               %li.active=link_to("Activity", '#activity', 'data-toggle' => 'pill')
               %li=link_to("Personas", '#personas', 'data-toggle' => 'pill')
               %li=link_to("Context", '#context', 'data-toggle' => 'pill')

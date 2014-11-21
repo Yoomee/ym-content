@@ -1,7 +1,116 @@
-a{
-  color:$primary1;
-  outline: none !important;
-  &:hover{
-  color: lighten($primary1, 10%);;
+/* =======================================================================
+   TYPOGRAHY
+   ======================================================================= */
+
+// GENERAL TYPOGRAPHY AND HEADINGS
+
+#cms-style-container { // ID wrap for specificty
+
+body, html {
+  background: $cms-body-colour;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  font-family: $cms-font-family;
+  @include media-query (sm) {
+    font-size: 19px;
   }
 }
+p {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 1.25em;
+  @include media-query (sm) {
+    font-size: 19px;
+  }
+}
+.lead {
+  font-weight: 400;
+  padding: 0;
+  margin: 0 0 1.5em 0;
+  @include media-query (sm) {
+    font-size: 24px;
+  }
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+  color: $cms-heading-colour;
+}
+h1, .h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 0;
+  @include media-query (sm) {
+    font-size: 48px;
+    margin-bottom: 1.25em;
+  }
+}
+h2, .h2 {
+  font-size: 24px;
+  line-height: 1.04167;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.41667em;
+  @include media-query (sm) {
+    font-size: 36px;
+    line-height: 1.2;
+  }
+}
+h3, .h3 {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  @include media-query (sm) {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+}
+h4, .h4 {
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.3125em;
+  @include media-query (sm) {
+    font-size: 19px;
+    line-height: 1.31579;
+  }
+}
+
+// LINK STYLES
+
+a {
+  color: $cms-link-colour;
+  transition: all 0.2s ease;
+}
+
+// TYPOGRAPHY MODIFIERS
+
+
+.text-large {
+  font-size: 24px;
+}
+.text-small {
+  font-size: 16px;
+}
+.text-tiny {
+  font-size: 12px;
+}
+.strong {
+  font-weight: 700;
+}
+.italic {
+  font-style: italic;
+}
+.underline {
+  text-decoration: underline;
+}
+.white {
+  color: #fff;
+}
+.muted {
+  color: #BABABA;
+}
+
+} // END ID Wrap

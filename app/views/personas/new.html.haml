@@ -1,4 +1,6 @@
-.container.cms-main.mb-10
-  %h1.center
-    =title 'New persona'
-  =render 'form'
+.container.cms-main#cms-style-container
+  .row
+    .col-xs-12
+      %h1.cms-page-header=title 'New persona'
+  .row
+    =render 'form'

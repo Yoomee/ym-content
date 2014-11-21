@@ -1,16 +1,22 @@
-.container.cms-main
-  .row
-    .col-md-12
-      %h1.mb-3.center=title(header_title)
-      .clearfix
-      %ul.nav.nav-tabs.sitemap-tabs
-        %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
-          =link_to("Content list", content_packages_path, :icon => 'list')
-        -if can? :manage, ContentType
-          %li{:class => @content_types  ? 'active' : nil}
-            =link_to("Content templates", content_types_path, :icon => 'file-text-o')
-        %li{:class => @deleted_content_packages  ? 'active' : nil}
-          =link_to("Deleted content", deleted_content_packages_path, :icon => 'trash-o')
-        -if can? :manage, MetaDatum
-          %li{:class => @meta_data ? 'active' : nil}
-            =link_to('Non CMS meta data', meta_data_path, :icon => 'code')
+.row
+  .col-xs-12
+    %h1.mb-3.center=title(header_title)
+    .clearfix
+    .row
+      .col-sm-8
+        %ul.cms-tabs
+          %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
+            =link_to("Content list", content_packages_path, :icon => 'list')
+          -if can? :manage, ContentType
+            %li{:class => @content_types  ? 'active' : nil}
+              =link_to("Content templates", content_types_path, :icon => 'file-text-o')
+          %li{:class => @deleted_content_packages  ? 'active' : nil}
+            =link_to("Deleted content", deleted_content_packages_path, :icon => 'trash-o')
+          -if can? :manage, MetaDatum
+            %li{:class => @meta_data ? 'active' : nil}
+              =link_to('Non CMS meta data', meta_data_path, :icon => 'code')
+      .col-sm-4.text-right
+        -if @content_packages && !@deleted_content_packages
+          =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success btn-small')
+        -if @content_types
+          =link_if_can("Add new content template", [:new, ContentType.new], :icon => 'plus', :class => 'btn btn-success btn-small')

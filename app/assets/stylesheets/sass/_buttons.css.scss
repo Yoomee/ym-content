@@ -1,123 +1,122 @@
-.controller_content_packages .cms-main .btn{
-  float: right;
-  min-width: 150px;
-}
-.action_dashboard .cms-dashboard .btn{
-  background:#c9c9c9;
-}
-.cms-main .btn {
-  background: $primary-grey;
-  color: #666;
-  &:hover{
-    color:#666;
-  }
-}
-.cms-main .btn.btn-primary1,
-.cms-main .btn.btn-primary{
-  background: $primary1;
-  color:#fff;
-  &:hover, &:focus{
-    background: darken($primary1, 10%);
-    color:#fff;
-    outline: none;
-  }
-}
-.cms-main .btn.btn-primary2, , .cms-main-header .btn.btn-primary2{
-  background: #72BF44;
-  color:#fff;
-  font-size: 20px;
-  &:hover{
-    background: darken(#72BF44, 5%);
-  }
-}
-.cms-main .btn.btn-primary3{
-  background: $primary3;
-  color:#fff;
-  &:hover, &:focus{
-    background: darken($primary3, 10%);
-    color: #fff;
-  }
-}
-.cms-main .btn.btn-primary4{
-  background: $primary4;
-  &:hover{
-    background: darken($primary4, 10%);
-  }
-}
-.cms-main .btn.btn-grey{
-  background: $primary-grey;
-  &:hover{
-    background: darken($primary-grey, 10%);
-  }
-}
-.open .btn-default.dropdown-toggle{
-  background: $primary1 !important;
-}
-.form-control{
-  height: 44px;
-}
-.btn#content_package_submit_action{
-  float: right;
-}
-/* Hide save button for now */
+/* =======================================================================
+   BUTTONS
+   ======================================================================= */
 
-.btn-cms-status {
-  display: none;
+// GENERAL BUTTONS
+
+#cms-style-container { // ID wrap for specificty
+
+.btn {
+  white-space: normal;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  color: white;
+  @include media-query (sm) {
+    padding: 18px 20px;
+  }
+  &:hover {
+    color: white;
+  }
 }
-.controller_content_types .btn:hover, .btn:focus{
-  color: #fff;
-}
-.cms-edit-status .btn-group {
-  width: 100% !important;
-}
-.cms-main .selectpicker.btn {
-  background: #fff;
-  border-radius:3px;
+.btn-default {
   color: #666;
-  width: 100%;
-  min-width: 0;
+  background: #D8D8DA;
+  &:hover {
+    color: white;
+    background: darken(#D8D8D8, 5%);
+  }
 }
-.main-wrapper .cms-sidebar .selectpicker.btn,
-.cms-main .form-group .selectpicker.btn{
-    background: #f6f6f6;
-    border: 1px solid #AFAFAF;
-    padding: 12px 20px;
-    height: 48px;
-    &:hover{
-      color:#333;
+.btn-primary {
+  background: $cms-primary-col;
+  &:hover {
+   background: darken($cms-primary-col, 5%);
+  }
+}
+.btn-secondary {
+  background: $cms-secondary-col;
+  &:hover {
+    background: darken($cms-secondary-col, 5%);
+  }
+}
+.btn-success {
+  background: $cms-success-col;
+  &:hover {
+    background: darken($cms-success-col, 5%);
+  }
+}
+.btn-error {
+  background: $cms-error-col;
+  &:hover {
+    background: darken($cms-error-col, 5%);
+  }
+}
+
+// BUTTON MODIFIERS
+
+.btn-small {
+  padding: 8px 12px;
+  @include media-query (sm) {
+    padding: 8px 12px;
+  }
+}
+.btn-count {
+  padding:8px 12px;
+  font-size: 15px;
+  float: left;
+  .btn-number {
+    background: rgba(0,0,0,0.2);
+    display: block;
+    float: left;
+    width: 32px;
+    text-align: center;
+    border-radius: 26px;
+    line-height: 20px;
+    font-size: 13px;
+    padding: 6px 0;
+  }
+  .btn-text {
+    text-align: left;
+    float: left;
+    margin: 1px 0 0 12px;
+    font-size: 16px;
+    line-height: 30px;
+  }
+}
+
+// BUTTON EXTRAS
+
+.btn-block + .btn-block {
+  margin-top: 10px;
+  @include media-query (sm) {
+    margin-top: 0;
+  }
+}
+.cms-tabs {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  li {
+    display: inline-block;
+    &.active a {
+      background: $cms-primary-col;
+      color: white;
     }
-}
-.sitemap .selectpicker.btn{
-  background:#f3f3f3;
-  color: #777;
-}
-.sitemap .bootstrap-select.btn-group .selectpicker.btn .caret{
-  border-top-color: #777;
-}
-.cms-edit-status .bootstrap-select.btn-group .btn .caret,
-.content_package .bootstrap-select.btn-group .btn .caret {
-  border-top-color: #666;
- }
-.controller_content_packages .cms-main .cms-persona-box .btn{
-  min-width: 0;
-}
-.btn.new-content{
-  position: absolute;
-  right: 0;
-  top: -52px;
-}
-.cms-dashboard-btn div:nth-child(2){
-  @include ym_content_mq (md) {
-    padding:0;
+  }
+  a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    &:hover {
+      text-decoration: none;
+      background: rgba(0,0,0,0.1);
+    }
+  }
+  i {
+    margin-right: 5px;
   }
 }
-.cms-dashboard-btn .btn{
-  @include ym_content_mq (sm-max) {
-    margin:5px 0;
-  }
-}
-.cms-dashboard-btn .btn-cms-text{
-  @include ym_content_mq (md-max) {
-    font-size: 14px;
-  }
-}
+
+
+} // END ID Wrap
+
