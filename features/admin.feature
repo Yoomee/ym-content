@@ -74,6 +74,7 @@ Scenario: Creating a persona
   Then the persona is created
 
 @javascript
+@wip
 Scenario: Discussing a content package
   Given there is 1 content package
   When I discuss the content package
