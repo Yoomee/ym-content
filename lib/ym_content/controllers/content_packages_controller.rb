@@ -23,7 +23,7 @@ module YmContent::ContentPackagesController
 
   def edit
     @content_package = ContentPackage.includes(
-      {:content_type => :content_attributes},
+      {:content_chunks => :content_attribute},
       :personas
     ).find(params[:id])
   end
@@ -100,6 +100,7 @@ module YmContent::ContentPackagesController
   end
 
   def show
+    @content_package = ContentPackage.includes(:content_chunks => :content_attribute).find(params[:id])
     render_content_package_view
   end
 
@@ -132,7 +133,7 @@ module YmContent::ContentPackagesController
     def get_view_data
       # added double colon to access global scope... #TODO: this needs reviewing
       @persona_groups = ::PersonaGroup.all
-      @activity_items = @content_package.activity_items.paginate(:page => 1, :per_page => 5)
+      @activity_items = @content_package.activity_items.includes(:user, :resource).paginate(:page => 1, :per_page => 5)
       @non_meta_content_attributes = @content_package.content_attributes.where(:meta => false)
       @meta_content_attributes = @content_package.content_attributes.where(:meta => true)
     end
