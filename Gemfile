@@ -29,9 +29,10 @@ end
 
 
 group :development, :test do
-  gem 'debugger'
+  gem 'byebug'
   gem 'cucumber-rails', '~> 1.3', :require => false
   gem 'rspec-rails', '~> 2.0'
   gem 'spring'
   gem 'spring-commands-cucumber'
+  gem 'bullet'
 end
