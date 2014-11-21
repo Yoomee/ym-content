@@ -155,3 +155,19 @@ Then(/^the (character|word) counter should go red$/) do |word_character|
   word = word_character == 'word'
   expect(find("#content_package_#{word ? 'text' : 'title'}_input")['class']).to include("word-count-exceeded")
 end
+
+When(/^I visit its permalink$/) do
+  visit "/#{@content_package.permalink_path}".squeeze '/'
+end
+
+When(/^I change the content package "(.*?)" to "(.*?)"$/) do |attribute, value|
+  @content_package.update(attribute.to_sym => value)
+end
+
+When(/^I visit its restful url$/) do
+  visit "/content_packages/#{@content_package.id}".squeeze '/'
+end
+
+Then(/^I should get redirected to its permalink$/) do
+  expect(@content_package.permalink.full_path).to eq(current_path)
+end

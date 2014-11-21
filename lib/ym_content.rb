@@ -1,3 +1,4 @@
+require 'stringex'
 require 'ym_core'
 require 'ym_users'
 require 'ym_tags'
@@ -5,6 +6,8 @@ require 'ym_activity'
 require 'ym_content/engine'
 require 'ym_posts'
 require 'geocoder'
+
+require_relative "ym_content/permalinkable"
 
 module YmContent
 end

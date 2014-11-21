@@ -40,6 +40,7 @@ module YmContent
         try_migration_template "migrations/create_navigation_items.rb",   "db/migrate/create_navigation_items.rb"
         try_migration_template "migrations/add_meta_data_to_content_packages.rb",   "db/migrate/add_meta_data_to_content_packages.rb"
         try_migration_template "migrations/create_meta_data.rb",   "db/migrate/create_meta_data.rb"
+        try_migration_template "migrations/add_full_path_to_permalinks.rb",   "db/migrate/add_full_path_to_permalinks.rb"
 
         #Copy features folder
         directory "../../../../features/", "features"

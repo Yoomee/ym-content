@@ -59,6 +59,7 @@ FactoryGirl.define do
     due_date Date.today + 6.months
     author
     requested_by
+    sequence(:permalink_path) {|n| "my-nice-permalink-#{n}"}
     status "published"
     publish_at Date.today - 1.day
     sequence(:slug){|n| "content_package_#{n}" }
