@@ -60,7 +60,7 @@ When(/^I update the content package$/) do
   attach_file('content_package_photo', File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
   attach_file('content_package_document', File.join(Rails.root, 'public/dragonfly/defaults/user.jpg'))
   check('content_package_special')
-  find(".content-package-submit").click
+  click_button("Save")
 end
 
 Then(/^the content package should change$/) do
@@ -74,7 +74,7 @@ end
 Given(/^I remove an image$/) do
   visit edit_content_package_path(@content_package)
   check 'content_package_remove_photo'
-  find(".content-package-submit").click
+  click_button("Save")
 end
 
 Then(/^the image should be removed$/) do

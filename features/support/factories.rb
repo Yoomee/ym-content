@@ -4,7 +4,7 @@ FactoryGirl.define do
     name "Blog post"
     description "Share your latest news"
     singleton false
-    view_name 'blog_post'
+    view_name 'show'
     use_workflow true
     after(:build) do |content_type|
       if content_type.content_attributes.count.zero?
@@ -36,7 +36,7 @@ FactoryGirl.define do
   factory :user, :aliases => [:author, :requested_by]  do
     first_name "Charles"
     sequence(:last_name) {|n| "Barrett #{n}"}
-    sequence(:email) {|n| "charles@barrett_#{n}.com"}
+    sequence(:email) {|n| "charles@barrett-#{n}.com"}
     password "password"
     role "admin"
 
@@ -60,6 +60,7 @@ FactoryGirl.define do
     author
     requested_by
     status "published"
+    publish_at Date.today - 1.day
     sequence(:slug){|n| "content_package_#{n}" }
     after(:build) do |content_package|
       FactoryGirl.create(:activity_item, :resource_type => "ContentPackage", :resource => content_package)
@@ -82,7 +83,7 @@ FactoryGirl.define do
     benefit_4 "Benefit 4"
   end
 
-  factory :meta_data do
+  factory :meta_datum, :aliases => [:meta_data] do
     page_slug 'page_slug'
     sequence(:title) { |n| "Meta title #{n}" }
     sequence(:description) { |n| "Meta description #{n}" }

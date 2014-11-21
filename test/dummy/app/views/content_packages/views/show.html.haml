@@ -1,0 +1,57 @@
+.container.cms-main
+  .col-md-8
+    %h3=title(@content_package)
+    -@content_package.content_attributes.each do |attribute|
+      -case attribute.field_type
+      -when 'file'
+        %h4.mt-3
+          =attribute.name
+          -if Rails.env.development?
+            %h3.mt-0
+              %small
+                ="-if file = @content_package.#{attribute.slug}"
+                %br
+                :plain
+                  &nbsp;&nbsp;=link_to(file.name, file.url, :target => '_blank')
+        -if file = @content_package.send(attribute.slug)
+          %p=link_to(file.name, file.url, :target => '_blank')
+      -when 'image'
+        %h4.mt-3
+          =attribute.name
+          -if Rails.env.development?
+            %small
+              image_for(@content_package, '300x200#', :method =>
+              =":#{attribute.slug.chomp('_uid')})"
+        =image_for(@content_package, '300x200#', :method => attribute.slug.chomp('_uid'))
+      -when 'link'
+        %h4.mt-3
+          =attribute.name
+          -if Rails.env.development?
+            %h3.mt-0
+              %small
+                ="-if link = @content_package.#{attribute.slug}.try(:value)"
+                %br
+                :plain
+                  &nbsp;&nbsp;=link_to(link, link, :target => '_blank')
+          -if Rails.env.development?
+            %small="@content_package.#{attribute.slug}"
+        -if link = @content_package.send(attribute.slug).try(:value)
+          =link_to(link, link, :target => '_blank')
+      -when 'tags'
+        %h4.mt-3
+          =attribute.name
+          -if Rails.env.development?
+            %small="@content_package.send(#{attribute.slug}).map(&:to_s).join(', ')"
+        =@content_package.send(attribute.slug).map(&:to_s).join(', ')
+      -when 'text'
+        %h4.mt-3
+          =attribute.name
+          -if Rails.env.development?
+            %small="@content_package.#{attribute.slug}"
+        =@content_package.send(attribute.slug).try(:html_safe)
+      -else
+        %h4.mt-3
+          =attribute.name
+          -if Rails.env.development?
+            %small="@content_package.#{attribute.slug}"
+        %p=@content_package.send(attribute.slug)

@@ -16,6 +16,8 @@ class CreateContentPackages < ActiveRecord::Migration
       t.date :due_date
       t.integer :review_frequency
       t.date :next_review
+      t.date :publish_at
+      t.date :published_at
       t.datetime :deleted_at
       t.timestamps
     end
