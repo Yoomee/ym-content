@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   resources :personas
   resources :meta_data
 
-  get "*path", to: "content_packages#show"
+  #TODO Permalinks
+  # get "*path", to: "content_packages#show"
 
 end

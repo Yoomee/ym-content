@@ -3,7 +3,8 @@ module YmContent::ContentPackage
   def self.included(base)
     base.send(:include, YmCore::Model)
     base.send(:include, YmActivity::Recordable)
-    base.send(:include, YmContent::Permalinkable)
+    #TODO Permalinks
+    # base.send(:include, YmContent::Permalinkable)
 
     base.belongs_to :content_type
     base.has_many :content_chunks
@@ -33,11 +34,14 @@ module YmContent::ContentPackage
 
     base.delegate :content_attributes, :package_name, :view_name, :missing_view?, :viewless?, :to => :content_type
 
+    #TODO Permalinks
+    base.has_permalinks
+
     base.acts_as_taggable_on :acts_as_taggable_on_tags
 
     base.image_accessor :meta_image
 
-    # base.alias_method_chain(:set_permalink_path, :viewless)
+    base.alias_method_chain(:set_permalink_path, :viewless)
 
     base.extend(ClassMethods)
 
