@@ -8,7 +8,7 @@
               =link_to('All', meta_data_path, icon: 'arrow-left')
             %h2
               Meta data for
-              =@meta_data
+              =@meta_datum
           .col-md-2
             =link_if_can('Edit', [:edit, @meta_datum], class: 'btn btn-primary')
             =link_if_can('Delete', [:destroy, @meta_datum], confirm: 'Are you sure?', class: 'btn btn-danger')
