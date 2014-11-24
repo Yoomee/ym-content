@@ -59,6 +59,10 @@ Tests will be copied to your application, to enable you to change and override t
 To run the tests in this gem in the dummy application:
 ```
  rake -f test/dummy/Rakefile db:drop db:create db:migrate db:test:prepare
+ bundle exec rake
+```
+To run the tests individually you can also run
+```
  cucumber
  rspec
 ```
