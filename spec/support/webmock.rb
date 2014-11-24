@@ -22,7 +22,8 @@ RSpec.configure do |config|
       to_return(:status => 200, :body => google_json, :headers => {})
 
     stub_request(:get, "http://www.youtube.com/oembed?format=json&url=http://www.youtube.com/watch?v=qvmc9d0dlO").
-      with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+      with(:headers => {'Accept'=>'*/*'}).
       to_return(:status => 404, :body => "", :headers => {})
+
   end
 end
