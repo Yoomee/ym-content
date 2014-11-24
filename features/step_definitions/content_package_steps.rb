@@ -119,7 +119,7 @@ end
 When(/^I assign it to an author$/) do
   visit edit_content_package_path(@content_package)
   select("#{@author.full_name} (#{@author.role})", :from => 'content_package[author_id]', :visible => false)
-  find(".cms-edit-status input[type='submit']").click
+  click_button("Save")
 end
 
 Then(/^the content package author should change$/) do
