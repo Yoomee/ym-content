@@ -34,6 +34,7 @@ describe ContentType do
     end
 
     it 'returns true if view does not exist' do
+      content_type.view_name = 'blah'
       content_type.viewless = false
       expect(content_type.missing_view?).to be_truthy
     end
