@@ -12,7 +12,7 @@ When(/^I fill in the meta data form$/) do
 end
 
 Then(/^the meta data should be created$/) do
-  # page.should have_content @meta_data.page_slug
+  page.should have_content @meta_data.page_slug
   page.should have_content @meta_data.title
   page.should have_content @meta_data.description
   page.should have_content @meta_data.keywords
