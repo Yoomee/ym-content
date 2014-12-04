@@ -34,9 +34,6 @@ module YmContent::ContentPackage
 
     base.delegate :content_attributes, :package_name, :view_name, :missing_view?, :viewless?, :to => :content_type
 
-    #TODO Permalinks
-    base.has_permalinks
-
     base.acts_as_taggable_on :acts_as_taggable_on_tags
 
     base.image_accessor :meta_image

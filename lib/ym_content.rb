@@ -1,6 +1,5 @@
 require 'stringex'
 require 'ym_core'
-require 'ym_permalinks'
 require 'ym_users'
 require 'ym_tags'
 require 'ym_activity'

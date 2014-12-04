@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '>= 3'
   s.add_dependency 'ym_core'
-  s.add_dependency 'ym_permalinks', '~> 1.0.1'
   s.add_dependency 'ym_users', '~> 1.1.1'
   s.add_dependency 'ym_tags', '~> 1.0.4'
   s.add_dependency 'ym_posts'
