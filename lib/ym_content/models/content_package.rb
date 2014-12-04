@@ -3,8 +3,7 @@ module YmContent::ContentPackage
   def self.included(base)
     base.send(:include, YmCore::Model)
     base.send(:include, YmActivity::Recordable)
-    #TODO Permalinks
-    # base.send(:include, YmContent::Permalinkable)
+    base.send(:include, YmContent::Permalinkable)
 
     base.belongs_to :content_type
     base.has_many :content_chunks

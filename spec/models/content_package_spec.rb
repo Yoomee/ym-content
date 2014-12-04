@@ -5,6 +5,8 @@ describe ContentPackage do
   let (:content_package) { FactoryGirl.build(:content_package) }
 
   it { should validate_presence_of(:content_type) }
+  it { should have_one(:permalink).conditions(active: true) }
+  it { should have_many(:permalinks) }
 
   it 'is valid' do
     content_package.valid?
@@ -182,6 +184,7 @@ describe ContentPackage do
 
   it 'has its children deleted too' do
     content_package.slug = nil
+    content_package.save
     content_package.children << FactoryGirl.create(:content_package, :parent => content_package, :slug => nil)
     content_package.delete
     content_package.reload
@@ -195,9 +198,20 @@ describe ContentPackage do
 
   it 'cannot be deleted if it has a child with a slug' do
     content_package.slug = nil
+    content_package.save
     content_package.children << FactoryGirl.build(:content_package, :parent => content_package)
     content_package.delete
     expect(content_package.deleted?).to be_falsey
   end
+
+
+  it 'cant have a duplicate permalink' do
+    content_package.permalink_path = "test"
+    content_package.save
+    cp = FactoryGirl.build(:content_package, :permalink_path => "test")
+    cp.save
+    expect(cp.valid?).to be_falsey
+  end
+
 
 end

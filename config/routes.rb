@@ -45,6 +45,6 @@ Rails.application.routes.draw do
   resources :meta_data
 
   #TODO Permalinks
-  # get "*path", to: "content_packages#show"
+  get "*path", to: "content_packages#show"
 
 end

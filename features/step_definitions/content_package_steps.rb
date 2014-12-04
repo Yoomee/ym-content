@@ -16,6 +16,15 @@ Given(/^there (?:is|are) (\d+) content packages?\s?(not\s)?(?:assigned to me)?$/
   @content_package = @content_packages.first
 end
 
+Given(/^there is a content package with a parent$/) do
+  @parent_content_package = FactoryGirl.create(:content_package)
+  @content_package = FactoryGirl.create(:content_package, :parent_id => @parent_content_package.id)
+end
+
+Given(/^(?:there is|I create) a content package with the permalink path "(.*?)"$/) do |permalink|
+  cp = FactoryGirl.create(:content_package, :permalink_path => permalink)
+end
+
 When(/^I go to the sitemap$/) do
   visit content_packages_path
 end
@@ -169,5 +178,13 @@ When(/^I visit its restful url$/) do
 end
 
 Then(/^I should get redirected to its permalink$/) do
-  expect(@content_package.permalink.full_path).to eq(current_path)
+  expect("/#{@content_package.permalink.full_path}".squeeze '/').to eq(current_path)
+end
+
+When(/^I visit its full path permalink$/) do
+  visit @content_package.permalink.full_path
+end
+
+Then(/^I should get an error$/) do
+  pending # express the regexp above with the code you wish you had
 end

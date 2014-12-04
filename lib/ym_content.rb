@@ -8,9 +8,13 @@ require 'ym_posts'
 require 'geocoder'
 
 #TODO Permalinks
-# require_relative "ym_content/permalinkable"
+require_relative "ym_content/permalinkable"
 
 module YmContent
+   def self.config(&block)
+    yield Engine.config if block
+    Engine.config
+  end
 end
 
 Dir[File.dirname(__FILE__) + '/ym_content/models/*.rb'].each {|file| require file }

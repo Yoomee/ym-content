@@ -1,15 +1,22 @@
 namespace :permalinks do
 
   task migrate_to_full_path: :environment do
+    ENV['RAKE_PERMALINK_RUNNING'] = 'true'
     puts "Finding root level elements"
-    ContentPackage.where(:parent_id => nil).each do |cp|
-      set_full_path_for_tree cp
+
+    Permalink.where(:active => false).each do |p|
+      p.full_path = "/#{p.path}"
+      p.save
     end
 
-    Permalink.where(:active => false).each do |permalink|
-      active_permalink = Permalink.find_by_resource_id_and_resource_type_and_active(permalink.resource_id, permalink.resource_type, true)
-      permalink.full_path = active_permalink.full_path.gsub(active_permalink.path, permalink.path)
-      permalink.save
+    ContentPackage.all.each do |cp|
+      p = cp.permalink
+      next if p.nil?
+      cp.permalinks.create(:active => false, :path => p.path, :full_path => "/#{p.path}")
+    end
+
+    ContentPackage.where(:parent_id => nil).each do |cp|
+      set_full_path_for_tree cp
     end
 
   end
@@ -17,8 +24,9 @@ namespace :permalinks do
 end
 
 def set_full_path_for_tree(cp)
-  puts "Setting full path for #{cp.name}"
+  puts "About to set Full path for #{cp.id} - #{cp.name}"
   cp.save if cp.permalink
+
   ContentPackage.where(:parent_id => cp.id).each do |child|
     set_full_path_for_tree child
   end

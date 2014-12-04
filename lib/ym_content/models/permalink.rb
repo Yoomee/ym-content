@@ -4,7 +4,7 @@ class Permalink < ActiveRecord::Base
 
   belongs_to :resource, :polymorphic => true
 
-  validates :path, :presence => true, :uniqueness => {:case_sensitive => false, :scope => :active}
+  validates :full_path, :presence => true, :uniqueness => {:case_sensitive => false, :scope => :active}
 
   validate :path_does_not_match_existing_route
   validate :path_is_valid_url
@@ -35,13 +35,20 @@ class Permalink < ActiveRecord::Base
     "/#{resource_type.tableize}/#{resource_id}"
   end
 
+  def self.find_from_url(url)
+    find_by_attr = YmContent.config.nested_permalinks ? :full_path : :path
+    permalink_path = "#{find_by_attr == :full_path ? '/' : ''}#{url}".squeeze('/')
+    Permalink.find_by(find_by_attr => permalink_path)
+  end
+
   private
   def create_inactive_permalink
-    resource.permalinks.create(:active => false, :path => path_was) if path_changed?
+    return unless path_changed?
+    resource.permalinks.create(:active => false, :path => path_was, :full_path => full_path_was)
   end
 
   def delete_duplicate_permalinks
-    Permalink.without(self).where(:path => path, :active => false).delete_all
+    Permalink.without(self).where(:path => path, :full_path => full_path, :active => false).delete_all
   end
 
   def path_does_not_match_existing_route

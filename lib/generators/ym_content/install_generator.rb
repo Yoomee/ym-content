@@ -42,6 +42,10 @@ module YmContent
         try_migration_template "migrations/create_meta_data.rb",   "db/migrate/create_meta_data.rb"
         try_migration_template "migrations/add_full_path_to_permalinks.rb",   "db/migrate/add_full_path_to_permalinks.rb"
 
+        # initializers
+        copy_file 'initializers/ym_content.rb',
+          'config/initializers/ym_content.rb'
+
         #Copy features folder
         directory "../../../../features/", "features"
       end

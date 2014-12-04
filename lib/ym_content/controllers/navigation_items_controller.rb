@@ -42,10 +42,10 @@ module YmContent::NavigationItemsController
     else
       term = params[:term]
     end
-    render :json => ContentPackage.search(term).map{|cp| {
+    render :json => ContentPackage.search(term).includes(:permalink).map { |cp| {
       :id => cp.id,
       :label => cp.name.truncate(60),
-      :value => polymorphic_path(cp)
+      :value => cp.permalink_display_path
     }}
   end
 

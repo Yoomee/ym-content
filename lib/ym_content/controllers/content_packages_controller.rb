@@ -3,8 +3,8 @@ module YmContent::ContentPackagesController
   def self.included(base)
     base.load_and_authorize_resource
     base.before_filter :get_view_data, only: [:edit, :update]
-    base.before_filter :redirect_to_friendly_url, only: [:show]
-    # base.around_action :redirect_to_permalink, :only => :show
+    # base.before_filter :redirect_to_friendly_url, only: [:show]
+    base.around_action :redirect_to_permalink, :only => :show
   end
 
   def activity
@@ -101,7 +101,7 @@ module YmContent::ContentPackagesController
   end
 
   def show
-    @content_package = ContentPackage.includes(:content_chunks => :content_attribute).find(params[:id])
+    # @content_package = ContentPackage.includes(:content_chunks => :content_attribute).find(params[:id])
     render_content_package_view
   end
 
@@ -146,13 +146,27 @@ module YmContent::ContentPackagesController
   end
 
   def redirect_to_permalink
+    #If the url matched the catch all route at the bottom of the routes file it will have a param of 'path'
     if params[:path]
-      if permalink = Permalink.find_by_full_path(("/" + params[:path]).squeeze '/')
-        @content_package = permalink.resource
+      if permalink = Permalink.find_from_url(params[:path])
+        #If the permalink is active then just set the content package and yield to show.
+        if permalink.active
+          @content_package = ContentPackage.includes(:content_chunks => :content_attribute).find(permalink.resource_id)
+          yield
+        else
+          # Otherwise redirect to the proper permalink so that we come back to this method and fall through the correct path.
+          redirect_to permalink.resource.permalink.full_path, status: 301
+        end
+      else
+        # If there isn't a matching permalink handle it with rails (Default is 404)
+        raise ActionController::RoutingError.new('Not Found')
       end
-      yield
     else
-      redirect_to @content_package.permalink.full_path, status: 301
+      if @content_package.permalink.nil?
+        yield
+      else
+        redirect_to @content_package.permalink.full_path, status: 301
+      end
     end
   end
 
