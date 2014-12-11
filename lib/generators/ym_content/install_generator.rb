@@ -46,6 +46,10 @@ module YmContent
         copy_file 'initializers/ym_content.rb',
           'config/initializers/ym_content.rb'
 
+          # stylesheets
+          copy_file 'stylesheets/_cms_styles.scss',
+          'app/assets/stylesheets/sass/_cms_styles.scss'
+
         #Copy features folder
         directory "../../../../features/", "features"
       end
