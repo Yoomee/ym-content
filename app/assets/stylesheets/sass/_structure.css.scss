@@ -1,17 +1,3 @@
-body.controller_content_packages.action_edit,
-body.controller_content_types,
-body.controller_content_packages,
-body.controller_navigation_items,
-body.controller_users,
-body.controller_registrations,
-body.controller_sessions,
-body.controller_personas {
-  background: #F1F1F1;
-  background-size: 100%;
-  color: #555;
-}
-
-
 
 .container-cms-edit {
   max-width: 100%;
@@ -57,32 +43,30 @@ body.controller_personas {
   word-break: break-word;
 }
 
-.objective {
-  .fa-flag,
-  .fa-tags,
-  .fa-cog {
-    background: $primary1;
-    color: #fff;
-    padding:10px;
-    border-radius: 50%;
-    float: left;
-    margin-right:20px;
-  }
+
+
+
+
+
+
+//
+// Structure
+// --------------------------------------------------
+
+// General structure and layout
+
+// SHAME - TODO - There has to be a better way than this!
+body.controller_content_packages.action_edit,
+body.controller_content_types,
+body.controller_content_packages,
+body.controller_navigation_items,
+body.controller_users,
+body.controller_registrations,
+body.controller_sessions,
+body.controller_personas {
+  background: $cms-body-colour;
+  color: #555;
 }
-
-.hide{
-  display: none;
-}
-
-
-
-
-/* =======================================================================
-   STRUCTURE
-   ======================================================================= */
-
-// GENERAL STRUCTURE AND LAYOUT
-
 .cms-main {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -100,7 +84,7 @@ body.controller_personas {
 }
 .cms-well {
   border-radius: 4px;
-  background: #FFF; // variable-well-color
+  background: $cms-well-colour;
   padding: 20px;
   margin-bottom: 20px;
   @include media-query (sm) {
@@ -114,13 +98,7 @@ body.controller_personas {
   left: 0;
   width: 100%;
   padding: 10px 0;
-  background: white;
+  background: $cms-well-colour;
   border-top: 1px solid #E7E7E7;
   z-index: 1000;
 }
-
-
-
-
-
-

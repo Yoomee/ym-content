@@ -7,41 +7,39 @@
   .row
     .col-md-6.col-md-offset-3.mb-4
       %h1.cms-page-header=title "New content"
-      .tabs-wrap
-        %ul.nav.nav-tabs
-          %li.active=link_to("Content template", '#content-type', 'data-toggle' => 'tab')
-          %li=link_to("Add context", '#context', 'data-toggle' => 'tab')
-          %li=link_to("Assign author", '#author', 'data-toggle' => 'tab')
-        %hr
+      %ul.cms-tabs
+        %li.active=link_to("Content template", '#content-type', 'data-toggle' => 'tab')
+        %li=link_to("Add context", '#context', 'data-toggle' => 'tab')
+        %li=link_to("Assign author", '#author', 'data-toggle' => 'tab')
       =semantic_form_for @content_package do |form|
         .tab-content
-          #content-type.tab-pane.active
+          #content-type.tab-pane.active.cms-well
             =form.inputs do
               =form.input :parent_id, :as => :hidden
               =form.input :name
               %br
               =form.input :content_type, :as => :select, :label => "Select a content template below", :required => false
-          #context.tab-pane
-            %h5 Write an objective/goal for this content
+          #context.tab-pane.cms-well
+            %h4 Write an objective/goal for this content
             .cms-edit-context-box
               =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}, :class => "content-objective-goal"
             %br
-            %h5.mb-3 Select the intended audience for this content
+            %h4.mb-3 Select the intended audience for this content
             =form.inputs do
               -PersonaGroup.all.each do |group|
                 .persona-group-select
-                  %h5.cms-edit-group-title=group
+                  %h4.cms-edit-group-title=group
                   =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false, :member_label => :to_s
               .clearfix
 
           #author.tab-pane
-            =form.inputs do
-              =form.input :requested_by, :collection => User.where(:role => 'admin')
-              =form.input :author, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id] }
-              =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
-              =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
-            =form.action :submit, :label => 'Finish', :wrapper_html => { :class => 'mt-3 btn-success' }
+            .cms-well
+              =form.inputs do
+                =form.input :requested_by, :collection => User.where(:role => 'admin')
+                =form.input :author, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id] }
+                =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
+                =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
+            =form.action :submit, :label => 'Finish', :wrapper_html => { :class => 'mt-3 btn btn-success pull-right' }
 
-        =link_to("Next", '#', :class => 'btn btn-secondary mt-3 js-tab-next')
+        =link_to("Next", '#', :class => 'btn btn-secondary pull-right mt-3 js-tab-next')
         =link_to("Previous", '#', :class => 'btn btn-default pull-left mt-3 js-tab-previous', :style => 'display: none')
-

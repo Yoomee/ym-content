@@ -1,5 +1,5 @@
-%li.cms-activity
-  =image_for(activity.user, "45x45#", :class => 'thumbnail cms-thumbnail')
+%li
+  =image_for(activity.user, "45x45#", :class => 'cms-thumbnail')
   -if include_name == true
     =link_to activity.resource.name, edit_content_package_path(activity.resource)
     %span=" was #{activity.text} by #{activity.user.full_name}"
@@ -8,3 +8,4 @@
     by
     %span.user-name=activity.user.full_name
   %div.when="#{time_ago_in_words(activity.created_at)} ago"
+  .clearfix

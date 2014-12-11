@@ -8,27 +8,25 @@
 .container.cms-main#cms-style-container
   =render("content_packages/sitemap_header", :header_title => "Content list")
   .row
-    .tab-content.tab-content-sitemap.relative
-      #sitemap.sitemap.tab-pane.active
-        #content_search.form
-          =semantic_form_for 'content_search', :remote => true do |form|
-            =form.input :link, :label => false, :input_html => {:placeholder => "Quick find: start typing the title or web address"}, :wrapper_html => {:style => "display:block;"}
-        %table.table
-          %thead
-            %tr
-              %th.col-md-6
-                Name
-              %th.col-md-2.center Status
-              %th.col-md-2.center Assigned to
-              %th.col-md-2.center  Due Date
-              %th{:colspan => 4}
-                .sitemap-filter.pull-right
-                  %strong Filter
-                  &nbsp;
-                  =select_tag(:status, options_for_select([['All', nil]] + ContentPackage.statuses(current_user).invert.to_a, params[:filter]), :class => 'noselectpicker')
-          %tbody#content-packages-list
-            -@content_packages.each do |content_package|
-              =render('content_package', :content_package => content_package)
-            %tr
-              %td{:colspan => 8}
-                =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success btn-small')
+    .col-xs-12
+      .tab-content.tab-content-sitemap.relative
+        #sitemap.sitemap.tab-pane.active
+          #content_search.form
+            =semantic_form_for 'content_search', :remote => true do |form|
+              =form.input :link, :label => false, :input_html => {:placeholder => "Quick find: start typing the title or web address"}, :wrapper_html => {:style => "display:block;"}
+          %table.cms-table
+            %thead
+              %tr
+                %th.text-left Name
+                %th Status
+                %th Assigned to
+                %th Due Date
+                %th{:colspan => 4}
+                  .sitemap-filter.pull-right
+                    %strong Filter
+                    &nbsp;
+                    =select_tag(:status, options_for_select([['All', nil]] + ContentPackage.statuses(current_user).invert.to_a, params[:filter]), :class => 'noselectpicker')
+            %tbody#content-packages-list
+              -@content_packages.each do |content_package|
+                =render('content_package', :content_package => content_package)
+      =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success btn-small pull-right mt-3')

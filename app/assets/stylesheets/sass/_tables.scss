@@ -1,0 +1,19 @@
+//
+// Tables
+// --------------------------------------------------
+
+// Default tables
+
+.cms-table {
+  font-size: 14px;
+  width: 100%;
+  td {
+    padding: 10px;
+  }
+  thead {
+    border-bottom: 2px solid #DDDDDD;
+    th {
+      padding-bottom: 10px;
+    }
+  }
+}

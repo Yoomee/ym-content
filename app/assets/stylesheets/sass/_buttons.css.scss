@@ -1,8 +1,8 @@
-/* =======================================================================
-   BUTTONS
-   ======================================================================= */
+//
+// Buttons
+// --------------------------------------------------
 
-// GENERAL BUTTONS
+// Default button
 
 #cms-style-container { // ID wrap for specificty
 
@@ -52,7 +52,7 @@
   }
 }
 
-// BUTTON MODIFIERS
+// Button modifiers
 
 .btn-small {
   padding: 8px 12px;
@@ -84,7 +84,7 @@
   }
 }
 
-// BUTTON EXTRAS
+// Button extras
 
 .btn-block + .btn-block {
   margin-top: 10px;
@@ -92,31 +92,5 @@
     margin-top: 0;
   }
 }
-.cms-tabs {
-  list-style: none;
-  margin: 0 0 10px;
-  padding: 0;
-  li {
-    display: inline-block;
-    &.active a {
-      background: $cms-primary-col;
-      color: white;
-    }
-  }
-  a {
-    display: block;
-    padding: 8px 12px;
-    border-radius: 6px;
-    &:hover {
-      text-decoration: none;
-      background: rgba(0,0,0,0.1);
-    }
-  }
-  i {
-    margin-right: 5px;
-  }
-}
-
 
 } // END ID Wrap
-

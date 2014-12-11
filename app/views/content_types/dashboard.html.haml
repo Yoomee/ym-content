@@ -46,12 +46,13 @@
                   =link_to "Edit", edit_content_package_path(content_package), :class=>"cms-table-view"
       .cms-well.clearfix.fadeInSlow3
         %h4 Recent Activity
-        %ul.cms-activities
+        %ul.cms-activity-feed.cms-activities
           -@activity_items.each do |activity|
             =render("content_packages/activity", :include_name => true, :activity => activity)
         .text-center=link_to "See older activity", activity_content_packages_path, :remote => true, :class => 'btn btn-default btn-small js-older-activities fadeInPop'
+
     .col-md-4.fadeInSlow
-      .cms-well.dashboard-actions
+      .cms-well
         =link_if_can("Create new content", new_content_package_path, :class => 'btn btn-primary btn-block mb-1')
         =link_if_can("Content list", content_packages_path, :class => 'btn btn-primary btn-block mb-1')
         =link_if_can("Users & permissions", '#', :class => 'btn btn-default btn-block disabled mb-1')

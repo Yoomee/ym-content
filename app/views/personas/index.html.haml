@@ -9,15 +9,15 @@
       .col-md-8
         %h4=group
     -group.personas.each_slice(4) do |personas|
-      .row.mb-3
+      .row
         -personas.each do |persona|
-          .col-md-3.fadeInPop
-            .well.paper
+          .col-md-3
+            .cms-well
               .row
-                .col-sm-12.center
+                .col-sm-12.text-center
                   =image_for(persona, '150x150#')
-                  %h4.mv-2
+                  %h4.mb-2
                     =persona.name
                     %br
                     %small=persona.category
-                  =link_to('View / edit', edit_persona_path(persona), :class => 'btn btn-primary btn-block btn-small')
+                  =link_to('View / edit', edit_persona_path(persona), :class => 'btn btn-primary btn-small')

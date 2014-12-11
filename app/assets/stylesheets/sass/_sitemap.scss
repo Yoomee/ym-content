@@ -1,38 +1,14 @@
-/*==================== Dashboard ====================*/
+//
+// Sitemap
+// --------------------------------------------------
 
-.cms-activities {
-  float: left;
-  width: 100%;
-  margin: 0 0 20px;
-  padding: 0;
-}
-.cms-activity {
-  float: left;
-  clear: both;
-  list-style-type: none;
-  margin: 0;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  width: 100%;
-  padding: 15px 0;
-  .desc {
-    margin: 0 0 3px;
-  }
-  .when {
-    color: #999;
-  }
-}
-.cms-thumbnail {
-  float: left;
-  margin: 0px 10px 0px 0;
-}
-.redactor_box {
-margin-bottom: 20px;
-}
+// Content list
+
 .sitemap-filter select {
   width: auto;
 }
 .sitemap .spacer{
-  float:left;
+  float: left;
   width: 20px;
   height: 36px;
   background: green;
@@ -45,10 +21,10 @@ margin-bottom: 20px;
   background-position: 0 -72px;
 }
 .sitemap .spacer-empty{
-  background:none;
+  background: none;
 }
 .sitemap tbody tr:hover {
-  background:#f2f2f2;
+  background: #f2f2f2;
 }
 .sitemap tbody tr:last-of-type:hover {
   background: transparent;
@@ -60,25 +36,22 @@ margin-bottom: 20px;
   padding: 0;
 }
 .sitemap td.td-name .sitemap-caret{
-  width:8px;
+  width: 8px;
 }
 .sitemap td.td-name .fa-spinner{
-  margin-left:-4px;
-  width:12px;
+  margin-left: -4px;
+  width: 12px;
 }
 .sitemap .has-children td.td-name {
   cursor: pointer;
 }
 .sitemap td.td-name .name {
   padding: 8px 8px 8px 4px  ;
-  float:left;
+  float: left;
   white-space: nowrap;
   overflow: hidden;
   max-width: 350px;
   text-overflow: ellipsis;
-}
-div.sitemap form.content_search input#content_search_link {
-  width: 100%;
 }
 #content-types.sitemap td.td-name .name{
   max-width: 500px;
@@ -86,12 +59,11 @@ div.sitemap form.content_search input#content_search_link {
 .dashboard-actions:empty {
   display: none;
 }
-
 .dashboard-well.well, .nested-fields.well{
-  border:0;
-  border-radius:3px;
+  border: 0;
+  border-radius: 3px;
   background: #fff;
 }
 .dashboard-actions .btn{
-  padding:14px;
+  padding: 14px;
 }

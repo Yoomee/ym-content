@@ -4,8 +4,6 @@
 
    ======================================================================= */
 
-@import 'sass/variables';
-@import 'sass/responsive';
 @import 'sass/buttons';
 @import 'sass/labels';
 @import 'sass/margins';
@@ -16,5 +14,12 @@
 @import 'sass/forms';
 @import 'sass/inputs';
 @import 'sass/character-limits';
-@import 'sass/dashboard';
+
 @import 'sass/general';
+@import 'sass/edit';
+
+@import 'sass/sitemap';
+@import 'sass/helpers';
+@import 'sass/tables';
+@import 'sass/tabs';
+@import 'sass/feed';

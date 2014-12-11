@@ -3,60 +3,6 @@
    Styles for CMS navbar
    ======================================================================= */
 
-.cms-navbar {
-  background:$primary2;
-  margin:0px;
-  border-radius:0;
-  border:none;
-  clear:both;
-  .container {
-    position:relative;
-  }
-  ul {
-    margin:0px;
-    float:right;
-    li {
-      display:inline-block;
-    }
-    a {
-      color:#fff;
-      display:block;
-      padding:12px;
-      &:hover {
-        text-decoration:none;
-        background: darken($primary2, 10%);
-      }
-    }
-  }
-  .cms-navbar-toggle {
-    position:absolute;
-    right:40px;
-    bottom:-46px;
-    z-index:10;
-    padding:0px 20px 20px;
-    color:#fff;
-    span {
-      display:block;
-      background:#e34440;
-      padding:4px 9px 2px;
-      float:left;
-    }
-    &:hover {
-      text-decoration:none;
-    }
-    span.warning {
-      background: rgba(0, 0, 0, 0.4);
-      padding-right: 15px;
-      padding-left: 15px;
-    }
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1200px) {
-  .cms-navbar .cms-navbar-toggle {
-    right:0px;
-  }
-}
 
 .nav-div {
   border-right: 1px solid rgba(0,0,0,0.2);
@@ -175,12 +121,12 @@
 }
 .controller_content_packages .tabs-wrap  .nav > li.active > a{
   border-radius: 3px;
-  border:0;
-  background:$primary1;
+  border: 0;
+  background: $cms-primary-col;
   color: #fff;
 }
 .cms-main ul.nav.nav-tabs {
-  margin-bottom:20px;
+  margin-bottom: 20px;
   a{
     border: 0 none;
     border-radius: 0;
@@ -191,8 +137,8 @@
     transition: all .2s ease-in-out;
   }
   li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
-    background:$primary1;
-    border:0;
+    background: $cms-primary-col;
+    border: 0;
     color: #fff;
     border-radius: 3px;
   }
@@ -201,8 +147,3 @@
 .sitemap-tabs i {
   margin-right: 5px;
 }
-
-
-
-
-

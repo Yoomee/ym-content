@@ -1,8 +1,8 @@
-/* =======================================================================
-   TYPOGRAHY
-   ======================================================================= */
+//
+// Typography
+// --------------------------------------------------
 
-// GENERAL TYPOGRAPHY AND HEADINGS
+// General typography and headings
 
 #cms-style-container { // ID wrap for specificty
 
@@ -78,14 +78,14 @@ h4, .h4 {
   }
 }
 
-// LINK STYLES
+// Link styles
 
 a {
   color: $cms-link-colour;
   transition: all 0.2s ease;
 }
 
-// TYPOGRAPHY MODIFIERS
+// Modifiers
 
 
 .text-large {
