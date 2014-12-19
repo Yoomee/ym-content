@@ -48,7 +48,7 @@ module YmContent::NavigationItem
       self.resource = nil
     elsif !@link.nil?
       path = @link.to_s.sub(/^\//,'')
-      if permalink = Permalink.find_by_path(path)
+      if permalink = Permalink.find_by_path(path.downcase)
         self.resource = permalink.resource
         self.url = nil
       else

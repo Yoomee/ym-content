@@ -9,6 +9,12 @@ Scenario: I visit a content package via its permalink
   When I visit its permalink
   Then I should see all its content
 
+Scenario: I visit a content package via a case insensitive permalink
+  Given there is 1 content package
+  When I change the content package "permalink_path" to "a-lower-case-permalink"
+  When I visit "/a-LoWeR-cAsE-pErMaLiNk"
+  Then I should see all its content
+
 Scenario: I can view a page by its original permalink even after it has changed
   Given there is 1 content package
   When I change the content package "permalink_path" to "new-permalink"

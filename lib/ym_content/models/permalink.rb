@@ -37,7 +37,7 @@ class Permalink < ActiveRecord::Base
 
   def self.find_from_url(url)
     find_by_attr = YmContent.config.nested_permalinks ? :full_path : :path
-    permalink_path = "#{find_by_attr == :full_path ? '/' : ''}#{url}".squeeze('/')
+    permalink_path = "#{find_by_attr == :full_path ? '/' : ''}#{url}".squeeze('/').downcase
     Permalink.find_by(find_by_attr => permalink_path)
   end
 
