@@ -2,7 +2,11 @@ module YmContent::Permalinkable
 
   extend ActiveSupport::Concern
   included do
-    has_one :permalink, -> { where(:active => true) }, :as => :resource, :autosave => true
+    if Rails::VERSION::MAJOR >= 4
+      has_one :permalink, -> { where(:active => true) }, :as => :resource, :autosave => true
+    else
+      has_one :permalink, :conditions => { :active => true }, :as => :resource, :autosave => true
+    end
     has_many :permalinks, :as => :resource, :autosave => true, :dependent => :destroy
     before_validation :set_permalink_path, :set_permalink_full_path
     after_validation :set_permalink_errors
