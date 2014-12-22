@@ -3,6 +3,10 @@
    General styles for all CMS content
    ======================================================================= */
 
+.cms-main, 
+.container.cms-main {
+  padding-top: 60px;
+}
 .table-content-types {
   > tbody > tr.content-type > th {
     background: #666;

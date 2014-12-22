@@ -11,8 +11,14 @@
     background: $cms-primary-col;
     color: #fff;
     padding:10px;
-    border-radius: 50%;
+    border-radius: 4px;
     float: left;
     margin-right:20px;
   }
+}
+// Objective content 
+
+.objective p {
+  font-style: italic;
+  line-height: 1.4em;
 }

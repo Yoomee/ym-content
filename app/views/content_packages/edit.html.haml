@@ -43,7 +43,7 @@
                   .col-md-1
                     %i.fa.fa-flag.fa-2x
                   .col-md-10.ml-2
-                    %label Content objective/goal
+                    %label.mt-0 Content objective/goal
                     %p=@content_package.notes
             =form.inputs do
               -@non_meta_content_attributes.each do |content_attribute|
@@ -54,7 +54,7 @@
                 .col-md-1
                   %i.fa.fa-tags.fa-2x
                 .col-md-10.ml-2
-                  %label Meta data
+                  %label.mt-0 Meta data
                   %p Override the site default meta tags
             =form.inputs do
               =form.input :meta_title, hint: 'Meta title: aim for 70 characters'
@@ -68,7 +68,7 @@
                   .col-md-1
                     %i.fa.fa-cog.fa-2x
                   .col-md-10.ml-2
-                    %label Settings
+                    %label.mt-0 Settings
                     %p Change page settings
               =form.inputs do
                 =form.input :content_type_id, :as => :hidden

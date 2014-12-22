@@ -43,7 +43,7 @@
 }
 .cms-form .image.input{
   img{
-    border-radius: 50%;
+    border-radius: 4px;
     float: left;
     margin:15px 18px;
   }
@@ -110,11 +110,10 @@
   margin-bottom: 40px;
 }
 .form-control, select {
-  background: #FFF;
-  height: 45px;
-  border: 1px solid #AFAFAF;
+  background:  #f3f3f3;
+  border: 1px solid #d9d9d9;
+  outline: medium none;
   width: 100%;
-  outline: none;
 }
 .sitemap-filter select {
   background: #fff;
@@ -161,18 +160,19 @@ input[type="radio"], input[type="checkbox"] {
 // Redactor
 
 .redactor_editor {
-  background: #FFF;
+  background: #f3f3f3;
   box-shadow: none !important;
   border-radius: 0 0 4px 4px;
   white-space: normal;
-  border: 1px solid #AFAFAF;
+  border: 1px solid #d9d9d9;
 }
 
 .redactor_toolbar {
   border-bottom: 0;
-  background: $cms-body-colour;
+  background: lighten($cms-primary-col, 40%);
   border-radius: 4px 4px 0 0;
-  border: 1px solid #AFAFAF;
+  box-shadow:0 0 0;
+  border: 1px solid #d9d9d9;
   li {
     a {
       padding: 20px;
@@ -186,6 +186,7 @@ input[type="radio"], input[type="checkbox"] {
 .redactor.form-control {
   color: #555;
   padding: 20px;
+  background:#f3f3f3;
 }
 .redactor_editor {
   min-height: 170px;

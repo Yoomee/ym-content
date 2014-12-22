@@ -139,7 +139,7 @@
   li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
     background: $cms-primary-col;
     border: 0;
-    color: #fff;
+    color: #fff !important;
     border-radius: 3px;
   }
 }
@@ -147,3 +147,38 @@
 .sitemap-tabs i {
   margin-right: 5px;
 }
+
+
+
+  .cms-subnav {
+    position: fixed;
+    right: 0;
+    top: 160px;
+    z-index: 70;
+  }
+  .cms-subnav ul {
+  
+  }
+  .cms-subnav li {
+    background: $cms-secondary-col;
+    border-top: 1px solid #fff;
+    display: block;
+    margin-bottom: 0;
+  }
+  .cms-subnav li a {
+    color: white;
+    display: block;
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+  }
+  .cms-subnav li a:hover {
+    color: white;
+  }
+  .cms-subnav li.cms-nav-trigger {
+    background: $cms-secondary-col;
+    border-top: 0 none;
+    color: white;
+  }
+
