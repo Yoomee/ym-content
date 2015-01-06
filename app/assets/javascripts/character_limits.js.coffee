@@ -39,7 +39,7 @@ window.CharacterLimits = (->
     rOptions.changeCallback = redactorChanged
     r.destroy()
     rInput.redactor(rOptions)
-    rInput.after $("<span/>").text(counterText).addClass("pull-right word-count js-limit-quantity label label-default")
+    rInput.after $("<span/>").text("0/0").addClass("pull-right word-count js-limit-quantity label label-default")
     inputChanged rInput
 
   # jQuery Event bindings
