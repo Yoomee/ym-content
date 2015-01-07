@@ -47,9 +47,15 @@ module YmContent::MetaTagsHelper
     meta_title, meta_description, meta_image, meta_keywords, meta_hide_from_robots = meta_values
     meta_tags = meta_hide_from_robots.to_s
     # build actual tags from values
+
+    if meta_image.present?
+      meta_tags << "<meta name=\"twitter:card\" content=\"photo\">\n"
+    else
+      meta_tags << "<meta name=\"twitter:card\" content=\"summary\">\n"
+    end
+
     if meta_title.present?
       meta_tags << "<meta itemprop=\"name\" content=\"#{meta_title}\">\n"
-      meta_tags << "<meta name=\"twitter:card\" content=\"summary\">\n"
       meta_tags << "<meta name=\"twitter:title\" content=\"#{meta_title}\">\n"
       meta_tags << "<meta property=\"og:title\" content=\"#{meta_title}\" />\n"
     end
