@@ -89,7 +89,7 @@
               %h4.mb-1.ml-1 Page settings
               =form.inputs do
                 =parent_content_package_select(form)
-                =form.input :permalink_path, :prepend => @content_package.parent ? @content_package.parent.permalink_display_path : '/' unless @content_package.viewless?
+                =form.input :permalink_path, :prepend => @content_package.parent &&  @content_package.parent.respond_to?(:permalink_display_path)  ? @content_package.parent.permalink_display_path : '/' unless @content_package.viewless?
                 =form.input :slug if current_user.yoomee_staff?
                 =form.input :logged_in_only, :as => :content_boolean, :label => "Only logged in users can view this"
                 =form.input :hide_from_robots, :as => :content_boolean, :label => "Exclude from search engine indexing"
