@@ -45,7 +45,9 @@ Rails.application.routes.draw do
   resources :meta_data
 
   #TODO Permalinks
-  get ':path/edit', to: "content_packages#edit"
-  get "*path", to: "content_packages#show"
+  unless YmContent.config.use_ym_permalinks
+    get ':path/edit', to: "content_packages#edit"
+    get "*path", to: "content_packages#show"
+  end
 
 end

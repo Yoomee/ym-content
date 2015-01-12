@@ -2,10 +2,12 @@ module YmContent::ContentPackagesController
 
   def self.included(base)
     base.load_and_authorize_resource
-    if Rails::VERSION::MAJOR >= 4
-      base.around_action :redirect_to_permalink, :only => [:show, :edit]
-    else
-      base.around_filter :redirect_to_permalink, :only => [:show, :edit]
+    unless YmContent.config.use_ym_permalinks
+      if Rails::VERSION::MAJOR >= 4
+        base.around_action :redirect_to_permalink, :only => [:show, :edit]
+      else
+        base.around_filter :redirect_to_permalink, :only => [:show, :edit]
+      end
     end
   end
 
@@ -127,11 +129,11 @@ module YmContent::ContentPackagesController
   end
 
   private
-    def content_package_params
-      params.require(:content_package).permit(*params[:content_package].try(:keys) + [:persona_ids => []])
-    end
+  def content_package_params
+    params.require(:content_package).permit(*params[:content_package].try(:keys) + [:persona_ids => []])
+  end
 
-    def get_view_data
+  def get_view_data
       # added double colon to access global scope... #TODO: this needs reviewing
       @persona_groups = ::PersonaGroup.all
       @activity_items = @content_package.activity_items.includes(:user, :resource).paginate(:page => 1, :per_page => 5)
@@ -139,13 +141,13 @@ module YmContent::ContentPackagesController
       @meta_content_attributes = @content_package.content_attributes.where(:meta => true)
     end
 
-  def render_content_package_view
-    if template_exists?("content_packages/views/#{@content_package.view_name}")
-      render "content_packages/views/#{@content_package.view_name}" and return
+    def render_content_package_view
+      if template_exists?("content_packages/views/#{@content_package.view_name}")
+        render "content_packages/views/#{@content_package.view_name}" and return
+      end
     end
-  end
 
-  def redirect_to_permalink
+    def redirect_to_permalink
     #If the url matched the catch all route at the bottom of the routes file it will have a param of 'path'
     if params[:path]
       if permalink = Permalink.find_from_url(params[:path])

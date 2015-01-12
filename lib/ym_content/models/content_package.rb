@@ -3,7 +3,9 @@ module YmContent::ContentPackage
   def self.included(base)
     base.send(:include, YmCore::Model)
     base.send(:include, YmActivity::Recordable)
-    base.send(:include, YmContent::Permalinkable)
+    unless YmContent.config.use_ym_permalinks
+      base.send(:include, YmContent::Permalinkable)
+    end
 
     base.belongs_to :content_type
     base.has_many :content_chunks
@@ -32,6 +34,10 @@ module YmContent::ContentPackage
     base.validate :embeddable_attributes
 
     base.delegate :content_attributes, :package_name, :view_name, :missing_view?, :viewless?, :to => :content_type
+
+    if YmContent.config.use_ym_permalinks
+      base.has_permalinks
+    end
 
     base.acts_as_taggable_on :acts_as_taggable_on_tags
 
