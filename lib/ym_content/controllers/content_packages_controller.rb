@@ -3,7 +3,6 @@ module YmContent::ContentPackagesController
   def self.included(base)
     base.load_and_authorize_resource
     base.before_filter :get_view_data, only: [:edit, :update]
-    # base.before_filter :redirect_to_friendly_url, only: [:show]
     base.around_action :redirect_to_permalink, :only => :show
   end
 
@@ -168,13 +167,6 @@ module YmContent::ContentPackagesController
         redirect_to @content_package.permalink.full_path, status: 301
       end
     end
-  end
-
-  def redirect_to_friendly_url
-    return true if env['ORIGINAL_PATH_INFO']
-    permalink = @content_package.permalinks.where(:active => true).first
-    return true unless permalink
-    redirect_to '/' + permalink.path, status: 301
   end
 
 end
