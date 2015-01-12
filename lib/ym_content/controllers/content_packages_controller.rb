@@ -3,7 +3,11 @@ module YmContent::ContentPackagesController
   def self.included(base)
     base.load_and_authorize_resource
     base.before_filter :get_view_data, only: [:edit, :update]
-    base.around_action :redirect_to_permalink, :only => :show
+    if Rails::VERSION::MAJOR >= 4
+      base.around_action :redirect_to_permalink, :only => :show
+    else
+      base.around_filter :redirect_to_permalink, :only => :show
+    end
   end
 
   def activity
