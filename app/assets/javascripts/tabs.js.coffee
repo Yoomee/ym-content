@@ -7,7 +7,7 @@ window.Tabs = (->
     $('.js-tab-next').toggle !$(e.target).parent().is(':last-child')
 
   init = ->
-    $tabs = $('.nav-tabs li')
+    $tabs = $('.cms-tabs li')
 
   $ ->
     $('.js-tab-next').click (e) ->
