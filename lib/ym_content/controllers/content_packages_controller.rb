@@ -2,11 +2,10 @@ module YmContent::ContentPackagesController
 
   def self.included(base)
     base.load_and_authorize_resource
-    base.before_filter :get_view_data, only: [:edit, :update]
     if Rails::VERSION::MAJOR >= 4
-      base.around_action :redirect_to_permalink, :only => :show
+      base.around_action :redirect_to_permalink, :only => [:show, :edit]
     else
-      base.around_filter :redirect_to_permalink, :only => :show
+      base.around_filter :redirect_to_permalink, :only => [:show, :edit]
     end
   end
 
@@ -26,10 +25,7 @@ module YmContent::ContentPackagesController
   end
 
   def edit
-    @content_package = ContentPackage.includes(
-      {:content_chunks => :content_attribute},
-      :personas
-    ).find(params[:id])
+    get_view_data
   end
 
   def create
@@ -109,6 +105,7 @@ module YmContent::ContentPackagesController
   end
 
   def update
+    get_view_data
     previous_status = @content_package.status
     if @content_package.update_attributes(content_package_params)
       flash[:notice] = "Updated \"#{@content_package}\""
