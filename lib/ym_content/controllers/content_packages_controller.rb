@@ -164,7 +164,7 @@ module YmContent::ContentPackagesController
         raise ActionController::RoutingError.new('Not Found')
       end
     else
-      if @content_package.permalink.nil?
+      if @content_package.permalink.nil? || params[:action] == "edit"
         yield
       else
         redirect_to @content_package.permalink.full_path, status: 301
