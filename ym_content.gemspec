@@ -26,6 +26,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'cocoon'
   s.add_dependency 'ruby-oembed'
   s.add_dependency "stringex", "~>1.3.2"
+  s.add_dependency "sir-trevor-rails", "~>0.4.0"
+  s.add_dependency "dragonfly", "~>0.9.10"
 
   s.add_development_dependency "sqlite3"
 

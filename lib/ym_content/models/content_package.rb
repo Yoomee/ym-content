@@ -229,6 +229,8 @@ module YmContent::ContentPackage
       else
         instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
       end
+    when 'rich'
+      instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value))
     else
       instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value).try(:html_safe))
     end
@@ -356,6 +358,20 @@ module YmContent::ContentPackage
       else
         content_chunk.value = value.try(:id)
       end
+    when 'rich'
+      #strip out leading and trailing <p><br></p>
+      data = JSON.parse(value)["data"]
+      data.each do |block|
+        if block["type"] == 'text'
+          st = block["data"]["text"].gsub('<p><br></p>', '')
+          block["data"]["text"] = st
+        end
+        if block["type"] == 'list'
+          st = block["data"]["text"].gsub('<ul>', '').gsub('</ul>', '')
+          block["data"]["text"] = st
+        end
+      end
+      content_chunk.value = JSON.generate({"data" => data})
     else
       content_chunk.value = value
     end

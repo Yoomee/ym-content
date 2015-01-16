@@ -4,7 +4,9 @@
 #= require character_limits
 #= require tabs
 #= require search_manager
-
+#= require eventable
+#= require underscore
+#= require sir-trevor
 
 $(document).ready ->
 

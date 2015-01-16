@@ -96,7 +96,13 @@ module YmContent::ContentTypesController
         :meta_tag_name,
         :limit_quantity,
         :limit_unit,
-        :position
+        :position,
+        :num_text_blocks,
+        :num_heading_blocks,
+        :num_list_blocks,
+        :num_quote_blocks,
+        :num_image_blocks,
+        :num_video_blocks,
       ]
     )
   end

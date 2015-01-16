@@ -9,6 +9,13 @@
     .character-limit-inputs{:class => f.object.limitable? ? '' : 'hide'}
       =f.input :limit_quantity
       =f.input :limit_unit, :as => :select, :collection => [['Characters', 'character'], ['Words', 'word']], :include_blank => false
+    .sir-trevor-settings{:class => f.object.field_type == 'rich' ? '' : 'hide'}
+      =f.input :num_text_blocks, as: :select, collection: 0..20, label: 'Maximum allowed text blocks'
+      =f.input :num_heading_blocks, as: :select, collection: 0..20, label: 'Maximum allowed heading blocks'
+      =f.input :num_list_blocks, as: :select, collection: 0..20, label: 'Maximum allowed list blocks'
+      =f.input :num_image_blocks, as: :select, collection: 0..20, label: 'Maximum allowed image blocks'
+      =f.input :num_video_blocks, as: :select, collection: 0..20, label: 'Maximum allowed video blocks'
+      =f.input :num_quote_blocks, as: :select, collection: 0..20, label: 'Maximum allowed quote blocks'
     =f.input :position, :as => :hidden
     =f.input :required, :default => false, :label => "This is a required field"
     =f.input :meta, :default => false, :label => "This is a meta attribute"

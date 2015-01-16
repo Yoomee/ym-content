@@ -6,6 +6,7 @@ require 'ym_activity'
 require 'ym_content/engine'
 require 'ym_posts'
 require 'geocoder'
+require 'dragonfly'
 
 #TODO Permalinks
 require_relative "ym_content/permalinkable"

@@ -23,7 +23,8 @@ module YmContent::ContentAttribute
         :tags => 'Tag list',
         :boolean => 'Check box',
         :user => "User",
-        :location => "Location"
+        :location => "Location",
+        :rich => "Rich content"
       }
     end
 
@@ -45,6 +46,7 @@ module YmContent::ContentAttribute
     when 'text' then 'redactor'
     when 'boolean' then 'content_boolean'
     when 'user' then 'select'
+    when 'rich' then 'text'
     else field_type
     end
   end
@@ -75,6 +77,20 @@ module YmContent::ContentAttribute
 
   def removable?
     new_record? || content_type.missing_view?
+  end
+
+  def sir_trevor_limit_data
+    {
+      :blockTypeLimits => {
+        :Text => num_text_blocks,
+        :Image => num_image_blocks,
+        :Quote => num_quote_blocks,
+        :Heading => num_heading_blocks,
+        :Video => num_video_blocks,
+        :List => num_list_blocks
+      }, 
+      :blockTypes => ['Text', 'Image', 'Video', 'Heading', 'Quote', 'List']
+    }
   end
 
   def to_s

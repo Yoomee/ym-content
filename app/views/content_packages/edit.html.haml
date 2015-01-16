@@ -1,6 +1,14 @@
 :javascript
   $(document).ready(function() {
     YmContent.Redactor.init();
+    $('.st-content').each(function() {
+        new SirTrevor.Editor({
+          el: $(this),
+          blockTypes: $(this).data('blocktypes'),
+          blockTypeLimits: $(this).data('blocktypelimits')
+        });
+    });
+
     $("#content_package_author_id").on("change", function(){
       role = $("option:selected", this).data("role");
       if (role === "author") {
@@ -47,7 +55,7 @@
                     %p=@content_package.notes
             =form.inputs do
               -@non_meta_content_attributes.each do |content_attribute|
-                =form.content_input content_attribute
+                =form.content_input content_attribute, input_html: {class: ("st-content" if content_attribute.field_type == 'rich'), data: content_attribute.sir_trevor_limit_data }
           #meta.tab-pane.cms-form
             .form-group.objective
               .row

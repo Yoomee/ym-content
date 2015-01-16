@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   get '/content' => 'content_types#dashboard'
+  post '/attachments' => 'attachments#create'
 
   resources :content_packages do
     collection do
