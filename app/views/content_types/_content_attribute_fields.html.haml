@@ -10,6 +10,8 @@
       =f.input :limit_quantity
       =f.input :limit_unit, :as => :select, :collection => [['Characters', 'character'], ['Words', 'word']], :include_blank => false
     .sir-trevor-settings{:class => f.object.field_type == 'rich' ? '' : 'hide'}
+      %p
+        Select the number of content blocks that can be used, selecting 0 will make that block unavailable and leaving a field blank will mean there is no limit on that block type
       =f.input :num_text_blocks, as: :select, collection: 0..20, label: 'Maximum allowed text blocks'
       =f.input :num_heading_blocks, as: :select, collection: 0..20, label: 'Maximum allowed heading blocks'
       =f.input :num_list_blocks, as: :select, collection: 0..20, label: 'Maximum allowed list blocks'
