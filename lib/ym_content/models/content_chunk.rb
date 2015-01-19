@@ -40,8 +40,6 @@ module YmContent::ContentChunk
       YmContent::Link.new(raw_value)
     when 'user'
       User.find_by_id(raw_value) if raw_value.present?
-    # when 'rich'
-    #   rich_content
     else
       raw_value
     end
