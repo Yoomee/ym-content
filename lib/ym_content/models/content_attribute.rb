@@ -80,6 +80,8 @@ module YmContent::ContentAttribute
   end
 
   def sir_trevor_limit_data
+    default_block_types = ['Text', 'Image', 'Video', 'Heading', 'Quote', 'List']
+    allowed_block_types = default_block_types.select { |type| send("num_#{type.downcase}_blocks") != 0 }
     {
       :blockTypeLimits => {
         :Text => num_text_blocks,
@@ -89,7 +91,7 @@ module YmContent::ContentAttribute
         :Video => num_video_blocks,
         :List => num_list_blocks
       }, 
-      :blockTypes => ['Text', 'Image', 'Video', 'Heading', 'Quote', 'List']
+      :blockTypes => allowed_block_types,
     }
   end
 
