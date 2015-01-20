@@ -39,8 +39,8 @@ Add the following line to the header section of your application layout
 
 Add the following lines to the very bottom of your applications routes.rb file
 ```
-comfy_route :cms_admin, :path => '/'
-comfy_route :cms, :path => '/'
+ym_content_route :cms_admin, :path => '/'
+ym_content_route :cms, :path => '/'
 ```
 ## Settings
 
