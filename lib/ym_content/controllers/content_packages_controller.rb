@@ -2,12 +2,10 @@ module YmContent::ContentPackagesController
 
   def self.included(base)
     base.load_and_authorize_resource
-    unless YmContent.config.use_ym_permalinks
-      if Rails::VERSION::MAJOR >= 4
-        base.around_action :redirect_to_permalink, :only => [:show, :edit]
-      else
-        base.around_filter :redirect_to_permalink, :only => [:show, :edit]
-      end
+    if Rails::VERSION::MAJOR >= 4
+      base.around_action :redirect_to_permalink, :only => [:show, :edit]
+    else
+      base.around_filter :redirect_to_permalink, :only => [:show, :edit]
     end
   end
 
