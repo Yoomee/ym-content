@@ -3,7 +3,8 @@
 ym_content is Yoomee's cms
 
 ## Installation
-um_content works with Rails 3.2 upwards. You can add it to your Gemfile with:
+ym_content works with Rails 3.2 upwards. You can add it to your Gemfile with:
+
 ```
 gem 'ym_content'
 ```
@@ -36,6 +37,11 @@ Add the following line to the header section of your application layout
 =ym_content_meta_tags
 ```
 
+Add the following lines to the very bottom of your applications routes.rb file
+```
+comfy_route :cms_admin, :path => '/'
+comfy_route :cms, :path => '/'
+```
 ## Settings
 
 ### Meta tag defaults

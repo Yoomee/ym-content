@@ -7,7 +7,7 @@ require 'ym_content/engine'
 require 'ym_posts'
 require 'geocoder'
 
-#TODO Permalinks
+require_relative 'ym_content/routing'
 require_relative "ym_content/permalinkable"
 
 module YmContent
