@@ -1,4 +1,5 @@
 module SirTrevor::ViewHelper
+  # Methods to help render sir trevor HTML in views
     def sir_trevor_markdown(text)
         renderer = Redcarpet::Render::HTML.new(:hard_wrap => true, :filter_html => false,
                                                :autolink => true, :no_intraemphasis => true,

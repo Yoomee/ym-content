@@ -367,6 +367,7 @@ module YmContent::ContentPackage
           st = block["data"]["text"].gsub('<p><br></p>', '')
           block["data"]["text"] = st
         end
+        # Sir Trevor wraps lists in <ul> tags when editing, remove them here else nested list hell occurs
         if block["type"] == 'list'
           st = block["data"]["text"].gsub('<ul>', '').gsub('</ul>', '')
           block["data"]["text"] = st

@@ -66,6 +66,7 @@ module YmContent::ContentTypesController
   end
 
   def convert_sir_trevor_settings(params)
+    # Replace sir trevor params with JSON
     params["content_attributes_attributes"].each do |content_attributes_params|
       ca_id = content_attributes_params[0]
       content_attributes = content_attributes_params[1].with_indifferent_access
@@ -78,6 +79,7 @@ module YmContent::ContentTypesController
   end
 
   def sir_trevor_settings_to_json(settings)
+    # Convert Sir Trevor form fields to JSON so content_type.update_attributes works
     j = {}
     ::ContentAttribute::DEFAULT_SIR_TREVOR_BLOCK_TYPES.each do |block_type|
       j[block_type] = {:required => (settings.has_key? "#{block_type}_required"), :limit => settings["#{block_type}_limit"] }
@@ -89,7 +91,6 @@ module YmContent::ContentTypesController
   def update
     params = content_type_params
     params = convert_sir_trevor_settings(params)
-    logger.info params
     if @content_type.update_attributes(params)
       redirect_to content_packages_path
     else

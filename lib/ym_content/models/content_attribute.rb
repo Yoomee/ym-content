@@ -93,6 +93,7 @@ module YmContent::ContentAttribute
   end
 
   def sir_trevor_limit_data
+    # Hash to give to Sir Trevor JS initialize options
     settings = sir_trevor_settings_json
     block_type_limits = {}
     settings.map {|k,v| block_type_limits[k] = v["limit"]}
