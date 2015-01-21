@@ -24,6 +24,7 @@ module YmContent::ContentPackage
     base.has_and_belongs_to_many :personas
     base.belongs_to :author, :class_name => 'User'
     base.belongs_to :requested_by, :class_name => 'User'
+    base.has_many :sir_trevor_images
 
     base.before_create :set_next_review
     base.before_save :set_status

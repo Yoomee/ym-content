@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       put 'restore'
       get 'search'
       get 'activity'
+      post 'upload_sir_trevor_attachment'
     end
   end
 

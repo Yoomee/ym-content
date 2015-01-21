@@ -83,6 +83,23 @@ module YmContent::ContentPackagesController
   def reorder
   end
 
+  def remove_abandoned_sir_trevor_images
+    rich_content_chunks = @content_package.content_chunks.joins(:content_attribute).where(:content_attributes => {field_type: 'rich'}).pluck(:value)
+    urls = []
+    rich_content_chunks.each do |chunk|
+      value = JSON.parse(chunk)['data']
+      value.select! { |i| i['type'] == 'image' }
+      value.each do |v|
+        urls.append(v['data']['file']['url'])
+      end
+    end
+    @content_package.sir_trevor_images.each do |stimg|
+      unless urls.include? stimg.image.url 
+        stimg.destroy!
+      end
+    end
+  end
+
   def restore
     @content_package.restore
     flash[:notice] = "Restored \"#{@content_package}\""
@@ -116,6 +133,7 @@ module YmContent::ContentPackagesController
         @content_package.published_at = DateTime.now
         @content_package.save
       end
+      remove_abandoned_sir_trevor_images
       if @content_package.missing_view?
         redirect_to content_packages_path(:open => @content_package)
       else
@@ -125,6 +143,15 @@ module YmContent::ContentPackagesController
       #TODO change to flash[:error] when the style has been made
       flash[:notice] = "Sorry there was a problem saving this page: #{@content_package.errors.full_messages.to_sentence}"
       render :action => 'edit'
+    end
+  end
+
+  def upload_sir_trevor_attachment
+    begin
+      stimg = @content_package.sir_trevor_images.create(image: params[:attachment][:file], sir_trevor_uid: params[:attachment][:uid], filename: params[:attachment][:original_filename]) 
+      render json: { file: { url: stimg.image.url, dragonfly_uid: stimg.image_uid } }, status: 200
+    rescue
+      render json: { error: 'Upload failed' }, status: 500
     end
   end
 

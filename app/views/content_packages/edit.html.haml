@@ -1,6 +1,9 @@
 :javascript
   $(document).ready(function() {
     YmContent.Redactor.init();
+    SirTrevor.setDefaults({
+      uploadUrl: $('#cms-style-container').data('sirTrevorUploadUrl')
+    });
     $('.st-content').each(function() {
         new SirTrevor.Editor({
           el: $(this),
@@ -9,6 +12,7 @@
           required: $(this).data('required')
         });
     });
+
 
     $("#content_package_author_id").on("change", function(){
       role = $("option:selected", this).data("role");
@@ -22,7 +26,7 @@
     });
   });
 
-.container.cms-main#cms-style-container
+.container.cms-main#cms-style-container{data: {sir_trevor_upload_url: upload_sir_trevor_attachment_content_package_path(@content_package)} }
   =semantic_form_for @content_package do |form|
     .cms-fixed-toolbar
       .container
@@ -170,3 +174,6 @@
                 =render("discussion")
               #content-scorecard.tab-pane
                 Not defined yet
+}
+}
+}
