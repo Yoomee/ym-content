@@ -147,6 +147,15 @@ module YmContent::ContentPackage
     end
   end
 
+  # The child of a content package with a view cannot be viewless
+  def valid_content_types
+    if parent.present? && !parent.content_type.viewless?
+      ContentType.not_viewless
+    else
+      ContentType.all
+    end
+  end
+
   def to_s
     name
   end

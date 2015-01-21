@@ -9,10 +9,12 @@ module YmContent::ContentType
       base.has_many :content_packages, :conditions => {:deleted_at => nil}
     end
     base.validates_presence_of :name
-    #base.send(:default_scope, { :include => :content_attributes })
     base.accepts_nested_attributes_for :content_attributes, :allow_destroy => true
     base.before_create(:set_content_attribute_positions)
     base.before_destroy(:destroyable?)
+
+    base.scope :viewless, -> { base.where(:viewless)}
+    base.scope :not_viewless, -> { base.where(:viewless => false)}
   end
 
   def self.default_scope
