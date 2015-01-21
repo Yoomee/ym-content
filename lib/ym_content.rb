@@ -19,6 +19,7 @@ end
 
 Dir[File.dirname(__FILE__) + '/ym_content/models/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/ym_content/controllers/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/ym_content/permalinks/*.rb'].each {|file| require file }
 
 require 'cocoon'
 require 'oembed'
