@@ -12,12 +12,17 @@
     .sir-trevor-settings{:class => f.object.field_type == 'rich' ? '' : 'hide'}
       %p
         Select the number of content blocks that can be used, selecting 0 will make that block unavailable and leaving a field blank will mean there is no limit on that block type
-      =f.input :num_text_blocks, as: :select, collection: 0..20, label: 'Maximum allowed text blocks'
-      =f.input :num_heading_blocks, as: :select, collection: 0..20, label: 'Maximum allowed heading blocks'
-      =f.input :num_list_blocks, as: :select, collection: 0..20, label: 'Maximum allowed list blocks'
-      =f.input :num_image_blocks, as: :select, collection: 0..20, label: 'Maximum allowed image blocks'
-      =f.input :num_video_blocks, as: :select, collection: 0..20, label: 'Maximum allowed video blocks'
-      =f.input :num_quote_blocks, as: :select, collection: 0..20, label: 'Maximum allowed quote blocks'
+      -ContentAttribute::DEFAULT_SIR_TREVOR_BLOCK_TYPES.each do |block_type|
+        -value = f.object.sir_trevor_settings_json[block_type]
+        .block-type-setting
+          %span=block_type
+          %br
+            =label_tag "#{block_type}_required", "Required"
+            =check_box_tag "#{f.object_name}[sir_trevor_settings][#{block_type}_required]", 1 ,value["required"]
+          %br
+            =label_tag "#{block_type}_required", "Number of blocks allowed (leave blank for no limit)"
+            =number_field_tag "#{f.object_name}[sir_trevor_settings][#{block_type}_limit]", value["limit"]
+
     =f.input :position, :as => :hidden
     =f.input :required, :default => false, :label => "This is a required field"
     =f.input :meta, :default => false, :label => "This is a meta attribute"

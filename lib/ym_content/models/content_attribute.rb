@@ -34,6 +34,7 @@ module YmContent::ContentAttribute
 
   end
 
+  DEFAULT_SIR_TREVOR_BLOCK_TYPES = ['Text', 'Image', 'Video', 'Heading', 'Quote', 'List']
   META_TAG_TYPES = ["title", "description", "image", "keywords"]
 
   def field_type
@@ -79,19 +80,26 @@ module YmContent::ContentAttribute
     new_record? || content_type.missing_view?
   end
 
+  def sir_trevor_settings_json
+    if sir_trevor_settings
+      j = JSON.parse(sir_trevor_settings)
+    else
+      j = {}
+      DEFAULT_SIR_TREVOR_BLOCK_TYPES.each do |block_type|
+        j[block_type] = {:required => false, :limit => 0 }
+      end
+    end
+    j
+  end
+
   def sir_trevor_limit_data
-    default_block_types = ['Text', 'Image', 'Video', 'Heading', 'Quote', 'List']
-    allowed_block_types = default_block_types.select { |type| send("num_#{type.downcase}_blocks") != 0 }
+    settings = sir_trevor_settings_json
+    block_type_limits = {}
+    settings.map {|k,v| block_type_limits[k] = v["limit"]}
     {
-      :blockTypeLimits => {
-        :Text => num_text_blocks,
-        :Image => num_image_blocks,
-        :Quote => num_quote_blocks,
-        :Heading => num_heading_blocks,
-        :Video => num_video_blocks,
-        :List => num_list_blocks
-      }, 
-      :blockTypes => allowed_block_types,
+      :blockTypeLimits => block_type_limits, 
+      :blockTypes => settings.reject{|k,v| v["limit"] == "0" }.keys, 
+      :required => settings.reject{|k,v| v["required"] == true }.keys 
     }
   end
 
