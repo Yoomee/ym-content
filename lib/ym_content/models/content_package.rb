@@ -30,6 +30,7 @@ module YmContent::ContentPackage
     base.validates :name, :content_type, :requested_by, :review_frequency, :presence => true
     base.validate :required_attributes
     base.validate :embeddable_attributes
+    base.validate :viewless_children
 
     base.delegate :content_attributes, :package_name, :view_name, :missing_view?, :viewless?, :to => :content_type
 
@@ -188,6 +189,12 @@ module YmContent::ContentPackage
           end
         end
       end
+    end
+  end
+
+  def viewless_children
+    if parent.present? && !parent.content_type.viewless? && content_type.viewless?
+      self.errors.add(:content_type, "Viewless content packages cannot be added as children of content packages with a view")
     end
   end
 
