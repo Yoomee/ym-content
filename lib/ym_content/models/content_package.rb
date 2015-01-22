@@ -52,8 +52,7 @@ module YmContent::ContentPackage
     def member_routes
       resourceful_routes = [
         { :route => 'edit', :action => 'edit',    :method => 'get'},
-        { :route => '',     :action => 'update',  :method => 'put'},
-        { :route => '',     :action => 'update',  :method => 'patch'},
+        { :route => '',     :action => 'update',  :method => "#{Rails::VERSION::MAJOR >= 4 ? 'patch' : 'put'}"},
         { :route => '',     :action => 'destroy', :method => 'delete'},
         { :route => '',     :action => 'show',    :method => 'get'}
       ]
