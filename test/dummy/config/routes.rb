@@ -12,4 +12,7 @@ Dummy::Application.routes.draw do
 
   root :to => 'content_types#index'
 
+  ym_content_route :cms_admin, :path => '/'
+  ym_content_route :cms, :path => '/'
+
 end

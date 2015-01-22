@@ -2,10 +2,11 @@ module YmContent::ContentPackagesController
 
   def self.included(base)
     base.load_and_authorize_resource
+
     if Rails::VERSION::MAJOR >= 4
-      base.around_action :redirect_to_permalink, :only => [:show, :edit]
+      base.around_action :redirect_to_permalink, :only => ContentPackage.member_routes.collect{ |x| x[:action] }
     else
-      base.around_filter :redirect_to_permalink, :only => [:show, :edit]
+      base.around_filter :redirect_to_permalink, :only => ContentPackage.member_routes.collect{ |x| x[:action] }
     end
   end
 
@@ -162,12 +163,12 @@ module YmContent::ContentPackagesController
         raise ActionController::RoutingError.new('Not Found')
       end
     else
-      if @content_package.permalink.nil? || params[:action] == "edit"
+      if @content_package.permalink.nil? || ContentPackage.member_routes.reject { |x| x[:action] == "show" }.any?{|x| x[:action] == params[:action]}
         yield
       else
         redirect_to @content_package.permalink.full_path, status: 301
       end
     end
-  end
+    end
 
 end

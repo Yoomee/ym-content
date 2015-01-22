@@ -49,6 +49,29 @@ module YmContent::ContentPackage
 
   module ClassMethods
 
+    def member_routes
+      resourceful_routes = [
+        { :route => 'edit', :action => 'edit',    :method => 'get'},
+        { :route => '',     :action => 'update',  :method => 'put'},
+        { :route => '',     :action => 'update',  :method => 'patch'},
+        { :route => '',     :action => 'destroy', :method => 'delete'},
+        { :route => '',     :action => 'show',    :method => 'get'}
+      ]
+
+      # Get each route thats matches /content_packages/:id/:action
+      routes = Rails.application.routes.routes.select do |route|
+        /\/content_packages\/:id\/(\w+)/.match(route.path.spec.to_s)
+      end
+
+      # Project each route in to a hash of format: {:action => "children", :method => "get"}
+      routes = routes.map do |x|
+        { :route => x.defaults[:action], :action => x.defaults[:action], :method => x.verb.source.gsub(/[^0-9A-Za-z]/, '').downcase }
+      end
+
+      # Return a joint array of resourceful routes as well as defined member routes
+      routes | resourceful_routes
+    end
+
     def statuses(user)
       Hash.new.tap do |s|
         s[:draft] = 'Draft' if user.try(:role_is?, :admin) || user.try(:role_is?, :editor)

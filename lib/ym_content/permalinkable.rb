@@ -50,8 +50,8 @@ module YmContent::Permalinkable
   end
 
   def set_permalink_full_path
-    return if permalink.nil? || (self.parent && self.parent.permalink.full_path.nil?)
-    self.permalink.full_path = self.parent ? "#{CGI::escape(self.parent.permalink.full_path).gsub('%2F', '/')}/#{self.permalink.path}".squeeze('/') : "/#{self.permalink.path}"
+    return if permalink.nil? || (self.parent && self.parent.permalink && self.parent.permalink.full_path.nil?)
+    self.permalink.full_path = self.parent && !self.parent.viewless? ? "#{CGI::escape(self.parent.permalink.full_path).gsub('%2F', '/')}/#{self.permalink.path}".squeeze('/') : "/#{self.permalink.path}"
   end
 
   def sync_child_full_paths
