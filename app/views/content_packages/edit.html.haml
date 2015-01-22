@@ -124,7 +124,7 @@
                     -@activity_items.each do |activity|
                       =render("content_packages/activity", :include_name => true, :activity => activity)
                   -if @activity_items.total_pages != @activity_items.current_page
-                    =link_to "See older activity", activity_content_packages_path(@content_package), :remote => true, :class => 'btn btn-small js-older-activities pull-right mt-1'
+                    =link_to "See older activity", activity_content_package_path(@content_package), :remote => true, :class => 'btn btn-small js-older-activities pull-right mt-1'
               #personas.tab-pane
                 - if @content_package.personas.present?
                   %h5.hide Audience/personas

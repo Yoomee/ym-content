@@ -14,7 +14,7 @@ module YmContent::ContentPackagesController
     if request.xhr?
       page = params[:page] || 2
       if @content_package
-        @activity_items = @content_package.paginate(:page => page, :per_page => 5)
+        @activity_items = @content_package.activity_items.paginate(:page => page, :per_page => 5)
       else
         @activity_items = ActivityItem.where(:resource_type => "ContentPackage").paginate(:page => page, :per_page => 5)
       end
@@ -147,28 +147,28 @@ module YmContent::ContentPackagesController
     end
 
     def redirect_to_permalink
-    #If the url matched the catch all route at the bottom of the routes file it will have a param of 'path'
-    if params[:path]
-      if permalink = Permalink.find_from_url(params[:path])
-        #If the permalink is active then just set the content package and yield to show.
-        if permalink.active
-          @content_package = ContentPackage.includes(:content_chunks => :content_attribute).find(permalink.resource_id)
-          yield
+      #If the url matched the catch all route at the bottom of the routes file it will have a param of 'path'
+      if params[:path]
+        if permalink = Permalink.find_from_url(params[:path])
+          #If the permalink is active then just set the content package and yield to show.
+          if permalink.active
+            @content_package = ContentPackage.includes(:content_chunks => :content_attribute).find(permalink.resource_id)
+            yield
+          else
+            # Otherwise redirect to the proper permalink so that we come back to this method and fall through the correct path.
+            redirect_to permalink.resource.permalink.full_path, status: 301
+          end
         else
-          # Otherwise redirect to the proper permalink so that we come back to this method and fall through the correct path.
-          redirect_to permalink.resource.permalink.full_path, status: 301
+          # If there isn't a matching permalink handle it with rails (Default is 404)
+          raise ActionController::RoutingError.new('Not Found')
         end
       else
-        # If there isn't a matching permalink handle it with rails (Default is 404)
-        raise ActionController::RoutingError.new('Not Found')
+        if (@content_package && @content_package.permalink.nil?) || ContentPackage.member_routes.reject { |x| x[:action] == "show" }.any?{|x| x[:action] == params[:action]}
+          yield
+        else
+          redirect_to @content_package.permalink.full_path, status: 301
+        end
       end
-    else
-      if @content_package.permalink.nil? || ContentPackage.member_routes.reject { |x| x[:action] == "show" }.any?{|x| x[:action] == params[:action]}
-        yield
-      else
-        redirect_to @content_package.permalink.full_path, status: 301
-      end
-    end
     end
 
 end
