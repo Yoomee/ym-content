@@ -1,5 +1,5 @@
 .nested-fields.well
-  =link_to_remove_association "Remove this content attribute", f, :class => 'pull-right', :icon => 'trash-o'
+  =link_to_remove_association "Remove this content attribute", f, :class => 'pull-right btn btn-secondary'
   .clearfix
   =f.inputs do
     =f.input :name
@@ -15,17 +15,18 @@
       -ContentAttribute::DEFAULT_SIR_TREVOR_BLOCK_TYPES.each do |block_type|
         -value = f.object.sir_trevor_settings_json[block_type]
         .block-type-setting
-          %span=block_type
-          %br
-            =label_tag "#{block_type}_required", "Required"
-            =check_box_tag "#{f.object_name}[sir_trevor_settings][#{block_type}_required]", 1 ,value["required"]
+          %h4=block_type 
+          =check_box_tag "#{f.object_name}[sir_trevor_settings][#{block_type}_required]", 1 ,value["required"]
+          %span=label_tag "#{block_type}_required", "Required?"
           %br
             =label_tag "#{block_type}_required", "Number of blocks allowed (leave blank for no limit)"
             =number_field_tag "#{f.object_name}[sir_trevor_settings][#{block_type}_limit]", value["limit"]
 
     =f.input :position, :as => :hidden
-    =f.input :required, :default => false, :label => "This is a required field"
-    =f.input :meta, :default => false, :label => "This is a meta attribute"
+    .col-md-6
+      =f.input :required, :default => false, :label => "This is a required field"
+    .col-md-6
+      =f.input :meta, :default => false, :label => "This is a meta attribute"
     .meta-attributes{:class => f.object.meta? ? '' : 'hide'}
       %p
         The site has default values for meta tags. Adding a meta attribute here allows editors to override them on pages using this content template.

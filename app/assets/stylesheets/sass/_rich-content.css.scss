@@ -1,0 +1,62 @@
+
+/* =======================================================================
+   Styling for Sir Trevor rich content editor
+   ======================================================================= */
+
+
+#cms-style-container{ // ID wrap for specificty
+
+  .st-block__inner:hover{
+    border-color:$cms-primary-col;
+    border-radius:4px;
+  }
+  .st-block-controls__top{
+    cursor: pointer;
+  }
+  .st-block-ui-btn,
+  .st-block-control-ui-btn{
+    border-color:$cms-primary-col;
+  }
+  .st-block-controls__top:hover:before{
+    color:$cms-primary-col;
+  }
+  .st-block-ui-btn:hover,
+  .st-block-control-ui-btn:hover,
+  .st-block-control-ui-btn:hover{
+    background: lighten($cms-primary-col, 40%)
+  }
+  .st-block__delete-label{
+    margin: 0;
+    padding: 1.1em 0.7em;
+    width:5em;
+    height: 3.5em;
+  }
+  .st-block__editor{
+    text-align: center;
+    img{ 
+      width: auto;
+      max-width:100%;
+    }
+  }
+  .st-block--with-plus:after{
+    color: $cms-primary-col;
+  }
+  .st-upload-btn:hover{
+    background: $cms-primary-col;
+  }
+  .st-block__inner *::-moz-selection{
+    background: $cms-primary-col;
+  }
+  .block-type-setting{
+    padding:25px 0;
+    border-top:1px solid #d9d9d9;
+    .required-check{
+      float:right;
+    }
+  }
+  .st-block[data-type="video"] .st-block__inner p{
+     display: none
+   }
+ }
+
+

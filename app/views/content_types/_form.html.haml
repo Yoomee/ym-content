@@ -50,7 +50,6 @@
       =form.semantic_fields_for :content_attributes, @content_type.content_attributes.sort_by(&:position) do |content_attribute|
         =render 'content_attribute_fields', :f => content_attribute
         .links.mb-2
-          %i.fa.fa-plus-circle
-          =link_to_add_association 'Add another content attribute', form, :content_attributes
+          =link_to_add_association 'Add another content attribute', form, :content_attributes, :class => 'btn btn-primary'
 
   =form.actions
