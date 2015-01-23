@@ -2,12 +2,17 @@ module YmContent::ContentTypesController
 
   def self.included(base)
     base.load_and_authorize_resource
+    base.skip_load_resource :only => :create
   end
 
   def children
   end
 
   def create
+    params = content_type_params
+    params = convert_sir_trevor_settings(params)
+    @content_type = ::ContentType.new
+    @content_type.assign_attributes(params)
     if @content_type.save
       redirect_to content_types_path
     else
