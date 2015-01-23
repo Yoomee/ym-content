@@ -66,3 +66,23 @@ To run the tests individually you can also run
  cucumber
  rspec
 ```
+
+## Sir Trevor
+
+To add rich content support to your project, all you maneed to do is 
+
+Make a migration for the Sir Trevor Image model (see lib/generators/ym_content/templates/migrations/create_sir_trevor_images.rb)
+
+Add gem to Gemfile
+```
+gem 'sir-trevor-rails', '~> 0.4.0'
+```
+Generate the partials for viewing the content
+
+```bash
+rails g sir_trevor:views
+```
+
+Sir Trevor JS docs: http://madebymany.github.io/sir-trevor-js/docs.html
+
+Sir Trevor Rails docs: https://github.com/madebymany/sir-trevor-rails/blob/v4-with-link-attributes/README.md
