@@ -83,6 +83,8 @@ Generate the partials for viewing the content
 rails g sir_trevor:views
 ```
 
+If you create any custom blocks, add the block name to the DEFAULT_SIR_TREVOR_BLOCK_TYPES list in the ContentPackage model
+
 Sir Trevor JS docs: http://madebymany.github.io/sir-trevor-js/docs.html
 
 Sir Trevor Rails docs: https://github.com/madebymany/sir-trevor-rails/blob/v4-with-link-attributes/README.md

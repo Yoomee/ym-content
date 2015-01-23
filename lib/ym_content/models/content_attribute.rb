@@ -100,7 +100,7 @@ module YmContent::ContentAttribute
     {
       :blockTypeLimits => block_type_limits, 
       :blockTypes => settings.reject{|k,v| v["limit"] == "0" }.keys, 
-      :required => settings.reject{|k,v| v["required"] == true }.keys 
+      :required => settings.reject{|k,v| v["required"] == false }.keys 
     }
   end
 
