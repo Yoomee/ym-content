@@ -6,11 +6,16 @@
 
 #cms-style-container{ // ID wrap for specificty
 
-  .st-block__inner:hover{
-    border-color:$cms-primary-col;
-    border-radius:4px;
+  .st-block__inner{
+      border-color:#f3f3f3;
+      border-radius:4px;
+    &:hover{
+      border-color:$cms-primary-col;
+    }
   }
-  .st-block-controls__top{
+  .st-block-controls__top,
+  .st-block--with-plus,
+  .st-icon--add{
     cursor: pointer;
   }
   .st-block-ui-btn,
@@ -44,9 +49,6 @@
   .st-upload-btn:hover{
     background: $cms-primary-col;
   }
-  .st-block__inner *::-moz-selection{
-    background: $cms-primary-col;
-  }
   .block-type-setting{
     padding:25px 0;
     border-top:1px solid #d9d9d9;
@@ -55,8 +57,23 @@
     }
   }
   .st-block[data-type="video"] .st-block__inner p{
-     display: none
-   }
+    display: none
+  }
+  .st-icon--add:after{
+    clear:both;
+  }
  }
-
-
+.st-format-btn:hover, .st-format-btn--is-active{
+  color:lighten($cms-primary-col, 40%) !important;
+}
+.st-block__inner ::-moz-selection {
+  background: #f3f3f3 !important;
+  text-shadow: none;
+}
+.st-block__inner ::selection {
+  background: #f3f3f3 !important;
+  text-shadow: none;
+}
+.st-block__inner *::-moz-selection{
+  background:$cms-primary-col;
+}
