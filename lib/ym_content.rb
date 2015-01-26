@@ -8,7 +8,7 @@ require 'ym_posts'
 require 'geocoder'
 require 'dragonfly'
 
-#TODO Permalinks
+require_relative 'ym_content/routing'
 require_relative "ym_content/permalinkable"
 
 module YmContent
@@ -18,8 +18,9 @@ module YmContent
   end
 end
 
-Dir[File.dirname(__FILE__) + '/ym_content/models/*.rb'].each {|file| require file unless YmContent.config.use_ym_permalinks && file == "permalink.rb" }
+Dir[File.dirname(__FILE__) + '/ym_content/models/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/ym_content/controllers/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/ym_content/permalinks/*.rb'].each {|file| require file }
 
 require 'cocoon'
 require 'oembed'

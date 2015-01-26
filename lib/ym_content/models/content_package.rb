@@ -3,9 +3,7 @@ module YmContent::ContentPackage
   def self.included(base)
     base.send(:include, YmCore::Model)
     base.send(:include, YmActivity::Recordable)
-    unless YmContent.config.use_ym_permalinks
-      base.send(:include, YmContent::Permalinkable)
-    end
+    base.send(:include, YmContent::Permalinkable)
 
     base.belongs_to :content_type
     base.has_many :content_chunks
@@ -33,12 +31,9 @@ module YmContent::ContentPackage
     base.validates :name, :content_type, :requested_by, :review_frequency, :presence => true
     base.validate :required_attributes
     base.validate :embeddable_attributes
+    base.validate :viewless_children
 
     base.delegate :content_attributes, :package_name, :view_name, :missing_view?, :viewless?, :to => :content_type
-
-    if YmContent.config.use_ym_permalinks
-      base.has_permalinks
-    end
 
     base.acts_as_taggable_on :acts_as_taggable_on_tags
 
@@ -54,6 +49,31 @@ module YmContent::ContentPackage
   end
 
   module ClassMethods
+
+    def member_routes
+      # Define all routes set up by "resources :content_packages"
+      # We have to include the route so that we know if its the
+      # url path or the http verb that defines the action
+      resourceful_routes = [
+        { :route => 'edit', :action => 'edit',    :method => 'get'},
+        { :route => '',     :action => 'update',  :method => "#{Rails::VERSION::MAJOR >= 4 ? 'patch' : 'put'}"},
+        { :route => '',     :action => 'destroy', :method => 'delete'},
+        { :route => '',     :action => 'show',    :method => 'get'}
+      ]
+
+      # Get all the routes that match /content_packages/:id/:action
+      routes = Rails.application.routes.routes.select do |route|
+        /\/content_packages\/:id\/(\w+)/.match(route.path.spec.to_s)
+      end
+
+      # Project each route in to a hash of format: {:action => "children", :method => "get"}
+      routes = routes.map do |x|
+        { :route => x.defaults[:action], :action => x.defaults[:action], :method => x.verb.source.gsub(/[^0-9A-Za-z]/, '').downcase }
+      end
+
+      # Return a joint array of resourceful routes as well as defined member routes
+      routes | resourceful_routes
+    end
 
     def statuses(user)
       Hash.new.tap do |s|
@@ -154,6 +174,15 @@ module YmContent::ContentPackage
     end
   end
 
+  # The child of a content package with a view cannot be viewless
+  def valid_content_types
+    if parent.present? && !parent.content_type.viewless?
+      ContentType.not_viewless
+    else
+      ContentType.all
+    end
+  end
+
   def to_s
     name
   end
@@ -186,6 +215,12 @@ module YmContent::ContentPackage
           end
         end
       end
+    end
+  end
+
+  def viewless_children
+    if parent.present? && !parent.content_type.viewless? && content_type.viewless?
+      self.errors.add(:content_type, "Viewless content packages cannot be added as children of content packages with a view")
     end
   end
 

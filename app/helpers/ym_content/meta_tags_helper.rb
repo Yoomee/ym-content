@@ -43,7 +43,7 @@ module YmContent::MetaTagsHelper
   end
 
   # generates meta tags from data
-  def build_meta_tags(meta_values)
+  def build_meta_tags(meta_values, include_keywords = true)
     meta_title, meta_description, meta_image, meta_keywords, meta_hide_from_robots = meta_values
     meta_tags = meta_hide_from_robots.to_s
     # build actual tags from values
@@ -72,7 +72,7 @@ module YmContent::MetaTagsHelper
       meta_tags << "<meta property=\"og:image\" content=\"#{meta_image}\"/>\n"
     end
 
-    if meta_keywords.present?
+    if meta_keywords.present? && include_keywords
       meta_tags << "<meta name=\"keywords\" content=\"#{meta_keywords}\">\n"
     end
 

@@ -18,7 +18,7 @@
               =form.input :parent_id, :as => :hidden
               =form.input :name
               %br
-              =form.input :content_type, :as => :select, :label => "Select a content template below", :required => false
+              =form.input :content_type, :as => :select, :collection => @content_package.valid_content_types, :label => "Select a content template below", :required => false
           #context.tab-pane.cms-well
             %h4 Write an objective/goal for this content
             .cms-edit-context-box
