@@ -151,7 +151,8 @@ module YmContent::ContentPackagesController
     begin
       stimg = @content_package.sir_trevor_images.create(image: params[:attachment][:file], sir_trevor_uid: params[:attachment][:uid], filename: params[:attachment][:original_filename]) 
       render json: { file: { url: stimg.image.url, dragonfly_uid: stimg.image_uid } }, status: 200
-    rescue
+    rescue => exception
+      puts exception
       render json: { error: 'Upload failed' }, status: 500
     end
   end
