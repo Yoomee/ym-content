@@ -13,6 +13,7 @@ class ActionDispatch::Routing::Mapper
       end
 
       get '/content' => 'content_types#dashboard'
+      post '/attachments' => 'attachments#create'
 
       resources :content_packages do
         collection do
@@ -28,6 +29,7 @@ class ActionDispatch::Routing::Mapper
           put 'restore'
           get 'search'
           get 'activity'
+          post 'upload_sir_trevor_attachment'
         end
       end
 
