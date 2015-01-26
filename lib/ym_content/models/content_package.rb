@@ -50,6 +50,9 @@ module YmContent::ContentPackage
   module ClassMethods
 
     def member_routes
+      # Define all routes set up by "resources :content_packages"
+      # We have to include the route so that we know if its the
+      # url path or the http verb that defines the action
       resourceful_routes = [
         { :route => 'edit', :action => 'edit',    :method => 'get'},
         { :route => '',     :action => 'update',  :method => "#{Rails::VERSION::MAJOR >= 4 ? 'patch' : 'put'}"},
@@ -57,7 +60,7 @@ module YmContent::ContentPackage
         { :route => '',     :action => 'show',    :method => 'get'}
       ]
 
-      # Get each route thats matches /content_packages/:id/:action
+      # Get all the routes that match /content_packages/:id/:action
       routes = Rails.application.routes.routes.select do |route|
         /\/content_packages\/:id\/(\w+)/.match(route.path.spec.to_s)
       end

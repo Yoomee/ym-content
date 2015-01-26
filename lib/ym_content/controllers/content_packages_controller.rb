@@ -3,6 +3,8 @@ module YmContent::ContentPackagesController
   def self.included(base)
     base.load_and_authorize_resource
 
+    # Define an around filter for all controller actions that could potenatially be
+    # routed to from a permalinks
     if Rails::VERSION::MAJOR >= 4
       base.around_action :redirect_to_permalink, :only => ContentPackage.member_routes.collect{ |x| x[:action] }
     else
@@ -147,10 +149,10 @@ module YmContent::ContentPackagesController
     end
 
     def redirect_to_permalink
-      #If the url matched the catch all route at the bottom of the routes file it will have a param of 'path'
+      # If the url matched a permalinkable content package route then it will have a param of :path
       if params[:path]
         if permalink = Permalink.find_from_url(params[:path])
-          #If the permalink is active then just set the content package and yield to show.
+          #If the permalink is active then just set the content package and yield to the original action.
           if permalink.active
             @content_package = ContentPackage.includes(:content_chunks => :content_attribute).find(permalink.resource_id)
             yield
