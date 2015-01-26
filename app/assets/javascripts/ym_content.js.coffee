@@ -7,6 +7,7 @@
 #= require eventable
 #= require underscore
 #= require sir-trevor
+#= require_tree ./sir_trevor_custom_blocks
 
 $(document).ready ->
 

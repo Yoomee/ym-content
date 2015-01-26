@@ -34,7 +34,7 @@ module YmContent::ContentAttribute
 
   end
 
-  DEFAULT_SIR_TREVOR_BLOCK_TYPES = ['Text', 'Image', 'Video', 'Heading', 'Quote', 'List']
+  DEFAULT_SIR_TREVOR_BLOCK_TYPES = ['Text', 'Image', 'Video', 'Heading', 'Quote', 'List', 'Alert']
   META_TAG_TYPES = ["title", "description", "image", "keywords"]
 
   def field_type
@@ -83,6 +83,11 @@ module YmContent::ContentAttribute
   def sir_trevor_settings_json
     if sir_trevor_settings
       j = JSON.parse(sir_trevor_settings)
+      DEFAULT_SIR_TREVOR_BLOCK_TYPES.each do |block_type|
+        unless j.has_key? block_type
+          j[block_type] = {:required => false, :limit => 0 }
+        end
+      end
     else
       j = {}
       DEFAULT_SIR_TREVOR_BLOCK_TYPES.each do |block_type|
