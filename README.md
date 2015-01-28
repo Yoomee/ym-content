@@ -75,9 +75,11 @@ To run the tests individually you can also run
 
 ## Sir Trevor
 
-To add rich content support to your project, all you maneed to do is 
+To add rich content support to your project, all you need to do is 
 
 Make a migration for the Sir Trevor Image model (see lib/generators/ym_content/templates/migrations/create_sir_trevor_images.rb)
+
+Make a migration to add sir_trevor_settings:text to the content attribute model.
 
 Add gem to Gemfile
 ```
@@ -89,7 +91,21 @@ Generate the partials for viewing the content
 rails g sir_trevor:views
 ```
 
-If you create any custom blocks, add the block name to the DEFAULT_SIR_TREVOR_BLOCK_TYPES list in the ContentPackage model
+For some reason, the heading block doesn't generate so you will have to do this manually
+
+# How to use
+
+There is a new content attribute type called rich content. Add a rich content content attribute to your content type. In the view, render the Sir Trevor output
+
+```
+=render_sir_trevor @content_package.my_content_attribute_name
+```
+
+# Custom Blocks
+
+1. Add the block javascript to app/assets/javascripts/sir_trevor_custom_blocks
+2. Create a partial in the target application app/views/sir_trevor/blocks
+3. Add the block name to the SIR_TREVOR_DEFAULT_BLOCKS list in content_attribute.rb in ym_content
 
 Sir Trevor JS docs: http://madebymany.github.io/sir-trevor-js/docs.html
 
