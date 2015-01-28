@@ -164,9 +164,12 @@
                           =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-small pull-right mt-2 btn-primary2', :icon => 'download')
                       .clearfix
               #context.tab-pane
+                %h5 Content Package Id
+                .cms-edit-context-box
+                  =@content_package.id
                 %h5 Content type
                 .cms-edit-context-box
-                  =@content_package.content_type
+                  =link_to(@content_package.content_type, edit_content_type_path(@content_package.content_type))
                 %h5 Content requested by
                 .cms-edit-context-box.requested-by
                   =@content_package.requested_by.try(:full_name)
