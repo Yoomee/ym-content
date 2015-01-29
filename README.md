@@ -43,7 +43,7 @@ ym_content_route :cms_admin, :path => '/'
 ym_content_route :cms, :path => '/'
 ```
 
-To ensure that links to permalinked content packages, ensure that the default host is set in each relevant environment file
+To ensure that links to permalinked content packages work set the default host is set in each relevant environment file
 ```
  routes.default_url_options[:host] = 'localhost'
 ```
