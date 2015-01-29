@@ -95,7 +95,7 @@ module YmContent::ContentPackage
 
     def search(term)
       escaped_term = "%#{term}%"
-      joins(:permalink).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
+      joins(:permalink).where(deleted_at: nil).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
     end
 
   end
