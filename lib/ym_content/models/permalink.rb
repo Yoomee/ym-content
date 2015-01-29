@@ -12,6 +12,8 @@ class Permalink < ActiveRecord::Base
   after_update :create_inactive_permalink
   after_update :delete_duplicate_permalinks
 
+  scope :active, -> { where(active: true) }
+
   def initialize(*args)
     super(*args)
     generate_unique_path!

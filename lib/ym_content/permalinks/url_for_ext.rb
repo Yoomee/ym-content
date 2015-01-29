@@ -19,7 +19,7 @@ module ActionDispatch
         when Hash
           return nil if options.delete(:permalink) == false
           if options[:controller] && options[:id]
-            return Permalink.find_by_resource_type_and_resource_id(options[:controller].classify, options[:id])
+            return Permalink.active.find_by_resource_type_and_resource_id(options[:controller].classify, options[:id])
           elsif options[:_positional_args]
             resource = options[:_positional_args].first
             if resource.respond_to?(:permalink) && resource.permalink
