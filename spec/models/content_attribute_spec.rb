@@ -24,7 +24,7 @@ describe ContentAttribute do
       content_attribute.slug = nil
       content_attribute.name = "Test"
       content_attribute.valid?
-      expect(content_attribute.slug).to eq("test")
+      expect(content_attribute.slug).to_not eq("test")
     end
   end
 
