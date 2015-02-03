@@ -14,7 +14,7 @@
 
     loadData: function(data){
       this.$editor.html($('<img>', { src: data.file.url })).show();
-      this.$editor.append($('<input>', {type: 'text', class: 'st-input-string js-alt-input', name: 'description', placeholder: 'Alt text', style: 'width: 100%; margin-top:10px; text-align: center;', value: data.text}));
+      this.$editor.append($('<input>', {type: 'text', class: 'st-input-string js-alt-input', name: 'description', placeholder: 'Alt text', style: 'width: 100%; margin-top:10px; text-align: center;', value: data.description}));
     },
 
     onBlockRender: function(){
