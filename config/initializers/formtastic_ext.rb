@@ -18,7 +18,7 @@ module Formtastic
             }
           end
           if content_attribute.field_type == 'rich'
-            (hash[:data] || {}).reverse_merge!(content_attribute.sir_trevor_limit_data)
+            (hash[:data] ||= {}).reverse_merge!(content_attribute.sir_trevor_limit_data)
           end
         end
         options[:input_html] = (options[:input_html] || {}).reverse_merge(input_html_options)
