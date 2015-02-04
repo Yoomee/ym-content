@@ -7,6 +7,7 @@
 #= require eventable
 #= require underscore
 #= require sir-trevor
+#= require redactor/redactor
 #= require_tree ./sir_trevor_custom_blocks
 
 $(document).ready ->
@@ -95,13 +96,13 @@ window.YmContent =
         removeStyles: true,
         buttons: [ 'unorderedlist', 'orderedlist', 'link', 'html' ],
         convertDivs: true,
-        path:'/assets/redactor',
+        path:'vendor/assets/javascripts/redactor',
         focusCallback: (e) ->
           $(e.currentTarget).parents(".form-group").addClass("focus")
         blurCallback: (e) ->
           $(e.currentTarget).parents(".form-group").removeClass("focus")
         initCallback: (e) ->
-          if CharacterLimits && this.$source.data('limit-quantity')
+          if CharacterLimits && this.$element.data('limit-quantity')
             CharacterLimits.registerRedactor(this)
 
   Sitemap:
