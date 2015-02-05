@@ -1,4 +1,4 @@
-Given(/^there (?:is|are) (\d+) content packages?\s?(not\s)?(?:assigned to me)?$/) do |n, assigned|
+Given(/^there (?:is|are) (\d+) (unpublished )?content packages?\s?(not\s)?(?:assigned to me)?$/) do |n, unpublished, assigned|
   if n.to_i.zero?
     ContentPackage.destroy_all
   end
@@ -6,6 +6,8 @@ Given(/^there (?:is|are) (\d+) content packages?\s?(not\s)?(?:assigned to me)?$/
     n.to_i.times do |i|
       if assigned.try(:strip) == 'not'
         arr << FactoryGirl.create(:content_package, :title => "Content package #{i}")
+      elsif unpublished.present?
+        arr << FactoryGirl.create(:content_package, :title => "Content package #{i}", :status => "draft" )
       else
         arr << FactoryGirl.create(:content_package, :title => "Content package #{i}", :author => @current_user )
       end
@@ -22,7 +24,7 @@ Given(/^there is a content package with a parent$/) do
 end
 
 Given(/^(?:there is|I create) a content package with the permalink path "(.*?)"$/) do |permalink|
-  cp = FactoryGirl.create(:content_package, :permalink_path => permalink)
+  FactoryGirl.create(:content_package, :permalink_path => permalink)
 end
 
 When(/^I go to the sitemap$/) do
@@ -187,4 +189,8 @@ end
 
 Then(/^I should get an error$/) do
   pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should get redirected to the login page$/) do
+  expect(current_path).to eq("/login")
 end

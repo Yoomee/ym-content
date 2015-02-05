@@ -37,3 +37,8 @@ Scenario: I can visit a content package without a permalink
   Given there is 1 content package
   When I visit "/non-existent-permalink"
   Then I should get a 404
+
+Scenario: I can not visit an unpublished content package by its permalinks
+  Given there is 1 unpublished content package
+  When I visit its permalink
+  Then I should get redirected to the login page
