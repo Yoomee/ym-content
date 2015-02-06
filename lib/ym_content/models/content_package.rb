@@ -270,6 +270,7 @@ module YmContent::ContentPackage
     else
       instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value).try(:html_safe))
     end
+
   end
 
   def method_missing(method_sym, *arguments, &block)

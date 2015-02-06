@@ -15,6 +15,7 @@ class CreateContentAttributes < ActiveRecord::Migration
       t.string :meta_tag_name
       t.integer :default_attribute_id
       t.text :sir_trevor_settings
+      t.integer :resource_content_type_id
     end
     add_index :content_attributes, :content_type_id
   end
