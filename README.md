@@ -22,7 +22,7 @@ Then run the migrations:
 rake db:migrate
 ```
 
-Add the following line to your application.js.coffee
+Add the following line to your application.js
 ```
 #= require ym_content
 ```
@@ -80,7 +80,7 @@ To run the tests individually you can also run
 
 ## Sir Trevor
 
-To add rich content support to your project, all you need to do is 
+To add rich content support to your project, all you need to do is
 
 Make a migration for the Sir Trevor Image model (see lib/generators/ym_content/templates/migrations/create_sir_trevor_images.rb)
 
