@@ -16,6 +16,7 @@ group :test do
   gem 'capybara', '~> 2.1'
   gem 'capybara-webkit'
   gem 'capybara-screenshot', '~> 0.3.13'
+  gem 'therubyracer'
   gem 'database_cleaner'
   gem 'launchy', '~> 2.3.0'
   gem 'shoulda-matchers'
@@ -25,6 +26,7 @@ group :test do
   gem 'jquery-rails'
   gem 'coffee-rails'
   gem 'webmock'
+  gem 'sqlite3'
 end
 
 

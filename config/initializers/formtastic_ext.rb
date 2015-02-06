@@ -17,8 +17,12 @@ module Formtastic
               :limit_unit => content_attribute.limit_unit
             }
           end
+          if content_attribute.field_type == 'rich'
+            (hash[:data] ||= {}).reverse_merge!(content_attribute.sir_trevor_limit_data)
+          end
         end
         options[:input_html] = (options[:input_html] || {}).reverse_merge(input_html_options)
+        (options[:input_html][:class] ||= "")  << "st-content hide" if content_attribute.field_type == 'rich'
         input(content_attribute.input_method, options)
       end
 

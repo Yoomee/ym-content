@@ -60,7 +60,8 @@
                     %p=@content_package.notes
             =form.inputs do
               -@non_meta_content_attributes.each do |content_attribute|
-                =form.content_input content_attribute, input_html: {class: ("st-content hide" if content_attribute.field_type == 'rich'), data: (content_attribute.sir_trevor_limit_data if content_attribute.field_type == 'rich')}
+                /content_input is defined in config/initializers/formtastic_ext.rb
+                =form.content_input content_attribute
           #meta.tab-pane.cms-form
             .form-group.objective
               .row

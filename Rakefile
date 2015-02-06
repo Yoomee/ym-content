@@ -28,6 +28,9 @@ load 'rails/tasks/engine.rake'
 Bundler::GemHelper.install_tasks
 
 require 'rake/testtask'
+require 'rubygems'
+require 'cucumber'
+require 'cucumber/rake/task'
 
 # Rake::TestTask.new(:test) do |t|
 #   t.libs << 'lib'
@@ -37,8 +40,13 @@ require 'rake/testtask'
 # end
 
 require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new(:spec)
+# RSpec::Core::RakeTask.new(:spec)
 
-task :cucumber => 'app:cucumber'
-task :default => [:spec, :cucumber]
+Cucumber::Rake::Task.new(:cucumber) do |t|
+  t.cucumber_opts = "features --format pretty"
+end
+
+task :default => [:cucumber]
+
+
 

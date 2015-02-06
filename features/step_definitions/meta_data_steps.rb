@@ -65,7 +65,7 @@ Given(/^the meta data page refers to itself$/) do
 end
 
 Then(/^the meta data should be shown in the header$/) do
-  page.title.should have_content @meta_data.title
+  page.title.should have_content @meta_title
   has_css?("meta[property='og:title'][content='#{@meta_data.title}']", visible: false)
   has_css?("meta[property='og:description'][content='#{@meta_data.description}']", visible: false)
   has_css?("meta[name='keywords'][content='#{@meta_data.keywords}']", visible: false)
