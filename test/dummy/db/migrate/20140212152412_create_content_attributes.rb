@@ -13,6 +13,7 @@ class CreateContentAttributes < ActiveRecord::Migration
       t.boolean :required, :default => false
       t.boolean :meta, :default => false
       t.text :sir_trevor_settings
+      t.integer :resource_content_type_id
     end
     add_index :content_attributes, :content_type_id
   end
