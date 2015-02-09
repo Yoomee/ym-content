@@ -1,3 +1,4 @@
+// Shamelessly copied from http://jqueryui.com/autocomplete/#combobox
   (function( $ ) {
     $.widget( "custom.combobox", {
       _create: function() {

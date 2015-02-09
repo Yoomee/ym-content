@@ -31,7 +31,7 @@ window.YmContent =
         YmContent.ContentPackages.updateGoal()
       $('#content_package_notes').change ->
         YmContent.ContentPackages.goalChangedByUser = true
-      YmContent.ContentPackages.updateGoal();
+      YmContent.ContentPackages.updateGoal()
     updateGoal: ->
       unless YmContent.ContentPackages.goalChangedByUser
         goal = YmContent.ContentPackages.descriptions[$('#content_package_content_type_id').val()]
