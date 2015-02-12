@@ -107,7 +107,7 @@ module YmContent::ContentAttribute
         j[block_type] = {:required => false, :limit => 0 }
       end
     end
-    j
+    HashWithIndifferentAccess.new(j)
   end
 
   def sir_trevor_limit_data
