@@ -15,7 +15,6 @@ module YmContent::MetaTagsHelper
     end
     meta_tags = build_meta_tags(meta_values)
     meta_tags.html_safe
-    'edward woz here'
   end
 
   # builds meta data needed for generating meta tags
