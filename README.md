@@ -22,7 +22,7 @@ Then run the migrations:
 rake db:migrate
 ```
 
-Add the following line to your application.js.coffee
+Add the following line to your application.js
 ```
 #= require ym_content
 ```
@@ -80,7 +80,7 @@ To run the tests individually you can also run
 
 ## Sir Trevor
 
-To add rich content support to your project, all you need to do is 
+To add rich content support to your project, all you need to do is
 
 Make a migration for the Sir Trevor Image model (see lib/generators/ym_content/templates/migrations/create_sir_trevor_images.rb)
 
@@ -110,7 +110,8 @@ There is a new content attribute type called rich content. Add a rich content co
 
 1. Add the block javascript to app/assets/javascripts/sir_trevor_custom_blocks
 2. Create a partial in the target application app/views/sir_trevor/blocks
-3. Add the block name to the SIR_TREVOR_DEFAULT_BLOCKS list in content_attribute.rb in ym_content
+3. Add the block name to the SIR_TREVOR_DEFAULT_BLOCKS list in content_attribute.rb in ym_content OR override in your app by placing the following code in content_attribute.rb
+``` YmContent::ContentAttribute::DEFAULT_SIR_TREVOR_BLOCK_TYPES = ['Text', 'Image', 'Video', 'Heading', 'Quote', 'List', 'Alert', 'MY_CUSTOM_BLOCK'] ```
 
 Sir Trevor JS docs: http://madebymany.github.io/sir-trevor-js/docs.html
 

@@ -95,7 +95,7 @@ module YmContent::ContentPackage
 
     def search(term)
       escaped_term = "%#{term}%"
-      joins(:permalink).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
+      joins(:permalink).where(deleted_at: nil).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
     end
 
   end
@@ -270,6 +270,7 @@ module YmContent::ContentPackage
     else
       instance_variable_set("@#{content_attribute.slug}".to_sym, content_chunk.try(:value).try(:html_safe))
     end
+
   end
 
   def method_missing(method_sym, *arguments, &block)

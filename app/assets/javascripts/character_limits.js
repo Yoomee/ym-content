@@ -4,7 +4,7 @@ window.CharacterLimits = (function() {
   length = function() {
     var text, words;
     if (unit() === "word") {
-      text = input.hasClass("redactor-editor") ? input.text() : input.val();
+      text = input.hasClass("redactor-editor") ? input.prev('.redactor-editor').text() : input.val();
       words = text.trim().replace(/\s+/gi, ' ').split(' ');
       if (words[0] === "") {
         return 0;
@@ -12,8 +12,8 @@ window.CharacterLimits = (function() {
         return words.length;
       }
     } else {
-      if (input.hasClass("redactor-editor")) {
-        return input.text().length - 1;
+      if (input.hasClass("redactor")) {
+        return input.prev('.redactor-editor').text().length;
       } else {
         return input.val().length;
       }
@@ -42,8 +42,8 @@ window.CharacterLimits = (function() {
   counterText = function() {
     return length() + "/" + limit();
   };
-  redactorChanged = function() {
-    return inputChanged(this.$element);
+  redactorChanged = function(r) {
+    return inputChanged(r.$element);
   };
   inputChanged = function(a) {
     input = $(a);
@@ -53,11 +53,6 @@ window.CharacterLimits = (function() {
   registerRedactor = function(r) {
     var rInput, rOptions;
     rInput = r.$element;
-    rOptions = r.opts;
-    rOptions.initCallback = null;
-    rOptions.changeCallback = redactorChanged;
-    r.core.destroy();
-    rInput.redactor(rOptions);
     rInput.after($("<span/>").text("0/0").addClass("pull-right word-count js-limit-quantity label label-default"));
     return inputChanged(rInput);
   };
@@ -74,6 +69,7 @@ window.CharacterLimits = (function() {
     });
   });
   return {
-    registerRedactor: registerRedactor
+    registerRedactor: registerRedactor,
+    redactorChanged: redactorChanged
   };
 })();

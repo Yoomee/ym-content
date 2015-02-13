@@ -7,6 +7,7 @@ module YmContent::ContentAttribute
     base.after_validation :set_slug
     base.validates :slug, :name, :field_type, :presence => true
     base.validates :slug, :name, :uniqueness => { :scope => :content_type_id }
+    base.belongs_to :resource_content_type, :class_name => 'ContentType'
     base.extend(ClassMethods)
   end
 
@@ -24,7 +25,8 @@ module YmContent::ContentAttribute
         :boolean => 'Check box',
         :user => "User",
         :location => "Location",
-        :rich => "Rich content"
+        :rich => "Rich content",
+        :resource => "Link to content"
       }
     end
 
@@ -47,6 +49,7 @@ module YmContent::ContentAttribute
     when 'text' then 'redactor'
     when 'boolean' then 'content_boolean'
     when 'user' then 'select'
+    when 'resource' then 'autocomplete_select'
     when 'rich' then 'text'
     else field_type
     end
@@ -68,8 +71,18 @@ module YmContent::ContentAttribute
         :collection => ::User.all,
         :prompt => "None selected"
       }
+    when 'resource'
+      {
+        :collection => resource_collection,
+        :prompt => "None selected",
+      }
     else {}
     end
+  end
+
+  def resource_collection
+    # ContentPackage collection for atrributes of type resource
+    resource_content_type.nil? ? ::ContentPackage.published : ::ContentPackage.where(content_type: resource_content_type).published
   end
 
   def limitable?
@@ -94,7 +107,7 @@ module YmContent::ContentAttribute
         j[block_type] = {:required => false, :limit => 0 }
       end
     end
-    j
+    HashWithIndifferentAccess.new(j)
   end
 
   def sir_trevor_limit_data

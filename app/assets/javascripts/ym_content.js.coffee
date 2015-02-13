@@ -19,6 +19,7 @@
 #= require sir-trevor
 #= require redactor
 #= require_tree ./sir_trevor_custom_blocks
+#= require autocomplete-field
 
 $(document).ready ->
 
@@ -114,6 +115,9 @@ window.YmContent =
         initCallback: (e) ->
           if CharacterLimits && this.$element.data('limit-quantity')
             CharacterLimits.registerRedactor(this)
+        changeCallback: (e) ->
+          if CharacterLimits && this.$element.data('limit-quantity')
+            CharacterLimits.redactorChanged(this)
 
   Sitemap:
     init: ->

@@ -3,6 +3,7 @@
 :javascript
   $(document).ready(function() {
     YmContent.Redactor.init();
+    $( ".autocomplete-select" ).combobox();
     SirTrevor.setDefaults({
       uploadUrl: $('#cms-style-container').data('sirTrevorUploadUrl')
     });

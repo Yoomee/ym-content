@@ -127,6 +127,7 @@ module YmContent::ContentTypesController
         :limit_quantity,
         :limit_unit,
         :position,
+        :resource_content_type_id,
         :sir_trevor_settings => ::ContentAttribute::DEFAULT_SIR_TREVOR_BLOCK_TYPES.map {|e| ["#{e}_required", "#{e}_limit"] }.flatten
       ] 
     )

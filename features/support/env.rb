@@ -61,3 +61,12 @@ ActionController::Base.allow_rescue = false
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+#Make sure that cucumber exits with a status code != 0 if any of the tests fail
+at_exit do
+  begin
+    e = $! # last exception
+    cleanup_after_tests
+  ensure
+    raise e if $! != e
+  end
+end
