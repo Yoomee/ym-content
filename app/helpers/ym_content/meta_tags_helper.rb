@@ -15,6 +15,7 @@ module YmContent::MetaTagsHelper
     end
     meta_tags = build_meta_tags(meta_values)
     meta_tags.html_safe
+    'edward woz here'
   end
 
   # builds meta data needed for generating meta tags
@@ -25,7 +26,7 @@ module YmContent::MetaTagsHelper
 
         meta_title = @content_package.meta_title.presence || Settings.default_meta_title
         meta_description = @content_package.meta_description.presence || Settings.default_meta_description
-        meta_image = @content_package.meta_image_uid ? "http://#{Settings.site_url}#{@content_package.meta_image.thumb('300x300#').url}" : "http://#{Settings.site_url}#{Settings.default_fb_meta_image}"
+        meta_image = @content_package.meta_image_uid ? "#{Settings.site_url}#{@content_package.meta_image.thumb('300x300#').url}" : "#{Settings.site_url}#{image_path(Settings.default_fb_meta_image)}"
         meta_keywords = @content_package.meta_keywords.presence || Settings.default_meta_keywords
 
         if @content_package.hide_from_robots?
@@ -36,7 +37,7 @@ module YmContent::MetaTagsHelper
     elsif meta_data = ::MetaDatum.where(page_slug: page_slug).first
       meta_title = meta_data.title || Settings.default_meta_title
       meta_description = meta_data.description || Settings.default_meta_description
-      meta_image = meta_data.image_uid ? "http://#{Settings.site_url}#{meta_data.image.thumb('300x300#').url}" : "http://#{Settings.site_url}#{Settings.default_fb_meta_image}"
+      meta_image = meta_data.image_uid ? "#{Settings.site_url}#{meta_data.image.thumb('300x300#').url}" : "#{Settings.site_url}#{image_path(Settings.default_fb_meta_image)}"
       meta_keywords = meta_data.keywords || Settings.default_meta_keywords
       [meta_title, meta_description, meta_image, meta_keywords, nil]
     end
