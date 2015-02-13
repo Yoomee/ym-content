@@ -16,6 +16,7 @@
         });
     });
 
+    $('html, body').animate({ scrollTop: $('h1').position().top }, 0, "linear");
 
     $("#content_package_author_id").on("change", function(){
       role = $("option:selected", this).data("role");
