@@ -19,6 +19,8 @@ module YmContent
         copy_file "models/navigation_item.rb",   "app/models/navigation_item.rb"
         insert_into_file "app/models/user.rb", "\n  def self.available_roles\n    %w(admin editor author)\n  end\n", :after => "class User < ActiveRecord::Base"
         copy_file "models/meta_datum.rb",   "app/models/meta_datum.rb"
+        copy_file "models/tag_category.rb",   "app/models/tag_category.rb"
+        copy_file "models/resource_tag_category.rb",   "app/models/resource_tag_category.rb"
 
         # views
         copy_file "views/users/_form.html.haml", "app/views/users/_form.html.haml"
@@ -42,6 +44,8 @@ module YmContent
         try_migration_template "migrations/create_meta_data.rb",   "db/migrate/create_meta_data.rb"
         try_migration_template "migrations/add_full_path_to_permalinks.rb",   "db/migrate/add_full_path_to_permalinks.rb"
         try_migration_template "migrations/create_sir_trevor_images.rb",   "db/migrate/create_sir_trevor_image.rb"
+        try_migration_template "migrations/create_tag_categories.rb",   "db/migrate/create_tag_categories.rb"
+        try_migration_template "migrations/create_resource_tag_categories.rb",   "db/migrate/create_resource_tag_categories.rb"
 
         # initializers
         copy_file 'initializers/ym_content.rb',
