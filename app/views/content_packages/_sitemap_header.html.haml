@@ -3,7 +3,7 @@
     %h1.mb-3.center=title(header_title)
     .clearfix
     .row
-      .col-sm-8
+      .col-sm-9
         %ul.cms-tabs
           %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
             =link_to("Content list", content_packages_path, :icon => 'list')
@@ -18,7 +18,10 @@
           -if defined?(YmDocuments)
             %li{:class => @documents? 'active' : nil}
               =link_to('Documents', ym_documents_engine.documents_path, :icon => 'file-archive-o')
-      .col-sm-4.text-right
+          -if can? :manage, TagCategory
+            %li{:class => @tag_categories  ? 'active' : nil}
+              =link_to("Tag Management", tags_path, :icon => 'tags')
+      .col-sm-3.text-right
         -if @content_packages && !@deleted_content_packages
           =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success btn-small')
         -if @content_types

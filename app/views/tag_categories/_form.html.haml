@@ -1,0 +1,9 @@
+.cms-form
+  =semantic_form_for @tag_category do |f|
+    =f.object.tag_list
+
+    =f.inputs do
+      =f.input :name
+      =f.input :slug, label: "Unique identifier"
+    =f.actions do
+      =f.action :submit, label: 'Save'

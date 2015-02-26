@@ -31,6 +31,8 @@ module YmContent
         copy_file "controllers/personas_controller.rb",           "app/controllers/personas_controller.rb"
         copy_file "controllers/navigation_items_controller.rb",   "app/controllers/navigation_items_controller.rb"
         copy_file "controllers/meta_data_controller.rb",   "app/controllers/meta_data_controller.rb"
+        copy_file "controllers/tags_controller.rb",   "app/controllers/tags_controller.rb"
+        copy_file "controllers/tag_categories_controller.rb",   "app/controllers/tag_categories_controller.rb"
 
         # migrations
         try_migration_template "migrations/create_content_types.rb",      "db/migrate/create_content_types.rb"
