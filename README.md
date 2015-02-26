@@ -116,3 +116,32 @@ There is a new content attribute type called rich content. Add a rich content co
 Sir Trevor JS docs: http://madebymany.github.io/sir-trevor-js/docs.html
 
 Sir Trevor Rails docs: https://github.com/madebymany/sir-trevor-rails/blob/v4-with-link-attributes/README.md
+
+## Javascript Update
+
+This version includes necessary JS in the ym_content views and doesn't reply on ym_assets JS.
+
+When updating your project to use this version the following changes need to be made:
+
+Remove the following from application.js if present
+
+  //= require ym_assets
+  //= require ym_content
+  //= require cocoon
+  //= require redactor
+
+Add the following to config/initializers/assets.rb
+
+  Rails.application.config.assets.precompile += %w( ym_content.js )
+
+Add a _before_body_end.html.haml file to views/layouts (if it doesn't already exist). The contents of this file should be:
+
+  =yield :before_body_end
+
+
+If there are project specific Sir Trevor custom blocks these will need to be wrapped to prevent errors on the frontend
+
+  if (typeof SirTrevor !== "undefined") {
+  // custom block
+  }
+
