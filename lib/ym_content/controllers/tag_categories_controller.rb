@@ -18,10 +18,18 @@ module YmContent::TagCategoriesController
   def edit
   end
 
+  def update
+    if @tag_category.update(tag_category_params)
+      redirect_to tags_path
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def tag_category_params
-     params.require(:tag_category).permit(:name, :slug)
+     params.require(:tag_category).permit(:name, :slug, taxonomy_list: [])
   end
 
 end

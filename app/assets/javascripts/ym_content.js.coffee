@@ -20,6 +20,7 @@
 #= require redactor
 #= require_tree ./sir_trevor_custom_blocks
 #= require autocomplete-field
+#= require select2
 
 $(document).ready ->
 
@@ -27,6 +28,10 @@ $(document).ready ->
     $(this).parents('.form-group').addClass('focus')
   $('input,textarea,select').focusout ->
     $(this).parents('.form-group').removeClass('focus')
+
+  $('.select2').select2
+    tags: true,
+    tokenSeparators: [',']
 
   # Set quick find menu width to be size of container
   $.ui.autocomplete::_resizeMenu = ->

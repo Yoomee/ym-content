@@ -1,9 +1,10 @@
+-content_for :head do
+  =javascript_include_tag("ym_content")
 .cms-form
   =semantic_form_for @tag_category do |f|
-    =f.object.tag_list
-
     =f.inputs do
       =f.input :name
       =f.input :slug, label: "Unique identifier"
+      =f.input :taxonomy_list, as: :select, collection: TagCategory.tag_counts_on("taxonomy").pluck(:name), multiple: true, :selected => @tag_category.taxonomy.collect(&:name), input_html: { class: 'select2' }
     =f.actions do
       =f.action :submit, label: 'Save'

@@ -125,8 +125,6 @@
                     -@content_package.content_type.tag_categories.each do |category|
                       %h3=category.name
                       -category.taxonomy_list.each do |tag|
-                        / %label.btn.btn-grey{ class: @.tag_list.include?(tag.name) ? 'active' : '' }
-                        / =hidden_field  'content_package[taxonomy_list][]', tag, @content_package.taxonomy_from(category).include?(tag)
                         =check_box_tag "content_package[taxonomy_tags][#{category.slug}][]", tag, @content_package.taxonomy_from(category).include?(tag)
                         =tag
 
