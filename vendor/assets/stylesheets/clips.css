@@ -10,7 +10,7 @@
   margin-bottom: 1em;
 }
 
-.redactor-editor .redactor-expand-heading:before {
+.redactor-editor [data-expand="start"]:before {
   content: "EXPAND HEADING";
   font-size: 12px;
   position: absolute;
