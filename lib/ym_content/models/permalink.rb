@@ -50,7 +50,7 @@ class Permalink < ActiveRecord::Base
 
   private
   def create_inactive_permalink
-    return unless path_changed?
+    return unless path_changed? || full_path_changed?
     resource.permalinks.create(:active => false, :path => path_was, :full_path => full_path_was)
   end
 

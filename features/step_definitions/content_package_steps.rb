@@ -31,6 +31,11 @@ When(/^I go to the sitemap$/) do
   visit content_packages_path
 end
 
+When(/^it changes parent$/) do
+  parent_content_package = FactoryGirl.create(:content_package)
+  @content_package.update_attributes(:parent_id => parent_content_package.id)
+end
+
 Then(/^I see the content packages$/) do
   @content_packages.each do |content_package|
     expect(page).to have_content(content_package.to_s)
