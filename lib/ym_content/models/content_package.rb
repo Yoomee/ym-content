@@ -37,6 +37,7 @@ module YmContent::ContentPackage
 
     base.acts_as_taggable_on :acts_as_taggable_on_tags
     base.acts_as_taggable_on :taxonomy
+    delegate :tag_categories, to: :content_type
 
     base.image_accessor :meta_image
 
