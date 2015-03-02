@@ -49,6 +49,15 @@ To ensure that links to permalinked content packages work set the default host i
 ```
 ## Settings
 
+Ymcontent comes with a few optional features, these are enabled in the ym_content.rb config initialiser.
+
+
+| Config Key        | Description                                                                                                           | Default |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------|---------|
+| nested_permalinks | When saving content packages create permalinks based on its parents in the content list                               | true    |
+| tags_feature      | The ability to assign tag categories to a content type and then tag content packages with tags from these categories  | false   |
+
+
 ### Meta tag defaults
 
 In your applications config/settings.yml use the following settings
