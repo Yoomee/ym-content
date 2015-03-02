@@ -29,9 +29,9 @@ $(document).ready ->
   $('input,textarea,select').focusout ->
     $(this).parents('.form-group').removeClass('focus')
 
-  $('.select2').select2
-    tags: true,
-    tokenSeparators: [',']
+  $select2 = $('.select2')
+  $select2.select2
+    tags: true
 
   # Set quick find menu width to be size of container
   $.ui.autocomplete::_resizeMenu = ->
