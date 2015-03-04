@@ -18,7 +18,7 @@
           -if defined?(YmDocuments)
             %li{:class => @documents? 'active' : nil}
               =link_to('Documents', ym_documents_engine.documents_path, :icon => 'file-archive-o')
-          -if can? :manage, TagCategory && YmContent::config.tags_feature
+          -if (can? :manage, TagCategory) && (YmContent::config.tags_feature)
             %li{:class => @tag_categories  ? 'active' : nil}
               =link_to("Tag Management", tags_path, :icon => 'tags')
       .col-sm-3.text-right
