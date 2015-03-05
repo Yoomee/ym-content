@@ -46,14 +46,14 @@
         %h1=title @content_package
     .row
       .col-md-7.pr-3
-        %ul.cms-tabs
+        %ul.cms-tabs.four-tabs
           %li.active=link_to("Content", '#content', 'data-toggle' => 'tab', :icon => 'paragraph')
           %li=link_to("Meta", '#meta', 'data-toggle' => 'tab', :icon => 'tag')
           -if YmContent::config.tags_feature
             %li=link_to("Tags", '#tags', 'data-toggle' => 'tab', :icon => 'tags')
           -if current_user.admin?
             %li=link_to("Settings", '#settings', 'data-toggle' => 'tab', :icon => 'cog')
-
+          .clearfix
           -#%li=link_to("Related content", '#related', 'data-toggle' => 'tab')
         .tab-content.mb-2
           #content.tab-pane.active.cms-form
@@ -154,12 +154,13 @@
           .clearfix
           %hr.mv-3
           .cms-sidebar-tabs
-            %ul.cms-tabs
+            %ul.cms-tabs.three-tabs
               %li.active=link_to("Activity", '#activity', 'data-toggle' => 'pill')
               %li=link_to("Personas", '#personas', 'data-toggle' => 'pill')
               %li=link_to("Context", '#context', 'data-toggle' => 'pill')
               -# %li=link_to("Discussion", '#discussion', 'data-toggle' => 'pill')
               -# %li=link_to("Scorecard", '#content-scorecard', 'data-toggle' => 'pill')
+              .clearfix
             .tab-content.mb-2
               #activity.tab-pane.active
                 .cms-dashboard-well.clearfix.fadeIn
