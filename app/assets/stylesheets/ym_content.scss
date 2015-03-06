@@ -12,10 +12,16 @@
 @import 'sass/scaffold/reset';
 @import 'sass/scaffold/media-queries';
 @import 'sass/scaffold/grid';
+@import 'sass/scaffold/colours';
 @import 'sass/scaffold/general';
+@import 'sass/scaffold/helpers';
 
 @import 'sass/general/type';
 @import 'sass/general/nav';
+@import 'sass/general/buttons';
+@import 'sass/general/page';
+
+@import 'sass/activity-feed/feed';
 
 // @import 'sass/buttons';
 // @import 'sass/labels';

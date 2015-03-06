@@ -11,7 +11,8 @@ h4, .h4,
 h5, .h5 {
   color: #555555;
   font-weight: 600;
-  margin-top: 0;
+  margin: 0;
+  padding: 0;
 }
 h1, .h1 {
   font-size: 34px;
@@ -27,8 +28,12 @@ h2, .h2 {
   }
 }
 h3, .h3 {
-
+  font-size: 20px;
+  line-height: 30px;
+  margin-bottom: 12px;
   @include media-query (sm) {
+    font-size: 24px;
+    line-height: 40px;
   }
 }
 h4, .h4 {
@@ -62,4 +67,13 @@ p {
 a {
   color: inherit;
   transition: all 0.2s ease;
+}
+
+// Text modifiers
+
+.small-text {
+  font-size: 10px;
+  @include media-query (sm) {
+    font-size: 14px;
+  }
 }

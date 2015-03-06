@@ -1,5 +1,7 @@
 .cms-header
-  .container-fluid
+  .container
     .row
       .col-xs-6
-        .cms-nav-brand YM CMS
+        =link_to('YM CMS', '/content', :class => 'cms-nav-brand')
+      .col-xs-6
+        .text-right=link_to('return to site', '/', :class => 'btn btn-sm btn-success')
