@@ -1,6 +1,7 @@
 module YmContent::TagCategoriesController
 
   def self.included(base)
+    base.layout 'ym_content/application'
     base.load_and_authorize_resource
   end
 
@@ -21,7 +22,7 @@ module YmContent::TagCategoriesController
   def update
     old_tags = @tag_category.taxonomy_list
     if @tag_category.update(tag_category_params)
-      removed = old_tags - @tag_category.taxonomy_list 
+      removed = old_tags - @tag_category.taxonomy_list
       ActsAsTaggableOn::Tagging.where(tagger: @tag_category, tag: Tag.where(name: removed)).destroy_all
       redirect_to tags_path
     else

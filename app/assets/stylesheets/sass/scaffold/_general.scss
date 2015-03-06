@@ -1,0 +1,62 @@
+//
+// Scaffolding
+// --------------------------------------------------
+
+// Reset box-sizing
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  &:before, &:after {
+    box-sizing: border-box;
+  }
+}
+
+// Body reset
+
+body {
+  height: 100%;
+}
+
+html, body {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  font-family: "proxima-nova", Helvetica, sans-serif;
+  color: #444444;
+  background-color: #F9F8FC;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  font-weight: 400;
+  @include media-query (md) {
+    font-size: 18px;
+  }
+}
+img {
+  max-width: 100%;
+  display: inline-block;
+}
+
+// Only display content to screen readers
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+// Clearfix
+
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}

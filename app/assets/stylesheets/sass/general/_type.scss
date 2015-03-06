@@ -1,0 +1,65 @@
+//
+// General font styles
+// --------------------------------------------------
+
+// Heading styles
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5 {
+  color: #555555;
+  font-weight: 600;
+  margin-top: 0;
+}
+h1, .h1 {
+  font-size: 34px;
+  line-height: 50px;
+  @include media-query (sm) {
+    font-size: 48px;
+    line-height: 70px;
+  }
+}
+h2, .h2 {
+
+  @include media-query (sm) {
+  }
+}
+h3, .h3 {
+
+  @include media-query (sm) {
+  }
+}
+h4, .h4 {
+
+  @include media-query (sm) {
+  }
+}
+
+// Paragraphs
+
+p {
+  font-size: 14px;
+  line-height: 26px;
+  margin-top: 0;
+  margin-bottom: 1.25em;
+  @include media-query (sm) {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+
+// Lists
+
+.list-unstyled {
+  list-style: none;
+  padding: 0;
+}
+
+// Link styling
+
+a {
+  color: inherit;
+  transition: all 0.2s ease;
+}

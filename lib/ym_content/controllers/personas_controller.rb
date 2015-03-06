@@ -1,6 +1,7 @@
 module YmContent::PersonasController
 
   def self.included(base)
+    base.layout 'ym_content/application'
     base.load_and_authorize_resource
   end
 

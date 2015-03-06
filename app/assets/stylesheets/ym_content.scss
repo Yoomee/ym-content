@@ -9,24 +9,32 @@
 
    ======================================================================= */
 
-@import 'sass/buttons';
-@import 'sass/labels';
-@import 'sass/margins';
-@import 'sass/structure';
-@import 'sass/nav';
-@import 'sass/sidebar';
-@import 'sass/type';
-@import 'sass/forms';
-@import 'sass/inputs';
-@import 'sass/character-limits';
-@import 'sass/rich-content';
+@import 'sass/scaffold/reset';
+@import 'sass/scaffold/media-queries';
+@import 'sass/scaffold/grid';
+@import 'sass/scaffold/general';
 
-@import 'sass/general';
-@import 'sass/edit';
+@import 'sass/general/type';
+@import 'sass/general/nav';
 
-@import 'sass/sitemap';
-@import 'sass/helpers';
-@import 'sass/tables';
-@import 'sass/tabs';
-@import 'sass/tags';
-@import 'sass/feed';
+// @import 'sass/buttons';
+// @import 'sass/labels';
+// @import 'sass/margins';
+// @import 'sass/structure';
+// @import 'sass/nav';
+// @import 'sass/sidebar';
+// @import 'sass/type';
+// @import 'sass/forms';
+// @import 'sass/inputs';
+// @import 'sass/character-limits';
+// @import 'sass/rich-content';
+//
+// @import 'sass/general';
+// @import 'sass/edit';
+//
+// @import 'sass/sitemap';
+// @import 'sass/helpers';
+// @import 'sass/tables';
+// @import 'sass/tabs';
+// @import 'sass/tags';
+// @import 'sass/feed';

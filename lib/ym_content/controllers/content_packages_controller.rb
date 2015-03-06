@@ -1,6 +1,7 @@
 module YmContent::ContentPackagesController
 
   def self.included(base)
+    base.layout 'ym_content/application'
     base.load_and_authorize_resource
 
     # Define an around filter for all controller actions that could potenatially be
@@ -96,7 +97,7 @@ module YmContent::ContentPackagesController
       end
     end
     @content_package.sir_trevor_images.each do |stimg|
-      unless urls.include? stimg.image.url 
+      unless urls.include? stimg.image.url
         stimg.destroy!
       end
     end
@@ -150,7 +151,7 @@ module YmContent::ContentPackagesController
 
   def upload_sir_trevor_attachment
     begin
-      stimg = @content_package.sir_trevor_images.create(image: params[:attachment][:file], sir_trevor_uid: params[:attachment][:uid], filename: params[:attachment][:original_filename]) 
+      stimg = @content_package.sir_trevor_images.create(image: params[:attachment][:file], sir_trevor_uid: params[:attachment][:uid], filename: params[:attachment][:original_filename])
       render json: { file: { url: stimg.image.url, dragonfly_uid: stimg.image_uid } }, status: 200
     rescue => exception
       puts exception
