@@ -142,13 +142,36 @@ window.YmContent = {
   Redactor: {
 
     init: function() {
-      return $('.redactor textarea').redactor({
-        // removeClasses: true,
-        // removeStyles: true,
+     $('.redactor textarea').redactor({
+        removeClasses: true,
+        removeStyles: true,
+        buttons: restrictedButtons,
+        convertDivs: true,
+        path: 'vendor/assets/javascripts/redactor',
+        focusCallback: function(e) {
+          return $(e.currentTarget).parents(".form-group").addClass("focus");
+        },
+        blurCallback: function(e) {
+          return $(e.currentTarget).parents(".form-group").removeClass("focus");
+        },
+        initCallback: function(e) {
+          if (CharacterLimits && this.$element.data('limit-quantity')) {
+            return CharacterLimits.registerRedactor(this);
+          }
+        },
+        changeCallback: function(e) {
+          if (CharacterLimits && this.$element.data('limit-quantity')) {
+            return CharacterLimits.redactorChanged(this);
+          }
+        }
+      });
+
+      $('.rich_redactor textarea').redactor({
         buttons: allTheButtons,
-        // convertDivs: true,
         plugins: ['video', 'clips', 'highlightBlock', 'expandContent'],
         path: 'vendor/assets/javascripts/redactor',
+        imageUpload: '/redactor_uploads?file_type=image',
+        imageGetJson: '/redactor_uploads',
         focusCallback: function(e) {
           return $(e.currentTarget).parents(".form-group").addClass("focus");
         },
