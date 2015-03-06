@@ -2,6 +2,8 @@
 //= require sir-trevor
 //= require redactor
 //=require clips
+//= require select2
+
 
 /* =======================================================================
 
@@ -28,4 +30,5 @@
 @import 'sass/helpers';
 @import 'sass/tables';
 @import 'sass/tabs';
+@import 'sass/tags';
 @import 'sass/feed';

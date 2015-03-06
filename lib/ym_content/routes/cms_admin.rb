@@ -47,6 +47,11 @@ class ActionDispatch::Routing::Mapper
 
       resources :personas
       resources :meta_data
+
+      if YmContent::config.tags_feature
+        resources :tags
+        resources :tag_categories
+      end
     end
   end
 end

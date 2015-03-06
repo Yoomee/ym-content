@@ -8,6 +8,10 @@ module YmContent::ContentType
       base.has_many :content_attributes, :order => :position
       base.has_many :content_packages, :conditions => {:deleted_at => nil}
     end
+
+    base.has_many :resource_tag_categories, as: :taggable_resource
+    base.has_many :tag_categories, through: :resource_tag_categories
+
     base.validates_presence_of :name
     base.accepts_nested_attributes_for :content_attributes, :allow_destroy => true
     base.before_create(:set_content_attribute_positions)

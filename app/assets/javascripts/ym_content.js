@@ -18,25 +18,25 @@
 //= require underscore
 //= require sir-trevor
 //= require redactor
-//= require video
-//= require clips
-//= require expandy
-//= require highlight_block
-
 //= require_tree ./sir_trevor_custom_blocks
 //= require autocomplete-field
+//= require select2
 
 var allTheButtons = ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'image', 'link', 'alignment', 'horizontalrule', 'video'];
 var restrictedButtons = ['unorderedlist', 'orderedlist', 'link', 'html']
 
-
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 $(document).ready(function() {
+  var $select2;
   $('input,textarea,select').focusin(function() {
     return $(this).parents('.form-group').addClass('focus');
   });
   $('input,textarea,select').focusout(function() {
     return $(this).parents('.form-group').removeClass('focus');
+  });
+  $select2 = $('.select2');
+  $select2.select2({
+    tags: true
   });
   return $.ui.autocomplete.prototype._resizeMenu = function() {
     var ul;
@@ -140,7 +140,6 @@ window.YmContent = {
     }
   },
   Redactor: {
-
     init: function() {
      $('.redactor textarea').redactor({
         removeClasses: true,

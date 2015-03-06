@@ -7,6 +7,9 @@ require 'ym_content/engine'
 require 'ym_posts'
 require 'geocoder'
 require 'dragonfly'
+if defined?(YmDocuments)
+  require 'ym_documents'
+end
 
 require_relative 'ym_content/routing'
 require_relative "ym_content/permalinkable"

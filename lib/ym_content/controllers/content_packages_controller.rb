@@ -160,7 +160,7 @@ module YmContent::ContentPackagesController
 
   private
   def content_package_params
-    params.require(:content_package).permit(*params[:content_package].try(:keys) + [:persona_ids => []])
+    params.require(:content_package).permit(*params[:content_package].try(:keys) + [:persona_ids => [], :taxonomy_tags => @content_package.content_type.tag_categories.map{|x| { x.slug => [] }}.reduce(:merge)])
   end
 
   def get_view_data

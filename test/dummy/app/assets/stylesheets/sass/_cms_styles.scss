@@ -1,0 +1,29 @@
+//
+// CMS Styles
+// --------------------------------------------------
+
+// Variables
+// Set the variables for the colours used in the CMS here.
+
+// Body
+
+// SHAME - We shouldn't need to overwrite this
+body.controller_content_packages.action_show {
+  background: #FFFFFF;
+}
+
+$cms-font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+$cms-body-colour: #F1F1F1;
+$cms-well-colour: #FFFFFF;
+
+// Typopgrahy
+
+$cms-heading-colour: #4F86C6;
+$cms-link-colour: #4F86C6;
+
+// Colours
+
+$cms-primary-col: #4F86C6;
+$cms-secondary-col: #C40063;
+$cms-error-col: #EF3F30;
+$cms-success-col: #72BF44;

@@ -36,6 +36,8 @@ module YmContent::ContentPackage
     base.delegate :content_attributes, :package_name, :view_name, :missing_view?, :viewless?, :to => :content_type
 
     base.acts_as_taggable_on :acts_as_taggable_on_tags
+    base.acts_as_taggable_on :taxonomy
+    delegate :tag_categories, to: :content_type
 
     base.image_accessor :meta_image
 
@@ -98,6 +100,12 @@ module YmContent::ContentPackage
       joins(:permalink).where(deleted_at: nil).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
     end
 
+  end
+
+  def taxonomy_tags=(tags)
+    tags.keys.each do |category|
+      TagCategory.find_by_slug(category).tag(self, with: tags[category], on: 'taxonomy')
+    end
   end
 
   def deletable?
