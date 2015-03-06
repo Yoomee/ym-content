@@ -1,0 +1,22 @@
+//
+// Tables
+// --------------------------------------------------
+
+.cms-table {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  thead {
+    background: #4C545A;
+    color: #FFFFFF;
+  }
+  th {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 0;
+    @include media-query(sm) {
+      padding: 20px 0;
+    }
+  }
+}
