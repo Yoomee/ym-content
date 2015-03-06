@@ -22,6 +22,11 @@
 //= require autocomplete-field
 //= require select2
 
+//= require video
+//= require clips
+//= require expandy
+//= require highlight_block
+
 var allTheButtons = ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'image', 'link', 'alignment', 'horizontalrule', 'video'];
 var restrictedButtons = ['unorderedlist', 'orderedlist', 'link', 'html']
 
@@ -167,7 +172,7 @@ window.YmContent = {
 
       $('.rich_redactor textarea').redactor({
         buttons: allTheButtons,
-        plugins: ['video', 'clips', 'highlightBlock', 'expandContent'],
+        plugins: $('.rich_redactor textarea').data('redactor-plugins'),
         path: 'vendor/assets/javascripts/redactor',
         imageUpload: '/redactor_uploads?file_type=image',
         imageGetJson: '/redactor_uploads',

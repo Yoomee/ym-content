@@ -20,6 +20,9 @@ module Formtastic
           if content_attribute.field_type == 'rich'
             (hash[:data] ||= {}).reverse_merge!(content_attribute.sir_trevor_limit_data)
           end
+          if content_attribute.field_type == 'rich_content'
+            (hash[:data] ||= {}).reverse_merge!({"redactor-plugins" => YmContent::config.try(:redactor_plugins) || []})
+          end
         end
         options[:input_html] = (options[:input_html] || {}).reverse_merge(input_html_options)
         (options[:input_html][:class] ||= "")  << "st-content hide" if content_attribute.field_type == 'rich'
