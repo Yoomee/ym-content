@@ -1,10 +1,11 @@
 .row
   .col-xs-12
     .cms-page-header
-      %h1=title(header_title)
-    .row
-      .col-sm-12
-        -if @content_packages && !@deleted_content_packages
-          =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success')
-        -if @content_types
-          =link_if_can("Add new content template", [:new, ContentType.new], :icon => 'plus', :class => 'btn btn-success')
+      .row
+        .col-sm-6.col-sm-offset-3
+          %h1=title(header_title)
+        .col-sm-3.cms-header-actions
+          -if @content_packages && !@deleted_content_packages
+            =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success')
+          -if @content_types
+            =link_if_can("Add new template", [:new, ContentType.new], :icon => 'plus', :class => 'btn btn-success')

@@ -1,8 +1,7 @@
--content_for :head do
-  =javascript_include_tag("ym_content")
-.container.cms-main#cms-style-container
+.container
   .row
     .col-xs-12
-      %h1.cms-page-header=title 'New persona'
+      .cms-page-header
+        %h1=title 'New persona'
   .row
     =render 'form'

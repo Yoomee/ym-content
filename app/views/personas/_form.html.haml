@@ -1,9 +1,8 @@
-.col-md-6.col-md-offset-3
+.col-sm-8.col-sm-offset-2
   =semantic_form_for @persona do |form|
     =form.inputs do
       =form.input :group, :prompt => "Please select...", :collection => PersonaGroup.all.map{|p| [p.to_s, p.id] } << ['Add a new group...', 0], :selected => (@persona.group_name.nil? ? @persona.group_id : 0)
       =form.input :group_name, :label => "New group name", :input_html => {:disabled => @persona.group_name.nil?}, :wrapper_html => {:class => "#{'hide' if @persona.group_name.nil?}"}
-      %hr
       =form.input :name, :label => "Persona name"
       =form.input :category, :label => "Persona category"
       =form.input :image, :as => :image

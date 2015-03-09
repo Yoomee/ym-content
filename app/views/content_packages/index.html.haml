@@ -15,7 +15,7 @@
         #sitemap.sitemap.tab-pane.active
           #content_search.form
             =semantic_form_for 'content_search', :remote => true do |form|
-              =form.input :link, :label => false, :input_html => {:placeholder => "Quick find: start typing the title or web address"}, :wrapper_html => {:style => "display:block;"}
+              =form.input :link, :label => false, :input_html => {:placeholder => "Quick find: start typing the title or web address"}, :wrapper_html => {:style => "display:block;", :class => 'pt-0'}
           %table.cms-table
             %thead
               %tr
