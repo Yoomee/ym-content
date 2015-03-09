@@ -29,7 +29,7 @@ Scenario: I can visit a content package by its /content_package/:id and get redi
 Scenario: I can change a content package parent and the original permalink will redirect to the new one
  Given there is a content package with a parent
  When it changes parent
- And I visit "/my-nice-permalink-1/my-nice-permalink-2/"
+ And I visit the inactive permalink
  Then I should get redirected to its permalink
 
 @non_nested
