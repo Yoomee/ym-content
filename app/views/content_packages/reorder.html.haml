@@ -1,14 +1,23 @@
 :javascript
   $(document).ready(function(){YmContent.Sortable.init();});
-%h3 Reorder children
-%p
-  Drag and drop the children into the desired order and click
-  %em Save order.
-%form.formtastic.form-horizontal.form-sortable
-  %fieldset.inputs
-    .controls.sortable
-      -@content_package.children.each do |child|
-        .well{:id => "children_ids_#{child.id}"}
-          =child
-  %fieldset.form-actions
-    =link_to('Save order', reorder_content_package_path(@content_package), :method => :put, :class => 'btn sortable-submit mb-3')
+
+.container
+  .row
+    .col-xs-12
+      .cms-page-header
+        %h1 Reorder children
+  .row
+    .col-sm-12
+      .cms-well
+        %p.mb-0
+          Drag and drop the children into the desired order and click
+          %em Save order.
+      %form.formtastic.form-horizontal.form-sortable
+        %fieldset.inputs
+          .controls.sortable
+            -@content_package.children.each do |child|
+              .well{:id => "children_ids_#{child.id}"}
+                =child
+        %fieldset.form-actions
+          =link_to('Save order', reorder_content_package_path(@content_package), :method => :put, :class => 'btn btn-success sortable-submit pull-right')
+          .clearfix
