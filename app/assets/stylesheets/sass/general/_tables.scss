@@ -6,17 +6,81 @@
   width: 100%;
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
+  font-size: 14px;
+  margin-bottom: 30px;
   thead {
-    background: #4C545A;
+    background: $bg2;
     color: #FFFFFF;
   }
   th {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 600;
-    padding: 10px 0;
+    padding: 10px;
     @include media-query(sm) {
-      padding: 20px 0;
+      padding: 20px 10px;
     }
   }
+  td {
+    padding: 10px;
+  }
+}
+
+.td-status-published {
+}
+.td-status-pending {
+}
+.td-status-draft {
+}
+
+// Spacers for table tree view
+
+.sitemap-filter {
+  select {width:auto;}
+}
+.sitemap .spacer{
+  float: left;
+  width: 20px;
+  height: 36px;
+  background: green;
+  background: url('sitemap-spacer.png') 0 0 no-repeat;
+}
+.sitemap .spacer-mid{
+  background-position: 0 -36px;
+}
+.sitemap .spacer-last{
+  background-position: 0 -72px;
+}
+.sitemap .spacer-empty{
+  background: none;
+}
+.sitemap tbody tr:hover {
+  background: #E2E2E2;
+}
+.sitemap tbody tr:last-of-type:hover {
+  background: transparent;
+}
+.sitemap .table td{
+  border-top: none;
+}
+.sitemap td.td-name{
+  padding: 0;
+}
+.sitemap td.td-name .sitemap-caret{
+  width: 8px;
+}
+.sitemap td.td-name .fa-spinner{
+  margin-left: -4px;
+  width: 12px;
+}
+.sitemap .has-children td.td-name {
+  cursor: pointer;
+}
+.sitemap td.td-name .name {
+  padding: 8px 8px 8px 10px;
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 350px;
+  text-overflow: ellipsis;
 }

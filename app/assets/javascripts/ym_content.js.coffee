@@ -6,6 +6,7 @@
 #= require jquery-ui/autocomplete
 #= require jquery-ui/sortable
 #= require bootstrap/tab
+#= require bootstrap/dropdown
 #= require bootstrap-colorpicker
 
 #= require cocoon
