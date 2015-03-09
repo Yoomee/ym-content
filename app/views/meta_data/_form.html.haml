@@ -1,10 +1,11 @@
-.cms-form
-  =semantic_form_for @meta_datum do |f|
-    =f.inputs do
-      =f.input :page_slug, prepend: '/', hint: 'The url of the page, after the first /'
-      =f.input :title, hint: 'Meta title: aim for 70 characters'
-      =f.input :description, hint: 'Meta short description: Brief summary of the page, aim for 70 characters'
-      =f.input :keywords, hint: 'Meta keywords: comma separated'
-      =f.input :image, as: :image
-    =f.actions do
-      =f.action :submit, label: 'Save'
+.col-sm-8.col-sm-offset-2
+  .cms-well
+    =semantic_form_for @meta_datum do |f|
+      =f.inputs do
+        =f.input :page_slug, prepend: '/', hint: 'The url of the page, after the first /'
+        =f.input :title, hint: 'Meta title: aim for 70 characters'
+        =f.input :description, hint: 'Meta short description: Brief summary of the page, aim for 70 characters'
+        =f.input :keywords, hint: 'Meta keywords: comma separated'
+        =f.input :image, as: :image
+      =f.actions do
+        =f.action :submit, label: 'Save'

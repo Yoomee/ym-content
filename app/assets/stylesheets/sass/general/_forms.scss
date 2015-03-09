@@ -2,6 +2,19 @@
 // Forms
 // --------------------------------------------------
 
+.cms-form-well {
+  border-radius: 0 0 4px 4px;
+  background: #FFFFFF;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  border: 1px solid #E5E5E5;
+  border-top: 0;
+  @include media-query (sm) {
+    padding: 0 30px;
+    margin-bottom: 30px;
+  }
+}
+
 label {
   font-size: 14px;
   text-transform: uppercase;
@@ -26,7 +39,7 @@ input, textarea {
 
 button[disabled], html input[disabled] {
   background: #E2E2E2;
-  cursor: not-allowed; 
+  cursor: not-allowed;
 }
 
 input[type="checkbox"],

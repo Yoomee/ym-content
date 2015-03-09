@@ -1,48 +1,50 @@
--content_for :head do
-  =javascript_include_tag("ym_content")
 :javascript
   YmContent.ContentPackages.descriptions = #{Hash[ContentType.all.map{|ct| [ct.id, ct.description]}].to_json};
   $(document).ready(function(){
     YmContent.ContentPackages.initForm();
   });
-.container.cms-main#cms-style-container
+
+.container
   .row
-    .col-md-6.col-md-offset-3.mb-4
-      %h1.cms-page-header=title "New content"
-      %ul.cms-tabs
+    .col-xs-12
+      .cms-page-header
+        %h1=title "New content"
+  .row
+    .col-md-8.col-md-offset-2
+      %ul.cms-nav-tabs.cms-tabs
         %li.active=link_to("Content template", '#content-type', 'data-toggle' => 'tab')
         %li=link_to("Add context", '#context', 'data-toggle' => 'tab')
         %li=link_to("Assign author", '#author', 'data-toggle' => 'tab')
-        .clearfix
+
       =semantic_form_for @content_package do |form|
         .tab-content
-          #content-type.tab-pane.active.cms-well
-            =form.inputs do
-              =form.input :parent_id, :as => :hidden
-              =form.input :name
-              %br
-              =form.input :content_type, :as => :select, :collection => @content_package.valid_content_types, :label => "Select a content template below", :required => false
-          #context.tab-pane.cms-well
-            %h4 Write an objective/goal for this content
-            .cms-edit-context-box
-              =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}, :class => "content-objective-goal"
-            %br
-            %h4.mb-3 Select the intended audience for this content
-            =form.inputs do
-              -PersonaGroup.all.each do |group|
-                .persona-group-select
-                  %h4.cms-edit-group-title=group
-                  =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false, :member_label => :to_s
-              .clearfix
+          #content-type.tab-pane.active
+            .cms-form-well
+              =form.inputs do
+                =form.input :parent_id, :as => :hidden
+                =form.input :name
+                =form.input :content_type, :as => :select, :collection => @content_package.valid_content_types, :label => "Select a content template below", :required => false
+          #context.tab-pane
+            .cms-form-well
+              %h3 Write an objective/goal for this content
+              .cms-edit-context-box
+                =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}, :class => "content-objective-goal"
+              %h3 Select the intended audience for this content
+              =form.inputs do
+                -PersonaGroup.all.each do |group|
+                  .persona-group-select
+                    %h4.col-primary.cms-edit-group-title=group
+                    =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false, :member_label => :to_s
+                .clearfix
 
           #author.tab-pane
-            .cms-well
+            .cms-form-well
               =form.inputs do
                 =form.input :requested_by, :collection => User.where(:role => 'admin')
                 =form.input :author, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id] }
                 =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
                 =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
-            =form.action :submit, :label => 'Finish', :wrapper_html => { :class => 'mt-3 btn btn-success pull-right' }
+            =form.action :submit, :label => 'Finish', :wrapper_html => { :class => 'btn btn-success pull-right' }
 
-        =link_to("Next", '#', :class => 'btn btn-secondary pull-right mt-3 js-tab-next')
-        =link_to("Previous", '#', :class => 'btn btn-default pull-left mt-3 js-tab-previous', :style => 'display: none')
+        =link_to("Next", '#', :class => 'btn btn-primary pull-right js-tab-next')
+        =link_to("Previous", '#', :class => 'btn pull-left js-tab-previous', :style => 'display: none')

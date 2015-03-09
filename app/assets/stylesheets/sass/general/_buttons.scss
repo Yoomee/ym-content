@@ -24,6 +24,9 @@
   color: #FFFFFF;
   text-transform: uppercase;
   margin-bottom: 10px;
+  width: auto;
+  height: auto;
+  -webkit-appearance: none;
   &:hover, &:focus {
     color: #FFFFFF;
     opacity: 0.8;
