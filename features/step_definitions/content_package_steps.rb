@@ -33,6 +33,7 @@ end
 
 When(/^it changes parent$/) do
   parent_content_package = FactoryGirl.create(:content_package)
+  @inactive_permalink = @content_package.permalink
   @content_package.update_attributes(:parent_id => parent_content_package.id)
 end
 
@@ -190,6 +191,10 @@ end
 
 When(/^I visit its full path permalink$/) do
   visit @content_package.permalink.full_path
+end
+
+When(/^I visit the inactive permalink$/) do
+  visit @inactive_permalink.full_path
 end
 
 Then(/^I should get an error$/) do
