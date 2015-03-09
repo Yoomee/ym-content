@@ -7,5 +7,5 @@
     =activity.text.try(:capitalize)
     by
     %span=activity.user.full_name
-  %div.small-text="#{time_ago_in_words(activity.created_at)} ago"
+  .small-text="#{time_ago_in_words(activity.created_at)} ago"
   .clearfix

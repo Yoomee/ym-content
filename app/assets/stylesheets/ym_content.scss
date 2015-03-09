@@ -21,8 +21,14 @@
 @import 'sass/general/buttons';
 @import 'sass/general/page';
 @import 'sass/general/tables';
+@import 'sass/general/forms';
+@import 'sass/general/tabs';
 
-@import 'sass/activity-feed/feed';
+@import 'sass/redactor/general';
+
+@import 'sass/sidebar/general';
+@import 'sass/sidebar/feed';
+@import 'sass/sidebar/personas';
 
 // @import 'sass/buttons';
 // @import 'sass/labels';

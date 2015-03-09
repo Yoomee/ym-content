@@ -276,24 +276,24 @@ window.YmAssets =
       YmAssets.Forms.initColorPickers()
       $('textarea:not(.redactor):not([data-dont-grow=true])').autogrow()
 
-  Modals:
-    initAutoModal: () ->
-      $('#flash-modal').modal('show')
-      if res = window.location.search.match(/modal=(\w+)/)
-        if $("##{res[1]}").length
-          $("##{res[1]}").modal('show')
-          search_params = window.location.search.replace('?', '').split('&')
-          search_params.splice($.inArray("modal=#{res[1]}", search_params), 1)
-          if search_params.length > 0
-            search_params = "?#{search_params.join('&')}"
-          else
-            search_params = ""
-          new_href = "#{window.location.origin}#{window.location.pathname}#{search_params}"
-          if history.pushState != undefined
-            history.pushState
-              path: this.path,
-              '',
-              new_href
+  # Modals:
+  #   initAutoModal: () ->
+  #     $('#flash-modal').modal('show')
+  #     if res = window.location.search.match(/modal=(\w+)/)
+  #       if $("##{res[1]}").length
+  #         $("##{res[1]}").modal('show')
+  #         search_params = window.location.search.replace('?', '').split('&')
+  #         search_params.splice($.inArray("modal=#{res[1]}", search_params), 1)
+  #         if search_params.length > 0
+  #           search_params = "?#{search_params.join('&')}"
+  #         else
+  #           search_params = ""
+  #         new_href = "#{window.location.origin}#{window.location.pathname}#{search_params}"
+  #         if history.pushState != undefined
+  #           history.pushState
+  #             path: this.path,
+  #             '',
+  #             new_href
   ReadMoreTruncate:
     init: () ->
       $('.read-more-link').on 'click', (event) ->
@@ -306,7 +306,7 @@ window.YmAssets =
     YmAssets.Tabs.init()
     YmAssets.Bootstrap.init()
     YmAssets.Forms.init()
-    YmAssets.Modals.initAutoModal()
+    # YmAssets.Modals.initAutoModal()
     YmAssets.ReadMoreTruncate.init()
 
 $(document).ready ->

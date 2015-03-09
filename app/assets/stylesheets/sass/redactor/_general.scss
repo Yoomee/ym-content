@@ -1,0 +1,25 @@
+//
+// Redactor overrides
+// --------------------------------------------------
+
+.redactor-box {
+  margin-bottom: 0;
+}
+.redactor-editor {
+  height: 300px;
+  border: 1px solid #E2E2E2;
+  border-radius: 0 0 4px 4px;
+}
+.redactor-toolbar li a {
+  padding: 22px;
+  color: #555;
+  &:hover {
+    background-color: $brand-primary;
+  }
+}
+.redactor-toolbar {
+  border: 1px solid #E2E2E2;
+  border-bottom: 0;
+  box-shadow: none;
+  border-radius: 4px 4px 0 0;
+}
