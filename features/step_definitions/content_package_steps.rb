@@ -27,6 +27,11 @@ Given(/^(?:there is|I create) a content package with the permalink path "(.*?)"$
   FactoryGirl.create(:content_package, :permalink_path => permalink)
 end
 
+Given(/^there is a content package with an inactive permalink$/) do
+  @content_package = FactoryGirl.create(:content_package)
+  @inactive_permalink = @content_package.permalinks.create(path: 'test-inactive-permalink', active: false, full_path: '/test-inactive-permalink')
+end
+
 When(/^I go to the sitemap$/) do
   visit content_packages_path
 end
@@ -185,6 +190,11 @@ When(/^I visit its restful url$/) do
   visit "/content_packages/#{@content_package.id}".squeeze '/'
 end
 
+When(/^I visit its restful url with params$/) do
+  @params = 'utm_campaign=STA'
+  visit "/content_packages/#{@content_package.id}".squeeze('/') + '?' + @params
+end
+
 Then(/^I should get redirected to its permalink$/) do
   expect("/#{@content_package.permalink.full_path}".squeeze '/').to eq(current_path)
 end
@@ -197,10 +207,19 @@ When(/^I visit the inactive permalink$/) do
   visit @inactive_permalink.full_path
 end
 
+When(/^I visit the inactive permalink with params$/) do
+  @params = 'utm_campaign=STA'
+  visit @inactive_permalink.full_path + '?' + @params
+end
+
 Then(/^I should get an error$/) do
   pending # express the regexp above with the code you wish you had
 end
 
 Then(/^I should get redirected to the login page$/) do
   expect(current_path).to eq("/login")
+end
+
+Then(/^I should see the params$/) do
+  expect(URI.parse(current_url).query).to eq(@params)
 end

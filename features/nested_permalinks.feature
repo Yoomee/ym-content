@@ -32,6 +32,18 @@ Scenario: I can change a content package parent and the original permalink will 
  And I visit the inactive permalink
  Then I should get redirected to its permalink
 
+Scenario: I can visit an inactive content package permalink with params and the params will be passed on
+  Given there is a content package with an inactive permalink
+  When I visit the inactive permalink with params
+  Then I should get redirected to its permalink
+  And I should see the params
+
+Scenario: I can visit a content package by its /content_package/:id with and the params will be passed on
+  Given there is 1 content package
+  When I visit its restful url with params
+  Then I should get redirected to its permalink
+  And I should see the params
+
 @non_nested
 Scenario: I visit a nested content package via its permalink
   Given there is a content package with a parent

@@ -188,7 +188,7 @@ module YmContent::ContentPackagesController
             yield
           else
             # Otherwise redirect to the proper permalink so that we come back to this method and fall through the correct path.
-            redirect_to permalink.resource.permalink.full_path, status: 301
+            redirect_to permalink.resource.permalink.full_path + params_for_redirect, status: 301
           end
         else
           # If there isn't a matching permalink handle it with rails (Default is 404)
@@ -198,9 +198,16 @@ module YmContent::ContentPackagesController
         if (@content_package && @content_package.permalink.nil?) || ContentPackage.member_routes.reject { |x| x[:action] == "show" }.any?{|x| x[:action] == params[:action]}
           yield
         else
-          redirect_to @content_package.permalink.full_path, status: 301
+          redirect_to @content_package.permalink.full_path + params_for_redirect, status: 301
         end
       end
+    end
+
+    private
+
+    def params_for_redirect
+      significant_params = params.except(:action, :controller, :id, :path)
+      significant_params.present? ? '?' + significant_params.to_query : ''
     end
 
 end
