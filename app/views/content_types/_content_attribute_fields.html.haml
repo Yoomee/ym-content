@@ -1,6 +1,4 @@
-.nested-fields.well
-  =link_to_remove_association "Remove this content attribute", f, :class => 'pull-right btn btn-secondary'
-  .clearfix
+.nested-fields.cms-well
   =f.inputs do
     =f.input :name
     =f.input :field_type, :as => :select, :collection => ContentAttribute.field_types.invert, :prompt => "Select..."
@@ -15,7 +13,7 @@
       -ContentAttribute::DEFAULT_SIR_TREVOR_BLOCK_TYPES.each do |block_type|
         -value = f.object.sir_trevor_settings_json[block_type]
         .block-type-setting
-          %h4=block_type 
+          %h4=block_type
           =check_box_tag "#{f.object_name}[sir_trevor_settings][#{block_type}_required]", 1 ,value["required"]
           %span=label_tag "#{block_type}_required", "Required?"
           %br
@@ -27,12 +25,15 @@
       =f.input :resource_content_type, collection: ContentType.all
 
     =f.input :position, :as => :hidden
-    .col-md-6
-      =f.input :required, :default => false, :label => "This is a required field"
-    .col-md-6
-      =f.input :meta, :default => false, :label => "This is a meta attribute"
+    .row
+      .col-md-6
+        =f.input :required, :default => false, :label => "This is a required field"
+      .col-md-6
+        =f.input :meta, :default => false, :label => "This is a meta attribute"
     .meta-attributes{:class => f.object.meta? ? '' : 'hide'}
       %p
         The site has default values for meta tags. Adding a meta attribute here allows editors to override them on pages using this content template.
       =f.input :meta_tag_name, :as => :select, :collection => ContentAttribute::META_TAG_TYPES, :label => 'Choose the type of meta tag', :hint => "Meta tags for SEO and social networks are generated from this information. You only need one of each type per template. "
       =f.input :default_attribute, :as => :select, :collection => @content_type.content_attributes.select{|a| !a.meta?}, :label => "Select a value for this meta tag to default to", :prompt => "Select..."
+    =link_to_remove_association "Remove attribute", f, :class => 'pull-right btn btn-sm btn-warning'
+    .clearfix

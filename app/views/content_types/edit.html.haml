@@ -1,7 +1,8 @@
-.container.cms-main#cms-style-container
+.container
   .row
     .col-xs-12
-      %h1.cms-page-header=title 'Edit content template'
+      .cms-page-header
+        %h1=title 'Edit content template'
   .row
-    .cms-form.col-md-8.col-md-offset-2.mb-5
+    .col-sm-12
       =render 'form'
