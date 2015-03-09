@@ -4,38 +4,6 @@
       %h1=title(header_title)
     .row
       .col-sm-12
-        %table.cms-nav-tabs
-          %thead
-            %tr
-              %th{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
-                =link_to(content_packages_path) do
-                  %i.fa.fa-list
-                  %span Content list
-              -if can? :manage, ContentType
-                %th{:class => @content_types  ? 'active' : nil}
-                  =link_to(content_types_path) do
-                    %i.fa.fa-file-text-o
-                    %span Content templates
-              %th{:class => @deleted_content_packages  ? 'active' : nil}
-                =link_to(deleted_content_packages_path) do
-                  %i.fa.fa-trash-o
-                  %span Deleted content
-              -if can? :manage, MetaDatum
-                %th{:class => @meta_data ? 'active' : nil}
-                  =link_to(meta_data_path) do
-                    %i.fa.fa-code
-                    %span Non CMS meta data
-              -if defined?(YmDocuments)
-                %th{:class => @documents? 'active' : nil}
-                  =link_to(ym_documents_engine.documents_path) do
-                    %i.fa.fa-file-archive-o
-                    %span Documents
-              -if (can? :manage, TagCategory) && (YmContent::config.tags_feature)
-                %th{:class => @tag_categories  ? 'active' : nil}
-                  =link_to(tags_path) do
-                    %i.fa.fa-tags
-                    %span Tag Management
-      .col-sm-12
         -if @content_packages && !@deleted_content_packages
           =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success')
         -if @content_types
