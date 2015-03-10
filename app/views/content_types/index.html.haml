@@ -41,12 +41,15 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{:type => "button", :data => {:dismiss => "modal"}} &times;
+        %button.close-btn{:type => "button", :data => {:dismiss => "modal"}}
+          %i.fa.fa-times
         %h4.modal-title Duplicate
       .modal-body
         %p
           Copy the content attributes of this content template onto
-          =select_tag(:duplicate_to, options_from_collection_for_select(@content_types, "id", "name"), :prompt => "A new content template", :class => 'noselectpicker')
+        =select_tag(:duplicate_to, options_from_collection_for_select(@content_types, "id", "name"), :prompt => "A new content template")
+        %br
       .modal-footer
-        %button.btn.btn-default.pull-left{:type => "button", :data => {:dismiss => "modal"}} Cancel
-        %button.btn.btn-primary.js-duplicate-submit{:type => "button", :data => {:dismiss => "modal"}} Duplicate
+        %button.btn.btn-primary.js-duplicate-submit.pull-right{:type => "button", :data => {:dismiss => "modal"}} Duplicate
+        %button.btn.btn-default.pull-right{:type => "button", :data => {:dismiss => "modal"}} Cancel
+        .clearfix
