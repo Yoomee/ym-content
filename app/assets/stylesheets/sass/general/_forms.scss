@@ -21,6 +21,10 @@
     }
   }
 }
+fieldset { // fix bug where fields overflow
+  min-width: 100%;
+  max-width: 100%;
+}
 label {
   font-size: 14px;
   text-transform: uppercase;
@@ -69,18 +73,24 @@ input[type="radio"], {
   margin-right: 5px;
 }
 .image-inputs {
-  display: inline-block;
+  display: block;
+  @include media-query(sm) {
+    display: inline-block;
+  }
 }
 .remove-image {
   margin-left: 20px;
   margin-top: 5px;
 }
 input[type="file"] {
-  width: auto;
+  width: 100%;
   height: auto;
   padding: 10px;
-  margin-left: 20px;
+  margin-left: 0;
   font-size: 16px;
+  @include media-query(sm) {
+    margin-left: 20px;
+  }
 }
 
 textarea {
