@@ -6,32 +6,33 @@
       .col-xs-6
         .text-right=link_to('return to site', '/', :class => 'btn btn-sm')
 
-%ul.cms-nav-tabs
-  %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
-    =link_to(content_packages_path) do
-      %i.fa.fa-list
-      %span Content list
-  -if can? :manage, ContentType
-    %li{:class => @content_types  ? 'active' : nil}
-      =link_to(content_types_path) do
-        %i.fa.fa-file-text-o
-        %span Content templates
-  %li{:class => @deleted_content_packages  ? 'active' : nil}
-    =link_to(deleted_content_packages_path) do
-      %i.fa.fa-trash-o
-      %span Deleted content
-  -if can? :manage, MetaDatum
-    %li{:class => @meta_data ? 'active' : nil}
-      =link_to(meta_data_path) do
-        %i.fa.fa-code
-        %span Non CMS meta data
-  -if defined?(YmDocuments)
-    %li{:class => @documents? 'active' : nil}
-      =link_to(ym_documents_engine.documents_path) do
-        %i.fa.fa-file-archive-o
-        %span Documents
-  -if (can? :manage, TagCategory) && (YmContent::config.tags_feature)
-    %li{:class => @tag_categories  ? 'active' : nil}
-      =link_to(tags_path) do
-        %i.fa.fa-tags
-        %span Tag Management
+.affix-spacer{"data-offset-bottom" => "0", "data-offset-top" => "60", "data-spy" => "affix"}
+  %ul.cms-nav-tabs
+    %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
+      =link_to(content_packages_path) do
+        %i.fa.fa-list
+        %span Content list
+    -if can? :manage, ContentType
+      %li{:class => @content_types  ? 'active' : nil}
+        =link_to(content_types_path) do
+          %i.fa.fa-file-text-o
+          %span Content templates
+    %li{:class => @deleted_content_packages  ? 'active' : nil}
+      =link_to(deleted_content_packages_path) do
+        %i.fa.fa-trash-o
+        %span Deleted content
+    -if can? :manage, MetaDatum
+      %li{:class => @meta_data ? 'active' : nil}
+        =link_to(meta_data_path) do
+          %i.fa.fa-code
+          %span Non CMS meta data
+    -if defined?(YmDocuments)
+      %li{:class => @documents? 'active' : nil}
+        =link_to(ym_documents_engine.documents_path) do
+          %i.fa.fa-file-archive-o
+          %span Documents
+    -if (can? :manage, TagCategory) && (YmContent::config.tags_feature)
+      %li{:class => @tag_categories  ? 'active' : nil}
+        =link_to(tags_path) do
+          %i.fa.fa-tags
+          %span Tag Management

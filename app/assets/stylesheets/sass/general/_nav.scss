@@ -20,3 +20,13 @@
   display: inline-block;
   text-decoration: none;
 }
+.affix-spacer {
+  height: 60px;
+}
+.affix .cms-nav-tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+}

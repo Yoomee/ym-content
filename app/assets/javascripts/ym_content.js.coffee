@@ -7,6 +7,7 @@
 #= require jquery-ui/sortable
 #= require bootstrap/tab
 #= require bootstrap/dropdown
+#= require bootstrap/affix
 #= require bootstrap-colorpicker
 
 #= require cocoon
