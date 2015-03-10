@@ -5,7 +5,7 @@
     SearchManager.init();
     #{"$('#content-package-#{params[:open]}').effect('highlight', 3500);" if @open}
   });
-.container
+.container.page-margin-bottom
   =render("content_packages/sitemap_header", :header_title => "Content list")
   .row
     .col-xs-12
