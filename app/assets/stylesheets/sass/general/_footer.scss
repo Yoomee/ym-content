@@ -1,0 +1,30 @@
+//
+// Footer
+// --------------------------------------------------
+
+// Sticky Footer
+
+// Set size of sticky footer in the variable:
+  $footer-height: 67px;
+
+html, body {
+  height: 100%;
+}
+.cms-wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto (-$footer-height);
+}
+footer, .push {
+  min-height: $footer-height;
+  clear: both;
+}
+
+// Footer styles
+
+footer {
+  background: $bg3;
+  padding: 25px 0 20px;
+  color: #FFFFFF;
+}

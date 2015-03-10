@@ -1,5 +1,5 @@
 .col-sm-8.col-sm-offset-2
-  .cms-well
+  .cms-form-well
     =semantic_form_for @persona do |form|
       =form.inputs do
         =form.input :group, :prompt => "Please select...", :collection => PersonaGroup.all.map{|p| [p.to_s, p.id] } << ['Add a new group...', 0], :selected => (@persona.group_name.nil? ? @persona.group_id : 0)
@@ -14,7 +14,9 @@
         =form.input :benefit_3, :as => :string
         =form.input :benefit_4, :as => :string
         =form.input :file, :as => :file_with_preview, :label => "Full persona"
-      =form.actions
+      =form.actions do
+        =form.action :submit, :button_html => {:class => 'btn btn-success pull-right'}
+      .clearfix
 
   :javascript
     PersonaForm = {

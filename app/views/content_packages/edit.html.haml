@@ -60,61 +60,74 @@
                   %i.fa.fa-cog
                   %span Settings
           #content.tab-pane.active
-            =form.inputs do
-              -@non_meta_content_attributes.each do |content_attribute|
-                /content_input is defined in config/initializers/formtastic_ext.rb
-                =form.content_input content_attribute
+            .cms-form-well
+              =form.inputs do
+                -@non_meta_content_attributes.each do |content_attribute|
+                  /content_input is defined in config/initializers/formtastic_ext.rb
+                  =form.content_input content_attribute
           #meta.tab-pane
-            =form.inputs do
-              =form.input :meta_title, hint: 'Meta title: aim for 70 characters'
-              =form.input :meta_description, hint: 'Meta short description: Brief summary of the page, aim for 70 characters'
-              =form.input :meta_keywords, hint: 'Meta keywords: comma separated'
-              =form.input :meta_image, as: :image
+            .cms-form-well
+              =form.inputs do
+                =form.input :meta_title, hint: 'Meta title: aim for 70 characters'
+                =form.input :meta_description, hint: 'Meta short description: Brief summary of the page, aim for 70 characters'
+                =form.input :meta_keywords, hint: 'Meta keywords: comma separated'
+                =form.input :meta_image, as: :image
           -if YmContent::config.tags_feature
             #tags.tab-pane
-            =form.inputs do
-              %dl
-                -@content_package.tag_categories.each do |category|
-                  %dt
-                    %h3=category.name
-                  -category.taxonomy_list.each do |tag|
-                    %dd
-                      .checkbox
-                        %label
-                          =check_box_tag "content_package[taxonomy_tags][#{category.slug}][]", tag, @content_package.taxonomy_from(category).include?(tag)
-                          =tag
+              .cms-form-well
+                =form.inputs do
+                  %dl
+                    -@content_package.tag_categories.each do |category|
+                      %dt
+                        %h3=category.name
+                      -category.taxonomy_list.each do |tag|
+                        %dd
+                          .checkbox
+                            %label
+                              =check_box_tag "content_package[taxonomy_tags][#{category.slug}][]", tag, @content_package.taxonomy_from(category).include?(tag)
+                              =tag
           -if current_user.admin?
             #settings.tab-pane
-              =form.inputs do
-                =form.input :content_type_id, :as => :hidden
-                =form.input :name
-                =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}
-                .form-group#content_package_personas
-                  %label.control-label Personas
-                  -@persona_groups.each_slice(2) do |groups|
-                    .row
-                      -groups.each do |group|
-                        .col-md-6
-                          %h5.mb-1=group
-                          =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false, :member_label => :to_s
-                .clearfix
-                =form.input :requested_by, :collection => User.where(:role => 'admin')
-                =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
-                =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
-              %h4 Page settings
-              =form.inputs do
-                =parent_content_package_select(form)
-                =form.input :permalink_path, :prepend => @content_package.parent && @content_package.parent.respond_to?(:permalink_display_path) && YmContent.config.nested_permalinks ? @content_package.parent.permalink_display_path : '/' unless @content_package.viewless?
-                =form.input :slug if current_user.yoomee_staff?
-                =form.input :logged_in_only, :as => :content_boolean, :label => "Only logged in users can view this"
-                =form.input :hide_from_robots, :as => :content_boolean, :label => "Exclude from search engine indexing"
-      .col-md-4
+              .cms-form-well
+                =form.inputs do
+                  =form.input :content_type_id, :as => :hidden
+                  =form.input :name
+                  =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}
+                  .form-group#content_package_personas
+                    %h4.col-primary Personas
+                    %hr
+                    -@persona_groups.each_slice(2) do |groups|
+                      .row
+                        -groups.each do |group|
+                          .col-md-6
+                            %h5.mb-1=group
+                            =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false, :member_label => :to_s
+                  .clearfix
+                  =form.input :requested_by, :collection => User.where(:role => 'admin')
+                  =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
+                  .form-group
+                    %h4.col-primary Review frequency
+                    .check_boxes
+                      =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert, :label => false
+                .form-group
+                  %h4.col-primary Page settings
+                  %hr
+                  =form.inputs do
+                    =parent_content_package_select(form)
+                    =form.input :permalink_path, :prepend => @content_package.parent && @content_package.parent.respond_to?(:permalink_display_path) && YmContent.config.nested_permalinks ? @content_package.parent.permalink_display_path : '/' unless @content_package.viewless?
+                    =form.input :slug if current_user.yoomee_staff?
+                    =form.input :logged_in_only, :as => :content_boolean, :label => "Only logged in users can view this"
+                    =form.input :hide_from_robots, :as => :content_boolean, :label => "Exclude from search engine indexing"
+
         .cms-sidebar-actions
           -if current_user.role == "author"
-            =form.action :submit, :label => "Save Changes", :button_html => {:class => "btn btn-success js-save-progress btn-block"}
-            =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-block"}
+            =form.action :submit, :label => "Save Changes", :button_html => {:class => "btn btn-success js-save-progress pull-right"}
+            =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn pull-right"}
           -else
-            =form.action :submit, :label => "Save changes", :button_html => {:class => "btn btn-success btn-block"}
+            =form.action :submit, :label => "Save changes", :button_html => {:class => "btn btn-success pull-right"}
+          .clearfix
+
+      .col-md-4
         .cms-sidebar
           .cms-edit-status
             %div{:class => ("hidden" unless current_user.role != "author")}
@@ -129,13 +142,13 @@
                   %p Page will be published but not shown to the public until this date.
           .clearfix
           %ul.cms-nav-tabs.cms-tabs
-            %li.active=link_to("Activity", '#activity', 'data-toggle' => 'pill')
+            %li.active=link_to("Context", '#context', 'data-toggle' => 'pill')
+            %li=link_to("Activity", '#activity', 'data-toggle' => 'pill')
             %li=link_to("Personas", '#personas', 'data-toggle' => 'pill')
-            %li=link_to("Context", '#context', 'data-toggle' => 'pill')
             -# %li=link_to("Discussion", '#discussion', 'data-toggle' => 'pill')
             -# %li=link_to("Scorecard", '#content-scorecard', 'data-toggle' => 'pill')
           .tab-content
-            #activity.tab-pane.active.cms-well
+            #activity.tab-pane.cms-well
               %ul.cms-activities.cms-activity-feed
                 -@activity_items.each do |activity|
                   =render("content_packages/activity", :include_name => true, :activity => activity)
@@ -165,7 +178,7 @@
                             %li=benefit
                       -if persona.file
                         =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-sm', :icon => 'download')
-            #context.tab-pane.cms-well
+            #context.tab-pane.active.cms-well
               %label.col-primary Content Package Id
               %p
                 =@content_package.id

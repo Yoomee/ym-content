@@ -1,5 +1,5 @@
 .col-sm-8.col-sm-offset-2
-  .cms-well
+  .cms-form-well
     =semantic_form_for @meta_datum do |f|
       =f.inputs do
         =f.input :page_slug, prepend: '/', hint: 'The url of the page, after the first /'
@@ -8,4 +8,5 @@
         =f.input :keywords, hint: 'Meta keywords: comma separated'
         =f.input :image, as: :image
       =f.actions do
-        =f.action :submit, label: 'Save'
+        =f.action :submit, label: 'Save', :button_html => {:class => 'btn btn-success pull-right'}
+      .clearfix

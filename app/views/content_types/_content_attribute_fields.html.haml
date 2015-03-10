@@ -1,4 +1,4 @@
-.nested-fields.cms-well
+.nested-fields.cms-form-well
   =f.inputs do
     =f.input :name
     =f.input :field_type, :as => :select, :collection => ContentAttribute.field_types.invert, :prompt => "Select..."
@@ -25,15 +25,17 @@
       =f.input :resource_content_type, collection: ContentType.all
 
     =f.input :position, :as => :hidden
-    .row
-      .col-md-6
-        =f.input :required, :default => false, :label => "This is a required field"
-      .col-md-6
-        =f.input :meta, :default => false, :label => "This is a meta attribute"
+    .form-group
+      .row
+        .col-md-6
+          =f.input :required, :default => false, :label => "This is a required field"
+        .col-md-6
+          =f.input :meta, :default => false, :label => "This is a meta attribute"
     .meta-attributes{:class => f.object.meta? ? '' : 'hide'}
       %p
         The site has default values for meta tags. Adding a meta attribute here allows editors to override them on pages using this content template.
       =f.input :meta_tag_name, :as => :select, :collection => ContentAttribute::META_TAG_TYPES, :label => 'Choose the type of meta tag', :hint => "Meta tags for SEO and social networks are generated from this information. You only need one of each type per template. "
       =f.input :default_attribute, :as => :select, :collection => @content_type.content_attributes.select{|a| !a.meta?}, :label => "Select a value for this meta tag to default to", :prompt => "Select..."
+    %hr
     =link_to_remove_association "Remove attribute", f, :class => 'pull-right btn btn-sm btn-warning'
     .clearfix

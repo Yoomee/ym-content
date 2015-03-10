@@ -26,6 +26,16 @@
   }
 }
 
+
+
+// .td-status-published {
+//   border-left-color: #58AB58;
+// }
+// .td-status {
+//   border-left: 14px solid #eee;
+//   border-left-color: rgba(0,0,0,0.05);
+// }
+
 .td-status-published {
 }
 .td-status-pending {
@@ -36,7 +46,18 @@
 // Spacers for table tree view
 
 .sitemap-filter {
-  select {width:auto;}
+  select {
+    display: inline;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #E2E2E2;
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 10px;
+  }
 }
 .sitemap .spacer{
   float: left;

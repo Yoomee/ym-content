@@ -15,7 +15,7 @@
         %li.active=link_to("Content template", '#content-type', 'data-toggle' => 'tab')
         %li=link_to("Add context", '#context', 'data-toggle' => 'tab')
         %li=link_to("Assign author", '#author', 'data-toggle' => 'tab')
-
+      
       =semantic_form_for @content_package do |form|
         .tab-content
           #content-type.tab-pane.active
