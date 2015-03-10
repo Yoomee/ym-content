@@ -57,7 +57,7 @@
       font-weight: 600;
       position: relative;
       &:hover {
-        background: lighten($brand-primary, 30%);
+        background: $brand-primary-light;
       }
       span {
         display: none;

@@ -53,11 +53,11 @@
   color: #FFFFFF;
 }
 .btn-warning {
-  background: #F06969;
+  background: $error-col;
   color: #FFFFFF;
 }
 .btn-success {
-  background: #82C67A;
+  background: $success-col;
   color: #FFFFFF;
 }
 .btn.disabled {

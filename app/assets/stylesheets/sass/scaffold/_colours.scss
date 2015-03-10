@@ -17,6 +17,11 @@ $bg3: #444B50;
 // Brand colours
 
 $brand-primary: #8C7AC6;
+$brand-primary-light: lighten($brand-primary, 30%);
+
+// Colour for well borders / input borders / line breaks etc
+
+$outline-col: #E2E2E2;
 
 // Buttons
 
@@ -25,3 +30,4 @@ $btn-base: $bg2;
 // General
 
 $error-col: #E1566C;
+$success-col: #82C67A;

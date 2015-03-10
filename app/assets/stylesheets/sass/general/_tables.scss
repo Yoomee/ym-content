@@ -25,22 +25,17 @@
     padding: 10px;
   }
 }
-
-
-
-// .td-status-published {
-//   border-left-color: #58AB58;
-// }
-// .td-status {
-//   border-left: 14px solid #eee;
-//   border-left-color: rgba(0,0,0,0.05);
-// }
-
+.td-status {
+  border-left: 10px solid transparent;
+}
 .td-status-published {
+  border-color: $success-col;
 }
 .td-status-pending {
+  border-color: #F7EF99;
 }
 .td-status-draft {
+  border-color: $brand-primary-light;
 }
 
 // Spacers for table tree view
@@ -53,7 +48,7 @@
     vertical-align: middle;
     background-color: #fff;
     background-image: none;
-    border: 1px solid #E2E2E2;
+    border: 1px solid $outline-col;
     border-radius: 4px;
     box-shadow: none;
     font-size: 10px;
@@ -76,7 +71,7 @@
   background: none;
 }
 .sitemap tbody tr:hover {
-  background: #E2E2E2;
+  background: $outline-col;
 }
 .sitemap tbody tr:last-of-type:hover {
   background: transparent;

@@ -29,7 +29,7 @@
   });
 
 =semantic_form_for @content_package do |form|
-  .container.page-margin-bottom
+  .container.page-margin-bottom{data: {sir_trevor_upload_url: upload_sir_trevor_attachment_content_package_path(@content_package)} }
     .row
       .col-xs-12
         .cms-page-header
@@ -192,7 +192,3 @@
               =render("discussion")
             #content-scorecard.tab-pane.cms-well
               Not defined yet
-
-
-
-.container.cms-main#cms-style-container{data: {sir_trevor_upload_url: upload_sir_trevor_attachment_content_package_path(@content_package)} }

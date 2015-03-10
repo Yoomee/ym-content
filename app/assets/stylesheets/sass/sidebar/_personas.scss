@@ -6,7 +6,7 @@
   display: none;
 }
 .cms-persona-box {
-  border-bottom: 1px solid #E2E2E2;
+  border-bottom: 1px solid $outline-col;
   padding: 30px 0;
   &:last-of-type {
     border-bottom: 0;

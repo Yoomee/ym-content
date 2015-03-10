@@ -38,8 +38,8 @@ img {
 hr {
   border: none;
   height: 1px;
-  color: #E2E2E2;
-  background-color: #E2E2E2;
+  color: $outline-col;
+  background-color: $outline-col;
   margin-bottom: 30px;
   @include media-query (md) {
     margin-bottom: 30px;

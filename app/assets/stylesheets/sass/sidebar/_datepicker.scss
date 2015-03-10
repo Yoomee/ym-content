@@ -6,7 +6,7 @@
 
 .ui-datepicker {
   background: #FFFFFF;
-  border: 1px solid #E2E2E2;
+  border: 1px solid $outline-col;
   border-radius: 4px;
   padding: 30px;
   position: relative;
@@ -36,7 +36,7 @@
     padding: 5px;
     text-decoration: none;
     &:hover {
-      background: lighten($brand-primary, 30%);
+      background: $brand-primary-light;
       padding: 5px;
     }
   }

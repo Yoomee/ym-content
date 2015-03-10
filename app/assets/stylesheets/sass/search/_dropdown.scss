@@ -9,7 +9,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border: 1px solid #E2E2E2;
+  border: 1px solid $outline-col;
   border-top: 0;
   border-radius: 0 0 4px 4px;
 }
@@ -20,7 +20,7 @@
     display: block;
     padding: 15px;
     cursor: pointer;
-    border-bottom: 1px solid #E2E2E2;
+    border-bottom: 1px solid $outline-col;
     em {
       font-size: 14px;
     }
@@ -32,7 +32,7 @@
 #inside .ui-state-focus,
 #inside .ui-widget-content .ui-state-focus,
 #inside .ui-widget-header .ui-state-focus {
-  background: lighten($brand-primary, 30%);
+  background: $brand-primary-light;
   background-image: none;
   border: 0;
   border-radius: 0;

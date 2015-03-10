@@ -29,7 +29,7 @@
   background-color: #fff;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  border: 1px solid #E2E2E2;
+  border: 1px solid $outline-col;
   border-radius: 4px;
   li {
     margin-bottom: 0;
@@ -39,7 +39,7 @@
     padding: 8px 16px;
     text-decoration: none;
     &:hover {
-      background: lighten($brand-primary, 30%);
+      background: $brand-primary-light;
     }
   }
 }

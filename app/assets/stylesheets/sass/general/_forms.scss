@@ -31,7 +31,7 @@ label {
 input, textarea {
   width: 100%;
   height: 60px;
-  border: 1px solid #E2E2E2;
+  border: 1px solid $outline-col;
   border-radius: 4px;
   padding: 0 15px;
   transition: border 0.5s ease;
@@ -49,7 +49,7 @@ select {
   vertical-align: middle;
   background-color: #fff;
   background-image: none;
-  border: 1px solid #E2E2E2;
+  border: 1px solid $outline-col;
   border-radius: 4px;
   box-shadow: none;
   font-size: 16px;
@@ -59,7 +59,7 @@ select {
   }
 }
 button[disabled], html input[disabled] {
-  background: #E2E2E2;
+  background: $outline-col;
   cursor: not-allowed;
 }
 input[type="checkbox"],
@@ -93,7 +93,7 @@ select {
 }
 
 .check_boxes {
-  border-top: 1px solid #E2E2E2;
+  border-top: 1px solid $outline-col;
   margin-top: 10px;
   .checkbox {
     margin-bottom: 20px;
@@ -129,8 +129,8 @@ select {
   line-height: 1;
   color: #555;
   text-align: center;
-  background-color: lighten($brand-primary, 30%);
-  border: 1px solid #E2E2E2;
+  background-color: $brand-primary-light;
+  border: 1px solid $outline-col;
   border-radius: 4px;
 }
 .input-group-addon, .input-group-btn {
@@ -152,7 +152,7 @@ select {
   font-size: 12px;
   margin: 10px 0px 0;
   display: block;
-  background: lighten($brand-primary, 30%);
+  background: $brand-primary-light;
   padding: 0;
   border-radius: 4px;
   position: relative;
@@ -166,7 +166,7 @@ select {
     content: '';
     width: 0;
     height: 0;
-    border-bottom: solid 6px lighten($brand-primary, 30%);
+    border-bottom: solid 6px $brand-primary-light;
     border-left: solid 8px transparent;
     border-right: solid 8px transparent;
   }
