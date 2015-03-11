@@ -21,14 +21,7 @@
 //= require_tree ./sir_trevor_custom_blocks
 //= require autocomplete-field
 //= require select2
-
-//= require video
-//= require clips
-//= require expandy
-//= require highlight_block
-
-var allTheButtons = ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'image', 'link', 'alignment', 'horizontalrule', 'video'];
-var restrictedButtons = ['unorderedlist', 'orderedlist', 'link', 'html']
+//= require_tree ./redactor_plugins
 
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 $(document).ready(function() {
@@ -149,7 +142,7 @@ window.YmContent = {
      $('.redactor textarea').redactor({
         removeClasses: true,
         removeStyles: true,
-        buttons: restrictedButtons,
+        buttons: ['unorderedlist', 'orderedlist', 'link', 'html'],
         convertDivs: true,
         path: 'vendor/assets/javascripts/redactor',
         focusCallback: function(e) {
@@ -171,11 +164,12 @@ window.YmContent = {
       });
 
       $('.rich_redactor textarea').redactor({
-        buttons: allTheButtons,
+        buttons: ['html', 'formatting', 'bold', 'italic', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'image', 'link', 'alignment', 'horizontalrule'],
         plugins: $('.rich_redactor textarea').data('redactor-plugins'),
         path: 'vendor/assets/javascripts/redactor',
         imageUpload: '/redactor_uploads?file_type=image',
         imageGetJson: '/redactor_uploads',
+        formatting: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5'],
         focusCallback: function(e) {
           return $(e.currentTarget).parents(".form-group").addClass("focus");
         },
@@ -186,11 +180,13 @@ window.YmContent = {
           if (CharacterLimits && this.$element.data('limit-quantity')) {
             return CharacterLimits.registerRedactor(this);
           }
+          redactorPluginUpdates.update();
         },
         changeCallback: function(e) {
           if (CharacterLimits && this.$element.data('limit-quantity')) {
             return CharacterLimits.redactorChanged(this);
           }
+          redactorPluginUpdates.update('change');
         }
       });
     }

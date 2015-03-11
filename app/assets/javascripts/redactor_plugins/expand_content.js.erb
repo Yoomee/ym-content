@@ -1,0 +1,20 @@
+/*
+ * Expanding Content plugin.
+ * To include in a project add 'expandContent' to config.redactor_plugins in config/initializers/ym_content.rb
+ * Javascript to handle the expanding content on the front end will need to be added to the project
+ */
+
+if (!RedactorPlugins) var RedactorPlugins = {};
+
+RedactorPlugins.expandContent = function () {
+  return {
+    init: function () {
+      var button = this.button.add('expandContent', 'ExpandContent');
+      this.button.setAwesome('expandContent', 'fa-sort-amount-desc');
+      this.button.addCallback(button, this.expandContent.insert);
+    },
+    insert: function () {
+      this.insert.htmlWithoutClean('<h2 data-expand="start" class="redactor-expand-heading">Expand Heading</h2><p>Your text here</p><p>[EXPAND-END]</p>');
+    }
+  };
+};

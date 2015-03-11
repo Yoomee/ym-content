@@ -1,0 +1,95 @@
+// TO DO: remove importants and overly specific styles when ym_content redesign done
+
+// Callouts
+.redactor-editor p.call-out-box {
+  border: 1px solid #555;
+  color: #555;
+  margin-bottom: 1em;
+
+  .fa {
+    position: absolute;
+    left: 0;
+    font-size: 24px;
+    top: 0;
+    height: 100%;
+    padding: 14px 0 0 0;
+    border-right: 1px solid #555;
+    width: 60px;
+    text-align: center;
+  }
+
+  &:after {
+    display: none;
+  }
+}
+
+// Highlight Blocks
+.redactor-editor .redactor-wrap-marker {
+  font-size: 11px!important;
+  margin: 0!important;
+  display: block;
+
+  + p {
+    margin-top: 20px!important;
+  }
+}
+
+.redactor-editor .highlight-block {
+  background: #EEE;
+  border-top: 2px solid #555;
+  border-bottom: 2px solid #555;
+  margin: 0;
+  padding: 20px;
+  width: 100%;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  #cms-style-container & {
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &.highlight-block-primary {
+    border-color: #4f86c6;
+  }
+
+  &.highlight-block-secondary {
+    border-color: #C40063;
+  }
+
+  &.highlight-block-tertiary {
+    border-color: #72bf44;
+  }
+}
+
+// Expand Content
+
+.redactor-editor h2.redactor-wrap-marker {
+  font-size: 24px!important;
+  cursor: initial;
+  background: #f7f7f7;
+  color: #4f86c6;
+  padding: 20px;
+  border-bottom: 1px solid #4f86c6;
+}
+
+.redactor-editor .expanding-content {
+  height: auto;
+  background: #f7f7f7;
+  padding: 20px;
+  width: 100%;
+  margin: 0;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  #cms-style-container & {
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
