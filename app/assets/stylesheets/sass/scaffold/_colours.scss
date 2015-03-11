@@ -7,27 +7,40 @@
 // Yoomee brand teal = #19ACA0
 // Yoomee brand blue = #1CB1D9
 
+//
 // Backgrounds
+//
 
 $body-bg: #F9F8FC;
+
+$well-bg: #FFFFFF;
+
 $bg1: #646B70;
 $bg2: #4C545A;
 $bg3: #444B50;
 
+//
 // Brand colours
+//
 
 $brand-primary: #8C7AC6;
 $brand-primary-light: lighten($brand-primary, 30%);
 
+//
 // Colour for well borders / input borders / line breaks etc
+//
 
 $outline-col: #E2E2E2;
 
+//
 // Buttons
+//
+
+// -- Base .btn colour
 
 $btn-base: $bg2;
 
-// General
+//-- Modifier button colours
 
 $error-col: #E1566C;
 $success-col: #82C67A;

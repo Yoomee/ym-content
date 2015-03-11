@@ -1,0 +1,51 @@
+//
+// Tags
+// --------------------------------------------------
+
+.cms-tag-list {
+  margin: 0 15px;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  margin-bottom: 30px;
+  li {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    a {
+      display: block;
+      color: white !important;
+      background: $brand-primary;
+      text-decoration: none;
+      text-align: center;
+      padding: 10px 20px 10px 20px;
+      border-radius: 0 4px 4px 0;
+      font-size: 14px;
+      position: relative;
+      &:before {
+        position: absolute;
+        top: 0;
+        left: -15px;
+        content: '';
+        width: 0;
+        height: 0;
+        border-bottom: solid 18px transparent;
+        border-top: solid 18px transparent;
+        border-right: solid 15px $brand-primary;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        background: #F9F9F9;
+        height: 7px;
+        width: 7px;
+        border-radius: 10px;
+        top: 14px;
+        left: -3px;
+      }
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  }
+}

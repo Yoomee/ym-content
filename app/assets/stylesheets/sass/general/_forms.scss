@@ -4,10 +4,10 @@
 
 .cms-form-well {
   border-radius: 4px;
-  background: #FFFFFF;
+  background: $well-bg;
   padding: 10px 20px 30px;
   margin-bottom: 20px;
-  border: 1px solid #E5E5E5;
+  border: 1px solid $outline-col;
   @include media-query (sm) {
     padding: 10px 30px 30px;
     margin-bottom: 30px;
@@ -199,4 +199,51 @@ select {
   .word-count-exceeded & {
     color: $error-col;
   }
+}
+
+// Tag select
+
+.select2-container--default .select2-selection--multiple {
+  background-color: white;
+  border: 1px solid $outline-col;
+  border-radius: 4px;
+  cursor: text;
+  height: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 12px;
+  transition: all 0.3s ease;
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border: 1px solid $brand-primary;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: $brand-primary-light;
+  border: 1px solid $brand-primary;
+  border-radius: 4px;
+  cursor: default;
+  float: left;
+  margin-right: 5px;
+  margin-top: 5px;
+  padding: 0 5px;
+  color: #444;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: #999;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 5px;
+}
+.select2-container .select2-search--inline .select2-search__field {
+  margin-top: 7px;
+  height: auto;
+  padding: 0;
+}
+.select2-dropdown {
+  border: 1px solid $outline-col;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: $brand-primary-light;
+  color: #444;
 }

@@ -11,14 +11,15 @@
     });
   });
 
-.cms-form
+.container.page-margin-bottom
   .row
     .col-sm-8.col-sm-offset-2
-      =semantic_form_for @tag_category do |f|
-        =f.inputs do
-          =f.input :name
-          =f.input :slug, label: "Unique identifier"
-          =f.input :taxonomy_list, as: :select, collection: options_for_select(TagCategory.tag_counts_on("taxonomy").map { |tag| [tag.name, tag.name, data: {count: @tag_category.tag_count_for(tag)}] }, @tag_category.taxonomy.collect(&:name)), multiple: true, input_html: { class: 'select2' }
-        =f.actions do
-          .col-xs-12
-            .pull-right=f.action :submit, label: 'Save'
+      .cms-form-well
+        =semantic_form_for @tag_category do |f|
+          =f.inputs do
+            =f.input :name, hint: 'This can be anything you like'
+            =f.input :slug, label: "Unique identifier", hint: 'Try and make this the same as the name'
+            =f.input :taxonomy_list, as: :select, collection: options_for_select(TagCategory.tag_counts_on("taxonomy").map { |tag| [tag.name, tag.name, data: {count: @tag_category.tag_count_for(tag)}] }, @tag_category.taxonomy.collect(&:name)), multiple: true, input_html: { class: 'select2' }
+          =f.actions do
+            =f.action :submit, label: 'Save', :button_html => {:class => 'btn btn-success pull-right'}
+            .clearfix
