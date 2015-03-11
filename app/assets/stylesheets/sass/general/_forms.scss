@@ -79,15 +79,17 @@ input[type="radio"], {
   }
 }
 .remove-image {
-  margin-left: 20px;
   margin-top: 5px;
 }
 input[type="file"] {
   width: 100%;
   height: auto;
   padding: 10px;
-  margin-left: 0;
   font-size: 16px;
+}
+
+img + .image-inputs {
+  margin-left: 0;
   @include media-query(sm) {
     margin-left: 20px;
   }
