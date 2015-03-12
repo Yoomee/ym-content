@@ -25,8 +25,9 @@ module YmContent::ContentAttribute
         :boolean => 'Check box',
         :user => "User",
         :location => "Location",
-        :rich => "Rich content",
-        :resource => "Link to content"
+        :rich => "Rich content (Sir Trevor)",
+        :resource => "Link to content",
+        :rich_content => "Rich Content"
       }
     end
 
@@ -51,6 +52,7 @@ module YmContent::ContentAttribute
     when 'user' then 'select'
     when 'resource' then 'autocomplete_select'
     when 'rich' then 'text'
+    when 'rich_content' then 'rich_redactor'
     else field_type
     end
   end
@@ -116,9 +118,9 @@ module YmContent::ContentAttribute
     block_type_limits = {}
     settings.map {|k,v| block_type_limits[k] = v["limit"]}
     {
-      :blockTypeLimits => block_type_limits, 
-      :blockTypes => settings.reject{|k,v| v["limit"] == "0" }.keys, 
-      :required => settings.reject{|k,v| v["required"] == false }.keys 
+      :blockTypeLimits => block_type_limits,
+      :blockTypes => settings.reject{|k,v| v["limit"] == "0" }.keys,
+      :required => settings.reject{|k,v| v["required"] == false }.keys
     }
   end
 

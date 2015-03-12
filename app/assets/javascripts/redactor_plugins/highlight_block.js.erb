@@ -1,0 +1,68 @@
+/*
+ * Highlight Content plugin.
+ * To include in a project add 'highlightBlocks' to config.redactor_plugins in config/initializers/ym_content.rb
+ * Adpated from http://imperavi.com/redactor/plugins/clips/
+ */
+
+if (!RedactorPlugins) var RedactorPlugins = {};
+
+RedactorPlugins.highlightBlocks = function()
+{
+  return {
+    init: function()
+    {
+      var items = [
+        ['Highlight Block - Primary', '<p class="redactor-primary">[HIGHLIGHT-START]</p><p>Your text here</p><p>[HIGHLIGHT-END]</p>'],
+        ['Highlight Block - Secondary', '<p class="redactor-secondary">[HIGHLIGHT-START]</p><p>Your text here</p><p>[HIGHLIGHT-END]</p>'],
+        ['Highlight Block - Tertiary', '<p class="redactor-tertiary">[HIGHLIGHT-START]</p><p>Your text here</p><p>[HIGHLIGHT-END]</p>']
+      ];
+
+      this.highlightBlocks.template = $('<ul id="redactor-modal-list">');
+
+      for (var i = 0; i < items.length; i++)
+      {
+        var li = $('<li>');
+        var a = $('<a href="#" class="redactor-higlight-blocks-link">').text(items[i][0]);
+        var div = $('<div class="redactor-higlight-blocks">').hide().html(items[i][1]);
+
+        li.append(a);
+        li.append(div);
+        this.highlightBlocks.template.append(li);
+      }
+
+      this.modal.addTemplate('highlightBlocks', '<section>' + this.utils.getOuterHtml(this.highlightBlocks.template) + '</section>');
+
+      var button = this.button.add('highlightBlocks', 'Highlight Blocks');
+      this.button.setAwesome('highlightBlocks', 'fa-lightbulb-o');
+      this.button.addCallback(button, this.highlightBlocks.show);
+
+    },
+    show: function()
+    {
+      this.modal.load('highlightBlocks', 'Insert Highlight Block', 400);
+
+      this.modal.createCancelButton();
+
+      $('#redactor-modal-list').find('.redactor-higlight-blocks-link').each($.proxy(this.highlightBlocks.load, this));
+
+      this.selection.save();
+      this.modal.show();
+    },
+    load: function(i,s)
+    {
+      $(s).on('click', $.proxy(function(e)
+      {
+        e.preventDefault();
+        this.highlightBlocks.insert($(s).next().html());
+
+      }, this));
+    },
+    insert: function(html)
+    {
+      this.selection.restore();
+      this.insert.htmlWithoutClean(html, false);
+      this.modal.close();
+      this.observe.load();
+    }
+  };
+};
