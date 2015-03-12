@@ -1,5 +1,10 @@
 // TO DO: remove importants and overly specific styles when ym_content redesign done
 
+#redactor-modal textarea{
+  height: 68px;
+  box-shadow: none;
+}
+
 // Callouts
 .redactor-editor p.call-out-box {
   border: 1px solid #555;
@@ -91,5 +96,106 @@
     p:last-child {
       margin-bottom: 0;
     }
+  }
+}
+
+// Blockquotes
+#redactor-blockquote-citation {
+  width: 100%;
+  padding: 4px;
+}
+
+.redactor-modal-error {
+  font-style: italic;
+}
+
+.redactor-editor blockquote.blockquote-fancy {
+  position: relative;
+  border-left: 7px solid #555;
+  position: relative;
+  padding: 0 0 0 18px;
+  margin: 20px 0 20px 40px!important;
+
+  &:before {
+    content: "\201C";
+    position: absolute;
+    font-size: 60px;
+    margin: 0 0 0 -64px;
+    line-height: 1;
+  }
+
+  cite {
+    display: block;
+  }
+}
+
+// Date blocks
+.redactor-editor {
+  .dateblock {
+    display: table;
+    width: 100%;
+    margin-bottom: 30px;
+    background: #EEE;
+  }
+
+  .dateblock-info,
+  .dateblock-date {
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  .dateblock-date {
+    min-width: 75px;
+    width: 75px;
+    margin: 0;
+    line-height: 1;
+
+    @include media-query(md) {
+      width: 115px;
+    }
+  }
+
+  .dateblock-day,
+  .dateblock-month,
+  .dateblock-year {
+    display: block;
+    color: #555;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 5px;
+    font-weight: bold;
+  }
+
+  .dateblock-day {
+    background: none;
+    color: #555;
+    // background: $gg-blue;
+    border-radius: 4px 0 0 0;
+    font-size: 46px;
+    letter-spacing: -3px;
+    padding-left: 2px;
+    @include media-query(md) {
+      font-size: 66px;
+    }
+  }
+
+  .dateblock-month {
+    background: none;
+    font-size: 20px;
+  }
+
+  .dateblock-year {
+    background: none;
+    color: #555;
+    font-size: 20px;
+
+  }
+
+  .dateblock-text {
+    background: none;
+    color: #555;
+    border-radius: 0 4px 4px 4px;
+    padding: 20px 30px 10px;
+    margin: 0;
   }
 }

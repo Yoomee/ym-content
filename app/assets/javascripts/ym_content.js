@@ -164,7 +164,7 @@ window.YmContent = {
       });
 
       $('.rich_redactor textarea').redactor({
-        buttons: ['html', 'formatting', 'bold', 'italic', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'image', 'link', 'alignment', 'horizontalrule'],
+        buttons: ['html', 'formatting', 'bold', 'italic', 'unorderedlist', 'orderedlist', 'image', 'link', 'horizontalrule'],
         plugins: $('.rich_redactor textarea').data('redactor-plugins'),
         path: 'vendor/assets/javascripts/redactor',
         imageUpload: '/redactor_uploads?file_type=image',
