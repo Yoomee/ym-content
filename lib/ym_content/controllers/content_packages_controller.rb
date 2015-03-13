@@ -96,7 +96,7 @@ module YmContent::ContentPackagesController
       end
     end
     @content_package.sir_trevor_images.each do |stimg|
-      unless urls.include? stimg.image.url 
+      unless urls.include? stimg.image.url
         stimg.destroy!
       end
     end
@@ -150,7 +150,7 @@ module YmContent::ContentPackagesController
 
   def upload_sir_trevor_attachment
     begin
-      stimg = @content_package.sir_trevor_images.create(image: params[:attachment][:file], sir_trevor_uid: params[:attachment][:uid], filename: params[:attachment][:original_filename]) 
+      stimg = @content_package.sir_trevor_images.create(image: params[:attachment][:file], sir_trevor_uid: params[:attachment][:uid], filename: params[:attachment][:original_filename])
       render json: { file: { url: stimg.image.url, dragonfly_uid: stimg.image_uid } }, status: 200
     rescue => exception
       puts exception
@@ -160,7 +160,11 @@ module YmContent::ContentPackagesController
 
   private
   def content_package_params
-    params.require(:content_package).permit(*params[:content_package].try(:keys) + [:persona_ids => [], :taxonomy_tags => @content_package.content_type.tag_categories.map{|x| { x.slug => [] }}.reduce(:merge)])
+    permitted_params = [*params[:content_package].try(:keys) + [:persona_ids => []]]
+    if @content_package
+      permitted_params << [:taxonomy_tags => @content_package.content_type.tag_categories.map{|x| { x.slug => [] }}.reduce(:merge)]
+    end
+    params.require(:content_package).permit(permitted_params)
   end
 
   def get_view_data
