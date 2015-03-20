@@ -51,7 +51,7 @@ if (!RedactorPlugins) var RedactorPlugins = {};
           data = this.clean.stripTags(data);
 
           // parse if it is link on youtube & vimeo
-          var iframeStart = '<div class="responsive-video-wrapper"><iframe style="width: 640px; height: 340px;" src="',
+          var iframeStart = '<div class="responsive-video-wrapper"><iframe style="width: 640px; height: 360px;" src="',
             iframeEnd = '" frameborder="0" allowfullscreen></iframe></div>';
 
           if (data.match(this.video.reUrlYoutube))
