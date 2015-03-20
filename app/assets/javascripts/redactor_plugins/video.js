@@ -1,7 +1,7 @@
 /*
  * Video plugin.
  * To include in a project add 'video' to config.redactor_plugins in config/initializers/ym_content.rb
- * http://imperavi.com/redactor/plugins/video/
+ * http://imperavi.com/redactor/plugins/video/ (modified to add wrapper div)
  */
 
 if (!RedactorPlugins) var RedactorPlugins = {};
@@ -17,7 +17,7 @@ if (!RedactorPlugins) var RedactorPlugins = {};
       {
         return String()
         + '<section id="redactor-modal-video-insert">'
-          + '<label>' + this.lang.get('video_html_code') + '</label>'
+          + '<label>Paste a YouTube or Vimeo link here.<br>(e.g. https://www.youtube.com/watch?v=8uDuls5TyNE)</label>'
           + '<textarea id="redactor-insert-video-area" style="height: 160px;"></textarea>'
         + '</section>';
       },
@@ -51,8 +51,8 @@ if (!RedactorPlugins) var RedactorPlugins = {};
           data = this.clean.stripTags(data);
 
           // parse if it is link on youtube & vimeo
-          var iframeStart = '<iframe style="width: 500px; height: 281px;" src="',
-            iframeEnd = '" frameborder="0" allowfullscreen></iframe>';
+          var iframeStart = '<div class="responsive-video-wrapper"><iframe style="width: 640px; height: 340px;" src="',
+            iframeEnd = '" frameborder="0" allowfullscreen></iframe></div>';
 
           if (data.match(this.video.reUrlYoutube))
           {

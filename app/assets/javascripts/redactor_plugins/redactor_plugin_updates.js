@@ -20,6 +20,7 @@ window.redactorPluginUpdates = (function() {
     });
 
     wrapDateBlocks();
+    wrapVideo();
   };
 
   function wrapBlocks(startEl, endEl, wrapperClass, action) {
@@ -72,6 +73,13 @@ window.redactorPluginUpdates = (function() {
       div.append(next);
     });
 
+  }
+
+  function wrapVideo() {
+    $('p.responsive-video-wrapper').each(function () {
+      var content = $(this).html();
+      $(this).replaceWith('<div class="responsive-video-wrapper">' + content + '</div>');
+    });
   }
 
   return {

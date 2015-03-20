@@ -199,3 +199,8 @@
     margin: 0;
   }
 }
+
+// Video
+.redactor-editor .responsive-video-wrapper iframe {
+  max-width: 100%;
+}
