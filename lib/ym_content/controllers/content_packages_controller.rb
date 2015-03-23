@@ -79,6 +79,7 @@ module YmContent::ContentPackagesController
     @content_package.requested_by = current_user
     @content_package.review_frequency = 1
     @content_package.due_date = Date.today
+    @content_types = ContentType.all
   end
 
   def reorder
