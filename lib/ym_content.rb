@@ -7,6 +7,7 @@ require 'ym_content/engine'
 require 'ym_posts'
 require 'geocoder'
 require 'dragonfly'
+require 'acts-as-taggable-on'
 if defined?(YmDocuments)
   require 'ym_documents'
 end
