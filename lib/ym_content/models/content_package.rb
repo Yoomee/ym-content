@@ -130,6 +130,29 @@ module YmContent::ContentPackage
     [parent, parent.try(:parents)].flatten.compact
   end
 
+  def ancestors
+    result = []
+    c = self
+    while c.parent
+      result.unshift(c.parent)
+      c = c.parent
+    end
+    result
+  end
+
+  def first_ancestor_with_view
+    c = self
+    result = nil
+    while c.parent
+      if !c.parent.viewless?
+        result = c.parent
+        break
+      end
+      c = c.parent
+    end
+    result
+  end
+
   def published?
     status == 'published' && (publish_at.nil? || publish_at <= Date.today)
   end
