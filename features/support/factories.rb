@@ -22,6 +22,10 @@ FactoryGirl.define do
         ]
       end
     end
+
+    trait :viewless do
+      viewless true
+    end
   end
 
   factory :content_attribute do
@@ -65,6 +69,13 @@ FactoryGirl.define do
     sequence(:slug){|n| "content_package_#{n}" }
     after(:build) do |content_package|
       FactoryGirl.create(:activity_item, :resource_type => "ContentPackage", :resource => content_package)
+    end
+
+    factory :viewless_content_package do
+      association :content_type, :viewless
+      after :create do |content_package|
+        content_package.permalink.destroy!
+      end
     end
   end
 
