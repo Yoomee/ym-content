@@ -22,7 +22,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'site_prism'
   gem 'factory_girl_rails'
-  gem 'poltergeist', '~> 1.4.0'
+  gem 'poltergeist', '~> 1.6.0'
   gem 'jquery-rails'
   gem 'coffee-rails'
   gem 'webmock'
