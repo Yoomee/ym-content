@@ -36,6 +36,8 @@ RedactorPlugins.dateBlock = function() {
       this.button.setAwesome('dateBlock', 'fa-calendar');
       this.button.addCallback(button, this.dateBlock.show);
 
+      this.dateBlock.edit();
+
     },
     show: function () {
 
@@ -53,6 +55,7 @@ RedactorPlugins.dateBlock = function() {
       var day = $('#redactor-dateblock-day').val();
       var month = $('#redactor-dateblock-month').val();
       var year = $('#redactor-dateblock-year').val();
+      var dayClass = day.length > 2 ? ' dateblock-day-range' : '';
 
       if (text === '' || day === '' || month === '' || year === '') {
         if($('.redactor-modal-error').length) {
@@ -62,12 +65,12 @@ RedactorPlugins.dateBlock = function() {
         return;
       }
 
-      var date = '<span class="dateblock-day">' + day + '</span><span class="dateblock-month">' + month + '</span><span class="dateblock-year">' + year + '</span>';
+      var date = '<span class="dateblock-day' + dayClass + '">' + day + '</span><span class="dateblock-month">' + month + '</span><span class="dateblock-year">' + year + '</span>';
       var html = '<div class="dateblock"><p class="dateblock-inner dateblock-date">' + date + '</p><p class="dateblock-inner dateblock-text">' + text + '</p></div>';
 
       this.selection.restore();
       this.modal.close();
       this.insert.htmlWithoutClean(html);
     }
-  };
+  }
 }
