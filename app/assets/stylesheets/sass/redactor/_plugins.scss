@@ -1,8 +1,29 @@
 // TO DO: remove importants and overly specific styles when ym_content redesign done
 
-#redactor-modal textarea{
-  height: 68px;
-  box-shadow: none;
+#redactor-modal {
+  section {
+    padding: 20px 40px 40px 40px;
+  }
+
+  textarea{
+    height: 68px;
+    box-shadow: none;
+    padding: 8px;
+  }
+
+  input[type="text"], input[type="number"] {
+    box-shadow: none;
+    padding: 8px;
+    height: auto;
+  }
+
+  input[type="number"] {
+    width: 100px;
+  }
+
+  footer button {
+    border-radius: 0;
+  }
 }
 
 // Callouts
