@@ -1,4 +1,4 @@
-@editor
+@admin
 Feature: CMS admin
   In order to create great content
   As an admin

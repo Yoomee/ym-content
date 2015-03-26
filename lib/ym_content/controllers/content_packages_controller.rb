@@ -79,6 +79,7 @@ module YmContent::ContentPackagesController
     @content_package.requested_by = current_user
     @content_package.review_frequency = 1
     @content_package.due_date = Date.today
+    @content_types = ContentType.all
   end
 
   def reorder
@@ -161,7 +162,7 @@ module YmContent::ContentPackagesController
   private
   def content_package_params
     permitted_params = [*params[:content_package].try(:keys) + [:persona_ids => []]]
-    if @content_package
+    if @content_package && config.tags_feature
       permitted_params << [:taxonomy_tags => @content_package.content_type.tag_categories.map{|x| { x.slug => [] }}.reduce(:merge)]
     end
     params.require(:content_package).permit(permitted_params)

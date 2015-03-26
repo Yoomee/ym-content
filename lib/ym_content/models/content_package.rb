@@ -31,7 +31,6 @@ module YmContent::ContentPackage
     base.validates :name, :content_type, :requested_by, :review_frequency, :presence => true
     base.validate :required_attributes
     base.validate :embeddable_attributes
-    base.validate :viewless_children
 
     base.delegate :content_attributes, :package_name, :view_name, :missing_view?, :viewless?, :to => :content_type
 
@@ -140,6 +139,29 @@ module YmContent::ContentPackage
     [parent, parent.try(:parents)].flatten.compact
   end
 
+  def ancestors
+    result = []
+    c = self
+    while c.parent
+      result.unshift(c.parent)
+      c = c.parent
+    end
+    result
+  end
+
+  def first_ancestor_with_view
+    c = self
+    result = nil
+    while c.parent
+      if !c.parent.viewless?
+        result = c.parent
+        break
+      end
+      c = c.parent
+    end
+    result
+  end
+
   def published?
     status == 'published' && (publish_at.nil? || publish_at <= Date.today)
   end
@@ -182,15 +204,6 @@ module YmContent::ContentPackage
     end
   end
 
-  # The child of a content package with a view cannot be viewless
-  def valid_content_types
-    if parent.present? && !parent.content_type.viewless?
-      ContentType.not_viewless
-    else
-      ContentType.all
-    end
-  end
-
   def to_s
     name
   end
@@ -223,12 +236,6 @@ module YmContent::ContentPackage
           end
         end
       end
-    end
-  end
-
-  def viewless_children
-    if parent.present? && !parent.content_type.viewless? && content_type.viewless?
-      self.errors.add(:content_type, "Viewless content packages cannot be added as children of content packages with a view")
     end
   end
 

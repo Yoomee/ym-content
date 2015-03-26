@@ -16,7 +16,7 @@ RedactorPlugins.blockQuote = function() {
           + '</p>'
           + '<p>'
           + '<label for="redactor-blockquote-citation">Citation</label>'
-          + '<input id="redactor-blockquote-citation" />'
+          + '<input id="redactor-blockquote-citation" type="text" />'
           + '</p>'
         + '</section>';
     },
