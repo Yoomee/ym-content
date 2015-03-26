@@ -3,6 +3,11 @@ require 'spec_helper'
 describe ContentPackage do
 
   let (:content_package) { FactoryGirl.build(:content_package) }
+  it { should delegate_method(:viewless?).to(:content_type) }
+  it { should delegate_method(:package_name).to(:content_type) }
+  it { should delegate_method(:missing_view?).to(:content_type) }
+  it { should delegate_method(:view_name).to(:content_type) }
+  it { should delegate_method(:content_attributes).to(:content_type) }
 
   it { should validate_presence_of(:content_type) }
   it { should have_one(:permalink).conditions(active: true) }
