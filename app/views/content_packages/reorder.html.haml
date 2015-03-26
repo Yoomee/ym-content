@@ -13,4 +13,4 @@
         .well{:id => "children_ids_#{child.id}"}
           =child
   %fieldset.form-actions
-    =link_to('Save order', reorder_content_package_path(@content_package), :method => :put, :class => 'btn sortable-submit mb-3')
+    =link_to('Save order', save_order_content_package_path(@content_package), :method => :put, :class => 'btn sortable-submit mb-3')

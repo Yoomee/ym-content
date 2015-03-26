@@ -177,15 +177,9 @@ window.YmContent = {
           return $(e.currentTarget).parents(".form-group").removeClass("focus");
         },
         initCallback: function(e) {
-          if (CharacterLimits && this.$element.data('limit-quantity')) {
-            return CharacterLimits.registerRedactor(this);
-          }
           redactorPluginUpdates.update();
         },
         changeCallback: function(e) {
-          if (CharacterLimits && this.$element.data('limit-quantity')) {
-            return CharacterLimits.redactorChanged(this);
-          }
           redactorPluginUpdates.update('change');
         }
       });

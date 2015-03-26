@@ -51,13 +51,18 @@ module YmContent::Permalinkable
   end
 
   def set_permalink_full_path
-    return if permalink.nil? || (self.parent && self.parent.permalink && self.parent.permalink.full_path.nil?)
-    self.permalink.full_path = self.parent && !self.parent.viewless? ? "#{CGI::escape(self.parent.permalink.full_path).gsub('%2F', '/')}/#{self.permalink.path}".squeeze('/') : "/#{self.permalink.path}"
+    ancestor_with_view = self.first_ancestor_with_view
+    return if permalink.nil? || (ancestor_with_view && ancestor_with_view.permalink && ancestor_with_view.permalink.full_path.nil?)
+    self.permalink.full_path = ancestor_with_view && !ancestor_with_view.viewless? ? "#{CGI::escape(ancestor_with_view.permalink.full_path).gsub('%2F', '/')}/#{self.permalink.path}".squeeze('/') : "/#{self.permalink.path}"
   end
 
   def sync_child_full_paths
-    return if new_record? || permalink.nil?
-    if permalink.previous_changes[:full_path]
+    return if new_record?
+    if viewless?
+      children.each do |x|
+        x.save!
+      end
+    elsif permalink && permalink.previous_changes[:full_path]
       children.each do |x|
         x.permalinks.create(:active => false, :path => x.permalink.path, :full_path => "#{x.permalink.full_path}") unless x.permalink.nil? || ENV['RAKE_PERMALINK_RUNNING'] == 'true'
         x.save!
