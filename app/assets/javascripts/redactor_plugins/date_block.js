@@ -35,9 +35,6 @@ RedactorPlugins.dateBlock = function() {
       var button = this.button.add('dateBlock', 'Date Block');
       this.button.setAwesome('dateBlock', 'fa-calendar');
       this.button.addCallback(button, this.dateBlock.show);
-
-      this.dateBlock.edit();
-
     },
     show: function () {
 
