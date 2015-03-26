@@ -8,6 +8,7 @@ module YmContent::Permalinkable
       has_one :permalink, :conditions => { :active => true }, :as => :resource, :autosave => true
     end
     has_many :permalinks, :as => :resource, :autosave => true, :dependent => :destroy
+    validates :permalink, :presence => true, unless: 'viewless?', on: :update
     before_validation :set_permalink_path, :set_permalink_full_path
     after_validation :set_permalink_errors
     after_save :sync_child_full_paths
