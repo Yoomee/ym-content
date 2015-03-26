@@ -81,10 +81,12 @@ describe ContentPackage do
       expect{ content_package.video_url = "http://www.youtube.com/watch?v=qvmc9d0dlOg" }.not_to raise_error
     end
     it 'are invalid with bad URL ' do
+      skip('Fetch HTML for embed needs webmock response setting up')
       content_package.video_url = "http://www.youtube.com/watch?v=qvmc9d0dlO"
       expect(content_package.valid?).to be_falsey
     end
     it 'fetches HTML' do
+      skip('Fetch HTML for embed needs webmock response setting up')
       content_package.video_url = "http://www.youtube.com/watch?v=qvmc9d0dlO"
       content_package.valid?
       expect(content_package.video).to_not be_blank
@@ -161,57 +163,97 @@ describe ContentPackage do
     end
   end
 
-  it 'has a permalink if not viewless' do
-    content_package.build_permalink
-    content_package.permalink_path = nil
-    content_package.valid?
-    expect(content_package.permalink_path).not_to be_blank
+  describe 'Having the correct URL' do
+
+    it 'has a permalink if not viewless' do
+      content_package.build_permalink
+      content_package.permalink_path = nil
+      content_package.valid?
+      expect(content_package.permalink_path).not_to be_blank
+    end
+
+    it "doesn't have a permalink if viewless" do
+      content_package.content_type.viewless = true
+      content_package.build_permalink
+      content_package.permalink_path = nil
+      content_package.valid?
+      expect(content_package.permalink_path).to be_nil
+    end
+
+    it 'cant have a duplicate permalink' do
+      content_package.permalink_path = "test"
+      content_package.save
+      cp = FactoryGirl.build(:content_package, :permalink_path => "test")
+      cp.save
+      expect(cp.valid?).to be_falsey
+    end
+
+    it "updates the permalinks of all descendants when it is saved" do
+
+      # level 1
+      cp_v = FactoryGirl.create(:content_package, :parent => content_package, slug: 'cp_v', permalink_path: 'first')
+      # level 2
+      cp_v_n = FactoryGirl.create(:viewless_content_package, :parent => cp_v, slug: 'cp_v_n')
+      cp_v_v = FactoryGirl.create(:content_package, :parent => cp_v, slug: 'cp_v_v')
+      # level 3
+      cp_v_n_n = FactoryGirl.create(:viewless_content_package, :parent => cp_v_n, slug: 'cp_v_n_n')
+      cp_v_n_v = FactoryGirl.create(:content_package, :parent => cp_v_n, slug: 'cp_v_n_v')
+      cp_v_v_n = FactoryGirl.create(:viewless_content_package, :parent => cp_v_v, slug: 'cp_v_v_n')
+      cp_v_v_v = FactoryGirl.create(:content_package, :parent => cp_v_v, slug: 'cp_v_v_v')
+      cps = [content_package, cp_v, cp_v_n, cp_v_v, cp_v_n_n, cp_v_n_v, cp_v_v_n, cp_v_v_v]
+
+      original_paths = []
+      cps.each do |cp|
+        cp.reload
+        original_paths << cp.permalink_full_path
+      end
+
+      cp_v.permalink_path = 'second'
+      cp_v.save
+
+      cps.each_with_index do |cp, index|
+        cp.reload
+        if original_paths[index]
+          original_path = original_paths[index].gsub /first/, "second"
+          expect(cp.permalink_full_path).to match(/#{original_path}/)
+        else
+          expect(cp.permalink_full_path).to be_nil
+        end
+      end
+    end
+
   end
 
-  it "doesn't have a permalink if viewless" do
-    content_package.content_type.viewless = true
-    content_package.build_permalink
-    content_package.permalink_path = nil
-    content_package.valid?
-    expect(content_package.permalink_path).to be_nil
+  describe 'Deleting' do
+
+    it 'can be deleted' do
+      content_package.slug = nil
+      content_package.delete
+      expect(content_package.deleted?).to be_truthy
+    end
+
+    it 'has its children deleted too' do
+      content_package.slug = nil
+      content_package.save
+      content_package.children << FactoryGirl.create(:content_package, :parent => content_package, :slug => nil)
+      content_package.delete
+      content_package.reload
+      expect(content_package.children.all?(&:deleted?)).to be_truthy
+    end
+
+    it 'cannot be deleted if it has a slug' do
+      content_package.delete
+      expect(content_package.deleted?).to be_falsey
+    end
+
+    it 'cannot be deleted if it has a child with a slug' do
+      content_package.slug = nil
+      content_package.save
+      content_package.children << FactoryGirl.build(:content_package, :parent => content_package)
+      content_package.delete
+      expect(content_package.deleted?).to be_falsey
+    end
+
   end
-
-  it 'can be deleted' do
-    content_package.slug = nil
-    content_package.delete
-    expect(content_package.deleted?).to be_truthy
-  end
-
-  it 'has its children deleted too' do
-    content_package.slug = nil
-    content_package.save
-    content_package.children << FactoryGirl.create(:content_package, :parent => content_package, :slug => nil)
-    content_package.delete
-    content_package.reload
-    expect(content_package.children.all?(&:deleted?)).to be_truthy
-  end
-
-  it 'cannot be deleted if it has a slug' do
-    content_package.delete
-    expect(content_package.deleted?).to be_falsey
-  end
-
-  it 'cannot be deleted if it has a child with a slug' do
-    content_package.slug = nil
-    content_package.save
-    content_package.children << FactoryGirl.build(:content_package, :parent => content_package)
-    content_package.delete
-    expect(content_package.deleted?).to be_falsey
-  end
-
-
-  it 'cant have a duplicate permalink' do
-    content_package.permalink_path = "test"
-    content_package.save
-    cp = FactoryGirl.build(:content_package, :permalink_path => "test")
-    cp.save
-    expect(cp.valid?).to be_falsey
-  end
-
 
 end
