@@ -21,10 +21,12 @@ class ActionDispatch::Routing::Mapper
           get 'activity'
         end
         member do
+          # custom actions are not supported for these routes
+          # see content_package routes
           get 'children'
           put 'delete'
           get 'reorder'
-          put 'reorder' => 'content_packages#save_order'
+          put 'save_order'
           put 'restore'
           get 'search'
           get 'activity'
