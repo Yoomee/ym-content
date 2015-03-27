@@ -43,7 +43,7 @@
         %label Advanced
         =form.input :viewless
         =form.input :singleton
-    -if config.tags_feature
+    -if YmContent::config.tags_feature
       .form-group
         =form.input :tag_categories, as: :check_boxes
 

@@ -170,6 +170,8 @@ window.YmContent = {
         imageUpload: '/redactor_uploads?file_type=image',
         imageGetJson: '/redactor_uploads',
         formatting: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5'],
+        imageResizable: false,
+        imagePosition: false,
         focusCallback: function(e) {
           return $(e.currentTarget).parents(".form-group").addClass("focus");
         },
