@@ -21,6 +21,11 @@ window.redactorPluginUpdates = (function() {
 
     wrapDateBlocks();
     wrapVideo();
+
+    if (action !== 'change'){
+      RedactorPlugins.blockQuote().update();
+    }
+
   };
 
   function wrapBlocks(startEl, endEl, wrapperClass, action) {

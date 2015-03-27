@@ -39,13 +39,15 @@ RedactorPlugins.blockQuote = function() {
 
       this.selection.save();
       this.modal.show();
+
+      $('#redactor-blockquote-quote').focus();
     },
     insert: function () {
       var quote = $('#redactor-blockquote-quote').val();
       var citation = $('#redactor-blockquote-citation').val();
 
       if (quote === '') {
-        $('#redactor-blockquote-quote').parent('p').before('<p class="redactor-modal-error">Error - please give a quote</p>')
+        $('#redactor-blockquote-quote').parent('p').before('<p class="redactor-modal-error">Error - please give a quote</p>');
         return;
       }
 
@@ -57,8 +59,19 @@ RedactorPlugins.blockQuote = function() {
 
       this.selection.restore();
       this.modal.close();
-
       this.insert.htmlWithoutClean(html);
+    },
+    update: function() {
+      $('.blockquote-fancy').each(function () {
+        var $this = $(this);
+        var quoteContent = $this.text();
+        var citeText = $this.find('cite').text();
+        var quoteText = quoteContent.substring( 0, quoteContent.indexOf(citeText));
+        var citation = citeText.length ? '<cite>' + citeText + '</cite>' : '';
+
+        $(this).html('<p>' + quoteText + '</p>' + citation);
+      });
     }
-  }
-}
+  };
+
+};
