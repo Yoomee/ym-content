@@ -58,7 +58,7 @@ RedactorPlugins.dateBlock = function() {
         if($('.redactor-modal-error').length) {
           return;
         }
-        $('#redactor-dateblock-day').parent('p').before('<p class="redactor-modal-error">Error - please complete all the fields</p>')
+        $('#redactor-dateblock-day').parent('p').before('<p class="redactor-modal-error">Error - please complete all the fields</p>');
         return;
       }
 
@@ -68,6 +68,20 @@ RedactorPlugins.dateBlock = function() {
       this.selection.restore();
       this.modal.close();
       this.insert.htmlWithoutClean(html);
+    },
+    update: function () {
+      // Update html formatting so not lost on init / change
+      $('.dateblock-inner.dateblock-date').each(function () {
+        if ($(this).parent('.dateblock').length) {
+          return;
+        }
+
+        var div = $('<div class="dateblock" />').insertBefore($(this));
+        var next = $(this).next('.dateblock-text');
+
+        div.append($(this));
+        div.append(next);
+      });
     }
-  }
-}
+  };
+};
