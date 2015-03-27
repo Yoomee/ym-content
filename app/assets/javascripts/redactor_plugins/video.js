@@ -13,16 +13,14 @@ if (!RedactorPlugins) var RedactorPlugins = {};
     return {
       reUrlYoutube: /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com\S*[^\w\-\s])([\w\-]{11})(?=[^\w\-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig,
       reUrlVimeo: /https?:\/\/(www\.)?vimeo.com\/(\d+)($|\/)/,
-      getTemplate: function()
-      {
+      getTemplate: function() {
         return String()
         + '<section id="redactor-modal-video-insert">'
           + '<label>Paste a YouTube or Vimeo link here.<br>(e.g. https://www.youtube.com/watch?v=8uDuls5TyNE)</label>'
           + '<textarea id="redactor-insert-video-area" style="height: 160px;"></textarea>'
         + '</section>';
       },
-      init: function()
-      {
+      init: function() {
         var button = this.button.addAfter('image', 'video', this.lang.get('video'));
         this.button.addCallback(button, this.video.show);
       },
@@ -42,8 +40,7 @@ if (!RedactorPlugins) var RedactorPlugins = {};
         $('#redactor-insert-video-area').focus();
 
       },
-      insert: function()
-      {
+      insert: function() {
         var data = $('#redactor-insert-video-area').val();
 
         if (!data.match(/<iframe|<video/gi))
@@ -76,6 +73,13 @@ if (!RedactorPlugins) var RedactorPlugins = {};
         }
 
         this.code.sync();
+      },
+      update: function() {
+        // Update html formatting so not lost on init / change
+        $('p.responsive-video-wrapper').each(function () {
+          var content = $(this).html();
+          $(this).replaceWith('<div class="responsive-video-wrapper">' + content + '</div>');
+        });
       }
 
     };

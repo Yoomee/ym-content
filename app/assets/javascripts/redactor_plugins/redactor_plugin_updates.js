@@ -19,8 +19,8 @@ window.redactorPluginUpdates = (function() {
       }
     });
 
-    wrapDateBlocks();
-    wrapVideo();
+    RedactorPlugins.dateBlock().update();
+    RedactorPlugins.video().update();
 
     if (action !== 'change'){
       RedactorPlugins.blockQuote().update();
@@ -62,28 +62,6 @@ window.redactorPluginUpdates = (function() {
 
       $start.nextUntil($end).wrapAll('<div class="' + wrapperClass + className + '"></div>');
 
-    });
-  }
-
-  function wrapDateBlocks() {
-    $('.dateblock-inner.dateblock-date').each(function () {
-      if ($(this).parent('.dateblock').length) {
-        return;
-      }
-
-      var div = $('<div class="dateblock" />').insertBefore($(this));
-      var next = $(this).next('.dateblock-text');
-
-      div.append($(this));
-      div.append(next);
-    });
-
-  }
-
-  function wrapVideo() {
-    $('p.responsive-video-wrapper').each(function () {
-      var content = $(this).html();
-      $(this).replaceWith('<div class="responsive-video-wrapper">' + content + '</div>');
     });
   }
 
