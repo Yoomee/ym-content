@@ -49,6 +49,7 @@ class ActionDispatch::Routing::Mapper
 
       resources :personas
       resources :meta_data
+      resources :redactor_image_uploads, :only => [:index, :create]
 
       if YmContent::config.tags_feature
         resources :tags
