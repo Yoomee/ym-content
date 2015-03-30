@@ -249,3 +249,20 @@ select {
   background-color: $brand-primary-light;
   color: #444;
 }
+
+
+
+// Form containers
+
+.form-container{
+  border: 1px solid #E5E5E5;
+  background:#fff;
+  padding:30px;
+  border-radius:4px;
+  margin-bottom:10px;
+  .half-input{
+    width:48%;
+    margin-right:2%;
+    float: left;
+  }
+}
