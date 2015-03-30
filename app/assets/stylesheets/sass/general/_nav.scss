@@ -30,3 +30,22 @@
   width: 100%;
   z-index: 10000;
 }
+
+// Dropdown menu for CMS
+
+.cms-nav-tabs .dropdown-menu{
+  width: 100%;
+  right:5px;
+  left:auto;
+  min-width:260px;
+}
+
+.cms-nav-tabs .dropdown-menu li{
+  min-width:220px;
+  display: block;
+  right:10px;
+  width:100%;
+  a{
+   padding: 20px 0;
+  }
+}
