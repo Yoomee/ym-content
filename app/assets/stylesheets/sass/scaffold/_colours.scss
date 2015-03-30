@@ -2,14 +2,17 @@
 // Colour variables
 // --------------------------------------------------
 
-// Yoomee brand red = #E1566C
-// Yoomee brand yellow = #FBAA26
-// Yoomee brand teal = #19ACA0
-// Yoomee brand blue = #1CB1D9
+// Yoomee orange - #F9A939
+// Yoomee red - #EF5F6A
+// Yoomee purple - #982B8D
+// Yoomee blue - #1DB1D9
+// Yoomee teal - #1AABA1
+// Yoomee green - #95C750
+// Yoomee grey - #53616E
 
 //
 // Backgrounds
-//
+// --------------------------------------------------
 
 $body-bg: #F9F8FC;
 
@@ -21,26 +24,26 @@ $bg3: #444B50;
 
 //
 // Brand colours
-//
+// --------------------------------------------------
 
-$brand-primary: #8C7AC6;
+$brand-primary: #EF5F6A;
 $brand-primary-light: lighten($brand-primary, 30%);
 
 //
 // Colour for well borders / input borders / line breaks etc
-//
+// --------------------------------------------------
 
 $outline-col: #E2E2E2;
 
 //
 // Buttons
-//
+// --------------------------------------------------
 
-// -- Base .btn colour
+// Base .btn colour
 
 $btn-base: $bg2;
 
-//-- Modifier button colours
+// Modifier button colours
 
 $error-col: #E1566C;
 $success-col: #82C67A;
