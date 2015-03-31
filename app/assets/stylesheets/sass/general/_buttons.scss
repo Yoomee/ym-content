@@ -91,8 +91,25 @@
   padding: 15px 20px;
 }
 
+.btn-collapse:not(.collapsed){
+  position: relative;
+  &:after{
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid $btn-base;
+    left:46%;
+    bottom:-8px;
+    content: "";
+  }
+}
+
+
+
 // Links - used on content template add/edit page
 
 .links {
   margin-bottom: 20px;
 }
+
+

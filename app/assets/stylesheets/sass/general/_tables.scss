@@ -110,3 +110,16 @@
 .filter-control .sitemap-filter{
   margin-left:30px;
 }
+.allocated_content table{
+  width:100%;
+  tr{
+    border-bottom:1px solid #e5e5e5;
+  }
+  .table-page, .table-action{
+    width:50%;
+  }
+  .table-action{
+    float: right;
+    text-align:right;
+  }
+}
