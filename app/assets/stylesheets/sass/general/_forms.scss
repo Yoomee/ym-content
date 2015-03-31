@@ -250,6 +250,13 @@ select {
   color: #444;
 }
 
+// Autocomplete
+
+.ui-autocomplete li, 
+.ui-autocomplete li:hover,
+.ui-autocomplete li:focus{
+  padding:10px !important;
+}
 
 
 // Form containers
@@ -260,6 +267,8 @@ select {
   padding:30px;
   border-radius:4px;
   margin-bottom:10px;
+  float: left;
+  width:100%;
   .half-input{
     width:48%;
     margin-right:2%;

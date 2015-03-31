@@ -11,42 +11,39 @@
     .col-xs-12
       .cms-page-header
         %h1=title "New content"
+
   .row
     .col-md-8.col-md-offset-2
-      %ul.cms-nav-tabs.cms-tabs
-        %li.active=link_to("Content template", '#content-type', 'data-toggle' => 'tab')
-        %li=link_to("Add context", '#context', 'data-toggle' => 'tab')
-        %li=link_to("Assign author", '#author', 'data-toggle' => 'tab')
+      .form-container
+        =semantic_form_for @content_package do |form|
+          =form.inputs do
+            =form.input :parent_id, :as => :hidden
+            =form.input :name
+            =form.input :content_type, :as => :select, :collection => @content_package.valid_content_types, :label => "Search content templates", :required => false, :input_html => { :class => "autocomplete-select"}
 
-      =semantic_form_for @content_package do |form|
-        .tab-content
-          #content-type.tab-pane.active
-            .cms-form-well
-              =form.inputs do
-                =form.input :parent_id, :as => :hidden
-                =form.input :name
-                =form.input :content_type, :as => :select, :collection => @content_package.valid_content_types, :label => "Select a content template below", :required => false, :input_html => { :class => "autocomplete-select"}
-          #context.tab-pane
-            .cms-form-well
-              %h3 Write an objective/goal for this content
+            %h3{"aria-controls" => "collapseContext", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseContext"} Add context
+            #collapseContext.collapse
+              %p.lead Write an objective/goal for this content
               .cms-edit-context-box
                 =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}, :class => "content-objective-goal"
-              %h3 Select the intended audience for this content
+            
+            %h3{"aria-controls" => "collapseAudience", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseAudience"} Select the intended audience for this content
+            #collapseAudience.collapse
               =form.inputs do
                 -PersonaGroup.all.each do |group|
                   .persona-group-select
                     %h4.col-primary.cms-edit-group-title=group
                     =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false, :member_label => :to_s
-                .clearfix
-
-          #author.tab-pane
-            .cms-form-well
+            .clearfix
+            
+            %h3{"aria-controls" => "collapseAuthor", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseAuthor"} Assign author
+            #collapseAuthor.collapse
               =form.inputs do
                 =form.input :requested_by, :collection => User.where(:role => 'admin')
                 =form.input :author, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id] }
                 =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
                 =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
+
+            .clearfix
             =form.action :submit, :label => 'Finish', :wrapper_html => { :class => 'btn btn-success pull-right' }
 
-        =link_to("Next", '#', :class => 'btn btn-primary pull-right js-tab-next')
-        =link_to("Previous", '#', :class => 'btn pull-left js-tab-previous', :style => 'display: none')
