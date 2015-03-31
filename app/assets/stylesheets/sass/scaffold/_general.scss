@@ -71,3 +71,15 @@ hr {
     clear: both;
   }
 }
+
+// Javascript collabsables
+
+ .collapse {
+  display: none;
+  visibility: hidden;
+  &.in  { 
+    display: block; 
+    visibility: visible; 
+  }
+}
+

@@ -11,6 +11,7 @@
 #= require bootstrap/affix
 #= require bootstrap/modal
 #= require bootstrap-colorpicker
+#= require bootstrap/collapse
 
 #= require cocoon
 #= require widgets
