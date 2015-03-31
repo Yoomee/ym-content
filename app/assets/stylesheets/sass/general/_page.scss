@@ -8,6 +8,9 @@
 .cms-page-header {
   padding: 30px 0;
   text-align: center;
+  @include media-query (sm) {
+    padding: 40px 0;
+  }
 }
 .cms-header-actions {
   .btn {
