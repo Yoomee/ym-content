@@ -25,7 +25,7 @@
               =form.inputs do
                 =form.input :parent_id, :as => :hidden
                 =form.input :name
-                =form.input :content_type, :as => :select, :collection => @content_package.valid_content_types, :label => "Select a content template below", :required => false
+                =form.input :content_type, :as => :select, :collection => @content_package.valid_content_types, :label => "Select a content template below", :required => false, :input_html => { :class => "autocomplete-select"}
           #context.tab-pane
             .cms-form-well
               %h3 Write an objective/goal for this content
