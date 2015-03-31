@@ -52,6 +52,6 @@
       .cms-well
         =link_if_can("Create new content", new_content_package_path, :class => 'btn btn-primary btn-block')
         =link_if_can("Content list", content_packages_path, :class => 'btn btn-primary btn-block')
-        =link_if_can("Users & permissions", '#', :class => 'btn btn-default btn-block disabled')
+        =link_if_can("Users & permissions", '/users', :class => 'btn btn-primary btn-block')
         =link_if_can("Manage personas", personas_path, :class => 'btn btn-primary btn-block')
         =link_if_can("Request content template", '#', :class => 'btn btn-default btn-block disabled')

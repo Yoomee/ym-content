@@ -23,7 +23,7 @@
   margin: 0;
   color: #FFFFFF;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin: 5px 0;
   width: auto;
   height: auto;
   -webkit-appearance: none;
@@ -52,7 +52,7 @@
   border-color: #FFFFFF;
   color: #FFFFFF;
 }
-.btn-warning {
+.btn-error {
   background: $error-col;
   color: #FFFFFF;
 }
@@ -67,6 +67,9 @@
   -webkit-box-shadow: none;
   box-shadow: none;
   opacity: .65;
+}
+.btn-warning{
+  background: $warning-col;
 }
 
 // Button modifiers
