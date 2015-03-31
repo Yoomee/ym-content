@@ -1,6 +1,7 @@
 #= require jquery-migrate
 #= require autogrow
 #= require jquery-ui
+#= require jquery_ujs
 #= require jquery-ui/datepicker
 #= require jquery-ui-timepicker-addon
 #= require jquery-ui/autocomplete
