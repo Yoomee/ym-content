@@ -147,6 +147,7 @@
     border:0;
     padding: 0;
     display: table-cell;
+    border-bottom: 2px solid transparent;
     + li {
       border-left: 1px solid #E5E5E5;
     }
@@ -159,9 +160,9 @@
       text-align: center;
       font-weight: 600;
       position: relative;
-      border-top: 2px solid white;
+      border-top: 2px solid transparent;
       &:hover {
-        background: #FBFCFC;
+        background: #FFFFFF;
       }
       span {
         display: none;
@@ -171,7 +172,7 @@
         }
       }
     }
-    &.active a {
+    &.active {
       background: white;
       border-bottom: 2px solid $cms-client-brand-col;
     }

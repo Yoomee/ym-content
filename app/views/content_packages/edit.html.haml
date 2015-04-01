@@ -40,7 +40,7 @@
           .cms-well
             %label.col-primary Content objective/goal
             %p.mb-0=@content_package.notes
-          %ul.cms-nav-tabs.cms-tabs
+          %ul.cms-tabs
             %li.active
               =link_to('#content', 'data-toggle' => 'tab') do
                 %i.fa.fa-paragraph
@@ -129,7 +129,7 @@
 
       .col-md-4
         .cms-sidebar
-          .cms-edit-status
+          .cms-edit-status.cms-well
             %div{:class => ("hidden" unless current_user.role != "author")}
               %label{for: "content_package_author_id"} Assigned To
               =form.input :author_id, :as => :select, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id, {:'data-role' => u.role }] }, :include_blank => true, :label => false
@@ -141,7 +141,7 @@
                 .help-block{:class => @content_package.publish_at.present? ? '' : 'hidden'}
                   %p Page will be published but not shown to the public until this date.
           .clearfix
-          %ul.cms-nav-tabs.cms-tabs
+          %ul.cms-tabs
             %li.active=link_to("Context", '#context', 'data-toggle' => 'pill')
             %li=link_to("Activity", '#activity', 'data-toggle' => 'pill')
             %li=link_to("Personas", '#personas', 'data-toggle' => 'pill')

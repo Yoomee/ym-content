@@ -2,23 +2,6 @@
 // General sidebar styles
 // --------------------------------------------------
 
-.cms-edit-status {
-  padding: 30px 30px 0;
-  background: $brand-primary-light;
-  border: 1px solid $brand-primary-light;
-  border-bottom: 0;
-  border-radius: 4px 4px 0 0;
-}
-
-.cms-sidebar {
-  .cms-well, .cms-tabs {
-    border: 1px solid $outline-col;
-    border-top: 0;
-  }
-  .cms-tabs {
-    border-bottom: 1px solid $outline-col;
-  }
-}
 .cms-sidebar-actions {
   margin-bottom: 30px;
 }

@@ -13,12 +13,12 @@
                 =ContentPackage.where(:status => 'draft').count
               Drafts
           .col-md-4
-            =link_to filter_content_packages_path(:filter => 'pending'), :class => "btn btn-block btn-primary" do
+            =link_to filter_content_packages_path(:filter => 'pending'), :class => "btn btn-block btn-success" do
               %span.btn-number
                 =ContentPackage.where(:status => 'pending').count
               Ready to review
           .col-md-4
-            =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block btn-default" do
+            =link_to filter_content_packages_path(:filter => 'expiring'), :class=>"btn btn-block btn-error" do
               %span.btn-number
                 =ContentPackage.expiring.count
               Getting old
@@ -50,7 +50,7 @@
 
     .col-md-4
       .cms-well
-        =link_if_can("Create new content", new_content_package_path, :class => 'btn btn-primary btn-block')
+        =link_if_can("Create new content", new_content_package_path, :class => 'btn btn-success btn-block')
         =link_if_can("Content list", content_packages_path, :class => 'btn btn-primary btn-block')
         =link_if_can("Users & permissions", '/users', :class => 'btn btn-primary btn-block')
         =link_if_can("Manage personas", personas_path, :class => 'btn btn-primary btn-block')
