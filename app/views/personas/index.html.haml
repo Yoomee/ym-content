@@ -1,25 +1,26 @@
--content_for :head do
-  =javascript_include_tag("ym_content")
-.container.cms-main#cms-style-container
+.container.page-margin-bottom
   .row
-    .col-xs-8
-      %h1=title 'Personas'
-    .col-xs-4
-      =link_to('Add persona', new_persona_path, :icon => 'plus', :class => 'btn btn-success btn-small pull-right')
+    .col-xs-12
+      .cms-page-header
+        .row
+          .col-sm-6.col-sm-offset-3
+            %h1=title 'Personas'
+          .col-sm-3.cms-header-actions
+            =link_to('Add persona', new_persona_path, :icon => 'plus', :class => 'btn btn-success')
+
   -@persona_groups.each do |group|
     .row
       .col-md-8
-        %h4=group
+        %h3=group
     -group.personas.each_slice(4) do |personas|
       .row
         -personas.each do |persona|
-          .col-md-3
+          .col-md-3.col-sm-6
             .cms-well
               .row
                 .col-sm-12.text-center
                   =image_for(persona, '150x150#')
-                  %h4.mb-2
-                    =persona.name
-                    %br
-                    %small=persona.category
-                  =link_to('View / edit', edit_persona_path(persona), :class => 'btn btn-primary btn-small')
+                  %h4=persona.name
+                  %br
+                  %p.text-small=persona.category
+                  =link_to('View / edit', edit_persona_path(persona), :class => 'btn btn-primary btn-sm')

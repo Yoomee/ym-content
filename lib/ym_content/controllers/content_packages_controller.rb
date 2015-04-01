@@ -1,6 +1,7 @@
 module YmContent::ContentPackagesController
 
   def self.included(base)
+    base.layout 'ym_content/application', except: :show
     base.load_and_authorize_resource
 
     # Define an around filter for all controller actions that could potenatially be

@@ -1,4 +1,7 @@
--content_for :head do
-  =javascript_include_tag("ym_content")
-%h1 New meta data
-=render 'form'
+.container.page-margin-bottom
+  .row
+    .col-xs-12
+      .cms-page-header
+        %h1=title 'New meta data'
+  .row
+    =render 'form'

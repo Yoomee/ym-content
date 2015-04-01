@@ -1,6 +1,7 @@
 module YmContent::ContentTypesController
 
   def self.included(base)
+    base.layout 'ym_content/application'
     base.load_and_authorize_resource
     base.skip_load_resource :only => :create
   end
@@ -130,7 +131,7 @@ module YmContent::ContentTypesController
         :position,
         :resource_content_type_id,
         :sir_trevor_settings => ::ContentAttribute::DEFAULT_SIR_TREVOR_BLOCK_TYPES.map {|e| ["#{e}_required", "#{e}_limit"] }.flatten
-      ] 
+      ]
     )
   end
 end

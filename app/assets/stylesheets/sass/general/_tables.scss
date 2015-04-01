@@ -1,0 +1,125 @@
+//
+// Tables
+// --------------------------------------------------
+
+.cms-table {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  font-size: 14px;
+  margin-bottom: 30px;
+  thead {
+    background: $bg2;
+    color: #FFFFFF;
+  }
+  th {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px;
+    text-align: left;
+    @include media-query(sm) {
+      padding: 20px 10px;
+    }
+  }
+  td {
+    padding: 10px;
+  }
+}
+.td-status {
+  border-left: 10px solid transparent;
+}
+.td-status-published {
+  border-color: $success-col;
+}
+.td-status-pending {
+  border-color: #F7EF99;
+}
+.td-status-draft {
+  border-color: $brand-primary-light;
+}
+
+// Spacers for table tree view
+
+.sitemap-filter {
+  select {
+    display: inline;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid $outline-col;
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 10px;
+  }
+}
+.sitemap .spacer{
+  float: left;
+  width: 20px;
+  height: 36px;
+  background: green;
+  background: url('sitemap-spacer.png') 0 0 no-repeat;
+}
+.sitemap .spacer-mid{
+  background-position: 0 -36px;
+}
+.sitemap .spacer-last{
+  background-position: 0 -72px;
+}
+.sitemap .spacer-empty{
+  background: none;
+}
+.sitemap tbody tr:hover {
+  background: $outline-col;
+}
+.sitemap tbody tr:last-of-type:hover {
+  background: transparent;
+}
+.sitemap .table td{
+  border-top: none;
+}
+.sitemap td.td-name{
+  padding: 0;
+}
+.sitemap td.td-name .sitemap-caret{
+  width: 8px;
+}
+.sitemap td.td-name .fa-spinner{
+  margin-left: -4px;
+  width: 12px;
+}
+.sitemap .has-children td.td-name {
+  cursor: pointer;
+}
+.sitemap td.td-name .name {
+  padding: 8px 8px 8px 10px;
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 350px;
+  text-overflow: ellipsis;
+}
+
+// User actions
+
+.user-actions{
+  float:right;
+}
+.filter-control .sitemap-filter{
+  margin-left:30px;
+}
+.allocated_content table{
+  width:100%;
+  tr{
+    border-bottom:1px solid #e5e5e5;
+  }
+  .table-page, .table-action{
+    width:50%;
+  }
+  .table-action{
+    float: right;
+    text-align:right;
+  }
+}

@@ -10,27 +10,36 @@
 
    ======================================================================= */
 
-@import 'sass/buttons';
-@import 'sass/labels';
-@import 'sass/margins';
-@import 'sass/structure';
-@import 'sass/nav';
-@import 'sass/sidebar';
-@import 'sass/type';
-@import 'sass/forms';
-@import 'sass/inputs';
-@import 'sass/character-limits';
-@import 'sass/rich-content';
+@import 'sass/scaffold/reset';
+@import 'sass/scaffold/media-queries';
+@import 'sass/scaffold/grid';
+@import 'sass/scaffold/colours';
+@import 'sass/scaffold/general';
+@import 'sass/scaffold/helpers';
 
-@import 'sass/general';
-@import 'sass/edit';
+@import 'sass/general/type';
+@import 'sass/general/nav';
+@import 'sass/general/footer';
+@import 'sass/general/buttons';
+@import 'sass/general/page';
+@import 'sass/general/tables';
+@import 'sass/general/forms';
+@import 'sass/general/tabs';
+@import 'sass/general/tags';
+@import 'sass/general/dropdowns';
+@import 'sass/general/modals';
+@import 'sass/general/images';
 
-@import 'sass/sitemap';
-@import 'sass/helpers';
-@import 'sass/tables';
-@import 'sass/tabs';
-@import 'sass/tags';
-@import 'sass/feed';
-@import 'sass/redactor/*';
+@import 'sass/search/dropdown';
+
+@import 'sass/sortable/list';
+
+@import 'sass/redactor/general';
+
+@import 'sass/sidebar/general';
+@import 'sass/sidebar/feed';
+@import 'sass/sidebar/personas';
+@import 'sass/sidebar/datepicker';
+
 
 @import 'sass/collapse/*';
