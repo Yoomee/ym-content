@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 .cms-header {
-  background: #585F65;
+  background: $cms-client-brand-col;
   height: 60px;
   .btn {
     margin-top: 12px;
@@ -11,6 +11,7 @@
 }
 .cms-nav-brand {
   background: #3B4147;
+  background: rgba(0,0,0,0.1);
   margin-left: -15px;
   display: inline-block;
   float: left;
@@ -46,10 +47,11 @@
   display: inline-block;
   float: right;
   background: #3B4147;
+  background: rgba(0,0,0,0.1);
   margin-right: -15px;
   width: 60px;
   height: 60px;
-  color: #9A9FA2;
+  color: #FFF;
   font-size: 24px;
   text-align: center;
   a {
@@ -131,5 +133,47 @@
   width:100%;
   a{
    padding: 20px 0;
+  }
+}
+.cms-nav-tabs {
+  display: table;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: #FBFCFC;
+  border-bottom: 1px solid #E5E5E5;
+  table-layout: fixed;
+  li {
+    border:0;
+    padding: 0;
+    display: table-cell;
+    + li {
+      border-left: 1px solid #E5E5E5;
+    }
+    a {
+      text-transform: uppercase;
+      font-size: 14px;
+      text-decoration: none;
+      display: block;
+      padding: 16px 10px;
+      text-align: center;
+      font-weight: 600;
+      position: relative;
+      border-top: 2px solid white;
+      &:hover {
+        background: #FBFCFC;
+      }
+      span {
+        display: none;
+        margin-left: 5px;
+        @include media-query(sm) {
+          display: inline;
+        }
+      }
+    }
+    &.active a {
+      background: white;
+      border-bottom: 2px solid $cms-client-brand-col;
+    }
   }
 }
