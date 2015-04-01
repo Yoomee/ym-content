@@ -18,23 +18,26 @@
             =link_to(deleted_content_packages_path) do
               %i.fa.fa-trash-o
               %span Deleted content
-          -if can? :manage, MetaDatum
-            %li{:class => @meta_data ? 'active' : nil}
-              =link_to(meta_data_path) do
-                %i.fa.fa-code
-                %span Non CMS meta data
           -if defined?(YmDocuments)
             %li{:class => @documents? 'active' : nil}
               =link_to(ym_documents_engine.documents_path) do
                 %i.fa.fa-file-archive-o
                 %span Documents
+          -if can? :manage, MetaDatum
+            %li{:class => @meta_data ? 'active' : nil}
+              =link_to(meta_data_path) do
+                %i.fa.fa-code
+                %span Non CMS meta data
           -if (can? :manage, TagCategory) && (YmContent::config.tags_feature)
             %li{:class => @tag_categories  ? 'active' : nil}
               =link_to(tags_path) do
                 %i.fa.fa-tags
                 %span Tag Management
-
-
+          -if (can? :manage, User)
+            %li{:class => @users || @user ? 'active' : nil}
+              =link_to(users_path) do
+                %i.fa.fa-file-text-o
+                %span User Management
 
     =link_to('Return to site', '/', :class => 'cms-nav--return-link')
     .cms-nav-user
@@ -68,11 +71,7 @@
       =link_to(deleted_content_packages_path) do
         %i.fa.fa-trash-o
         %span Deleted content
-    -if can? :manage, MetaDatum
-      %li{:class => @meta_data ? 'active' : nil}
-        =link_to(meta_data_path) do
-          %i.fa.fa-code
-          %span Non CMS meta data
+
     -if defined?(YmDocuments)
       %li{:class => @documents? 'active' : nil}
         =link_to(ym_documents_engine.documents_path) do
@@ -83,3 +82,19 @@
         =link_to(tags_path) do
           %i.fa.fa-tags
           %span Tag Management
+
+    %li.dropdown
+      %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+        More
+        %i.fa.fa-caret-down
+      %ul.dropdown-menu{:role => "menu"}
+        -if can? :manage, MetaDatum
+          %li{:class => @meta_data ? 'active' : nil}
+            =link_to(meta_data_path) do
+              %i.fa.fa-code
+              %span Non CMS meta data
+        -if (can? :manage, User)
+          %li{:class => @users || @user ? 'active' : nil}
+            =link_to(users_path) do
+              %i.fa.fa-file-text-o
+              %span User Management
