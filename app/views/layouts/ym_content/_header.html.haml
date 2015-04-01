@@ -44,8 +44,8 @@
       .dropdown
         =link_to('', '#', 'data-toggle' => 'dropdown', :icon => 'user', :icon_last => true)
         %ul.cms-nav-user-dropdown
-          -if current_user.blogger?
-            %li=link_to('Blog posts', '/conversations/blogs?mine=true', :icon => 'pencil-square-o', :icon_first => true)
+          / -if current_user.blogger?
+          /   %li=link_to('Blog posts', '/conversations/blogs?mine=true', :icon => 'pencil-square-o', :icon_first => true)
           %li=link_to('Account settings', edit_user_path(current_user), :icon => 'cog', :icon_first => true)
           %li=link_to('Change password', change_password_path, :icon => 'unlock-alt', :icon_first => true)
           %li=link_to('Sign out', sign_out_path, :method => :delete, :icon => 'sign-out', :icon_first => true)

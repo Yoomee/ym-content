@@ -19,7 +19,7 @@
           =form.inputs do
             =form.input :parent_id, :as => :hidden
             =form.input :name
-            =form.input :content_type, :as => :select, :collection => @content_package.valid_content_types, :label => "Search content templates", :required => false, :input_html => { :class => "autocomplete-select"}
+            =form.input :content_type, :as => :select, :collection => @content_types, :label => "Search content templates", :required => false, :input_html => { :class => "autocomplete-select"}
 
             %h3{"aria-controls" => "collapseContext", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseContext"} Add context
             #collapseContext.collapse
