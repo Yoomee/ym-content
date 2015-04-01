@@ -73,14 +73,8 @@
                 =form.input :meta_keywords, hint: 'Meta keywords: comma separated'
                 =form.input :meta_image, as: :image
           -if YmContent::config.tags_feature
-            #tags.tab-pane.cms-form
-              .form-group.objective
-                .row
-                  .col-md-1
-                    %i.fa.fa-cog.fa-2x
-                  .col-md-10.ml-2
-                    %label.mt-0 Tags
-                    %p Assign tags to the page
+            #tags.tab-pane
+              .cms-form-well
                 .row
                   .col-xs-12
                     =form.inputs do
@@ -88,7 +82,7 @@
                         %button.collapse-trigger{"aria-expanded" => "false", "data-target" => "##{(category.name).parameterize}-collapse", "data-toggle" => "collapse", :type => "button"}
                           =category.name
                           -if category.taxonomy_list.present?
-                            %i.fa.fa-angle-down.pull-right
+                            %i.fa.fa-caret-down.pull-right
                         %div{:id => ("#{(category.name).parameterize}-collapse"), :class => 'collapse'}
                           %ul.list-half
                             -category.taxonomy_list.each do |tag|
