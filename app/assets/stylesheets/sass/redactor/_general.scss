@@ -10,7 +10,8 @@
   border: 1px solid $outline-col;
   border-radius: 0 0 4px 4px;
 }
-.redactor-toolbar li a {
+.redactor-toolbar li a,
+.redactor-toolbar li a.fa-redactor-btn {
   padding: 22px;
   color: #555;
   &:hover {
