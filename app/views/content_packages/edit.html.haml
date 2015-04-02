@@ -40,25 +40,25 @@
           .cms-well
             %label.col-primary Content objective/goal
             %p.mb-0=@content_package.notes
-          %ul.cms-tabs
-            %li.active
-              =link_to('#content', 'data-toggle' => 'tab') do
-                %i.fa.fa-paragraph
-                %span Content
+        %ul.cms-tabs
+          %li.active
+            =link_to('#content', 'data-toggle' => 'tab') do
+              %i.fa.fa-paragraph
+              %span Content
+          %li
+            =link_to('#meta', 'data-toggle' => 'tab') do
+              %i.fa.fa-tag
+              %span Meta
+          -if YmContent::config.tags_feature
             %li
-              =link_to('#meta', 'data-toggle' => 'tab') do
-                %i.fa.fa-tag
-                %span Meta
-            -if YmContent::config.tags_feature
-              %li
-                =link_to('#tags', 'data-toggle' => 'tab') do
-                  %i.fa.fa-tags
-                  %span Tags
-            -if current_user.admin?
-              %li
-                =link_to('#settings', 'data-toggle' => 'tab') do
-                  %i.fa.fa-cog
-                  %span Settings
+              =link_to('#tags', 'data-toggle' => 'tab') do
+                %i.fa.fa-tags
+                %span Tags
+          -if current_user.admin?
+            %li
+              =link_to('#settings', 'data-toggle' => 'tab') do
+                %i.fa.fa-cog
+                %span Settings
         #content.tab-pane.active
           .cms-form-well
             =form.inputs do
