@@ -143,6 +143,10 @@
   background: #FBFCFC;
   border-bottom: 1px solid #E5E5E5;
   table-layout: fixed;
+  + .cms-form-well {
+    border-radius: 0 0 4px 4px;
+    border-top: 0;
+  }
   li {
     border:0;
     padding: 0;
