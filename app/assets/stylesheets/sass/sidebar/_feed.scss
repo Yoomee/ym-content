@@ -1,0 +1,30 @@
+//
+// Activity feed
+// --------------------------------------------------
+
+.cms-activity-feed {
+  list-style: none;
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 20px;
+  @include media-query(sm) {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 30px;
+  }
+  li {
+    padding: 5px 0;
+    @include media-query(sm) {
+      padding: 10px 0;
+    }
+  }
+  li:nth-child(odd) {
+    background: #F9F8FC;
+  }
+  .cms-thumbnail {
+    float: left;
+    margin-right: 15px;
+    border-radius: 4px;
+  }
+}

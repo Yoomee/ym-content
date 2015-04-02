@@ -1,0 +1,40 @@
+//
+// Helpers
+// --------------------------------------------------
+
+// Text helpers
+
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+
+// Remove margin - Only use when you definitely do not want the element to have margin
+
+.m0 { margin: 0 !important; }
+.mt-0 { margin-top: 0 !important; }
+.mr-0 { margin-right: 0 !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.ml-0 { margin-left: 0 !important; }
+
+// Remove padding - Only use when you definitely do not want the element to have padding
+
+.p0 { padding: 0 !important; }
+.pt-0 { padding-top: 0 !important; }
+.pr-0 { padding-right: 0 !important; }
+.pb-0 { padding-bottom: 0 !important; }
+.pl-0 { padding-left: 0 !important; }
+
+// Utility classes
+
+.hidden {
+  display: none;
+}
+.hide {
+  display: none;
+}

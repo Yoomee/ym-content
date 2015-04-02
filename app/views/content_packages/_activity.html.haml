@@ -6,6 +6,6 @@
   -else
     =activity.text.try(:capitalize)
     by
-    %span.user-name=activity.user.full_name
-  %div.when="#{time_ago_in_words(activity.created_at)} ago"
+    %span=activity.user.full_name
+  .small-text="#{time_ago_in_words(activity.created_at)} ago"
   .clearfix

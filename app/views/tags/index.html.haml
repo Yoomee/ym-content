@@ -1,11 +1,11 @@
-.container.cms-main#cms-style-container
-  =render("content_packages/sitemap_header", :header_title => "Content templates")
+.container.page-margin-bottom
+  =render("content_packages/sitemap_header", :header_title => "Tag management")
   .row
     .col-xs-12
-      .tab-content.tab-content-sitemap.relative
-        #tags.tab-pane.active
-          %ul.cms-tag-list
-            -@tag_categories.each do |cat|
-              %li
-                =link_to(cat.name, edit_tag_category_path(cat))
-          .text-center=link_to('New Tag Category', new_tag_category_path, :class => 'btn btn-success', :icon => 'plus')
+      .cms-well
+        %ul.cms-tag-list
+          -@tag_categories.each do |cat|
+            %li
+              =link_to(cat.name, edit_tag_category_path(cat))
+        %hr
+        .text-center=link_to('New Tag Category', new_tag_category_path, :class => 'btn btn-success', :icon => 'plus')

@@ -1,0 +1,50 @@
+//
+// jQuery UI Datepicker
+// --------------------------------------------------
+
+// General styling
+
+.ui-datepicker {
+  background: #FFFFFF;
+  border: 1px solid $outline-col;
+  border-radius: 4px;
+  position: relative;
+}
+.ui-datepicker-prev,
+.ui-datepicker-next {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: block;
+  background: #E9E5F4;
+  font-size: 14px;
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    padding: 5px;
+  }
+}
+.ui-datepicker-next {
+  left: auto;
+  right: 5px;
+}
+.ui-datepicker-calendar {
+  text-align: center;
+  a {
+    outline: 0;
+    padding: 5px;
+    text-decoration: none;
+    &:hover {
+      background: $brand-primary-light;
+      padding: 5px;
+    }
+  }
+}
+
+.ui-datepicker-title {
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  color: $brand-primary;
+}

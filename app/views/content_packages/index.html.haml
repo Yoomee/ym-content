@@ -1,5 +1,3 @@
--content_for :head do
-  =javascript_include_tag("ym_content")
 :javascript
   $(document).ready(function() {
     YmContent.Sitemap.init();
@@ -7,7 +5,7 @@
     SearchManager.init();
     #{"$('#content-package-#{params[:open]}').effect('highlight', 3500);" if @open}
   });
-.container.cms-main#cms-style-container
+.container.page-margin-bottom
   =render("content_packages/sitemap_header", :header_title => "Content list")
   .row
     .col-xs-12
@@ -15,7 +13,7 @@
         #sitemap.sitemap.tab-pane.active
           #content_search.form
             =semantic_form_for 'content_search', :remote => true do |form|
-              =form.input :link, :label => false, :input_html => {:placeholder => "Quick find: start typing the title or web address"}, :wrapper_html => {:style => "display:block;"}
+              =form.input :link, :label => false, :input_html => {:placeholder => "Quick find: start typing the title or web address"}, :wrapper_html => {:style => "display:block;", :class => 'pt-0'}
           %table.cms-table
             %thead
               %tr

@@ -1,41 +1,11 @@
 .row
   .col-xs-12
-    %h1.mb-3.center=title(header_title)
-    .clearfix
-    .row
-      .col-sm-12.text-right.mb-1
-        -if @content_packages && !@deleted_content_packages
-          =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success btn-small')
-        -if @content_types
-          =link_if_can("Add new content template", [:new, ContentType.new], :icon => 'plus', :class => 'btn btn-success btn-small')
-      .col-sm-12
-        %ul.cms-tabs
-          %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
-            =link_to(content_packages_path) do
-              %i.fa.fa-list
-              %span Content list
-          -if can? :manage, ContentType
-            %li{:class => @content_types  ? 'active' : nil}
-              =link_to(content_types_path) do
-                %i.fa.fa-file-text-o
-                %span Content templates
-          %li{:class => @deleted_content_packages  ? 'active' : nil}
-            =link_to(deleted_content_packages_path) do
-              %i.fa.fa-trash-o
-              %span Deleted content
-          -if can? :manage, MetaDatum
-            %li{:class => @meta_data ? 'active' : nil}
-              =link_to(meta_data_path) do
-                %i.fa.fa-code
-                %span Non CMS meta data
-          -if defined?(YmDocuments)
-            %li{:class => @documents? 'active' : nil}
-              =link_to(ym_documents_engine.documents_path) do
-                %i.fa.fa-file-archive-o
-                %span Documents
-          -if (can? :manage, TagCategory) && (YmContent::config.tags_feature)
-            %li{:class => @tag_categories  ? 'active' : nil}
-              =link_to(tags_path) do
-                %i.fa.fa-tags
-                %span Tag Management
-          .clearfix
+    .cms-page-header
+      .row
+        .col-sm-6.col-sm-offset-3
+          %h1=title(header_title)
+        .col-sm-3.cms-header-actions
+          -if @content_packages && !@deleted_content_packages
+            =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success')
+          -if @content_types
+            =link_if_can("Add new template", [:new, ContentType.new], :icon => 'plus', :class => 'btn btn-success')

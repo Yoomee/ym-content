@@ -1,12 +1,16 @@
 //= require jquery-migrate
 //= require autogrow
 //= require jquery-ui
+//= require jquery_ujs
 //= require jquery-ui/datepicker
 //= require jquery-ui-timepicker-addon
 //= require jquery-ui/autocomplete
 //= require jquery-ui/sortable
 //= require bootstrap/tab
 //= require bootstrap-colorpicker
+//= require bootstrap/dropdown
+//= require bootstrap/collapse
+//= require bootstrap/modal
 
 //= require cocoon
 //= require widgets

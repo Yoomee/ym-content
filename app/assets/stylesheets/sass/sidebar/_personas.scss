@@ -1,0 +1,15 @@
+//
+// Personas
+// --------------------------------------------------
+
+.persona-summary {
+  display: none;
+}
+.cms-persona-box {
+  border-bottom: 1px solid $outline-col;
+  padding: 30px 0;
+  &:last-of-type {
+    border-bottom: 0;
+    padding: 30px 0 0;
+  }
+}
