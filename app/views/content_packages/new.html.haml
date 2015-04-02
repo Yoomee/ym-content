@@ -19,7 +19,7 @@
           =form.inputs do
             =form.input :parent_id, :as => :hidden
             =form.input :name, :placeholder => "Select a name for your content"
-            =form.input :content_type, :as => :select, :collection => @content_types, :label => "Select a template", :required => false, :input_html => { :class => "autocomplete-select", :placeholder => "Search HERE"}
+            =form.input :content_type, :as => :select, :collection => @content_types, :label => "Select a template", :required => false, :input_html => { :class => "autocomplete-select", :placeholder => "Start typing to search"}
 
             %button.collapse-trigger{"aria-expanded" => "false", "data-target" => "#collapseContext", "data-toggle" => "collapse", :type => "button"}
               Add Context
