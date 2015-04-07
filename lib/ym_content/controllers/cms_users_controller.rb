@@ -1,22 +1,35 @@
 module YmContent::CmsUsersController
 
   def self.included(base)
-    base.authorize_resource :user
+    base.layout 'ym_content/application'
+    base.authorize_resource :cms_user
+    if Rails::VERSION::MAJOR >= 4
+      base.before_action :check_cms_user, except: [:index, :new, :create_user]
+    else
+      base.before_filter :check_cms_user, except: [:index, :new, :create_user]
+    end
+  end
+
+  def check_cms_user
+    @user = CmsUser.find(params[:id])
+    unless CmsUser.available_roles.include? @user.role
+      raise ActiveRecord::RecordNotFound
+    end 
   end
 
   def set_active
-    @user.active = !@user.active
+    @user.update(active: !@user.active)
     @show_inactive = session[:show_inactive] || false
   end
 
-  def manage
+  def index
     @show_inactive = (params[:show_inactive] && params[:show_inactive] == "true") || false
     if @show_inactive
-      @users = User.cms_users.all
+      @users = CmsUser.all_users
     else
-      @users = User.cms_users.where(active: true)
+      @users = CmsUser.all_users.where(active: true)
     end
-    @users = @users.order_by_last_name
+    @users = @users.order(:last_name)
     session[:show_inactive] = @show_inactive
   end
 
@@ -26,7 +39,40 @@ module YmContent::CmsUsersController
     flash_notice(@user)
   end
 
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @user.update_attributes(create_user_params)
+      return_or_redirect_to(@user)
+    else
+      render :action => "edit"
+    end
+  end
+
+  def create_user
+    # Admins need to be able to sign people up, can't use create route because it signs you in
+    @user = CmsUser.new(create_user_params)
+    if @user.save
+      redirect_to(cms_user_path(@user))
+    else
+      render :action => "new"
+    end
+  end
+
+  def new
+    @user = CmsUser.new
+  end
+
   private
+
+  def create_user_params
+    params.require(:cms_user).permit(permitted_user_parameters.push(:role, :password))
+  end
+
   def permitted_user_parameters
     permitted_params = %w(bio email first_name image last_name remove_image retained_image)
     permitted_params << 'role' if current_user.admin?

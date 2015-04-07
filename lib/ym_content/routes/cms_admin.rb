@@ -15,6 +15,14 @@ class ActionDispatch::Routing::Mapper
       get '/content' => 'content_types#dashboard'
       post '/attachments' => 'attachments#create'
 
+      # ym_users_routes
+      scope 'cms' do
+        resources :cms_users, controller: 'cms_users'
+      end
+
+      post '/cms_users/(:id)/set_active' => 'cms_users#set_active', :as => 'set_active_user'
+      post '/cms_users/create' => 'cms_users#create_user', :as => 'create_cms_user'
+
       resources :content_packages do
         collection do
           get 'filter/:filter' => 'content_packages#index', :as => 'filter'

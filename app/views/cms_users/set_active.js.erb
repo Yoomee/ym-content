@@ -1,0 +1,12 @@
+var user_id = "<%= @user.id %>";
+var active = <%= @user.active %>;
+var show_inactive = <%= @show_inactive %>;
+if (active || show_inactive)
+{
+  var row = $('.user-row[data_user-id="'+user_id+'"]');
+  row.find('.user-actions').find('.set-active-btn').text(active ? 'Deactivate' : 'Reactivate');
+}
+else
+{
+  $('.user-row[data_user-id="'+user_id+'"]').remove();
+}
