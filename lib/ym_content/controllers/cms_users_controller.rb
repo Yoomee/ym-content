@@ -34,6 +34,8 @@ module YmContent::CmsUsersController
   end
 
   def destroy
+    # Cast back to user so we don't break all the callbacks
+    @user = User.find(@user.id)
     @user_id = @user.id
     @user.destroy
     flash_notice(@user)
