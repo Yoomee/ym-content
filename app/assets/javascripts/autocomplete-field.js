@@ -12,14 +12,15 @@
 
       _createAutocomplete: function() {
         var selected = this.element.children( ":selected" ),
-          value = selected.val() ? selected.text() : "";
+          value = selected.val() ? selected.text() : "",
+          placeholder = $('.autocomplete-select').attr('placeholder') ||  '';
 
         this.input = $( "<input>" )
-          input = $('<input placeholder="' + $('.autocomplete-select').attr('placeholder') + '">')
           .appendTo( this.wrapper )
           .val( value )
           .attr( "title", "" )
           .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+          .attr('placeholder', placeholder)
           .autocomplete({
             delay: 0,
             minLength: 0,
