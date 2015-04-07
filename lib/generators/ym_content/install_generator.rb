@@ -21,6 +21,7 @@ module YmContent
         copy_file "models/meta_datum.rb",   "app/models/meta_datum.rb"
         copy_file "models/tag_category.rb",   "app/models/tag_category.rb"
         copy_file "models/resource_tag_category.rb",   "app/models/resource_tag_category.rb"
+        copy_file "models/cms_user.rb",   "app/models/cms_user.rb"
 
         # views
         copy_file "views/users/_form.html.haml", "app/views/users/_form.html.haml"
@@ -32,6 +33,7 @@ module YmContent
         copy_file "controllers/navigation_items_controller.rb",   "app/controllers/navigation_items_controller.rb"
         copy_file "controllers/meta_data_controller.rb",   "app/controllers/meta_data_controller.rb"
         copy_file "controllers/tags_controller.rb",   "app/controllers/tags_controller.rb"
+        copy_file "controllers/cms_users_controller.rb",   "app/controllers/cms_users_controller.rb"
         copy_file "controllers/tag_categories_controller.rb",   "app/controllers/tag_categories_controller.rb"
 
         # migrations
@@ -48,6 +50,7 @@ module YmContent
         try_migration_template "migrations/create_sir_trevor_images.rb",   "db/migrate/create_sir_trevor_image.rb"
         try_migration_template "migrations/create_tag_categories.rb",   "db/migrate/create_tag_categories.rb"
         try_migration_template "migrations/create_resource_tag_categories.rb",   "db/migrate/create_resource_tag_categories.rb"
+        try_migration_template "migrations/create_users.rb",   "db/migrate/create_users.rb"
 
         # initializers
         copy_file 'initializers/ym_content.rb',

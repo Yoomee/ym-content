@@ -54,12 +54,13 @@
         -@users.each do |user|
           %tr.user-row{'data_user-id' => user.id, :class => "role-#{user.role} " + (user.active ? 'active' : 'inactive')}
             %td.user-name
-              =link_to(user.full_name, cms_user_path(user))
+              =user_path(user)
+              / =link_to(user.full_name, cms_user_path(user))
             %td.user-role
               =user.role
 
             %td.user-actions
-              =link_to('Edit', edit_cms_user_path(user), class: 'btn btn-xs btn-success edit-user-btn')
-              =link_to( user.active ? 'Deactivate' : 'Reactivate', set_active_user_path(user), remote: true, method: :post, class: 'btn btn-xs btn-warning set-active-btn')
-              =link_to('Delete', cms_user_path(user), method: :delete, confirm: 'Are you sure?', remote: true,class: 'btn btn-xs btn-error delete-user-btn')
+              / =link_to('Edit', edit_cms_user_path(user), class: 'btn btn-xs btn-success edit-user-btn')
+              / =link_to( user.active ? 'Deactivate' : 'Reactivate', set_active_user_path(user), remote: true, method: :post, class: 'btn btn-xs btn-warning set-active-btn')
+              / =link_to('Delete', cms_user_path(user), method: :delete, confirm: 'Are you sure?', remote: true,class: 'btn btn-xs btn-error delete-user-btn')
     =will_paginate @users
