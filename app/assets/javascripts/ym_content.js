@@ -1,3 +1,4 @@
+//= require jquery
 //= require jquery-migrate
 //= require autogrow
 //= require jquery-ui

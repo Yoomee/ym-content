@@ -38,6 +38,10 @@
               =link_to(cms_users_path) do
                 %i.fa.fa-file-text-o
                 %span User Management
+          %li
+            =link_to('/personas') do
+              %i.fa.fa-group
+              %span Personas
 
     =link_to("Return to website", '/', :class => 'cms-nav--return-link')
     .cms-nav-user
@@ -54,7 +58,10 @@
         .cms-nav-controls
           -if @content_package && (action_name.show? || @show_cms_nav_edit_link)
             =link_to('Edit this page', edit_content_package_path(@content_package), :class => 'btn btn-success btn-sm') if can?(:update, @content_package)
-          .cms-nav-status Status: draft
+            .cms-nav-status
+              Status:
+              =@content_package.status
+
 
 .affix-spacer{"data-offset-bottom" => "0", "data-offset-top" => "60", "data-spy" => "affix"}
   %ul.cms-nav-tabs
@@ -99,3 +106,7 @@
             =link_to(cms_users_path) do
               %i.fa.fa-file-text-o
               %span User Management
+        %li
+          =link_to('/personas') do
+            %i.fa.fa-group
+            %span Personas

@@ -18,25 +18,33 @@
         =semantic_form_for @content_package do |form|
           =form.inputs do
             =form.input :parent_id, :as => :hidden
-            =form.input :name
-            =form.input :content_type, :as => :select, :collection => @content_types, :label => "Search content templates", :required => false, :input_html => { :class => "autocomplete-select"}
+            =form.input :name, :placeholder => "Select a name for your content"
+            =form.input :content_type, :as => :select, :collection => @content_types, :label => "Select a template", :required => false, :input_html => { :class => "autocomplete-select", :placeholder => "Start typing to search"}
 
-            %h3{"aria-controls" => "collapseContext", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseContext"} Add context
+            %button.collapse-trigger{"aria-expanded" => "false", "data-target" => "#collapseContext", "data-toggle" => "collapse", :type => "button"}
+              Add Context
+              %i.fa.fa-caret-down.pull-right
+
             #collapseContext.collapse
               %p.lead Write an objective/goal for this content
               .cms-edit-context-box
                 =form.input :notes, :label => 'Content objective/goal', :input_html => {:rows => 4}, :class => "content-objective-goal"
-            
-            %h3{"aria-controls" => "collapseAudience", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseAudience"} Select the intended audience for this content
+
+            %button.collapse-trigger{"aria-expanded" => "false", "data-target" => "#collapseAudience", "data-toggle" => "collapse", :type => "button"}
+              Select the intended audience for this content
+              %i.fa.fa-caret-down.pull-right
+
             #collapseAudience.collapse
               =form.inputs do
                 -PersonaGroup.all.each do |group|
                   .persona-group-select
                     %h4.col-primary.cms-edit-group-title=group
                     =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false, :member_label => :to_s
-            .clearfix
-            
-            %h3{"aria-controls" => "collapseAuthor", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseAuthor"} Assign author
+
+            %button.collapse-trigger{"aria-expanded" => "false", "data-target" => "#collapseAuthor", "data-toggle" => "collapse", :type => "button"}
+              Assign author
+              %i.fa.fa-caret-down.pull-right
+
             #collapseAuthor.collapse
               =form.inputs do
                 =form.input :requested_by, :collection => User.where(:role => 'admin')
@@ -44,6 +52,4 @@
                 =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
                 =form.input :review_frequency, :as => :radio, :collection => ContentPackage.review_frequencies.invert
 
-            .clearfix
             =form.action :submit, :label => 'Finish', :wrapper_html => { :class => 'btn btn-success pull-right' }
-

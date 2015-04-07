@@ -9,13 +9,19 @@
   border-radius: 0;
   border: 0;
   border-bottom: 1px solid #E5E5E5;
-  background: transparent;
+  background: $body-bg;
   text-align: left;
   font-size: 18px;
   &:focus {
     border: 0;
     border-bottom: 1px solid #E5E5E5;
     outline: none;
+  }
+  + .collapse {
+    margin-top: 15px;
+  }
+  &:last-of-type {
+    margin-bottom: 40px;
   }
 }
 .list-half {
