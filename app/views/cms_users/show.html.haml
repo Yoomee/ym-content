@@ -35,15 +35,12 @@
           #allocated_content.allocated_content.collapse
             %table
               %tbody
-                %tr
-                  %td.table-page
-                    What girls in Girlguiding do
-                  %td.table-action
-                    =link_to('View', '#', :class => 'btn btn-xs btn-default')
-                    =link_to('Edit', '#', :class => 'btn btn-xs btn-success')
-                %tr
-                  %td.table-page
-                    Girls matter
-                  %td.table-action
-                    =link_to('View', '#', :class => 'btn btn-xs btn-default')
-                    =link_to('Edit', '#', :class => 'btn btn-xs btn-success')
+                -@assigned_content.each do |content_package|
+                  %tr
+                    %td.table-page
+                      =content_package.name
+                    %td.table-action
+                      =link_to('View', content_package, :class => 'btn btn-xs btn-default') unless content_package.viewless? || content_package.missing_view?
+                      -if can? :edit, content_package
+                        =link_to('Edit', edit_content_package_path(content_package), :class => 'btn btn-xs btn-success')
+

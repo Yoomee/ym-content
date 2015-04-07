@@ -38,10 +38,10 @@ module YmContent::CmsUsersController
     @user = User.find(@user.id)
     @user_id = @user.id
     @user.destroy
-    flash_notice(@user)
   end
 
   def show
+    @assigned_content = ContentPackage.where(author_id: @user.id)
   end
 
   def edit
