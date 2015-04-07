@@ -32,6 +32,7 @@ $bg3: #444B50;
 
 $brand-primary: #5187C4;
 $brand-primary-light: lighten($brand-primary, 30%);
+$brand-primary-dark: darken($brand-primary, 30%);
 
 //
 // Colour for well borders / input borders / line breaks etc
