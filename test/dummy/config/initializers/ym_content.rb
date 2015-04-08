@@ -12,4 +12,5 @@ YmContent.config do |config|
             #      +-->Grandchild page (/parent/another-child/grandchild                                
     config.nested_permalinks = true
     config.tags_feature = false
+    config.cms_roles = ['admin', 'author']
 end
