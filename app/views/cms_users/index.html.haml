@@ -23,7 +23,7 @@
             .sitemap-filter.pull-right
               %strong Filter
               &nbsp;
-              =select_tag(:role, options_for_select([['All', nil]] + User.available_roles, params[:filter]), :class => 'noselectpicker')
+              =select_tag(:role, options_for_select([['All', nil]] + CmsUser.available_roles, params[:filter]), :class => 'noselectpicker')
             %label.pull-right.m0
               =check_box_tag :show_inactive, '', @show_inactive
               Show inactive users
