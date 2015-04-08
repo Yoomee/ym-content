@@ -28,9 +28,12 @@
 
 // Callouts
 .redactor-editor p.call-out-box {
+  width: 100%;
   border: 1px solid #555;
   color: #555;
   margin-bottom: 1em;
+  padding: 25px 25px 25px 84px;
+  position: relative;
 
   .fa {
     position: absolute;
@@ -38,7 +41,7 @@
     font-size: 24px;
     top: 0;
     height: 100%;
-    padding: 14px 0 0 0;
+    padding: 23px 0 0 0;
     border-right: 1px solid #555;
     width: 60px;
     text-align: center;
@@ -222,6 +225,18 @@
 }
 
 // Video
-.redactor-editor .responsive-video-wrapper iframe {
-  max-width: 100%;
+.redactor-editor .responsive-video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+  margin: 20px 0;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
