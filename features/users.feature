@@ -21,3 +21,11 @@ Scenario: Editing a user
   Given there are 4 users
   When I visit the cms user index 
   Then I see the cms users
+
+@javascript
+Scenario: Make a user inactive
+  Given there are 1 users
+  When I visit the cms user index 
+  And I set the user as inactive
+  Then the user is inactive
+

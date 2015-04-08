@@ -63,4 +63,16 @@ Then(/^I see the cms users$/) do
   user_rows.count.should > 1
 end
 
+When(/^I set the user as inactive$/) do
+  btn = page.find(".user-row[data_user-id='#{@user.id}']").find('.user-actions').find('.set-active-btn')
+  expect(btn).not_to be_nil
+  btn.click
+  puts @user.inspect
+end
+
+Then(/^the user is inactive$/) do
+  @user = User.find(@user.id)
+  expect(@user.active).to be_falsey
+end
+
 
