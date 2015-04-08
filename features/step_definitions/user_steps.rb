@@ -67,6 +67,7 @@ When(/^I set the user as inactive$/) do
   btn = page.find(".user-row[data_user-id='#{@user.id}']").find('.user-actions').find('.set-active-btn')
   expect(btn).not_to be_nil
   btn.click
+  sleep(2)
 end
 
 Then(/^the user is inactive$/) do
