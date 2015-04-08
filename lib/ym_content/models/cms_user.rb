@@ -5,10 +5,15 @@ module YmContent::CmsUser
     end
     base.table_name = 'users'
     base.scope :all_users, -> { base.where(role: YmContent::config.cms_roles) }
+    base.extend(ClassMethods)
   end
 
-  def self.available_roles
-    YmContent::config.cms_roles
+  module ClassMethods
+
+    def available_roles
+      YmContent::config.cms_roles
+    end
+
   end
 
   def active_for_authentication?
