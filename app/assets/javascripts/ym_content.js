@@ -150,6 +150,7 @@ window.YmContent = {
         buttons: ['unorderedlist', 'orderedlist', 'link', 'html'],
         convertDivs: true,
         path: 'vendor/assets/javascripts/redactor',
+        plugins: $('.redactor textarea').data('redactor-plugins'),
         focusCallback: function(e) {
           return $(e.currentTarget).parents(".form-group").addClass("focus");
         },
@@ -174,7 +175,7 @@ window.YmContent = {
         path: 'vendor/assets/javascripts/redactor',
         imageUpload: '/redactor_image_uploads?file_type=image',
         imageGetJson: '/redactor_image_uploads',
-        formatting: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5'],
+        formatting: ['p', 'h1', 'h2', 'h3', 'h4', 'h5'],
         imageResizable: false,
         imagePosition: false,
         focusCallback: function(e) {
