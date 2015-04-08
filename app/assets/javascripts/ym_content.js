@@ -23,6 +23,7 @@
 //= require underscore
 //= require sir-trevor
 //= require redactor
+//= require user_filter
 //= require_tree ./sir_trevor_custom_blocks
 //= require autocomplete-field
 //= require select2

@@ -1,29 +1,6 @@
 :javascript
   $(document).ready(function() {
-    $('select#role').change(function () {
-        var role;
-
-        role = $('select#role').val();
-        if (role.length > 0) {
-          $('h1').text("Users - " + ($('select#role option:selected').text()));
-          $("tr.user-row").hide();
-          $("tr.role-" + role).show();
-        } else {
-          $('h1').text('Users');
-          $("tr.user-row").show();
-        }
-      });
-    $('#show_inactive').change(function () {
-      var checked = this.checked;
-      if (window.location.search == "")
-      {
-        window.location.href = window.location.href + "?show_inactive=true";
-      }
-      else
-      {
-        window.location.href = window.location.href.replace(/true|false/gi, checked);
-      }
-    });
+    window.userFilter().init();
   });
 .container
   .row
