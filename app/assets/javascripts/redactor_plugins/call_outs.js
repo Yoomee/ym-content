@@ -9,13 +9,13 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 RedactorPlugins.callOuts = function()
 {
   return {
-    init: function()
-    {
+    init: function() {
+
       var items = [
-        ['Information Callout', '<p class="redactor-wrap-marker">[CALLOUT-START]</p><p class="call-out-box call-out-box-information"><span class="fa fa-info-circle"></span> Your text here</p><p class="redactor-wrap-marker">[CALLOUT-END]</p>'],
-        ['Contact Callout', '<p class="redactor-wrap-marker">[CALLOUT-START]</p><p class="call-out-box call-out-box-contact"><span class="fa fa-comment"></span> Your text here</p><p class="redactor-wrap-marker">[CALLOUT-END]</p>'],
-        ['Date Callout', '<p class="redactor-wrap-marker">[CALLOUT-START]</p><p class="call-out-box call-out-box-date"><span class="fa fa-calendar"></span> Your text here</p><p class="redactor-wrap-marker">[CALLOUT-END]</p>'],
-        ['Time Callout', '<p class="redactor-wrap-marker">[CALLOUT-START]</p><p class="call-out-box call-out-box-time"><span class="fa fa-clock-o"></span> Your text here</p><p class="redactor-wrap-marker">[CALLOUT-END]</p>']
+        ['Information Callout', 'call-out-box-information', 'fa-info-circle'],
+        ['Contact Callout', 'call-out-box-contact', 'fa-comment'],
+        ['Date Callout', 'call-out-box-date', 'fa-calendar'],
+        ['Time Callout', 'call-out-box-time', 'fa-clock-o']
       ];
 
       this.callOuts.template = $('<ul id="redactor-modal-list">');
@@ -23,11 +23,9 @@ RedactorPlugins.callOuts = function()
       for (var i = 0; i < items.length; i++)
       {
         var li = $('<li>');
-        var a = $('<a href="#" class="redactor-callouts-link">').text(items[i][0]);
-        var div = $('<div class="redactor-callouts">').hide().html(items[i][1]);
+        var a = $('<a href="#" class="redactor-callouts-link" data-type="' + items[i][1] + '" data-icon-name="' + items[i][2] + '">').text(items[i][0]);
 
         li.append(a);
-        li.append(div);
         this.callOuts.template.append(li);
       }
 
@@ -36,10 +34,8 @@ RedactorPlugins.callOuts = function()
       var button = this.button.add('callOuts', 'Call outs');
       this.button.setAwesome('callOuts', 'fa-bullhorn');
       this.button.addCallback(button, this.callOuts.show);
-
     },
-    show: function()
-    {
+    show: function() {
       this.modal.load('callOuts', 'Insert Callouts', 400);
 
       this.modal.createCancelButton();
@@ -49,17 +45,24 @@ RedactorPlugins.callOuts = function()
       this.selection.save();
       this.modal.show();
     },
-    load: function(i,s)
-    {
-      $(s).on('click', $.proxy(function(e)
-      {
+    load: function(i,s) {
+      $(s).on('click', $.proxy(function(e) {
         e.preventDefault();
-        this.callOuts.insert($(s).next().html());
+
+        var text = this.selection.getText();
+        var msg = text.length ? text : 'Your text here';
+        var icon = $(s).data('icon-name');
+        var className = $(s).data('type');
+
+        var html = '<p class="redactor-wrap-marker">[CALLOUT-START]</p>' +
+        '<p class="call-out-box ' + className + '"><span class="fa ' + icon +'"></span> ' + msg + '</p>' +
+        '<p class="redactor-wrap-marker">[CALLOUT-END]</p>';
+
+        this.callOuts.insert(html);
 
       }, this));
     },
-    insert: function(html)
-    {
+    insert: function(html) {
       this.selection.restore();
       this.insert.htmlWithoutClean(html, false);
       this.modal.close();
