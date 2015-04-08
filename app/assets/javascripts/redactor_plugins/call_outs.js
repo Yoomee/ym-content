@@ -12,10 +12,10 @@ RedactorPlugins.callOuts = function()
     init: function()
     {
       var items = [
-        ['Information Callout', '<p class="call-out-box call-out-box-information"><span class="fa fa-info-circle"></span> Your text here</p>'],
-        ['Contact Callout', '<p class="call-out-box call-out-box-contact"><span class="fa fa-comment"></span> Your text here</p>'],
-        ['Date Callout', '<p class="call-out-box call-out-box-date"><span class="fa fa-calendar"></span> Your text here</p>'],
-        ['Time Callout', '<p class="call-out-box call-out-box-time"><span class="fa fa-clock-o"></span> Your text here</p>']
+        ['Information Callout', '<p class="redactor-wrap-marker">[CALLOUT-START]</p><p class="call-out-box call-out-box-information"><span class="fa fa-info-circle"></span> Your text here</p><p class="redactor-wrap-marker">[CALLOUT-END]</p>'],
+        ['Contact Callout', '<p class="redactor-wrap-marker">[CALLOUT-START]</p><p class="call-out-box call-out-box-contact"><span class="fa fa-comment"></span> Your text here</p><p class="redactor-wrap-marker">[CALLOUT-END]</p>'],
+        ['Date Callout', '<p class="redactor-wrap-marker">[CALLOUT-START]</p><p class="call-out-box call-out-box-date"><span class="fa fa-calendar"></span> Your text here</p><p class="redactor-wrap-marker">[CALLOUT-END]</p>'],
+        ['Time Callout', '<p class="redactor-wrap-marker">[CALLOUT-START]</p><p class="call-out-box call-out-box-time"><span class="fa fa-clock-o"></span> Your text here</p><p class="redactor-wrap-marker">[CALLOUT-END]</p>']
       ];
 
       this.callOuts.template = $('<ul id="redactor-modal-list">');
@@ -61,7 +61,7 @@ RedactorPlugins.callOuts = function()
     insert: function(html)
     {
       this.selection.restore();
-      this.insert.html(html, false);
+      this.insert.htmlWithoutClean(html, false);
       this.modal.close();
       this.observe.load();
     }
