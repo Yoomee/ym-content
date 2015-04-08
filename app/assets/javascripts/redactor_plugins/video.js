@@ -47,9 +47,8 @@ if (!RedactorPlugins) var RedactorPlugins = {};
         {
           data = this.clean.stripTags(data);
 
-          // parse if it is link on youtube & vimeo
-          var iframeStart = '<div class="responsive-video-wrapper"><iframe src="',
-            iframeEnd = '" frameborder="0" allowfullscreen></iframe></div>';
+          var iframeStart = '<p class="responsive-video-wrapper"><iframe src="',
+            iframeEnd = '" frameborder="0" allowfullscreen></iframe></p>';
 
           if (data.match(this.video.reUrlYoutube))
           {
@@ -75,10 +74,11 @@ if (!RedactorPlugins) var RedactorPlugins = {};
         this.code.sync();
       },
       update: function() {
-        // Update html formatting so not lost on init / change
+        // do not have responsive wrapper on paras without iframe
         $('p.responsive-video-wrapper').each(function () {
-          var content = $(this).html();
-          $(this).replaceWith('<div class="responsive-video-wrapper">' + content + '</div>');
+          if (!$(this).find('iframe').length) {
+            $(this).removeClass('responsive-video-wrapper');
+          }
         });
       }
 
