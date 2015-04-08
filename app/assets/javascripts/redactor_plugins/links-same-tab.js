@@ -12,7 +12,6 @@ if (!RedactorPlugins) var RedactorPlugins = {};
       },
       load: function() {
         $('#redactor-link-blank').parent('label').remove();
-        console.log('hh');
       }
     };
   };

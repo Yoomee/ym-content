@@ -24,7 +24,7 @@ module Formtastic
           if content_attribute.field_type == 'text'
             (hash[:data] ||= {}).reverse_merge!({"redactor-plugins" => YmContent::config.try(:basic_redactor_plugins) || []})
           end
-          if content_attribute.field_type == 'redactor'
+          if content_attribute.field_type == 'rich_content'
             (hash[:data] ||= {}).reverse_merge!({"redactor-plugins" => YmContent::config.try(:redactor_plugins) || []})
           end
         end
