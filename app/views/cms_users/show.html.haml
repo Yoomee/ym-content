@@ -1,38 +1,39 @@
 .container.cms-main
-  .col-md-12
-  
-    %h1=title(@user)
+  .cms-page-header.cms-page-header-left
     .row.section-margin
-      .col-xs-2
+      .col-sm-2
         .image-wrapper
           =image_for(@user, "200x200#")
-      .col-xs-7
-        .label.upper Email
-        =link_to(@user.email, 'mailto:'+ @user.email)
-        .clearfix.section-margin
-        .label.upper Role
-        -if @user.role.present?
-          =@user.role
-        -else
-          =link_if_can("Set a role for this user", [:edit, @user])
+      .col-sm-7
+        %h3.mt-0=title(@user)
+        .col-sm-6.col-xs-12.p0
+          .label.upper Email
+          =link_to(@user.email, 'mailto:'+ @user.email)
+        .col-sm-2.p0
+          .label.upper Role
+          -if @user.role.present?
+            =@user.role
+          -else
+            =link_if_can("Set a role for this user", [:edit, @user])
         .clearfix.section-margin
         .label.upper Biography
         -if @user.bio.present?
           =@user.bio
         -else
           =link_if_can("Write a bio for this user", [:edit, @user])
-    .row.section-margin
-      .col-xs-12
-        =options_panel do
-          %a.btn.btn-default.btn-collapse{"aria-controls" => "allocated_content", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#allocated_content"}
-            Content assigned to
-            =title(@user.first_name)
-          =link_if_can("Edit user", [:edit, @user] ,:class => 'btn btn-success pull-right')
-
-      .row
+      .col-md-3
+        =link_if_can("Edit user", [:edit, @user] ,:class => 'btn btn-success  pull-right')
+        .btn.pull-right=back_link
+    -if @assigned_content.present? 
+      .row.section-margin
         .col-xs-12
-          #allocated_content.allocated_content.collapse
-            %table
+          .allocated_content
+            %table.cms-table
+              %thead
+                %tr
+                  %th.text-left{colspan: 4}
+                    Content assigned to
+                    =title(@user.first_name)
               %tbody
                 -@assigned_content.each do |content_package|
                   %tr
