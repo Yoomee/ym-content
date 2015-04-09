@@ -22,9 +22,6 @@
       padding: 20px 10px;
     }
   }
-  tr{
-    border-bottom:1px solid #e5e5e5;
-  }
   td {
     padding: 5px 10px;
   }
@@ -127,5 +124,4 @@
 tr.inactive.role-admin.user-row {
   color: #999;
   background: $body-bg;
-  border-bottom: 1px dashed #ccc;
 }
