@@ -3,6 +3,7 @@
 //= require autogrow
 //= require jquery-ui
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require jquery-ui/datepicker
 //= require jquery-ui-timepicker-addon
 //= require jquery-ui/autocomplete
