@@ -16,11 +16,5 @@ module YmContent::CmsUser
 
   end
 
-  def active_for_authentication?
-    super && self.active
-  end
 
-  def inactive_message
-    "Sorry, this account has been deactivated."
-  end
 end
