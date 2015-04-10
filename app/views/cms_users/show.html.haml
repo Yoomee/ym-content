@@ -23,7 +23,7 @@
           =link_if_can("Write a bio for this user", [:edit, @user])
       .col-md-3
         =link_if_can("Edit user", [:edit, @user] ,:class => 'btn btn-success  pull-right')
-        .btn.pull-right=back_link
+        .btn.pull-right=link_to('See all users', '/cms/cms_users')
     -if @assigned_content.present? 
       .row.section-margin
         .col-xs-12

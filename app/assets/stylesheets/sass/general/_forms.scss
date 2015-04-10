@@ -183,6 +183,16 @@ select {
     border-right: solid 8px transparent;
   }
 }
+.error .help-block{
+  height: auto;
+  opacity: 1;
+  background: $error-col;
+  padding: 10px;
+  color:#fff;
+  &:before{
+    border-bottom: solid 6px $error-col;
+  };
+}
 .focus .help-block,
 .checkbox > .help-block {
   height: auto;
