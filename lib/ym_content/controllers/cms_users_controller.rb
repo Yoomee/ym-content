@@ -25,11 +25,11 @@ module YmContent::CmsUsersController
   def index
     @show_inactive = (params[:show_inactive] && params[:show_inactive] == "true") || false
     if @show_inactive
-      @users = CmsUser.all_users.paginate(:page => params[:page], :per_page => 20)
+      @users = CmsUser.all_users
     else
-      @users = CmsUser.all_users.where(active: true).paginate(:page => params[:page], :per_page => 20)
+      @users = CmsUser.all_users.where(active: true)
     end
-    @users = @users.order(:last_name)
+    @users = @users.order('LOWER(last_name)')
     session[:show_inactive] = @show_inactive
   end
 
