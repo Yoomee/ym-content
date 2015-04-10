@@ -9,6 +9,7 @@ module Formtastic
           :hint => content_attribute.description,
           :required => content_attribute.required
         )
+
         options.reverse_merge!(content_attribute.input_options)
         input_html_options = {}.tap do |hash|
           if content_attribute.limit_quantity.to_i > 0
@@ -19,6 +20,9 @@ module Formtastic
           end
           if content_attribute.field_type == 'rich'
             (hash[:data] ||= {}).reverse_merge!(content_attribute.sir_trevor_limit_data)
+          end
+          if content_attribute.field_type == 'text'
+            (hash[:data] ||= {}).reverse_merge!({"redactor-plugins" => YmContent::config.try(:basic_redactor_plugins) || []})
           end
           if content_attribute.field_type == 'rich_content'
             (hash[:data] ||= {}).reverse_merge!({"redactor-plugins" => YmContent::config.try(:redactor_plugins) || []})

@@ -14,7 +14,7 @@ RedactorPlugins.expandContent = function () {
       this.button.addCallback(button, this.expandContent.insert);
     },
     insert: function () {
-      this.insert.htmlWithoutClean('<h2 data-expand="start" class="redactor-expand-heading">Expand Heading</h2><p>Your text here</p><p>[EXPAND-END]</p>');
+      this.insert.htmlWithoutClean('<p>[EXPAND-START]</p><h2 data-expand="start" class="redactor-expand-heading">Expand Heading</h2><p>Your text here</p><p>[EXPAND-END]</p>');
     }
   };
 };

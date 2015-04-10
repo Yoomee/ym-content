@@ -9,14 +9,17 @@ window.redactorPluginUpdates = (function() {
     wrapBlocks('.redactor-editor h2[data-expand="start"]', '.redactor-editor p:contains([EXPAND-END])', 'expanding-content', action);
     wrapBlocks('.redactor-editor p:contains([HIGHLIGHT-START])', '.redactor-editor p:contains([HIGHLIGHT-END])', 'highlight-block', action);
 
-    $('.redactor-editor .highlight-block p.redactor-wrap-marker').removeClass('redactor-wrap-marker');
-
-    $('.redactor-editor .redactor-wrap-marker').each(function () {
-      var text = $(this).text();
-
-      if (text.indexOf('HIGHLIGHT-START') === -1 && text.indexOf('HIGHLIGHT-END') === -1 && text.indexOf('EXPAND-END') === -1 && $(this).data('expand') !== 'start' ) {
-        $(this).removeClass('redactor-wrap-marker');
+    // Ensure markers have class and non-markers have not
+    $('.redactor-editor p').each(function () {
+      if (checkMarkers($(this))) {
+        $(this).addClass('redactor-wrap-marker');
+        if($(this).find('span').length) {
+          return;
+        }
+        $(this).wrapInner('<span></span>')
+        return;
       }
+      $(this).removeClass('redactor-wrap-marker');
     });
 
     RedactorPlugins.dateBlock().update();
@@ -25,7 +28,6 @@ window.redactorPluginUpdates = (function() {
     if (action !== 'change'){
       RedactorPlugins.blockQuote().update();
     }
-
   };
 
   function wrapBlocks(startEl, endEl, wrapperClass, action) {
@@ -63,6 +65,21 @@ window.redactorPluginUpdates = (function() {
       $start.nextUntil($end).wrapAll('<div class="' + wrapperClass + className + '"></div>');
 
     });
+  }
+
+  function checkMarkers(el) {
+    var str = el.text();
+    var markers = ['[HIGHLIGHT-START]', '[HIGHLIGHT-END]', '[EXPAND-START]', '[EXPAND-END]', '[CALLOUT-START]', '[CALLOUT-END]', '[QUOTE-START]', '[QUOTE-END]', '[DATEBLOCK-START]', '[DATEBLOCK-END]'];
+    var markersLength = markers.length;
+    var isMarker = false;
+
+    for(var i = 0; i < markersLength; i++) {
+      if(str.indexOf(markers[i]) !== -1 || el.data('expand') === 'start' ) {
+        isMarker = true;
+      }
+    }
+
+    return isMarker;
   }
 
   return {
