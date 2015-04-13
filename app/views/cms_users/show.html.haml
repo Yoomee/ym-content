@@ -6,6 +6,9 @@
           =image_for(@user, "200x200#")
       .col-sm-7
         %h3.mt-0=title(@user)
+        .col-sm-2.p0
+          .label.upper Status
+          =@user.active ? 'Active' : 'Inactive'
         .col-sm-6.col-xs-12.p0
           .label.upper Email
           =link_to(@user.email, 'mailto:'+ @user.email)
