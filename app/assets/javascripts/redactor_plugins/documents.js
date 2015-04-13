@@ -70,36 +70,16 @@ RedactorPlugins.documentsBlock = function() {
 
       if (pdf === '' && word === '' && epub === '' && mobi === '') {
         errors = true;
-        errorMsg += '<br>File link required.'
-      }
-
-      if (pdf !== '' && !validateLink(pdf, 'pdf')) {
-        errorMsg += '<br>Invalid file type - file should be a PDF.';
-        errors = true;
-      }
-
-      if (word !== '' && !validateLink(word, 'doc')) {
-        errorMsg += '<br>Invalid file type - file should be a Word doc.';
-        errors = true;
-      }
-
-      if (epub !== '' && !validateLink(epub, 'epub')) {
-        errorMsg += '<br>Invalid file type - file should be a ePub.';
-        errors = true;
-      }
-
-      if (mobi !== '' && !validateLink(mobi, 'mobi')) {
-        errorMsg += '<br>Invalid file type - file should be a Mobi.';
-        errors = true;
+        errorMsg += '<br>File link required.';
       }
 
       if (errors) {
-        $('#redactor-modal-documentsblock-insert').prepend('<p class="readactor-modal-error">Error:>' + errorMsg +'</p>');
+        $('#redactor-modal-documentsblock-insert').prepend('<p class="readactor-modal-error">Error:' + errorMsg +'</p>');
         return;
       }
 
-      var startTag = '[DOC-START]';
-      var endTag = '[DOC-END]';
+      var startTag = '<p class="redactor-wrap-marker">[DOC-START]</p>';
+      var endTag = '<p class="redactor-wrap-marker">[DOC-END]</p>';
       var titleHtml = '<h3>' + title + '</h3>';
       var descHtml = desc !== '' ? '<p>' + desc + '</p>' : '';
       var pdfHtml = pdf !== '' ? '<li><a href="' + pdf + '">Download ' + title + ' as PDF</a></li>' : '';
@@ -107,7 +87,7 @@ RedactorPlugins.documentsBlock = function() {
       var epubHtml = epub !== '' ? '<li><a href="' + epub + '">Download ' + title + ' as ePub</a></li>' : '';
       var mobiHtml = mobi !== '' ? '<li><a href="' + mobi + '">Download ' + title + ' as Mobi</a></li>' : '';
 
-      var html = startTag + titleHtml + descHtml + '<ul>' + pdfHtml + wordHtml + epubHtml + mobiHtml + '</ul>' + endTag;
+      var html = startTag + '<div class="document-block">' + titleHtml + descHtml + '<ul>' + pdfHtml + wordHtml + epubHtml + mobiHtml + '</ul>' + '</div>' + endTag;
 
       this.selection.restore();
       this.modal.close();
