@@ -21,7 +21,7 @@
             =number_field_tag "#{f.object_name}[sir_trevor_settings][#{block_type}_limit]", value["limit"]
     .resource-content-type{:class => f.object.field_type == 'resource' ? '' : 'hide'}
       %p
-        Limit the content type that can be linked to from this content type
+        Limit the template that can be linked to from this template
       =f.input :resource_content_type, collection: ContentType.all
 
     =f.input :position, :as => :hidden
