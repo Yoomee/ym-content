@@ -42,7 +42,7 @@
               %i.fa.fa-cogs
               Settings
         .cms-form-well
-          =form.input :name
+          =form.input :name, :label => 'Template name'
           -if current_user.yoomee_staff?
             =form.input :description, :label => "Content objective/goal", :input_html => {:rows => 4}
             =form.input :package_name

@@ -10,7 +10,7 @@
               %i.fa.fa-list
               %span Page list
           -if can? :manage, ContentType
-            %li{:class => @content_types  ? 'active' : nil}
+            %li{:class => @content_types ? 'active' : nil}
               =link_to(content_types_path) do
                 %i.fa.fa-file-text-o
                 %span Templates
