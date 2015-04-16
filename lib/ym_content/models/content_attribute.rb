@@ -27,7 +27,9 @@ module YmContent::ContentAttribute
         :location => "Location",
         :rich => "Rich content (Sir Trevor)",
         :resource => "Link to content",
-        :rich_content => "Rich Content"
+        :rich_content => "Rich Content",
+        :date => "Date",
+        :time => "Time"
       }
     end
 
@@ -53,6 +55,8 @@ module YmContent::ContentAttribute
     when 'resource' then 'autocomplete_select'
     when 'rich' then 'text'
     when 'rich_content' then 'rich_redactor'
+    when 'date' then 'date_picker'
+    when 'time' then 'ym_time_picker'
     else field_type
     end
   end
