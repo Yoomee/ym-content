@@ -10,11 +10,11 @@
               %i.fa.fa-list
               %span Page list
           -if can? :manage, ContentType
-            %li{:class => @content_types ? 'active' : nil}
+            %li{:class => (@content_types && !@activity_items.nil?) ? 'active' : nil}
               =link_to(content_types_path) do
                 %i.fa.fa-file-text-o
                 %span Templates
-          %li{:class => @deleted_content_packages  ? 'active' : nil}
+          %li{:class => @deleted_content_packages ? 'active' : nil}
             =link_to(deleted_content_packages_path) do
               %i.fa.fa-trash-o
               %span Deleted content
@@ -70,7 +70,7 @@
         %i.fa.fa-list
         %span Page list
     -if can? :manage, ContentType
-      %li{:class => @content_types  ? 'active' : nil}
+      %li{:class => (@content_types && @activity_items.nil?) ? 'active' : nil}
         =link_to(content_types_path) do
           %i.fa.fa-file-text-o
           %span Templates
