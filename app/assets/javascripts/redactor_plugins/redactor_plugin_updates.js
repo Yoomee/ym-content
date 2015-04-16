@@ -8,6 +8,8 @@ window.redactorPluginUpdates = (function() {
 
     wrapBlocks('.redactor-editor h2[data-expand="start"]', '.redactor-editor p:contains([EXPAND-END])', 'expanding-content', action);
     wrapBlocks('.redactor-editor p:contains([HIGHLIGHT-START])', '.redactor-editor p:contains([HIGHLIGHT-END])', 'highlight-block', action);
+    wrapBlocks('.redactor-editor p:contains([DOC-START])', '.redactor-editor p:contains([DOC-END])', 'document-block', action);
+
 
     // Ensure markers have class and non-markers have not
     $('.redactor-editor p').each(function () {
@@ -69,7 +71,7 @@ window.redactorPluginUpdates = (function() {
 
   function checkMarkers(el) {
     var str = el.text();
-    var markers = ['[HIGHLIGHT-START]', '[HIGHLIGHT-END]', '[EXPAND-START]', '[EXPAND-END]', '[CALLOUT-START]', '[CALLOUT-END]', '[QUOTE-START]', '[QUOTE-END]', '[DATEBLOCK-START]', '[DATEBLOCK-END]'];
+    var markers = ['[HIGHLIGHT-START]', '[HIGHLIGHT-END]', '[EXPAND-START]', '[EXPAND-END]', '[CALLOUT-START]', '[CALLOUT-END]', '[QUOTE-START]', '[QUOTE-END]', '[DATEBLOCK-START]', '[DATEBLOCK-END]', '[DOC-START]', '[DOC-END]'];
     var markersLength = markers.length;
     var isMarker = false;
 
