@@ -1,10 +1,13 @@
 .cms-header
   .container-fluid
     .cms-nav-brand
-      =link_to('CMS', '/content', :class => 'cms-nav-brand--logo', :icon => 'home', :icon_first => true)
       .dropdown.cms-nav-dropdown-toggle
-        =link_to('', '#', 'data-toggle' => 'dropdown', :icon => 'caret-down', :icon_last => true)
+        =link_to('CMS', '#', 'data-toggle' => 'dropdown', :icon => 'caret-down', :icon_last => true, :class => 'cms-nav-brand--logo')
         %ul.cms-nav-dropdown
+          %li{:class => !@content_packages && !@activity_items.nil?  ? 'active' : nil}
+            =link_to('/content') do
+              %i.fa.fa-home
+              %span My content
           %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
             =link_to(content_packages_path) do
               %i.fa.fa-list
@@ -62,9 +65,12 @@
               Status:
               =@content_package.status
 
-
 .affix-spacer{"data-offset-bottom" => "0", "data-offset-top" => "60", "data-spy" => "affix"}
   %ul.cms-nav-tabs
+    %li{:class => !@content_packages && !@activity_items.nil?  ? 'active' : nil}
+      =link_to('/content') do
+        %i.fa.fa-home
+        %span My content
     %li{:class => @content_packages && !@deleted_content_packages  ? 'active' : nil}
       =link_to(content_packages_path) do
         %i.fa.fa-list
@@ -74,11 +80,6 @@
         =link_to(content_types_path) do
           %i.fa.fa-file-text-o
           %span Templates
-    %li{:class => @deleted_content_packages  ? 'active' : nil}
-      =link_to(deleted_content_packages_path) do
-        %i.fa.fa-trash-o
-        %span Deleted content
-
     -if defined?(YmDocuments)
       %li{:class => @documents? 'active' : nil}
         =link_to(ym_documents_engine.documents_path) do
@@ -110,3 +111,7 @@
           =link_to('/personas') do
             %i.fa.fa-group
             %span Personas
+        %li
+          =link_to(deleted_content_packages_path) do
+            %i.fa.fa-trash-o
+            %span Deleted content

@@ -21,11 +21,16 @@
   color: #FFFFFF;
   text-transform: uppercase;
   font-weight: 700;
-  padding: 17px 5px 17px 20px;
   font-size: 26px;
   line-height: 8px;
   display: inline-block;
   text-decoration: none;
+  i {
+    margin-left: 5px;
+    font-size: 16px;
+    top: -3px;
+    position: relative;
+  }
 }
 .cms-nav--return-link,
 .cms-nav-status {
@@ -93,7 +98,6 @@
 }
 .cms-nav-dropdown {
   float: left;
-  left: -113px;
   right: auto;
   min-width: 200px;
 }
@@ -102,7 +106,7 @@
   display: inline-block;
   > a {
     display: block;
-    padding: 24px 15px 18px 4px;
+    padding: 15px 20px 15px 20px;
     line-height: 1;
   }
 }
