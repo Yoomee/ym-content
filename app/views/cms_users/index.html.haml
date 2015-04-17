@@ -37,6 +37,7 @@
 
             %td.user-actions
               -action = user.active ? 'deactivate' : 'reactivate'
+              -btn_class = user.active ? 'btn-default' : 'btn-warning'
               =link_to('Edit', edit_cms_user_path(user), class: 'btn btn-xs btn-success edit-user-btn')
-              =link_to( user.active ? 'Deactivate' : 'Reactivate', set_active_user_path(user), remote: true, method: :post, class: 'btn btn-xs btn-warning set-active-btn', :data => {:confirm => "Are you sure you want to #{action} this user?"})
+              =link_to( user.active ? 'Deactivate' : 'Reactivate', set_active_user_path(user), remote: true, method: :post, class: "btn btn-xs set-active-btn #{btn_class}" , :data => {:confirm => "Are you sure you want to #{action} this user?"})
               =link_to('Delete', cms_user_path(user), method: :delete, data: {confirm: 'Are you sure? This user will be permanently removed and cannot be restored.'}, remote: true,class: 'btn btn-xs btn-error delete-user-btn')
