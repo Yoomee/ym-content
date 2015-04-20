@@ -410,6 +410,8 @@ module YmContent::ContentPackage
       else
         content_chunk.value = value.try(:id)
       end
+    when 'datetime'
+      content_chunk.value = value.to_s
     when 'rich'
       #strip out leading and trailing <p><br></p>
       data = JSON.parse(value)["data"]
