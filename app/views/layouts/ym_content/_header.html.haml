@@ -38,7 +38,7 @@
                 %span Tag Management
           -if (can? :manage, User)
             %li{:class => @users || @user ? 'active' : nil}
-              =link_to(users_path) do
+              =link_to(cms_users_path) do
                 %i.fa.fa-file-text-o
                 %span User Management
           %li
@@ -104,7 +104,7 @@
               %span Non CMS meta data
         -if (can? :manage, User)
           %li{:class => @users || @user ? 'active' : nil}
-            =link_to(users_path) do
+            =link_to(cms_users_path) do
               %i.fa.fa-file-text-o
               %span User Management
         %li

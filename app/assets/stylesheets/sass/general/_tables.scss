@@ -23,7 +23,7 @@
     }
   }
   td {
-    padding: 10px;
+    padding: 5px 10px;
   }
 }
 .td-status {
@@ -112,9 +112,7 @@
 }
 .allocated_content table{
   width:100%;
-  tr{
-    border-bottom:1px solid #e5e5e5;
-  }
+  
   .table-page, .table-action{
     width:50%;
   }
@@ -122,4 +120,8 @@
     float: right;
     text-align:right;
   }
+}
+tr.inactive.role-admin.user-row {
+  color: #999;
+  background: $body-bg;
 }

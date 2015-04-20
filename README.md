@@ -154,3 +154,14 @@ If there are project specific Sir Trevor custom blocks these will need to be wra
   // custom block
   }
 
+## User Management
+
+You will need the following in your project (see generators):
+The add_active_to_users migration
+cms_users_controller.rb
+cms_user.rb
+
+In your project ym_content config file add:
+```
+config.cms_roles = [<list of cms roles>]
+```

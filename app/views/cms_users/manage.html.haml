@@ -1,0 +1,57 @@
+:javascript
+  $(document).ready(function() {
+    $('select#role').change(function () {
+        var role;
+
+        role = $('select#role').val();
+        if (role.length > 0) {
+          $('h1').text("Users - " + ($('select#role option:selected').text()));
+          $("tr.user-row").hide();
+          $("tr.role-" + role).show();
+        } else {
+          $('h1').text('Users');
+          $("tr.user-row").show();
+        }
+      });
+    $('#show_inactive').change(function () {
+      var checked = this.checked;
+      window.location.href = window.location.href.replace(/true|false/gi, checked);
+    });
+  });
+.container
+  .row
+    .col-xs-12
+      .cms-page-header
+        .row
+          .col-sm-6.col-sm-offset-3
+            %h1=title("Users")
+          .col-sm-3.cms-header-actions
+            =link_if_can("Add new user", [:new, User.new], :icon => 'plus', :class => 'btn btn-success')
+.container.page-margin-bottom
+  .col-md-12
+    
+    %table.cms-table
+      %thead
+        %tr
+          %th Name
+          %th Role
+          %th.filter-control
+            .sitemap-filter.pull-right
+              %strong Filter
+              &nbsp;
+              =select_tag(:role, options_for_select([['All', nil]] + User.available_roles, params[:filter]), :class => 'noselectpicker')
+            %label.pull-right.m0
+              =check_box_tag :show_inactive, '', @show_inactive
+              Show inactive users
+      %tbody
+        -@users.each do |user|
+          %tr.user-row{'data_user-id' => user.id, :class => "role-#{user.role}"}
+            %td.user-name
+              =user.full_name
+            %td.user-role
+              =user.role
+
+            %td.user-actions
+              =link_to('Edit', edit_user_path(user), class: 'btn btn-xs btn-success edit-user-btn')
+              =link_to( user.active ? 'Deactivate' : 'Reactivate', set_active_user_path(user), method: :post, class: 'btn btn-xs btn-warning set-active-btn')
+              =link_to('Delete', user_path(user), method: :delete, confirm: 'Are you sure?', remote: true,class: 'btn btn-xs btn-error delete-user-btn')
