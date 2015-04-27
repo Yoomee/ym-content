@@ -76,7 +76,7 @@ module YmContent::CmsUsersController
   end
 
   def permitted_user_parameters
-    permitted_params = %w(bio email first_name image last_name remove_image retained_image)
+    permitted_params = %w(bio email first_name image last_name remove_image retained_image active)
     permitted_params << 'role' if current_user.admin?
     permitted_params
   end
