@@ -1,0 +1,112 @@
+//
+// Buttons
+// --------------------------------------------------
+
+// General button styling
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: normal;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: $btn-base;
+  text-decoration: none;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  margin: 5px 0 0 5px;
+  width: auto;
+  height: auto;
+  -webkit-appearance: none;
+  &:hover, &:focus {
+    color: #FFFFFF;
+    opacity: 0.8;
+    border-color: transparent;
+  }
+}
+
+// Button styles
+
+.btn-number { // for displaying a count in a button
+  display: inline-block;
+  background: rgba(0,0,0,0.2);
+  padding: 5px;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+.btn-primary {
+  background: $btn-primary;
+  color: #FFFFFF;
+}
+.btn-secondary {
+  background: transparent;
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+.btn-error {
+  background: $error-col;
+  color: #FFFFFF;
+}
+.btn-success {
+  background: $success-col;
+  color: #FFFFFF;
+}
+.btn.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .65;
+}
+.btn-warning{
+  background: $warning-col;
+}
+
+// Button modifiers
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-xs {
+  font-size: 10px;
+  padding: 4px 8px;
+}
+.btn-sm {
+  font-size: 12px;
+  padding: 8px 15px;
+}
+.btn-lg {
+  font-size: 20px;
+  padding: 15px 20px;
+}
+
+.btn-collapse:not(.collapsed){
+  position: relative;
+  &:after{
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid $btn-base;
+    left:46%;
+    bottom:-8px;
+    content: "";
+  }
+}
+
+
+
+// Links - used on content template add/edit page
+
+.links {
+  margin-bottom: 20px;
+}

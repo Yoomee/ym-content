@@ -1,6 +1,6 @@
-%h4 Meta data defaults
-.row
-  .col-md-4
+.col-md-4
+  .cms-well
+    %h3 Meta data defaults
     %p Meta data is automatically generated for pages in the CMS from the information on each page.
 
     %p Other pages, such as /login, will get the default meta information listed on the right.
@@ -9,18 +9,20 @@
 
     %p Listed below are any existing meta data overrides.
 
-  .col-md-8
-    %dl
-      %dt title
-      %dd=Settings.default_meta_title
-    %dl
-      %dt description
-      %dd=Settings.default_meta_description
-    %dl
-      %dt keywords
-      %dd=Settings.default_meta_keywords
-    %dl
-      %dt image
-      %dd=image_tag(Settings.default_fb_meta_image, class: 'pull-left')
-
-%hr
+.col-md-8
+  %dl
+    %dt
+      %label Title
+    %dd=Settings.default_meta_title
+  %dl
+    %dt
+      %label Description
+    %dd=Settings.default_meta_description
+  %dl
+    %dt
+      %label Keywords
+    %dd=Settings.default_meta_keywords
+  %dl
+    %dt
+      %label Image
+    %dd=image_tag(Settings.default_fb_meta_image)

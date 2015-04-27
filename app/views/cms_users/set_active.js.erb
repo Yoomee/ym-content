@@ -1,0 +1,20 @@
+var user_id = "<%= @user.id %>";
+var active = <%= @user.active %>;
+var show_inactive = <%= @show_inactive %>;
+var btn_class = active ? 'btn-default' : 'btn-warning';
+if (active || show_inactive)
+{
+  var row = $('.user-row[data_user-id="'+user_id+'"]');
+  var btn = row.find('.user-actions').find('.set-active-btn');
+  btn.text(active ? 'Deactivate' : 'Reactivate');
+  btn.removeClass('btn-default');
+  btn.removeClass('btn-warning');
+  btn.addClass(btn_class);
+  row.removeClass('active');
+  row.removeClass('inactive');
+  row.addClass(active ? 'active' : 'inactive');
+}
+else
+{
+  $('.user-row[data_user-id="'+user_id+'"]').remove();
+}

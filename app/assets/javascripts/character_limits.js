@@ -53,14 +53,14 @@ window.CharacterLimits = (function() {
   registerRedactor = function(r) {
     var rInput, rOptions;
     rInput = r.$element;
-    rInput.after($("<span/>").text("0/0").addClass("pull-right word-count js-limit-quantity label label-default"));
+    rInput.after($("<span/>").text("0/0").addClass("word-count js-limit-quantity"));
     return inputChanged(rInput);
   };
   $(function() {
     $("[data-limit-quantity]").each(function() {
       input = $(this);
       if (!input.hasClass('redactor')) {
-        input.after($("<span/>").text(counterText).addClass("pull-right word-count js-limit-quantity label label-default"));
+        input.after($("<span/>").text(counterText).addClass("word-count js-limit-quantity"));
         return inputChanged(this);
       }
     });

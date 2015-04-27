@@ -63,7 +63,7 @@ RedactorPlugins.dateBlock = function() {
       }
 
       var date = '<span class="dateblock-day' + dayClass + '">' + day + '</span><span class="dateblock-month">' + month + '</span><span class="dateblock-year">' + year + '</span>';
-      var html = '<div class="dateblock"><p class="dateblock-inner dateblock-date">' + date + '</p><p class="dateblock-inner dateblock-text">' + text + '</p></div>';
+      var html = '<p class="redactor-wrap-marker">[DATEBLOCK-START]</p><div class="dateblock"><p class="dateblock-inner dateblock-date">' + date + '</p><p class="dateblock-inner dateblock-text">' + text + '</p></div><p class="redactor-wrap-marker">[DATEBLOCK-END]</p>';
 
       this.selection.restore();
       this.modal.close();

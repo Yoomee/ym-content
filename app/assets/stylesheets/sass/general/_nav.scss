@@ -1,0 +1,188 @@
+//
+// Nav
+// --------------------------------------------------
+
+.cms-header {
+  background: $cms-client-brand-col;
+  height: 60px;
+  .btn {
+    margin-top: 12px;
+  }
+}
+.cms-nav-brand {
+  background: #3B4147;
+  background: rgba(0,0,0,0.1);
+  margin-left: -15px;
+  display: inline-block;
+  float: left;
+}
+.cms-nav-brand--logo {
+  font-family: "jaf-domus-titling-web";
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 8px;
+  display: inline-block;
+  text-decoration: none;
+  i {
+    margin-left: 5px;
+    font-size: 16px;
+    top: -3px;
+    position: relative;
+  }
+}
+.cms-nav--return-link,
+.cms-nav-status {
+  display: inline-block;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 14px;
+  float: left;
+  padding: 21px 20px 21px;
+}
+.cms-nav-status {
+  float: right;
+}
+.cms-nav-controls {
+  display: inline-block;
+  float: right;
+}
+.cms-nav-user {
+  display: inline-block;
+  float: right;
+  background: #3B4147;
+  background: rgba(0,0,0,0.1);
+  margin-right: -15px;
+  width: 60px;
+  height: 60px;
+  color: #FFF;
+  font-size: 24px;
+  text-align: center;
+  a {
+    display: block;
+    padding: 16px 0;
+  }
+}
+.cms-nav-user-dropdown,
+.cms-nav-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 60;
+  display: none;
+  float: right;
+  min-width: 160px;
+  padding: 0;
+  margin: -1px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #3B4147;
+  background-clip: padding-box;
+  color: white;
+  .dropdown.open & {
+    display: block;
+  }
+  a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    i {
+      margin-right: 5px;
+    }
+  }
+  li + li {
+    border-top: 1px solid #62666B;
+  }
+}
+.cms-nav-dropdown {
+  float: left;
+  right: auto;
+  min-width: 200px;
+}
+.cms-nav-dropdown-toggle {
+  color: #FFF;
+  display: inline-block;
+  > a {
+    display: block;
+    padding: 15px 20px 15px 20px;
+    line-height: 1;
+  }
+}
+.affix-spacer {
+  height: 60px;
+}
+.affix .cms-nav-tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+}
+
+// Dropdown menu for CMS
+
+.cms-nav-tabs .dropdown-menu{
+  width: 100%;
+  right:5px;
+  left:auto;
+  min-width:260px;
+}
+
+.cms-nav-tabs .dropdown-menu li{
+  min-width:220px;
+  display: block;
+  right:10px;
+  width:100%;
+  a{
+   padding: 20px 0;
+  }
+}
+.cms-nav-tabs {
+  display: table;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: #FBFCFC;
+  border-bottom: 1px solid #E5E5E5;
+  table-layout: fixed;
+  + .cms-form-well {
+    border-radius: 0 0 4px 4px;
+    border-top: 0;
+  }
+  li {
+    border:0;
+    padding: 0;
+    display: table-cell;
+    border-bottom: 2px solid transparent;
+    + li {
+      border-left: 1px solid #E5E5E5;
+    }
+    a {
+      text-transform: uppercase;
+      font-size: 14px;
+      text-decoration: none;
+      display: block;
+      padding: 16px 10px;
+      text-align: center;
+      font-weight: 600;
+      position: relative;
+      border-top: 2px solid transparent;
+      &:hover {
+        background: #FFFFFF;
+      }
+      span {
+        display: none;
+        margin-left: 5px;
+        @include media-query(sm) {
+          display: inline;
+        }
+      }
+    }
+    &.active {
+      background: white;
+      border-bottom: 2px solid $cms-client-brand-col;
+    }
+  }
+}

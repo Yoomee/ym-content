@@ -1,9 +1,8 @@
--content_for :head do
-  =javascript_include_tag("ym_content")
-.container.cms-main#cms-style-container
+.container.page-margin-bottom
   .row
     .col-xs-12
-      %h1.cms-page-header=title 'New content template'
+      .cms-page-header
+        %h1=title 'New content template'
   .row
-    .cms-form.col-md-8.col-md-offset-2.mb-5
+    .col-sm-12
       =render 'form'

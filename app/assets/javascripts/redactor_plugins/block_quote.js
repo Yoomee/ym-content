@@ -55,7 +55,7 @@ RedactorPlugins.blockQuote = function() {
         citation = '<cite>- ' + citation + '</cite>';
       }
 
-      var html = '<blockquote class="blockquote-fancy"><p>' + quote + '</p>' + citation + '</blockquote>';
+      var html = '<p class="redactor-wrap-marker">[QUOTE-START]</p><blockquote class="blockquote-fancy"><p>' + quote + '</p>' + citation + '</blockquote><p class="redactor-wrap-marker">[QUOTE-END]</p>';
 
       this.selection.restore();
       this.modal.close();

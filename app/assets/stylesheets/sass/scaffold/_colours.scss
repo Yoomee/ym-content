@@ -1,0 +1,56 @@
+//
+// Colour variables
+// --------------------------------------------------
+
+// SET CLIENT COLOUR
+
+$cms-client-brand-col: #5187C4;
+
+// Yoomee orange - #F9A939
+// Yoomee red - #EF5F6A
+// Yoomee purple - #982B8D
+// Yoomee blue - #1DB1D9
+// Yoomee teal - #1AABA1
+// Yoomee green - #95C750
+// Yoomee grey - #53616E
+
+//
+// Backgrounds
+// --------------------------------------------------
+
+$body-bg: #f4f9ff;
+
+$well-bg: #FFFFFF;
+
+$bg1: #646B70;
+$bg2: #4C545A;
+$bg3: #444B50;
+
+//
+// Brand colours
+// --------------------------------------------------
+
+$brand-primary: #5187C4;
+$brand-primary-light: lighten($brand-primary, 30%);
+$brand-primary-dark: darken($brand-primary, 30%);
+
+//
+// Colour for well borders / input borders / line breaks etc
+// --------------------------------------------------
+
+$outline-col: #E2E2E2;
+
+//
+// Buttons
+// --------------------------------------------------
+
+// Base .btn colour
+
+$btn-base: $bg2;
+$btn-primary: #5187C4;
+
+// Modifier button colours
+
+$error-col: #E1566C;
+$warning-col: #e8c94e;
+$success-col: #82C67A;

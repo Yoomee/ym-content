@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $('.more-persona').on('click', function(){
-    $(this).parent('.row').next('.persona-summary').toggle();
+    $(this).closest('.row').next('.persona-summary').toggle();
   });
   $('#content_attributes').on('click', '.nested-fields .reveal', function(e){
     e.preventDefault();

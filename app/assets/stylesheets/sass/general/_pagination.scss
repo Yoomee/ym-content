@@ -1,0 +1,65 @@
+//
+// Pagination (multiple pages)
+// --------------------------------------------------
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  border-radius: 2px;
+
+  > li {
+    display: inline; // Remove list-style and block-level defaults
+    > a,
+    > span {
+      position: relative;
+      float: left; // Collapse white-space
+      padding: 10px 10px;
+      line-height: 5px;
+      text-decoration: none;
+      color: $cms-client-brand-col;
+      background-color: white;
+      border: 1px solid $cms-client-brand-col;
+      margin-left: -1px;
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 600;
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+
+    }
+    // &:first-child {
+    //   > a,
+    //   > span {
+    //     margin-left: 0;
+    //     @include border-left-radius(5px);
+    //   }
+    // }
+    // &:last-child {
+    //   > a,
+    //   > span {
+    //     @include border-right-radius(5px);
+    //   }
+    // }
+  }
+
+  > li > a,
+  > li > span {
+    &:hover,
+    &:focus {
+      color: $brand-primary-light;
+      background-color: white;
+    }
+  }
+
+  > .active > a,
+  > .active > span {
+    &,
+    &:hover,
+    &:focus {
+      z-index: 2;
+      color: white;
+      background-color: $cms-client-brand-col;
+      cursor: default;
+    }
+  }
+}
+

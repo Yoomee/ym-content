@@ -1,5 +1,3 @@
-// TO DO: remove importants and overly specific styles when ym_content redesign done
-
 #redactor-modal {
   section {
     padding: 20px 40px 40px 40px;
@@ -28,9 +26,12 @@
 
 // Callouts
 .redactor-editor p.call-out-box {
+  width: 100%;
   border: 1px solid #555;
   color: #555;
-  margin-bottom: 1em;
+  margin: 0;
+  padding: 25px 25px 25px 84px;
+  position: relative;
 
   .fa {
     position: absolute;
@@ -38,7 +39,7 @@
     font-size: 24px;
     top: 0;
     height: 100%;
-    padding: 14px 0 0 0;
+    padding: 23px 0 0 0;
     border-right: 1px solid #555;
     width: 60px;
     text-align: center;
@@ -49,16 +50,24 @@
   }
 }
 
-// Highlight Blocks
+// Markers
 .redactor-editor .redactor-wrap-marker {
-  font-size: 11px!important;
-  margin: 0!important;
+  font-size: 11px;
+  margin: 0;
   display: block;
 
-  + p {
-    margin-top: 20px!important;
+  + p:not(.call-out-box), + h2, + h3, + h4, + h5 {
+    margin-top: 20px;
+  }
+
+  span {
+    background: #F7EF99;
+    padding: 2px;
+    font-weight: normal;
   }
 }
+
+// Highlight Blocks
 
 .redactor-editor .highlight-block {
   background: #EEE;
@@ -94,12 +103,13 @@
 // Expand Content
 
 .redactor-editor h2.redactor-wrap-marker {
-  font-size: 24px!important;
+  font-size: 24px;
   cursor: initial;
   background: #f7f7f7;
   color: #4f86c6;
   padding: 20px;
   border-bottom: 1px solid #4f86c6;
+  margin: 0;
 }
 
 .redactor-editor .expanding-content {
@@ -135,7 +145,7 @@
   border-left: 7px solid #555;
   position: relative;
   padding: 0 0 0 18px;
-  margin: 20px 0 20px 40px!important;
+  margin: 20px 0 20px 40px;
 
   &:before {
     content: "\201C";
@@ -155,7 +165,7 @@
   .dateblock {
     display: table;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 0;
     background: #EEE;
   }
 
@@ -222,6 +232,18 @@
 }
 
 // Video
-.redactor-editor .responsive-video-wrapper iframe {
-  max-width: 100%;
+.redactor-editor .responsive-video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+  margin: 20px 0;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }

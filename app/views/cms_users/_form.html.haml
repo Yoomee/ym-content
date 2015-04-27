@@ -1,0 +1,20 @@
+=semantic_form_for(@user, cms_user_url_and_method_create_edit(@user)) do |form|
+  =form.inputs do
+    .half-input
+      =form.input :first_name
+    .half-input
+      =form.input :last_name
+    .clearfix
+    =form.input :email
+    -if current_user.is_admin?
+      =form.input :role, :as => :select, :collection => CmsUser.available_roles, :include_blank => false
+    -if @user.new_record?
+      =form.input :password
+    -else
+      =form.input :bio, :input_html => {:rows => 5, :class => 'span4'}
+      =form.input :image, :as => :image
+      =form.input :active
+  =hidden_field_tag :return_to, params[:return_to] if params[:return_to]
+  =form.actions do
+    =form.action :submit, :label => 'Save', :button_html => {:class => 'btn btn-success pull-right'}
+    .btn=link_to('View all users', '/cms/cms_users')

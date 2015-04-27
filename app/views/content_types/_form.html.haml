@@ -31,28 +31,47 @@
         }
       });
     });
-    
+
 =semantic_form_for @content_type do |form|
   =form.inputs do
-    =form.input :name
-    -if current_user.yoomee_staff?
-      =form.input :description, :label => "Content objective/goal", :input_html => {:rows => 4}
-      =form.input :package_name
-      =form.input :view_name
-      .form-group
-        %label Advanced
-        =form.input :viewless
-        =form.input :singleton
-    -if YmContent::config.tags_feature
-      .form-group
-        =form.input :tag_categories, as: :check_boxes
+    .row
+      .col-md-4
+        %ul.cms-nav-tabs
+          %li.active
+            =link_to('') do
+              %i.fa.fa-cogs
+              Settings
+        .cms-form-well
+          =form.input :name, :label => 'Template name'
+          -if current_user.yoomee_staff?
+            =form.input :description, :label => "Content objective/goal", :input_html => {:rows => 4}
+            =form.input :package_name
+            =form.input :view_name
+            .form-group
+              %h4 Advanced
+              .check_boxes.form-group
+                =form.input :viewless
+                =form.input :singleton
+          -if YmContent::config.tags_feature
+            .form-group
+              %h4 Tag categories
+              =form.input :tag_categories, as: :check_boxes, :label => false
+      .col-md-8
+        %ul.cms-nav-tabs
+          %li.active
+            =link_to('') do
+              %i.fa.fa-paragraph
+              Fields
+        #content_attributes
+          =form.semantic_fields_for :content_attributes, @content_type.content_attributes.sort_by(&:position) do |content_attribute|
+            =render 'content_attribute_fields', :f => content_attribute
+            .links.text-center
+              =link_to_add_association 'Add another content attribute', form, :content_attributes, :class => 'btn btn-primary', :icon => 'plus'
+              .clearfix
 
-    %hr.pv-3
-    #content_attributes
-      %h3.mb-3.center Content attributes
-      =form.semantic_fields_for :content_attributes, @content_type.content_attributes.sort_by(&:position) do |content_attribute|
-        =render 'content_attribute_fields', :f => content_attribute
-        .links.mb-2
-          =link_to_add_association 'Add another content attribute', form, :content_attributes, :class => 'btn btn-primary'
-
-  =form.actions
+        .row
+          .col-xs-12
+            %hr
+            =form.actions do
+              =form.action :submit, :button_html => {:class => 'btn btn-success pull-right'}
+            .clearfix
