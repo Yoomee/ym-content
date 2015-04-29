@@ -3,7 +3,8 @@
     YmContent.Sitemap.init();
     // set up search form
     SearchManager.init();
-    #{"$('#content-package-#{params[:open]}').effect('highlight', 3500);" if @open}
+    $('#content-package').removeClass('highlight');
+    #{"$('#content-package-#{params[:open]}').addClass('highlight');" if @open}
   });
 .container.page-margin-bottom
   =render("content_packages/sitemap_header", :header_title => "Content list")
