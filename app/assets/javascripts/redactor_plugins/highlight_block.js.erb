@@ -9,25 +9,19 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 RedactorPlugins.highlightBlocks = function()
 {
   return {
-    init: function()
-    {
+    init: function() {
       var items = [
-        ['Highlight Block - Primary', '<p class="redactor-primary">[HIGHLIGHT-START]</p><p>Your text here</p><p>[HIGHLIGHT-END]</p>'],
-        ['Highlight Block - Secondary', '<p class="redactor-secondary">[HIGHLIGHT-START]</p><p>Your text here</p><p>[HIGHLIGHT-END]</p>'],
-        ['Highlight Block - Tertiary', '<p class="redactor-tertiary">[HIGHLIGHT-START]</p><p>Your text here</p><p>[HIGHLIGHT-END]</p>']
+        ['<li><a href="#" class="redactor-higlight-blocks-link" data-class="redactor-primary">Highlight Block - Primary</a></li>'],
+        ['<li><a href="#" class="redactor-higlight-blocks-link" data-class="redactor-secondary">Highlight Block - Secondary</a></li>'],
+        ['<li><a href="#" class="redactor-higlight-blocks-link" data-class="redactor-tertiary">Highlight Block - Tertiary</a></li>']
       ];
 
       this.highlightBlocks.template = $('<ul id="redactor-modal-list">');
 
-      for (var i = 0; i < items.length; i++)
-      {
-        var li = $('<li>');
-        var a = $('<a href="#" class="redactor-higlight-blocks-link">').text(items[i][0]);
-        var div = $('<div class="redactor-higlight-blocks">').hide().html(items[i][1]);
+      var itemsLength = items.length;
 
-        li.append(a);
-        li.append(div);
-        this.highlightBlocks.template.append(li);
+      for (var i = 0; i < itemsLength; i++) {
+        this.highlightBlocks.template.append(items[i]);
       }
 
       this.modal.addTemplate('highlightBlocks', '<section>' + this.utils.getOuterHtml(this.highlightBlocks.template) + '</section>');
@@ -37,32 +31,28 @@ RedactorPlugins.highlightBlocks = function()
       this.button.addCallback(button, this.highlightBlocks.show);
 
     },
-    show: function()
-    {
+    show: function() {
       this.modal.load('highlightBlocks', 'Insert Highlight Block', 400);
-
       this.modal.createCancelButton();
-
       $('#redactor-modal-list').find('.redactor-higlight-blocks-link').each($.proxy(this.highlightBlocks.load, this));
-
       this.selection.save();
       this.modal.show();
     },
-    load: function(i,s)
-    {
-      $(s).on('click', $.proxy(function(e)
-      {
+    load: function(i,s) {
+      $(s).on('click', $.proxy(function(e) {
         e.preventDefault();
-        this.highlightBlocks.insert($(s).next().html());
-
+        var text = this.selection.getText() !== '' ? this.selection.getHtml() : 'Your text here';
+        var className = $(e.currentTarget).data('class');
+        var html = '<p class="' + className + '">[HIGHLIGHT-START]</p><p>' + text + '</p><p>[HIGHLIGHT-END]</p>';
+        this.highlightBlocks.insert(html);
       }, this));
     },
-    insert: function(html)
-    {
+    insert: function(html) {
       this.selection.restore();
       this.insert.htmlWithoutClean(html, false);
       this.modal.close();
       this.observe.load();
+      redactorPluginUpdates.formatHighlightBlocks('change');
     }
   };
 };
