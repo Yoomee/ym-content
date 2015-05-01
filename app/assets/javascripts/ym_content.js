@@ -206,8 +206,8 @@ window.YmContent = {
         var content_package_id, depth, link, row, _results, _results2;
         link = $(this);
         row = link.parent();
-        if ($(this).data('open') === 1) {
-          link.data('open', 0);
+        if ($(this).attr('data-open') === '1') {
+          link.attr('data-open', 0);
           link.find('i.sitemap-caret').removeClass('fa-caret-down').addClass('fa-caret-right');
           depth = row.data('depth');
           _results = [];
@@ -216,15 +216,16 @@ window.YmContent = {
             if (row.data('depth') > depth) {
               row.hide();
               link = row.find('td.td-name');
-              link.data('open', 0);
+              link.attr('data-open', 0);
               link.find('i.sitemap-caret').removeClass('fa-caret-down').addClass('fa-caret-right');
             } else {
               break;
             }
           }
+          YmContent.Sitemap.setCookie();
           return _results;
         } else if ($(this).data('loaded') === 1) {
-          link.data('open', 1);
+          link.attr('data-open', 1);
           link.find('i.sitemap-caret').removeClass('fa-caret-right').addClass('fa-caret-down');
           depth = row.data('depth');
           _results2 = [];
@@ -240,15 +241,18 @@ window.YmContent = {
               break;
             }
           }
+          YmContent.Sitemap.setCookie();
           return _results2;
         } else {
           content_package_id = row.attr('id').split('-').slice(-1)[0];
-          link.data('loaded', 0);
+          link.attr('data-loaded', 0);
           setTimeout("YmContent.Sitemap.loading(" + content_package_id + ")", 250);
           return $.get("/content_packages/" + content_package_id + "/children").success(function() {
-            link.data('loaded', 1);
-            link.data('open', 1);
+            link.attr('data-loaded', 1);
+            // link.data('open', 1);
+            link.attr('data-open', 1);
             link.find('i.sitemap-caret').removeClass('fa-spin').removeClass('fa-spinner').removeClass('fa-caret-right');
+            YmContent.Sitemap.setCookie();
             return link.find('i.sitemap-caret').addClass('fa-caret-down');
           });
         }
@@ -272,6 +276,26 @@ window.YmContent = {
       if (link.data('loaded') === 0) {
         return link.find('i.sitemap-caret').removeClass('fa-caret-right').addClass('fa-spinner').addClass('fa-spin');
       }
+    }, 
+    getCookie: function() {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + "open" + "=");
+      if (parts.length == 2) return JSON.parse(parts.pop().split(";").shift());
+    },
+    setCookie: function() {
+      document.cookie = "open=" + JSON.stringify(YmContent.Sitemap.getOpenNodes());
+    },
+    getOpenNodes: function() {
+      return $.map($('.td-name[data-open=1]'), function(a) { 
+        return $(a).data('content-package');
+      });
+    },
+    setOpenNodes: function() {
+      $.each(YmContent.Sitemap.getCookie(), function(i, v) {
+        $('.td-name[data-content-package="'+ v +'"]').each(function() {
+          $(this).trigger('click');
+        });
+      });
     }
   },
   Sortable: {
