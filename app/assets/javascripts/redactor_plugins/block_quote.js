@@ -40,6 +40,9 @@ RedactorPlugins.blockQuote = function() {
       this.selection.save();
       this.modal.show();
 
+      var text = this.selection.getText() !== '' ? this.selection.getText() : '';
+      $('#redactor-blockquote-quote').val(text);
+
       $('#redactor-blockquote-quote').focus();
     },
     insert: function () {
@@ -60,16 +63,17 @@ RedactorPlugins.blockQuote = function() {
       this.selection.restore();
       this.modal.close();
       this.insert.htmlWithoutClean(html);
+      this.blockQuote.update;
     },
     update: function() {
       $('.blockquote-fancy').each(function () {
         var $this = $(this);
         var quoteContent = $this.text();
         var citeText = $this.find('cite').text();
-        var quoteText = quoteContent.substring( 0, quoteContent.indexOf(citeText));
+        var quoteText = citeText.length ? quoteContent.substring( 0, quoteContent.indexOf(citeText)) : quoteContent;
         var citation = citeText.length ? '<cite>' + citeText + '</cite>' : '';
 
-        $(this).html('<p>' + quoteText + '</p>' + citation);
+        $this.html('<p>' + quoteText + '</p>' + citation);
       });
     }
   };

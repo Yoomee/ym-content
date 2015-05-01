@@ -182,25 +182,16 @@ window.YmContent = {
         imagePosition: false,
         cleanStyleOnEnter: true,
         focusCallback: function(e) {
-          console.log('focus')
           return $(e.currentTarget).parents(".form-group").addClass("focus");
         },
         blurCallback: function(e) {
-          console.log('blur')
           return $(e.currentTarget).parents(".form-group").removeClass("focus");
         },
         initCallback: function(e) {
-          console.log('init')
           redactorPluginUpdates.update();
         },
         changeCallback: function(e) {
-          console.log('change')
           redactorPluginUpdates.update('change');
-        },
-        pasteCallback: function(html)
-        {
-            console.log('paste', html);
-            return html;
         }
       });
     }
