@@ -26,6 +26,9 @@
       e.preventDefault();
       $("#content_package_submit_action").click();
     });
+
+    $("#content_package_parent_id").combobox();
+    $(".custom-combobox-input").attr('placeholder', 'Start typing to search');
   });
 
 =semantic_form_for @content_package do |form|
