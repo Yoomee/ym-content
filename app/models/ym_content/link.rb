@@ -16,13 +16,19 @@ module YmContent
           # is email-like
           @url = 'mailto:' + @url
         else
+          # is this even a URL? (Until we have validation, keep broken text)
           begin
-            parsed = PublicSuffix.parse(@url)
+            URI.parse(@url)
           rescue
-            # must be internal/relative 
           else
-            # must be external, add scheme if doesn't exist
-            @url = 'http://' + @url if URI.parse(@url).scheme.nil?
+            begin
+              parsed = PublicSuffix.parse(@url)
+            rescue
+              # must be internal/relative 
+            else
+              # must be external, add scheme if doesn't exist
+              @url = 'http://' + @url if URI.parse(@url).scheme.nil?
+            end
           end
         end
         if url.start_with?('/')
