@@ -292,3 +292,12 @@ select {
   width:100%;
   clear:both;
 }
+
+.image.input, .image-inputs{
+  .help-block{
+    opacity:1;
+    height: auto;
+    padding: 10px; 
+    font-style: italic;
+  }
+}
