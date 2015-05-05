@@ -16,6 +16,16 @@ class LinkTest < ActiveSupport::TestCase
     link = YmContent::Link.new(input)
     assert_equal link.value, "http://#{input}"
   end
+  test "external with slash" do
+    input = "cake.co.uk/happiness/chocolate"
+    link = YmContent::Link.new(input)
+    assert_equal link.value, "http://#{input}"
+  end
+    test "external with www and slash" do
+    input = "www.cake.co.uk/happiness/chocolate"
+    link = YmContent::Link.new(input)
+    assert_equal link.value, "http://#{input}"
+  end
   test "external without www" do
     input = "cake.co.uk"
     link = YmContent::Link.new(input)

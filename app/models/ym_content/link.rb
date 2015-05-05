@@ -12,17 +12,17 @@ module YmContent
         @target = nil
       else
         @url = val.to_s.html_safe
-        if @url.match(/\A[^@\s]+@([^@.\s]+\.)*[^@.\s]+\z/)
+        if @url.match(/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/)
           # is email-like
           @url = 'mailto:' + @url
         else
-          # is this even a URL? (Until we have validation, keep broken text)
+          # is this even a URL? (Until we have form validation, keep broken text)
           begin
             URI.parse(@url)
           rescue
           else
             begin
-              parsed = PublicSuffix.parse(@url)
+              parsed = PublicSuffix.parse(@url.gsub(/\/\w*/, ''))
             rescue
               # must be internal/relative 
             else
