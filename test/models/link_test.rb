@@ -35,6 +35,11 @@ class LinkTest < ActiveSupport::TestCase
     input = "https://www.cake.com"
     link = YmContent::Link.new(input)
     assert_equal link.value, input
+  end  
+  test "external with subdomain" do
+    input = "https://new.cake.com"
+    link = YmContent::Link.new(input)
+    assert_equal link.value, input
   end
   test "content package" do
     cp = FactoryGirl.create(:content_package)
