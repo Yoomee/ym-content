@@ -6,7 +6,7 @@ module YmContent::ContentPackage
     base.send(:include, YmContent::Permalinkable)
 
     base.belongs_to :content_type
-    base.has_many :content_chunks
+    base.has_many :content_chunks, -> { includes :content_attribute }
     base.belongs_to :parent, :class_name => "ContentPackage"
     if Rails::VERSION::MAJOR >= 4
       base.has_many :children, -> { where(:deleted_at => nil).order(:position, :id) }, :class_name => "ContentPackage", :foreign_key => 'parent_id'
