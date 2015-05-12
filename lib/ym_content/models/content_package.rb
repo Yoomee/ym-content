@@ -27,6 +27,8 @@ module YmContent::ContentPackage
     base.before_create :set_next_review
     base.before_save :set_status
     base.after_save :save_content_chunks
+    base.after_save :invalidate_parent_cache
+    base.after_destroy :destroy_parent_cache
 
     base.validates :name, :content_type, :requested_by, :review_frequency, :presence => true
     base.validate :required_attributes
@@ -99,6 +101,9 @@ module YmContent::ContentPackage
       joins(:permalink).where(deleted_at: nil).where("name LIKE ? OR permalinks.path LIKE ?", escaped_term, escaped_term)
     end
 
+    def parent_dropdown_cache_key
+      "cp/parent-dropdown"
+    end
   end
 
   def taxonomy_tags=(tags)
@@ -160,6 +165,16 @@ module YmContent::ContentPackage
       c = c.parent
     end
     result
+  end
+
+  def destroy_parent_cache
+    Rails.cache.delete(ContentPackage.parent_dropdown_cache_key)
+  end
+
+  def invalidate_parent_cache
+    if id_changed? || name_changed? || deleted_at_changed? || parent_id_changed?
+      destroy_parent_cache
+    end
   end
 
   def published?
