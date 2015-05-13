@@ -64,7 +64,7 @@ module YmContent::ContentPackagesController
   end
 
   def index
-    @content_packages = @content_packages.root.includes(:children)
+    @content_packages = @content_packages.root.includes(:children, :content_type, :author)
     if params[:open] && open_content_package = ContentPackage.find_by_id(params[:open])
       @open = [open_content_package] + open_content_package.parents
     end
