@@ -29,6 +29,7 @@
                     &nbsp;
                     =select_tag(:status, options_for_select([['All', nil]] + ContentPackage.statuses(current_user).invert.to_a, params[:filter]), :class => 'noselectpicker')
             %tbody#content-packages-list
-              -@content_packages.each do |content_package|
-                =render('content_package', :content_package => content_package)
+              / -@content_packages.each do |content_package|
+              /   =render('content_package', :content_package => content_package)
+              =render(partial: 'content_package', collection: @content_packages, as: :content_package)
       =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success btn-small pull-right mt-3')
