@@ -159,8 +159,9 @@
           .tab-content
             #activity.tab-pane.cms-well
               %ul.cms-activities.cms-activity-feed
-                -@activity_items.each do |activity|
-                  =render("content_packages/activity", :include_name => true, :activity => activity)
+                =render(partial: "content_packages/activity", collection: @activity_items, as: :activity, locals: {:include_name => true})
+                / -@activity_items.each do |activity|
+                /   =render("content_packages/activity", :include_name => true, :activity => activity)
               -if @activity_items.total_pages != @activity_items.current_page
                 =link_to "See older activity", activity_content_package_path(@content_package), :remote => true, :class => 'btn btn-sm js-older-activities pull-right'
                 .clearfix
@@ -168,25 +169,26 @@
               #personas.tab-pane.cms-well
                 %label.col-primary Audience/personas
                 -@content_package.personas.each do |persona|
-                  .cms-persona-box
-                    .row
-                      .col-sm-4
-                        =image_for(persona, '120x120#')
-                      .col-sm-8
-                        %h4=persona
-                        %p.small-text="Age #{persona.age}"
-                        .btn.btn-xs.more-persona Read more
-                    .persona-summary
-                      %p
-                        %em=persona.summary
-                      -if persona.benefits.present?
+                  -cache(persona) do
+                    .cms-persona-box
+                      .row
+                        .col-sm-4
+                          =image_for(persona, '120x120#')
+                        .col-sm-8
+                          %h4=persona
+                          %p.small-text="Age #{persona.age}"
+                          .btn.btn-xs.more-persona Read more
+                      .persona-summary
                         %p
-                          %strong="Goals for #{persona.name}"
-                        %ul
-                          -persona.benefits.each do |benefit|
-                            %li=benefit
-                      -if persona.file
-                        =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-sm', :icon => 'download')
+                          %em=persona.summary
+                        -if persona.benefits.present?
+                          %p
+                            %strong="Goals for #{persona.name}"
+                          %ul
+                            -persona.benefits.each do |benefit|
+                              %li=benefit
+                        -if persona.file
+                          =link_to("Download full persona", persona.file.url, :target => '_blank', :class => 'btn btn-sm', :icon => 'download')
             #context.tab-pane.active.cms-well
               %label.col-primary Content Package Id
               %p
@@ -197,7 +199,7 @@
               %label.col-primary Content requested by
               %p
                 =@content_package.requested_by.try(:full_name)
-            #discussion.tab-pane.cms-well
-              =render("discussion")
-            #content-scorecard.tab-pane.cms-well
-              Not defined yet
+            / #discussion.tab-pane.cms-well
+            /   =render("discussion")
+            / #content-scorecard.tab-pane.cms-well
+            /   Not defined yet
