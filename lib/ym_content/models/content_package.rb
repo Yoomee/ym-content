@@ -308,7 +308,7 @@ module YmContent::ContentPackage
     if !method_sym.to_s.end_with?('=') && instance_variable_defined?("@#{attribute_name}".to_sym)
       instance_variable_get("@#{attribute_name}".to_sym)
     elsif content_type
-      if (file_attribute_name = find_file_attribute_name(attribute_name)) && (content_attribute = content_attributes.where(:field_type => %w{image file}).find_by_slug(file_attribute_name))
+      if (file_attribute_name = find_file_attribute_name(attribute_name)) && (content_attribute = content_attributes.select{ |x| %w{image file}.include?(x.field_type) && x.slug == file_attribute_name }.first)
         content_chunk = content_chunk_for_content_attribute(content_attribute, true)
         file_method_sym = method_sym.to_s.sub(file_attribute_name, 'file')
         if arguments.present?
@@ -316,7 +316,7 @@ module YmContent::ContentPackage
         else
           content_chunk.send(file_method_sym)
         end
-      elsif (tags_attribute_name = find_tags_attribute_name(attribute_name)) && (content_attribute = content_attributes.where(:field_type => 'tags').find_by_slug(tags_attribute_name.pluralize))
+      elsif (tags_attribute_name = find_tags_attribute_name(attribute_name)) && (content_attribute = content_attributes.select{ |x| x.field_type == 'tags' && slug == tags_attribute_name.pluralize }.first)
         tags_context = tags_attribute_name.pluralize
         tag_context = tags_attribute_name.singularize
         case method_sym.to_s
@@ -331,27 +331,27 @@ module YmContent::ContentPackage
         else
           super
         end
-      elsif content_attribute = content_attributes.find_by_slug(attribute_name)
+      elsif content_attribute = content_attributes.select{|x| x.slug == attribute_name}.first
         if method_sym.to_s.end_with?('=')
           set_value_for_content_attribute(content_attribute, arguments.first)
         else
           get_value_for_content_attribute(content_attribute)
         end
-      elsif content_attribute = content_attributes.where(:field_type => 'embeddable').find_by_slug(attribute_name.chomp('_url'))
+      elsif content_attribute = content_attributes.select{ |x| x.field_type == 'embeddable' && x.slug == attribute_name.chomp('_url') }.first
         if method_sym.to_s.end_with?('=')
           set_value_for_content_attribute(content_attribute, arguments.first, 'url')
         else
           get_value_for_content_attribute(content_attribute, 'url')
         end
-      elsif content_attribute = content_attributes.where(:field_type => 'image').find_by_slug(attribute_name.chomp('_path'))
+      elsif content_attribute = content_attributes.select{ |x| x.field_type == 'image' && x.slug == attribute_name.chomp('_path')}.first
         get_value_for_content_attribute(content_attribute, 'path')
-      elsif content_attribute = content_attributes.where(:field_type => 'location').find_by_slug(attribute_name.chomp('_lat_lng'))
+      elsif content_attribute = content_attributes.select{ |x| x.field_type == 'location' && x.slug == attribute_name.chomp('_lat_lng') }.first
         if method_sym.to_s.end_with?('=')
           set_value_for_content_attribute(content_attribute, arguments.first, 'lat_lng')
         else
           get_value_for_content_attribute(content_attribute, 'lat_lng')
         end
-      elsif content_attribute = content_attributes.find_by_slug(attribute_name.chomp('_id')) #TODO
+      elsif content_attribute = content_attributes.select{|x| x.slug == attribute_name.chomp('_id') }.first
         if method_sym.to_s.end_with?('=')
           set_value_for_content_attribute(content_attribute, arguments.first, 'id')
         else
