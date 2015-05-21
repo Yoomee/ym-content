@@ -190,6 +190,9 @@ module YmContent::ContentPackage
   end
 
   def respond_to_with_content_attributes?(method_id, include_all = false)
+    if method_id == :empty?
+      return false
+    end
     slug = method_id.to_s.sub(/^retained_/,'').sub(/^remove_/,'').sub(/_uid$/,'').chomp('=')
     if respond_to_without_content_attributes?(method_id, include_all)
       true
