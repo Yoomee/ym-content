@@ -171,7 +171,7 @@ module YmContent::ContentPackagesController
 
   def get_view_data
       # added double colon to access global scope... #TODO: this needs reviewing
-      @persona_groups = ::PersonaGroup.all
+      @persona_groups = ::PersonaGroup.all.includes(:personas)
       @activity_items = @content_package.activity_items.includes(:user, :resource).paginate(:page => 1, :per_page => 5)
       @non_meta_content_attributes = @content_package.content_attributes.where(:meta => false)
       @meta_content_attributes = @content_package.content_attributes.where(:meta => true)
