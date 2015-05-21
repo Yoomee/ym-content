@@ -316,7 +316,7 @@ module YmContent::ContentPackage
         else
           content_chunk.send(file_method_sym)
         end
-      elsif (tags_attribute_name = find_tags_attribute_name(attribute_name)) && (content_attribute = content_attributes.select{ |x| x.field_type == 'tags' && slug == tags_attribute_name.pluralize }.first)
+      elsif (tags_attribute_name = find_tags_attribute_name(attribute_name)) && (content_attribute = content_attributes.select{ |x| x.field_type == 'tags' && x.slug == tags_attribute_name.pluralize }.first)
         tags_context = tags_attribute_name.pluralize
         tag_context = tags_attribute_name.singularize
         case method_sym.to_s
