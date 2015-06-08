@@ -153,6 +153,7 @@ window.YmContent = {
         convertDivs: true,
         path: 'vendor/assets/javascripts/redactor',
         plugins: $('.redactor textarea').data('redactor-plugins'),
+        tabKey: false,
         focusCallback: function(e) {
           return $(e.currentTarget).parents(".form-group").addClass("focus");
         },
@@ -180,6 +181,7 @@ window.YmContent = {
         formatting: ['p', 'h1', 'h2', 'h3', 'h4', 'h5'],
         imageResizable: false,
         imagePosition: false,
+        tabKey: false,
         cleanStyleOnEnter: true,
         focusCallback: function(e) {
           return $(e.currentTarget).parents(".form-group").addClass("focus");
