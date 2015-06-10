@@ -92,6 +92,7 @@
                             %li
                               .checkbox.m0
                                 %label.m0
+                                  =hidden_field_tag "content_package[taxonomy_tags][#{category.slug}][]", ''
                                   =check_box_tag "content_package[taxonomy_tags][#{category.slug}][]", tag, @content_package.taxonomy_from(category).include?(tag)
                                   =tag
                           .clearfix
