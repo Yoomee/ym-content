@@ -6,6 +6,12 @@
     SearchManager.init();
     $('#content-package').removeClass('highlight');
     #{"$('#content-package-#{params[:open]}').addClass('highlight');" if @open}
+    if ($('.highlight').length) {
+      $('html, body').animate({
+          scrollTop: $('.highlight').offset().top - 100
+      }, 800);
+    }
+
   });
 .container.page-margin-bottom
   =render("content_packages/sitemap_header", :header_title => "Content list")
