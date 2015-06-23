@@ -278,7 +278,7 @@ window.YmContent = {
     loading: function(id) {
       var link;
       link = $("#content-package-" + id + " td.td-name");
-      if (link.data('loaded') === 0) {
+      if (link.attr('data-loaded') === '0') {
         return link.find('i.sitemap-caret').removeClass('fa-caret-right').addClass('fa-spinner').addClass('fa-spin');
       }
     }, 
