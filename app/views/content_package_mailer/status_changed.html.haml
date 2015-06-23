@@ -1,0 +1,8 @@
+%p="Hi #{@user.first_name},"
+%p
+
+  =link_to "#{@content_package.name}", "#{Settings.site_url}" + (@content_package.permalink_full_path ||= "content_packages/#{@content_package.id}")
+  is now
+  ="#{@content_package.human_readable_status.downcase}."
+
+%p Thanks

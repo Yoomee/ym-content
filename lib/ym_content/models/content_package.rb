@@ -153,6 +153,16 @@ module YmContent::ContentPackage
     result
   end
 
+  def human_readable_status
+    statuses = {
+      draft: 'Draft',
+      pending: 'Ready to review',
+      published: 'Published',
+      expiring: 'Getting old'
+    }
+    statuses[status.to_sym]
+  end
+
   def published?
     status == 'published' && (publish_at.nil? || publish_at <= Date.today)
   end
@@ -353,6 +363,7 @@ module YmContent::ContentPackage
 
   def send_emails
     ContentPackageMailer.assigned(self).deliver if author_id_changed? && author
+    ContentPackageMailer.status_changed(self).deliver if status_changed?
   end
 
   def set_next_review

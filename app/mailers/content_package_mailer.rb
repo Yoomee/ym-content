@@ -11,4 +11,10 @@ class ContentPackageMailer < ActionMailer::Base
     mail(:to => @user.email, :subject => "[#{Settings.site_name}] A piece of content has been assigned to you" )
   end
 
+  def status_changed(content_package)
+    @content_package = content_package
+    @user = @content_package.author
+    mail(:to => @user.email, :subject => "[#{Settings.site_name}] A piece of content you are responsible for is now #{@content_package.human_readable_status}" )
+  end
+
 end
