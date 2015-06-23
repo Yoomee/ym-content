@@ -1,4 +1,4 @@
-%p="Hi #{@user.first_name},"
+%p="Hi #{@content_package.author.first_name},"
 %p
   =link_to "#{@content_package.name}", "#{Settings.site_url}" + (@content_package.permalink_full_path ||= "content_packages/#{@content_package.id}")
   has been assigned to you. This means that you are responsible for ensuring that it is kept up to date. You will be notified when it is getting old or requires other specific input. If it requires updates it's your responsibility to inform the digital team through
