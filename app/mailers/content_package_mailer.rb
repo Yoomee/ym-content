@@ -2,14 +2,13 @@ class ContentPackageMailer < ActionMailer::Base
 
   helper YmCore::UrlHelper
 
-  default :from => "\"#{Settings.site_name}\" <#{Settings.site_noreply_email}>"
+  default :from => "\"#{Settings.site_name}\" <#{Settings.site_noreply_email}>",
+          :bcc => Settings.ym_content_bcc_emails
 
-  def assigned(content_package, assigned_to)
+  def assigned(content_package)
     @content_package = content_package
-    @user = assigned_to
-    reason = @content_package.author.present? ? 'writing' : 'approval'
-    @content = "has being assigned to you for #{reason}"
-    mail(:to => assigned_to.email, :subject => "[#{Settings.site_name}] #{content_package.name} #{@content}" )
+    @user = @content_package.author
+    mail(:to => @user.email, :subject => "[#{Settings.site_name}] A piece of content has been assigned to you" )
   end
 
 end

@@ -24,8 +24,8 @@ module YmContent::ContentPackage
     base.belongs_to :requested_by, :class_name => 'User'
 
     base.before_create :set_next_review
-    base.before_save :set_status
     base.after_save :save_content_chunks
+    base.after_save :send_emails
 
     base.validates :name, :content_type, :requested_by, :review_frequency, :presence => true
     base.validate :required_attributes
@@ -351,24 +351,16 @@ module YmContent::ContentPackage
     content_chunks.each(&:save)
   end
 
+  def send_emails
+    ContentPackageMailer.assigned(self).deliver if author_id_changed? && author
+  end
+
   def set_next_review
     self.next_review = Date.today + self.review_frequency.months
   end
 
   def set_permalink_path_with_viewless
     content_type.try(:viewless?) ? true : set_permalink_path_without_viewless
-  end
-
-  def set_status
-    if self.status_changed? && self.author_id then
-      case self.status
-      when 'draft'
-        ContentPackageMailer.assigned(self, self.author).deliver
-      when 'pending'
-        self.author_id = nil
-        ContentPackageMailer.assigned(self, self.requested_by).deliver
-      end
-    end
   end
 
   def set_value_for_content_attribute(content_attribute, value, method = nil)

@@ -1,6 +1,9 @@
 %p="Hi #{@user.first_name},"
 %p
-  =link_to "#{@content_package.name}", "#{Settings.site_url}/" + (@content_package.permalink_path ||= "content_packages/#{@content_package.id}")
-  =@content
+  =link_to "#{@content_package.name}", "#{Settings.site_url}" + (@content_package.permalink_full_path ||= "content_packages/#{@content_package.id}")
+  has been assigned to you. This means that you are responsible for ensuring that it is kept up to date. You will be notified when it is getting old or requires other specific input. If it requires updates it's your responsibility to inform the digital team through
+  =link_to 'trello', 'https://trello.com/b/15zUso6r/marcomms-content-progress-board'
+  who will then work with you to make the update.
+
 %p Thanks
 
