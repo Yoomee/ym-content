@@ -1,0 +1,9 @@
+%p="Hi #{@content_package.author.first_name},"
+
+%p
+  =link_to "#{@content_package.name}", "#{Settings.site_url}" + (@content_package.permalink_full_path ||= "content_packages/#{@content_package.id}")
+  is getting old and it's time for review. Please take a look over it, and if it needs updating please inform the digital team via
+  =link_to 'trello', 'https://trello.com/b/15zUso6r/marcomms-content-progress-board'
+  and they will work with you to make the necessary updates.
+
+%p Thanks

@@ -10,6 +10,11 @@ class ContentPackageMailer < ActionMailer::Base
     mail(:to => @content_package.author.email, :subject => "[#{Settings.site_name}] A piece of content has been assigned to you" )
   end
 
+  def expiring(content_package)
+    @content_package = content_package
+    mail(:to => @content_package.author.email, :subject => "[#{Settings.site_name}] A piece of content you are responsible for is getting old" )
+  end
+
   def status_changed(content_package)
     @content_package = content_package
     mail(:to => @content_package.author.email, :subject => "[#{Settings.site_name}] A piece of content you are responsible for is now #{@content_package.human_readable_status}" )
