@@ -204,7 +204,7 @@ window.YmContent = {
       $('select#status').change(function() {
         return YmContent.Sitemap.filter();
       });
-      return $('#sitemap').on('click', '.has-children td.td-name', function() {
+      return $('#sitemap').on('click', '.has-children td.td-name', function(e) {
         var content_package_id, depth, link, row, _results, _results2;
         link = $(this);
         row = link.parent();
@@ -224,7 +224,8 @@ window.YmContent = {
               break;
             }
           }
-          YmContent.Sitemap.setCookie();
+          if (e.originalEvent !== undefined)
+            YmContent.Sitemap.setCookie();
           return _results;
         } else if ($(this).data('loaded') === 1) {
           link.attr('data-open', 1);
@@ -243,7 +244,8 @@ window.YmContent = {
               break;
             }
           }
-          YmContent.Sitemap.setCookie();
+          if (e.originalEvent !== undefined)
+            YmContent.Sitemap.setCookie();
           return _results2;
         } else {
           content_package_id = row.attr('id').split('-').slice(-1)[0];
@@ -254,7 +256,8 @@ window.YmContent = {
             // link.data('open', 1);
             link.attr('data-open', 1);
             link.find('i.sitemap-caret').removeClass('fa-spin').removeClass('fa-spinner').removeClass('fa-caret-right');
-            YmContent.Sitemap.setCookie();
+            if (e.originalEvent !== undefined)
+              YmContent.Sitemap.setCookie();
             return link.find('i.sitemap-caret').addClass('fa-caret-down');
           });
         }
@@ -288,6 +291,11 @@ window.YmContent = {
     setCookie: function() {
       document.cookie = "open=" + JSON.stringify(YmContent.Sitemap.getOpenNodes());
     },
+    addToCookie: function(cp_id) {
+      var cookie = YmContent.Sitemap.getCookie();
+      cookie.push(cp_id);
+      document.cookie = "open=" + JSON.stringify(cookie);
+    },
     getOpenNodes: function() {
       return $.map($('.td-name[data-open=1]'), function(a) { 
         return $(a).data('content-package');
@@ -298,6 +306,16 @@ window.YmContent = {
         $('.td-name[data-content-package="'+ v +'"]').each(function() {
           $(this).trigger('click');
         });
+      });
+    },
+    openChildNodes: function(children_ids) {
+      var cookie = YmContent.Sitemap.getCookie();
+      $.each(cookie, function(i, v){
+        if (children_ids.indexOf(v) !== -1) {
+          $('.td-name[data-content-package="'+ v +'"]').each(function() {
+            $(this).trigger('click');
+          });
+        }
       });
     }
   },
