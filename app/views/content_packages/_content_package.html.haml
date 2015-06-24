@@ -4,7 +4,7 @@
   %td.td-name{:data => {:open => (open ? 1 : 0), :loaded => (open ? 1 : 0)}}
     =sitemap_spacers(content_package, parents)
     %span.name
-      - unless content_package.children.count.zero?
+      - unless current_page?(action: 'filter') || content_package.children.count.zero?
         %i.fa.sitemap-caret{:class => "fa-caret-#{open ? 'down' : 'right'}"}
       =content_package
   %td{:class => "td-status td-status-#{content_package.status}"}

@@ -43,7 +43,10 @@ module YmContent::ContentPackage
 
     base.scope :root, -> { base.where(:parent_id => nil, :deleted_at => nil).order(:position, :id) }
     base.scope :published, -> { base.where(:status => 'published').where('publish_at <= ? OR publish_at IS NULL', Date.today) }
-    base.scope :expiring, -> { base.where('next_review < ?', Date.today) }
+    base.scope :expiring, -> { base.published.where('next_review < ?', Date.today) }
+    base.scope :draft, -> { base.where(status: 'draft') }
+    base.scope :pending, -> { base.where(status: 'pending') }
+
   end
 
   module ClassMethods

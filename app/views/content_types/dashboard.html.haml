@@ -10,13 +10,13 @@
           .col-md-4
             =link_to filter_content_packages_path(:filter => 'draft'), :class => "btn btn-block btn-primary btn-count fadeInPop mb-1" do
               %span.btn-number
-                =ContentPackage.where(:status => 'draft').count
+                =ContentPackage.draft.count
               %span.btn-text
                 Drafts
           .col-md-4
             =link_to filter_content_packages_path(:filter => 'pending'), :class => "btn btn-block btn-secondary btn-count fadeInPop mb-1" do
               %span.btn-number
-                =ContentPackage.where(:status => 'pending').count
+                =ContentPackage.pending.count
               %span.btn-text
                 Ready to review
           .col-md-4

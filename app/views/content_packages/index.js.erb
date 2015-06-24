@@ -1,2 +1,5 @@
 $('#content-packages-list').html("<%=j render @content_packages %>");
+<% if @content_packages.respond_to?('next_page') %>
+  $('#content-packages-pagination').html("<%=j will_paginate(@content_packages, link_options: { 'data-remote' => true }) %>");
+<% end %>
 $('#content-package-<%= params[:open] %>').effect('highlight', 3500);

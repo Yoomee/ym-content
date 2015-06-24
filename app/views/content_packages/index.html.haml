@@ -27,6 +27,9 @@
                     &nbsp;
                     =select_tag(:status, options_for_select([['All', nil]] + ContentPackage.statuses(current_user).invert.to_a, params[:filter]), :class => 'noselectpicker')
             %tbody#content-packages-list
-              -@content_packages.each do |content_package|
-                =render('content_package', :content_package => content_package)
+              =render @content_packages
+          -if @content_packages.respond_to?('next_page')
+            .row
+              .col-xs-12#content-packages-pagination
+                =will_paginate(@content_packages, link_options: { 'data-remote' => true })
       =link_if_can("Add new content", [:new, ContentPackage.new], :icon => 'plus', :class => 'btn btn-success btn-small pull-right mt-3')

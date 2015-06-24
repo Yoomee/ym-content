@@ -16,7 +16,7 @@ class ActionDispatch::Routing::Mapper
 
       resources :content_packages do
         collection do
-          get 'filter/:filter' => 'content_packages#index', :as => 'filter'
+          get 'filter/:filter' => 'content_packages#filter', :as => 'filter'
           get 'deleted'
           get 'activity'
         end

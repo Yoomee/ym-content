@@ -103,7 +103,7 @@ window.YmContent =
 
   Sitemap:
     init: ->
-      YmContent.Sitemap.filter()
+      YmContent.Sitemap.setTitleText()
       $('select#status').change ->
         YmContent.Sitemap.filter()
       $('#sitemap').on 'click', '.has-children td.td-name', ->
@@ -144,15 +144,16 @@ window.YmContent =
             link.data('open',1)
             link.find('i.sitemap-caret').removeClass('fa-spin').removeClass('fa-spinner').removeClass('fa-caret-right')
             link.find('i.sitemap-caret').addClass('fa-caret-down')
-    filter: ->
+    setTitleText: ->
       status = $('select#status').val()
       if status.length > 0
         $('h1').text("Content list - #{$('select#status option:selected').text()}")
-        $("#sitemap tr.content-package").hide()
-        $("#sitemap tr.status-#{status}").show()
+    filter: ->
+      status = $('select#status').val()
+      if status.length > 0
+        window.location = '/content_packages/filter/' + status
       else
-        $('h1').text('Content list')
-        $("#sitemap tr.content-package").show()
+        window.location = '/content_packages'
     loading:(id) ->
       link = $("#content-package-#{id} td.td-name")
       if link.data('loaded') == 0

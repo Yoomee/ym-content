@@ -62,6 +62,11 @@ module YmContent::ContentPackagesController
     redirect_to deleted_content_packages_path
   end
 
+  def filter
+    @content_packages = @content_packages.send(params[:filter]).paginate(per_page: 50, page: params[:page])
+    render :index
+  end
+
   def index
     @content_packages = @content_packages.root.includes(:children)
     if params[:open] && open_content_package = ContentPackage.find_by_id(params[:open])
@@ -121,6 +126,7 @@ module YmContent::ContentPackagesController
       flash[:notice] = "Updated \"#{@content_package}\""
       current_user.record_activity!(@content_package, :text => "updated")
       if @content_package.status == 'published' && previous_status != 'published'
+        @content_package.set_next_review
         @content_package.published_at = @content_package.publish_at.presence || DateTime.now
         @content_package.save
       end
