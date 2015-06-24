@@ -113,7 +113,7 @@
                             %h5.mb-1=group
                             =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false, :member_label => :to_s
                   .clearfix
-                  =form.input :requested_by, :collection => User.where(:role => 'admin')
+                  =form.input :requested_by, :collection => User.where(:role => 'admin').order('lower(last_name)')
                   =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
                   .form-group
                     %h4.col-primary Review frequency
