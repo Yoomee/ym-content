@@ -163,6 +163,18 @@ describe ContentPackage do
     end
   end
 
+  describe 'expiring?' do
+    it 'is expiring' do
+      content_package.next_review = 1.week.ago
+      expect(content_package.expiring?).to be true
+    end
+
+    it 'is not expiring' do
+      content_package.next_review = 1.week.from_now
+      expect(content_package.expiring?).to be false
+    end
+  end
+
   describe 'Having the correct URL' do
 
     it 'has a permalink if not viewless' do

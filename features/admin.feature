@@ -46,6 +46,13 @@ Scenario: Updating a content package
   When I update the content package
   Then the content package should change
 
+Scenario: Review a content package
+  Given there is 1 content package
+  And the content package is expiring
+  When I review the content package
+  Then the content package should not be expiring
+  And the next review date should be correct
+
 Scenario: Removing an image
   Given there is 1 content package
   And I update the content package

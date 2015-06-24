@@ -27,6 +27,7 @@ class ActionDispatch::Routing::Mapper
           put 'delete'
           get 'reorder'
           put 'save_order'
+          put 'reviewed'
           put 'restore'
           get 'search'
           get 'activity'

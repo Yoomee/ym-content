@@ -24,6 +24,8 @@
               =form.action :submit, :label => "Mark as ready to review", :button_html => {:class => "btn btn-small btn-primary btn-block"}
             -else
               =form.action :submit, :label => "Save", :button_html => {:class => "btn btn-small btn-success btn-block"}
+            -if @content_package.expiring?
+              =link_to('Mark as reviewed', reviewed_content_package_path(@content_package.id), method: :put, class: 'btn btn-small btn-success btn-block')
     .row
       .col-xs-10
         %h1=title @content_package

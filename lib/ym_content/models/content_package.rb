@@ -116,6 +116,10 @@ module YmContent::ContentPackage
     deleted_at.present?
   end
 
+  def expiring?
+    next_review < Date.today
+  end
+
   def content_chunk_value_by_attribute_slug(slug)
     attribute = ContentAttribute.where(:content_type_id => content_type.id).where(:slug => slug).first
     chunk = content_chunks.select{|c|c.content_attribute.id == attribute.id}.first.try(:raw_value) || content_chunks.select{|c|c.content_attribute.id == attribute.default_attribute.try(:id)}.first.try(:raw_value)
@@ -203,6 +207,10 @@ module YmContent::ContentPackage
     else
       "WARNING: One or more of this package's parents are deleted. This package will not show in the sitemap unless you also restore #{deleted_parents.map{|cp| "\"#{cp.name}\""}.to_sentence}."
     end
+  end
+
+  def set_next_review
+    self.next_review = Date.today + self.review_frequency.months
   end
 
   def to_s
@@ -364,10 +372,6 @@ module YmContent::ContentPackage
   def send_emails
     ContentPackageMailer.assigned(self).deliver if author_id_changed? && author
     ContentPackageMailer.status_changed(self).deliver if status_changed?
-  end
-
-  def set_next_review
-    self.next_review = Date.today + self.review_frequency.months
   end
 
   def set_permalink_path_with_viewless

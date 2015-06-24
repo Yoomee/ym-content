@@ -223,3 +223,21 @@ end
 Then(/^I should see the params$/) do
   expect(URI.parse(current_url).query).to eq(@params)
 end
+
+Given(/^the content package is expiring$/) do
+  @content_package.update_attributes(next_review: 1.week.ago, review_frequency: 1)
+end
+
+When(/^I review the content package$/) do
+  visit edit_content_package_path(@content_package)
+  click_link 'Mark as reviewed'
+end
+
+Then(/^the content package should not be expiring$/) do
+  @content_package.reload
+  expect(@content_package.expiring?).to be(false)
+end
+
+Then(/^the next review date should be correct$/) do
+  expect(@content_package.next_review).to eq(1.month.from_now.to_date)
+end

@@ -91,6 +91,12 @@ module YmContent::ContentPackagesController
     redirect_to content_packages_path(:open => @content_package)
   end
 
+  def reviewed
+    @content_package.set_next_review
+    @content_package.save
+    redirect_to @content_package
+  end
+
   def save_order
     params[:children_ids].each_with_index do |child_id, position|
       ContentPackage.find(child_id).update_attribute(:position, position)
