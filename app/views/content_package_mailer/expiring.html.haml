@@ -1,9 +1,20 @@
-%p="Hi #{@content_package.author.first_name},"
+%p="Hi #{@user.try(:first_name)},"
 
 %p
-  =link_to "#{@content_package.name}", "#{Settings.site_url}" + (@content_package.permalink_full_path || "content_packages/#{@content_package.id}")
-  is getting old and it's time for review. Please take a look over it, and if it needs updating please inform the digital team via
+  =@count == 1 ? 'A piece' :pluralize(@count, 'piece')
+  of content assigned to you
+  =@count == 1 ? 'is' : 'are'
+  getting old and it's time for review.
+%p
+  Please take a look over
+  =@count == 1 ? 'it,' : 'them,'
+  and if
+  =@count == 1 ? 'it needs' : 'they need'
+  updating please inform the digital team via
   =link_to 'trello', 'https://trello.com/b/15zUso6r/marcomms-content-progress-board'
   and they will work with you to make the necessary updates.
+%ul
+  -@content_packages.each do |content_package|
+    %li=link_to "#{content_package.name}", "#{Settings.site_url}" + (content_package.permalink_full_path || "#{content_package_path(content_package)}")
 
 %p Thanks
