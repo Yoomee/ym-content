@@ -31,7 +31,7 @@
               =link_to(meta_data_path) do
                 %i.fa.fa-code
                 %span Non CMS meta data
-          -if (can? :manage, TagCategory) && (YmContent::config.tags_feature)
+          -if (YmContent::config.tags_feature) && (can? :manage, TagCategory) 
             %li{:class => @tag_categories  ? 'active' : nil}
               =link_to(tags_path) do
                 %i.fa.fa-tags
@@ -85,7 +85,7 @@
         =link_to(ym_documents_engine.documents_path) do
           %i.fa.fa-file-archive-o
           %span Documents
-    -if (can? :manage, TagCategory) && (YmContent::config.tags_feature)
+    -if (YmContent::config.tags_feature) && (can? :manage, TagCategory)
       %li{:class => @tag_categories  ? 'active' : nil}
         =link_to(tags_path) do
           %i.fa.fa-tags
