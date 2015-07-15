@@ -125,3 +125,7 @@ tr.inactive.user-row {
   color: #999;
   background: $body-bg;
 }
+
+.users-table tr {
+  border-bottom: 1px solid #DDDDDD;
+}

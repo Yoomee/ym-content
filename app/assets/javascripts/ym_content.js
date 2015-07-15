@@ -153,6 +153,7 @@ window.YmContent = {
         convertDivs: true,
         path: 'vendor/assets/javascripts/redactor',
         plugins: $('.redactor textarea').data('redactor-plugins'),
+        tabKey: false,
         focusCallback: function(e) {
           return $(e.currentTarget).parents(".form-group").addClass("focus");
         },
@@ -180,6 +181,8 @@ window.YmContent = {
         formatting: ['p', 'h1', 'h2', 'h3', 'h4', 'h5'],
         imageResizable: false,
         imagePosition: false,
+        tabKey: false,
+        cleanStyleOnEnter: true,
         focusCallback: function(e) {
           return $(e.currentTarget).parents(".form-group").addClass("focus");
         },
@@ -201,12 +204,12 @@ window.YmContent = {
       $('select#status').change(function() {
         return YmContent.Sitemap.filter();
       });
-      return $('#sitemap').on('click', '.has-children td.td-name', function() {
+      return $('#sitemap').on('click', '.has-children td.td-name', function(e) {
         var content_package_id, depth, link, row, _results, _results2;
         link = $(this);
         row = link.parent();
-        if ($(this).data('open') === 1) {
-          link.data('open', 0);
+        if ($(this).attr('data-open') === '1') {
+          link.attr('data-open', 0);
           link.find('i.sitemap-caret').removeClass('fa-caret-down').addClass('fa-caret-right');
           depth = row.data('depth');
           _results = [];
@@ -215,15 +218,17 @@ window.YmContent = {
             if (row.data('depth') > depth) {
               row.hide();
               link = row.find('td.td-name');
-              link.data('open', 0);
+              link.attr('data-open', 0);
               link.find('i.sitemap-caret').removeClass('fa-caret-down').addClass('fa-caret-right');
             } else {
               break;
             }
           }
+          if (e.originalEvent !== undefined)
+            YmContent.Sitemap.setCookie();
           return _results;
         } else if ($(this).data('loaded') === 1) {
-          link.data('open', 1);
+          link.attr('data-open', 1);
           link.find('i.sitemap-caret').removeClass('fa-caret-right').addClass('fa-caret-down');
           depth = row.data('depth');
           _results2 = [];
@@ -239,15 +244,20 @@ window.YmContent = {
               break;
             }
           }
+          if (e.originalEvent !== undefined)
+            YmContent.Sitemap.setCookie();
           return _results2;
         } else {
           content_package_id = row.attr('id').split('-').slice(-1)[0];
-          link.data('loaded', 0);
+          link.attr('data-loaded', 0);
           setTimeout("YmContent.Sitemap.loading(" + content_package_id + ")", 250);
           return $.get("/content_packages/" + content_package_id + "/children").success(function() {
-            link.data('loaded', 1);
-            link.data('open', 1);
+            link.attr('data-loaded', 1);
+            // link.data('open', 1);
+            link.attr('data-open', 1);
             link.find('i.sitemap-caret').removeClass('fa-spin').removeClass('fa-spinner').removeClass('fa-caret-right');
+            if (e.originalEvent !== undefined)
+              YmContent.Sitemap.setCookie();
             return link.find('i.sitemap-caret').addClass('fa-caret-down');
           });
         }
@@ -268,9 +278,45 @@ window.YmContent = {
     loading: function(id) {
       var link;
       link = $("#content-package-" + id + " td.td-name");
-      if (link.data('loaded') === 0) {
+      if (link.attr('data-loaded') === '0') {
         return link.find('i.sitemap-caret').removeClass('fa-caret-right').addClass('fa-spinner').addClass('fa-spin');
       }
+    }, 
+    getCookie: function() {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + "open" + "=");
+      cookie = parts.length == 2 ? JSON.parse(parts.pop().split(";").shift()) : [];
+      return cookie;
+    },
+    setCookie: function() {
+      document.cookie = "open=" + JSON.stringify(YmContent.Sitemap.getOpenNodes());
+    },
+    addToCookie: function(cp_id) {
+      var cookie = YmContent.Sitemap.getCookie();
+      cookie.push(cp_id);
+      document.cookie = "open=" + JSON.stringify(cookie);
+    },
+    getOpenNodes: function() {
+      return $.map($('.td-name[data-open=1]'), function(a) { 
+        return $(a).data('content-package');
+      });
+    },
+    setOpenNodes: function() {
+      $.each(YmContent.Sitemap.getCookie(), function(i, v) {
+        $('.td-name[data-content-package="'+ v +'"]').each(function() {
+          $(this).trigger('click');
+        });
+      });
+    },
+    openChildNodes: function(children_ids) {
+      var cookie = YmContent.Sitemap.getCookie();
+      $.each(cookie, function(i, v){
+        if (children_ids.indexOf(v) !== -1) {
+          $('.td-name[data-content-package="'+ v +'"]').each(function() {
+            $(this).trigger('click');
+          });
+        }
+      });
     }
   },
   Sortable: {

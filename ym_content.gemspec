@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sir-trevor-rails", "~>0.4.0"
   s.add_dependency "dragonfly", "~>0.9.10"
   s.add_dependency 'acts-as-taggable-on', '~> 3.2'
+  s.add_dependency 'public_suffix'
 
   s.add_development_dependency "sqlite3"
 

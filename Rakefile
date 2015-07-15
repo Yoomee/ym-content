@@ -32,12 +32,12 @@ require 'rubygems'
 require 'cucumber'
 require 'cucumber/rake/task'
 
-# Rake::TestTask.new(:test) do |t|
-#   t.libs << 'lib'
-#   t.libs << 'test'
-#   t.pattern = 'test/**/*_test.rb'
-#   t.verbose = false
-# end
+Rake::TestTask.new(:unittest) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = false
+end
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
@@ -46,7 +46,7 @@ Cucumber::Rake::Task.new(:cucumber) do |t|
   t.cucumber_opts = "features --format pretty"
 end
 
-task :default => [:spec, :cucumber]
+task :default => [:unittest, :spec, :cucumber]
 
 
 

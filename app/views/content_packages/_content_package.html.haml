@@ -1,7 +1,7 @@
 - open = @open && @open.include?(content_package)
 - parents = parents.try(:dup) || []
 %tr.content-package{:class => "status-#{content_package.status} #{'has-children' unless content_package.children.count.zero?}", :id => "content-package-#{content_package.id}", :data => {:depth => parents.size}}
-  %td.td-name{:data => {:open => (open ? 1 : 0), :loaded => (open ? 1 : 0)}}
+  %td.td-name{:data => {:open => (open ? 1 : 0), :loaded => (open ? 1 : 0), :content_package => content_package.id}}
     =sitemap_spacers(content_package, parents)
     %span.name
       - unless content_package.children.count.zero?

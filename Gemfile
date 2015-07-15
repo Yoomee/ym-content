@@ -37,4 +37,5 @@ group :development, :test do
   gem 'spring'
   gem 'spring-commands-cucumber'
   gem 'shoulda-matchers', require: false
+  gem 'public_suffix'
 end

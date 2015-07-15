@@ -7,10 +7,21 @@ window.redactorPluginUpdates = (function() {
   update = function(action) {
 
     wrapBlocks('.redactor-editor h2[data-expand="start"]', '.redactor-editor p:contains([EXPAND-END])', 'expanding-content', action);
-    wrapBlocks('.redactor-editor p:contains([HIGHLIGHT-START])', '.redactor-editor p:contains([HIGHLIGHT-END])', 'highlight-block', action);
     wrapBlocks('.redactor-editor p:contains([DOC-START])', '.redactor-editor p:contains([DOC-END])', 'document-block', action);
+    updateMarkers();
+    RedactorPlugins.dateBlock().update();
+    RedactorPlugins.video().update();
 
+    if (action !== 'change'){
+      RedactorPlugins.blockQuote().update();
+      this.formatHighlightBlocks(action);
+    }
+  },
+  formatHighlightBlocks = function(action) {
+    wrapBlocks('.redactor-editor p:contains([HIGHLIGHT-START])', '.redactor-editor p:contains([HIGHLIGHT-END])', 'highlight-block', action);
+  };
 
+  function updateMarkers() {
     // Ensure markers have class and non-markers have not
     $('.redactor-editor p').each(function () {
       if (checkMarkers($(this))) {
@@ -24,13 +35,7 @@ window.redactorPluginUpdates = (function() {
       $(this).removeClass('redactor-wrap-marker');
     });
 
-    RedactorPlugins.dateBlock().update();
-    RedactorPlugins.video().update();
-
-    if (action !== 'change'){
-      RedactorPlugins.blockQuote().update();
-    }
-  };
+  }
 
   function wrapBlocks(startEl, endEl, wrapperClass, action) {
 
@@ -85,6 +90,7 @@ window.redactorPluginUpdates = (function() {
   }
 
   return {
-    update: update
+    update: update,
+    formatHighlightBlocks: formatHighlightBlocks
   };
 })();

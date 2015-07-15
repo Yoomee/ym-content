@@ -26,6 +26,9 @@
       e.preventDefault();
       $("#content_package_submit_action").click();
     });
+
+    $("#content_package_parent_id").combobox();
+    $(".custom-combobox-input").attr('placeholder', 'Start typing to search');
   });
 
 =semantic_form_for @content_package do |form|
@@ -71,7 +74,7 @@
               =form.input :meta_title, hint: 'Meta title: aim for 70 characters'
               =form.input :meta_description, hint: 'Meta short description: Brief summary of the page, aim for 70 characters'
               =form.input :meta_keywords, hint: 'Meta keywords: comma separated'
-              =form.input :meta_image, as: :image
+              =form.input :meta_image, as: :image, hint: 'Meta images for facebook: Minimum size 600px x 315px, recommended size 1200px x 630px'
         -if YmContent::config.tags_feature
           #tags.tab-pane
             .cms-form-well
@@ -89,6 +92,7 @@
                             %li
                               .checkbox.m0
                                 %label.m0
+                                  =hidden_field_tag "content_package[taxonomy_tags][#{category.slug}][]", ''
                                   =check_box_tag "content_package[taxonomy_tags][#{category.slug}][]", tag, @content_package.taxonomy_from(category).include?(tag)
                                   =tag
                           .clearfix
@@ -109,7 +113,7 @@
                             %h5.mb-1=group
                             =form.input :personas, :as => :check_boxes, :collection => group.personas, :label => false, :member_label => :to_s
                   .clearfix
-                  =form.input :requested_by, :collection => User.where(:role => 'admin')
+                  =form.input :requested_by, :collection => User.where(:role => 'admin').order('lower(last_name)')
                   =form.input :due_date, :order => [:day, :month, :year], :include_blank => false, :start_year => Date.today.year
                   .form-group
                     %h4.col-primary Review frequency
@@ -138,7 +142,7 @@
           .cms-edit-status.cms-well
             %div{:class => ("hidden" unless current_user.role != "author")}
               %label{for: "content_package_author_id"} Assigned To
-              =form.input :author_id, :as => :select, :collection => User.where("role<>''").map { |u| ["#{u.full_name} (#{u.role})", u.id, {:'data-role' => u.role }] }, :include_blank => true, :label => false
+              =form.input :author_id, :as => :select, :collection => User.where("role<>''").order(:last_name).map { |u| ["#{u.full_name} (#{u.role})", u.id, {:'data-role' => u.role }] }, :include_blank => true, :label => false
               %label{for: "content_package_status"} Status
               =form.input :status, :as => :select, :collection => ContentPackage.statuses(current_user).invert, :include_blank => false, :label => false
               #content_package_publish_at_fields{:class => content_package_publish_at_class}
