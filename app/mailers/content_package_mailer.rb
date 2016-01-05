@@ -7,19 +7,25 @@ class ContentPackageMailer < ActionMailer::Base
 
   def assigned(content_package)
     @content_package = content_package
-    mail(:to => @content_package.author.email, :subject => "[#{Settings.site_name}] A piece of content has been assigned to you" )
+    to = @content_package.author.email
+    return unless YmContent.config.permitted_email.call(to)
+    mail(:to => to, :subject => "[#{Settings.site_name}] A piece of content has been assigned to you" )
   end
 
   def expiring(author, content_packages)
+    @user = author
+    to = @user.try(:email)
+    return unless to && YmContent.config.permitted_email.call(to)
     @content_packages = content_packages
     @count = @content_packages.count
-    @user = author
-    mail(:to => @user.try(:email), :subject => "[#{Settings.site_name}] Some content you are responsible for is getting old" )
+    mail(:to => to, :subject => "[#{Settings.site_name}] Some content you are responsible for is getting old" )
   end
 
   def status_changed(content_package)
     @content_package = content_package
-    mail(:to => @content_package.author.email, :subject => "[#{Settings.site_name}] A piece of content you are responsible for is now #{@content_package.human_readable_status}" )
+    to = @content_package.author.email
+    return unless YmContent.config.permitted_email.call(to)
+    mail(:to => to, :subject => "[#{Settings.site_name}] A piece of content you are responsible for is now #{@content_package.human_readable_status}" )
   end
 
 end
